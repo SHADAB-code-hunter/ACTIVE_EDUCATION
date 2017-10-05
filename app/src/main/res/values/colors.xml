@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+
+    <color name="theme1">#F6874F</color>
+    <color name="list_divider">#dedede</color>
+    <color name="bg_bubble_self">#E1E1E1</color>
+    <color name="colorLock">#4d4339</color>
+
+
+    <color name="circle_progress_color1">#FFFAAF3B</color>
+    <color name="circle_progress_color2">#FF3BB1CF</color>
+    <color name="circle_progress_color3">#FFEC6497</color>
+
+    <color name="color1">#5bacba</color>
+    <color name="color2">#d645d1</color>
+    <color name="color3">#1b9b24</color>
+    <color name="color4">#c6c01a</color>
+    <color name="color5">#e63838</color>
+    <color name="color6">#962bd9</color>
+    <color name="trans_black">#5e020202</color>
+    <color name="trans_grey">#561a1717</color>
+    <color name="transparent">#00000000</color>
+    <color name="theme_color">#8600FF</color>
+    <color name="white">#ffffff</color>
+    <color name="light_grey">#cccccc</color>
+    <color name="grey_home">#a4a0a0</color>
+    <color name="grey">#F1F1F2</color>
+    <color name="golden">#FFBB02</color>
+    <color name="txt_color">#8655FF</color>
+    <color name="txt_color_head">#4038FF</color>
+    <color name="btn_color">#edbfc0</color>
+
+    <color name="sample_red">#ff4444</color>
+    <color name="sample_blue">#33b5e5</color>
+    <color name="sample_green">#669900</color>
+    <color name="sample_yellow">#ff8800</color>
+    <color name="sample_color">#f119181d</color>
+    <color name="edt_text_color">#ffffff</color>
+<!---->
+
+    <color name="com_clor1">#f8bbd0</color>
+    <color name="com_clor2">#dcedc8</color>
+    <color name="com_clor3">#d1c4e9</color>
+
+    <!---->
+
+    <color name="ksw_md_ripple_normal">#74000000</color>
+    <color name="ksw_md_ripple_checked">#33019285</color>
+
+    <color name="ksw_md_solid_shadow">#33000000</color>
+
+    <color name="ksw_md_solid_normal">#ECECEC</color>
+    <color name="ksw_md_solid_checked">#019285</color>
+    <color name="ksw_md_solid_disable">#FFFFFF</color>
+    <color name="ksw_md_solid_checked_disable">#aaaaaa</color>
+
+    <dimen name="ksw_md_thumb_ripple_size">32dp</dimen>
+    <dimen name="ksw_md_thumb_solid_inset">1dp</dimen>
+    <dimen name="ksw_md_thumb_shadow_inset">1dp</dimen>
+    <dimen name="ksw_md_thumb_shadow_inset_top">1dp</dimen>
+    <dimen name="ksw_md_thumb_shadow_inset_bottom">0dp</dimen>
+
+    <dimen name="ksw_md_thumb_solid_size">10dp</dimen>
+    <dimen name="ksw_md_thumb_shadow_size">11dp</dimen>
+    <dimen name="ksw_md_thumb_shadow_offset">2dp</dimen>
+
+    <!---->
+
+    <!---->
+    <!-- Array of ColorStateList -->
+    <array name="colors">
+        <item>@color/fab_mini</item>
+        <item>@color/fab_mini</item>
+        <item>@color/fab_mini</item>
+        <item>@color/fab_mini</item>
+        <item>@color/fab_mini</item>
+    </array>
+
+    <array name="white_array">
+        <item>@android:color/white</item>
+        <item>@android:color/white</item>
+        <item>@android:color/white</item>
+        <item>@android:color/white</item>
+        <item>@android:color/white</item>
+    </array>
+
+    <array name="black_array">
+        <item>@android:color/black</item>
+        <item>@android:color/black</item>
+        <item>@android:color/black</item>
+        <item>@android:color/black</item>
+        <item>@android:color/black</item>
+    </array>
+     <!---->
+
+    <!-- rubber indicator  -->
+
+    <color name="smallCircleColor">#FFDF8D81</color>
+    <color name="largeCircleColor">#FFAF3854</color>
+    <color name="outerCircleColor">#FF533456</color>
+
+    <!---->
+
+    <!-- indiactor-->
+    <color name="uncompleted_color">#A3E0D9</color>
+    <color name="uncompleted_text_color">#F8F8F8</color>
+    <!---->
+
+
+    <!---->
+    <color name="bg">#f5f5f5</color>
+    <color name="bgnew">#464756</color>
+
+    <color name="filtersfab">#3f51b5</color>
+    <color name="filters_header">#303f9f</color>
+    <color name="filters_buttons">#ff4081</color>
+    <color name="filters_buttons_selected">#c2185b</color>
+    <color name="filters_chips">#2c2f30</color>
+    <color name="fab_color">#ffffff</color>
+
+    <color name="orange">#ff5722</color>
+    <color name="brown">#795548</color>
+    <!---->
+    <color name="theme_blue_background">#84ffff</color>
+    <color name="theme_blue_primary">#4FC3F7</color>
+    <color name="theme_blue_accent">#ff193a</color>
+    <color name="theme_blue_text">#039BE5</color>
+    <color name="theme_blue_text_inverse">@android:color/black</color>
+    <color name="theme_blue_primary_dark">#039BE5</color>
+    <color name="theme2">#9f90af</color>
+    <color name="theme3">#7f6899</color>
+    <color name="theme4">#7A5D87</color>
+
+
+
+    <!-- tubmlr-->
+    <color name="primary">#3c515c</color>
+
+    <color name="scrim">#42000000</color>
+    <color name="pressed">#33000000</color>
+    <color name="light_blue_500">#03A9F4</color>
+    <color name="cyan_500">#00BCD4</color>
+    <color name="teal_500">#009688</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="light_green_500">#8BC34A</color>
+
+    <color name="tumblr_primary">#36465D</color>
+    <color name="tumblr_orange">#F2992E</color>
+    <color name="tumblr_green">#56BC8A</color>
+    <color name="tumblr_white">#FFFFFF</color>
+    <color name="tumblr_grey">#748089</color>
+    <color name="tumblr_blue">#4AA8D8</color>
+    <color name="tumblr_red">#D95E40</color>
+
+    <color name="path_primary">#E62F17</color>
+    <color name="path_orange">#FF9500</color>
+    <color name="path_blue">#1774E6</color>
+    <color name="path_black">#403B36</color>
+    <color name="path_green">#5FB336</color>
+    <color name="path_purple">#49098A</color>
+    <color name="rippelColor">#FFFFFF</color>
+</resources>

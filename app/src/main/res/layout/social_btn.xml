@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/social__drawable_btn"
+        android:layout_margin="0dp">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:orientation="horizontal">
+
+           <TextView
+               android:layout_width="35dp"
+               android:layout_height="35dp"
+               android:layout_margin="10dp"
+               android:background="@drawable/ic_google_plus"/>
+           <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               style="@style/CustomEditText"
+               android:textColorHint="#ffffff"
+               android:soundEffectsEnabled="true"
+               android:outlineProvider="none"
+               app:hintAnimationEnabled="true">
+
+               <android.support.design.widget.TextInputEditText
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:textSize="12sp"
+                   style="@style/CustomEditText"
+                   android:gravity="center|left"
+                   android:allowUndo="true"
+                   android:hint="Google Account"
+                   android:soundEffectsEnabled="true"
+                   android:backgroundTint="#ffffff"
+                   android:textColor="@color/edt_text_color"
+                   android:singleLine="true" />
+
+           </android.support.design.widget.TextInputLayout>
+       </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_facebook"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="Facebook Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_whatsapp"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="WhatsApp"
+                        android:inputType="number"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <!---->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_twitter"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="Twitter Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_linkedin"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_fb_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="LinkedIn Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_skype"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="Skype Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+    <!---->
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_instagram"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="Instagram Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/social__drawable_btn"
+            android:layout_margin="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ic_tumblr"/>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:gravity="center|left"
+                        android:allowUndo="true"
+                        android:hint="Tumblr Account"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>
+</ScrollView>

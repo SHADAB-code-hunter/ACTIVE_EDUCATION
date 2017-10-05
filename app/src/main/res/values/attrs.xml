@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomFont">
+        <attr name="fontFamily" format="string" />
+    </declare-styleable>
+    <declare-styleable name="SearchableSpinner">
+        <attr name="hintText" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="ArcLayout">
+        <attr name="arc_height" format="dimension" />
+        <attr name="arc_position">
+            <enum name="bottom" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="left" value="2"/>
+            <enum name="right" value="3"/>
+        </attr>
+        <attr name="arc_cropDirection" format="enum">
+            <enum name="cropInside" value="0" />
+            <enum name="cropOutside" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FabSpeedDial">
+        <!-- Menu resource -->
+        <attr name="fab_menu" format="reference"/>
+
+        <!-- Main FAB background color -->
+        <attr name="fab_fabBackgroundColor" format="color"/>
+        <!-- Main FAB drawable -->
+        <attr name="fab_fabDrawable" format="reference"/>
+        <!-- Main FAB drawable tint -->
+        <attr name="fab_fabDrawableTint" format="color"/>
+        <!-- Main FAB ripple color -->
+        <attr name="fab_fabRippleColor" format="color"/>
+
+        <!-- Mini FAB background color -->
+        <attr name="fab_miniFabBackgroundColor" format="color"/>
+        <attr name="fab_miniFabBackgroundColorList" format="reference"/>
+        <!-- Main FAB drawable tint -->
+        <attr name="fab_miniFabDrawableTint" format="color"/>
+        <attr name="fab_miniFabDrawableTintList" format="reference"/>
+        <!-- Mini FAB ripple color -->
+        <attr name="fab_miniFabRippleColor" format="color"/>
+        <attr name="fab_miniFabRippleColorList" format="reference"/>
+
+        <!-- Mini FAB text color -->
+        <attr name="fab_miniFabTextColor" format="color"/>
+        <attr name="fab_miniFabTextColorList" format="reference"/>
+        <!-- Mini FAB text background drawable -->
+        <attr name="fab_miniFabTextBackground" format="reference"/>
+        <attr name="fab_miniFabTextBackgroundList" format="reference"/>
+
+        <!-- Use touch guard -->
+        <attr name="fab_useTouchGuard" format="boolean"/>
+        <!-- Touch guard color -->
+        <attr name="fab_touchGuardColor" format="color"/>
+        <!-- Use touch guard reveal effect -->
+        <attr name="fab_useRevealEffect" format="boolean"/>
+
+        <!-- Use rippe on pre Lollipop -->
+        <attr name="fab_useRippleOnPreLollipop" format="boolean"/>
+    </declare-styleable>
+
+
+<!-- jelly toolbar -->
+
+    <declare-styleable name="AwesomeTabBar">
+        <attr name="atb_padding" format="dimension" />
+        <attr name="atb_margin" format="dimension" />
+        <attr name="atb_tabWidth" format="dimension" />
+        <attr name="atb_tabHeight" format="dimension" />
+        <attr name="atb_indicatorColor" format="color" />
+        <attr name="atb_indicatorHeight" format="dimension" />
+        <attr name="atb_selectedTabBackgroundColor" format="color" />
+        <attr name="atb_selectedTabTextColor" format="color" />
+        <attr name="atb_selectedTabImageColor" format="color" />
+        <attr name="atb_indicatorLineColor" format="color" />
+        <attr name="atb_noImage" format="boolean" />
+        <attr name="atb_noText" format="boolean" />
+        <attr name="atb_imagePosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+        <attr name="atb_imageMargin" format="dimension" />
+        <attr name="atb_imageWidth" format="dimension" />
+        <attr name="atb_imageHeight" format="dimension" />
+        <attr name="atb_textMargin" format="dimension" />
+        <attr name="atb_textSize" format="dimension" />
+        <attr name="atb_fontPath" format="string"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="Pulsator4Droid">
+        <attr name="pulse_count" format="integer"/>
+        <attr name="pulse_duration" format="integer"/>
+        <attr name="pulse_color" format="color"/>
+        <attr name="pulse_repeat" format="integer"/>
+        <attr name="pulse_maxScale" format="float"/>
+        <attr name="pulse_startFromScratch" format="boolean"/>
+        <attr name="pulse_interpolator" format="enum">
+            <enum name="Linear" value="0"/>
+            <enum name="Accelerate" value="1"/>
+            <enum name="Decelerate" value="2"/>
+            <enum name="AccelerateDecelerate" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="RippleBackground">
+        <attr name="rb_color" format="color" />
+        <attr name="rb_strokeWidth" format="dimension"/>
+        <attr name="rb_radius" format="dimension"/>
+        <attr name="rb_duration" format="integer"/>
+        <attr name="rb_rippleAmount" format="integer"/>
+        <attr name="rb_scale" format="float"/>
+        <attr name="rb_type" format="enum">
+            <enum name="fillRipple" value="0"/>
+            <enum name="strokeRipple" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="menuLayout">
+        <attr name="indexLable" format="integer" />
+        <!--  <attr name="imageRes" format="integer" />   -->
+        <attr name="imageBackground" format="reference" />
+        <attr name="imageContent" format="reference" />
+        <attr name="textSize" format="dimension" />
+        <attr name="text" format="string" />
+    </declare-styleable>
+    <declare-styleable name="centerImageView">
+        <attr name="indexTag" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="NavigationTabBar">
+        <attr name="ntb_titled" format="boolean"/>
+        <attr name="ntb_badged" format="boolean"/>
+        <attr name="ntb_scaled" format="boolean"/>
+        <attr name="ntb_tinted" format="boolean"/>
+        <attr name="ntb_swiped" format="boolean"/>
+        <attr name="ntb_badge_use_typeface" format="boolean"/>
+
+        <attr name="ntb_title_size" format="dimension"/>
+        <attr name="ntb_title_mode" format="enum">
+            <enum name="all" value="0"/>
+            <enum name="active" value="1"/>
+        </attr>
+
+        <attr name="ntb_badge_size" format="dimension"/>
+        <attr name="ntb_badge_position" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="right" value="2"/>
+        </attr>
+        <attr name="ntb_badge_gravity" format="enum">
+            <enum name="top" value="0"/>
+            <enum name="bottom" value="1"/>
+        </attr>
+        <attr name="ntb_badge_bg_color" format="color"/>
+        <attr name="ntb_badge_title_color" format="color"/>
+
+        <attr name="ntb_typeface" format="string"/>
+        <attr name="ntb_corners_radius" format="dimension"/>
+        <attr name="ntb_icon_size_fraction" format="float"/>
+        <attr name="ntb_animation_duration" format="integer"/>
+
+        <attr name="ntb_inactive_color" format="color"/>
+        <attr name="ntb_active_color" format="color"/>
+        <attr name="ntb_bg_color" format="color"/>
+
+        <attr name="ntb_preview_colors" format="reference"/>
+    </declare-styleable>
+<!-- tumblr -->
+
+
+    <attr name="arc_origin">
+        <!-- Value same as the android:gravity -->
+        <flag name="top" value="0x30"/>
+        <flag name="bottom" value="0x50"/>
+        <flag name="left" value="0x03"/>
+        <flag name="right" value="0x05"/>
+        <flag name="center_vertical" value="0x10"/>
+        <flag name="center_horizontal" value="0x01"/>
+        <flag name="center" value="0x11"/>
+        <flag name="start" value="0x00800003"/>
+        <flag name="end" value="0x00800005"/>
+    </attr>
+
+    <declare-styleable name="arc_ArcLayout">
+        <attr name="arc_origin"/>
+        <attr name="arc_color" format="color"/>
+        <attr name="arc_radius" format="dimension"/>
+        <attr name="arc_axisRadius" format="dimension"/>
+        <attr name="arc_freeAngle" format="boolean"/>
+        <attr name="arc_reverseAngle" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="arc_ArcLayout_Layout">
+        <attr name="arc_origin"/>
+        <attr name="arc_angle" format="float"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="RippleView">
+        <attr name="rv_alpha" format="integer" />
+        <attr name="rv_framerate" format="integer"/>
+        <attr name="rv_rippleDuration" format="integer"/>
+        <attr name="rv_zoomDuration" format="integer" />
+        <attr name="rv_color" format="color" />
+        <attr name="rv_centered" format="boolean" />
+        <attr name="rv_type" format="enum">
+            <enum name="simpleRipple" value="0"/>
+            <enum name="doubleRipple" value="1"/>
+            <enum name="rectangle" value="2" />
+        </attr>
+        <attr name="rv_ripplePadding" format="dimension" />
+        <attr name="rv_zoom" format="boolean" />
+        <attr name="rv_zoomScale" format="float" />
+
+    </declare-styleable>
+</resources>

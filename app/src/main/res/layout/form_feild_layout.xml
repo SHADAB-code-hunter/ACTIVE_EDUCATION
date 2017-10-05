@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <EditText
+            android:id="@+id/id_edt_s_name"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:hint="Name of School " />
+        <EditText
+            android:id="@+id/id_edt_b_name"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:hint="Name of Board" />
+        <EditText
+            android:id="@+id/id_edt_pass_year"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:hint="Passing year"
+            android:inputType="number"/>
+        <EditText
+            android:id="@+id/id_edt_duration"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:hint="Duration"
+           />
+        <EditText
+            android:id="@+id/id_mark_percent"
+            android:layout_width="400dp"
+            android:layout_height="35dp"
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:singleLine="true"
+            android:hint="Obtain Marks In Percentage (%)" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="#463d5c"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10th Marksheet"
+                    android:background="#2345"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:textColor="@color/white" />
+                <ImageView
+                    android:id="@+id/id_doc_a"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus_button"
+                    android:layout_marginTop="0dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10th  Certficate"
+                    android:background="#2345"
+                    android:textSize="10sp"
+                    android:gravity="center"
+                    android:textColor="@color/white" />
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/id_doc_b"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus_button"
+                    android:layout_marginTop="0dp"
+                    app:civ_border_color="#bef7f7f7"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="5"
+                    app:civ_shadow_color="@color/transparent"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Other Doc"
+                    android:background="#2345"
+                    android:gravity="center"
+                    android:textColor="@color/white" />
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/id_doc_c"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_plus_button"
+                    android:layout_marginTop="0dp"
+                    app:civ_border_color="#bef7f7f7"
+                    app:civ_border_width="0dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="5"
+                    app:civ_shadow_color="@color/transparent"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

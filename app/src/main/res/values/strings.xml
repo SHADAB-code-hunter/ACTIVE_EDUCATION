@@ -1,0 +1,213 @@
+<resources>
+    <string name="app_name">ACTIVE EDUCATION</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="firebase_status_fmt">Firebase User: %s</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="view_pager_bottom_sheet_behavior" translatable="false">Fab_Filter.viewpagerbottomsheet.ViewPagerBottomSheetBehavior</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="hint_name">Full Name</string>
+    <string name="hint_email">Email</string>
+    <string name="err_msg_name">Enter full name</string>
+    <string name="err_msg_email">Enter valid email address</string>
+    <string name="title_activity_chat_room_discussion">ChatRoomDiscussionActivity</string>
+    <string name="action_logout">Logout</string>
+    <!--<string name="gcm_defaultSenderId">02312344i49</string>-->
+    <string name="loading">loading........</string>
+    <string name="refresh">refresh...</string>
+    <string name="list_null">List Data Not Found According to your Option....</string>
+
+
+    <string name="dialog_auth_title">Setup your profile</string>
+    <string name="dialog_auth_positive_btn">Do it now</string>
+    <string name="dialog_auth_negative_btn">Later</string>
+
+    <string name="zd_url">https://rememberthedate.zendesk.com</string>
+    <string name="zd_appid">b892498e99e6e01920489988755918219684f60af86bcd10</string>
+    <string name="zd_oauth">mobile_sdk_client_7f7d3c9abd345afe080e</string>
+
+    <string name="file_provider_authority">com.zendesk.rememberthedate</string>
+
+    <string name="zopim_account_id">50NQCshxDBXFdHvLfJFkZqAdWQjYch0S</string>
+
+    <string name="facebook_app_id">356658544797544</string>
+    <string name="fb_login_protocol_scheme">fb356658544797544</string>
+
+    <string name="sample_blue_title">sample_blue_title</string>
+    <string name="square_blue_name">square_blue</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+
+        "Component elevations.\n\n"
+
+        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
+        "does not vary from 6dp in one app to 16dp in another app).\n"
+        "Components may have different resting elevations across platforms, depending on the depth "
+        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
+
+        "Responsive elevation and dynamic elevation offsets.\n\n"
+
+        "Some component types have responsive elevation, meaning they change elevation in response "
+        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
+        "changes are consistently implemented using dynamic elevation offsets.\n"
+        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
+        "to the component’s resting state. They ensure that elevation changes are consistent "
+        "across actions and component types. For example, all components that lift on press have "
+        "the same elevation change relative to their resting elevation.\n"
+        "Once the input event is completed or cancelled, the component will return to its resting "
+        "elevation.\n\n"
+
+        "Avoiding elevation interference.\n\n"
+
+        "Components with responsive elevations may encounter other components as they move between "
+        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
+        "through other material, components avoid interfering with one another any number of ways, "
+        "whether on a per component basis or using the entire app layout.\n"
+        "On a component level, components can move or be removed before they cause interference. "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
+        "user picks up a card, or it can move if a snackbar appears.\n"
+        "On the layout level, design your app layout to minimize opportunities for interference. "
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
+    </string>
+
+    <!---->
+
+    <!-- Transitions -->
+    <string name="transition_avatar">AvatarTransition</string>
+    <string name="transition_morph_view" translatable="false">morph_view_transition</string>
+    <string name="transition_name" translatable="false">square_transition</string>
+    <string name="transition_toolbar_name" translatable="false">toolbar_transition</string>
+    <string name="transition_shared_toolbar" translatable="false">shared_toolbar_transition</string>
+
+    <string name="content_description_image_header">Image header</string>
+    <string name="content_description_image_smile_emoticon">Smile emotion</string>
+
+    <string name="text_ok_go_now">OK, you can go now</string>
+    <string name="text_hello_message">Think of all the great things you could use this transition for!</string>
+    <string name="reveal_body3">View layout change animation with Circular Reveal Animation on finish</string>
+
+
+    <!-- tumblr -->
+
+    <string name="app_license">License</string>
+    <string name="app_github">GitHub</string>
+    <string name="app_github_url"><![CDATA[https://github.com/ogaclejapan/ArcLayout]]></string>
+
+    <string name="reverse">Reverse</string>
+
+    <string name="title_center">Center</string>
+    <string name="title_left">Left</string>
+    <string name="title_right">Right</string>
+    <string name="title_top">Top</string>
+    <string name="title_top_left">Top Left</string>
+    <string name="title_top_right">Top Right</string>
+    <string name="title_bottom">Bottom</string>
+    <string name="title_bottom_left">Bottom Left</string>
+    <string name="title_bottom_right">Bottom Right</string>
+    <string name="title_advanced_freeangle">Advanced: Free angle</string>
+    <string name="title_advanced_tumblr">Advanced: Like a Tumblr</string>
+    <string name="title_advanced_path">Advanced: Like a Path</string>
+
+    <string name="note_center"><![CDATA[app:arc_origin=&quot;<b>center</b>&quot;<br/>Full arc of from 270 degrees]]></string>
+    <string name="note_left"><![CDATA[app:arc_origin=&quot;<b>left</b>&quot;<br/>Semi arc of from 270 degrees]]></string>
+    <string name="note_right"><![CDATA[app:arc_origin=&quot;<b>right</b>&quot;<br/>Semi arc of from 90 degrees]]></string>
+    <string name="note_top"><![CDATA[app:arc_origin=&quot;<b>top</b>&quot;<br/>Semi arc of from 0 degrees]]></string>
+    <string name="note_top_left"><![CDATA[app:arc_origin=&quot;<b>top|left</b>&quot;<br/>Quarter arc of from 0 degrees]]></string>
+    <string name="note_top_right"><![CDATA[app:arc_origin=&quot;<b>top|right</b>&quot;<br/>Quarter arc of from 90 degrees]]></string>
+    <string name="note_bottom"><![CDATA[app:arc_origin=&quot;<b>bottom</b>&quot;<br/>Semi arc of from 180 degrees]]></string>
+    <string name="note_bottom_left"><![CDATA[app:arc_origin=&quot;<b>bottom|left</b>&quot;<br/>Quarter arc of from 270 degrees]]></string>
+    <string name="note_bottom_right"><![CDATA[app:arc_origin=&quot;<b>bottom|right</b>&quot;<br/>Quarter arc of from 180 degrees]]></string>
+    <string name="note_advanced_freeangle"><![CDATA[app:arc_freeAngle=&quot;<b>true</b>&quot;<br/>Can be free angle to place the child view]]></string>
+    <string name="note_advanced_tumblr">Try pressing the button</string>
+    <string name="note_advanced_path">Try pressing the button</string>
+
+    <!-- stepper file -->
+
+    <!-- We can overwrite the values of the library's strings in order to customize them -->
+    <string name="vertical_form_stepper_form_confirm_button">Submit</string>
+    <string name="vertical_form_stepper_form_sending_data_message">Sending Data Please Wait.....</string>
+    <string name="add_alarm">Add New Alarm</string>
+    <string name="new_alarm_added">New alarm added successfully</string>
+    <string name="form_hint_title">Alarm title (required)</string>
+    <string name="form_hint_description">Alarm description (optional)</string>
+    <string name="error_title_min_characters">At least %1$d characters</string>
+    <string name="main_activity_explanation">Click the button to try it!</string>
+    <string name="main_activity_explanation_disclaimer">This app DOES NOT set up alarms for real!</string>
+    <string name="vertical_form_stepper_form_continue">Continue</string>
+    <string name="vertical_form_stepper_form_discard_question">Discard data?</string>
+    <string name="vertical_form_stepper_form_info_will_be_lost">All the information you have given will be lost</string>
+    <string name="vertical_form_stepper_form_discard_cancel">Cancel</string>
+    <string name="vertical_form_stepper_form_discard">Discard</string>
+    <string name="vertical_form_stepper_form_down_previous">down_previous</string>
+    <string name="vertical_form_stepper_form_down_next">down_next</string>
+    <string name="vertical_form_stepper_form_last_step">Final Step ( Form Submittion )</string>
+    <string name="Loading">Loading.......</string>
+    <string name="LogOut">Logout Please Wait.......</string>
+    <string name="LogIn">LogIn Please Wait.......</string>
+    <string name="SignUp">SignUp Please Wait.......</string>
+    <string name="development">UNDERSTANDING THE CULTURE OF ONE’S OWN COUNTRY ISN’T DIFFICULT, YET HOW MANY OF US MAKE AN EFFORT TO DO SO. YES, A DEEPER UNDERSTANDING ON CULTURE NOT ONLY HELPS US TO GAIN A GREAT INSIGHT OF THE DIVERSE CULTURE THE COUNTRY HAS,BUT ALSO ALLOWS US TO ADAPT TO IT BETTER, IF AND WHEN REQUIRED. ACTIVE QUIZ, THRIVES ON THE SAME CONCEPT AND PLEDGES TO PROVIDE THE NAÏVE CHILDREN THAT IN-DEPTH KNOWLEDGE OF OUR CULTURE, WHICH SOMEHOW, WE’VE BEEN DEPRIVED OF.</string>
+    <string name="description">jkhfjkdhjhdv dhfjkdhfjkhjkfhdhjkdhjkdbvjkc cb bjkbcm</string>
+    <string name="title_activity_partner_">Partner_Activity</string>
+
+
+</resources>

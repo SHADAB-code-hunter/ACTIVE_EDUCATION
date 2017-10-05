@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:menuLayout="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:background="@color/grey_home">
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ic_back_arrow"
+            android:drawablePadding="4dp"
+            android:textSize="17sp"
+            android:textColor="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="   Frenchisee Profile"
+            android:drawablePadding="4dp"
+            android:textSize="17sp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="0dp"
+    android:orientation="vertical">
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:id="@+id/layout_search">
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_back_arrow"
+            android:drawablePadding="4dp"
+            android:textSize="17sp"
+            android:textColor="@color/white" />
+
+
+<!--
+            <EditText
+                android:layout_marginLeft="110dp"
+                android:layout_marginRight="110dp"
+                android:id="@+id/searchBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_box_bg"
+                android:drawableLeft="@drawable/search_icon"
+                android:drawablePadding="18dp"
+                android:maxLines="1"
+                android:minLines="1"
+                android:singleLine="true" 
+                android:editable="false"
+                android:gravity="center_vertical"
+                android:minHeight="30dp"
+                android:textSize="13.5sp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:hint="input location">
+            </EditText>
+-->
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_below="@id/layout_search"
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cacheColorHint="@android:color/transparent"
+            android:scrollbars="none"
+            android:listSelector="@android:color/transparent">
+        </ListView>
+<!--
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/layout_search"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent" />
+-->
+
+    <LinearLayout
+        android:id="@+id/id_top_linear"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/grey_home"
+        android:layout_height="85dp"></LinearLayout>
+		<RelativeLayout 
+		    android:id="@+id/layout_frame"
+		    android:layout_below="@id/layout_search"
+		    android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+		    android:layout_height="190dp"
+		    android:orientation="vertical">
+
+            <View 
+                android:id="@+id/blank_view"
+                android:layout_width="match_parent"
+                android:background="@color/theme1"
+                android:visibility="gone"
+                android:layout_height="100dp" />
+
+             <View
+               android:layout_below="@id/blank_view"
+               android:id="@+id/blank_color_view"
+               android:layout_width="match_parent"
+               android:background="@color/theme1"
+               android:visibility="gone"
+               android:paddingBottom="5dp"
+               android:layout_height="150dp" />
+
+              <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:clipChildren="false"
+                    android:id="@+id/layout_menu"
+                    android:clipToPadding="false" >
+
+                  <Agent_Profile.MenuLayout
+                      android:id="@+id/img_a"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      menuLayout:indexLable="0"
+                      menuLayout:imageBackground="@mipmap/image_a"
+                      menuLayout:imageContent="@mipmap/ic_offer"
+                      android:layout_centerHorizontal="true" />
+
+                   <Agent_Profile.MenuLayout
+                      android:id="@+id/img_b"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       menuLayout:indexLable="4"
+                       menuLayout:imageBackground="@mipmap/image_b"
+                       menuLayout:imageContent="@mipmap/ic_target"
+                       android:layout_centerHorizontal="true"
+                      />
+
+                      <Agent_Profile.MenuLayout
+                          android:id="@+id/img_c"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          menuLayout:indexLable="3"
+                          menuLayout:imageBackground="@mipmap/image_c"
+                          menuLayout:imageContent="@mipmap/ic_graph"
+                          android:layout_centerHorizontal="true" />
+
+                      <Agent_Profile.MenuLayout
+                          android:id="@+id/img_d"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          menuLayout:indexLable="2"
+                          menuLayout:imageBackground="@mipmap/image_d"
+                          menuLayout:imageContent="@mipmap/ic_edt_prfl"
+                          android:layout_centerHorizontal="true" />
+
+                       <Agent_Profile.MenuLayout
+                           android:id="@+id/img_e"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           menuLayout:indexLable="1"
+                           menuLayout:imageBackground="@mipmap/image_e"
+                           menuLayout:imageContent="@mipmap/ic_account"
+                           android:layout_centerHorizontal="true" />
+                </RelativeLayout>
+        
+               <Agent_Profile.ViewPagerAD
+                    android:layout_marginTop="0dp"
+                    android:layout_below="@id/layout_menu"
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp" />
+
+      </RelativeLayout>
+
+       <Agent_Profile.CenterImageView
+           	 android:layout_below="@id/layout_search"
+			 android:id="@+id/circle"
+             android:layout_width="100dp"
+             android:layout_height="100dp"
+             android:layout_margin="0dp"
+             android:background="@drawable/ic_user_prfl"
+             android:layout_centerHorizontal="true" />
+    
+       
+</RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1044078881949",
+    "firebase_url": "https://activeeducation-fb3fe.firebaseio.com",
+    "project_id": "activeeducation-fb3fe",
+    "storage_bucket": "activeeducation-fb3fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044078881949:android:6007919af0aa5fce",
+        "android_client_info": {
+          "package_name": "com.gt.active_education"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044078881949-mdkmq4qn0m0fub72h5bu9e06plk00one.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gt.active_education",
+            "certificate_hash": "1ab8ed301a31e7475b8bb95957fd6acddc133761"
+          }
+        },
+        {
+          "client_id": "1044078881949-7h49kp9d50qhpbl2bhtmsa35hqdv8q75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMkkHN8igo-7DuPk1N_AiWlEhP99ie_gU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044078881949-7h49kp9d50qhpbl2bhtmsa35hqdv8q75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

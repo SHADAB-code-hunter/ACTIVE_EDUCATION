@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="500dp">
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|top"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="20dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="15dp">
+
+                <!-- <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:layout_weight="2.5">
+
+                        <ImageView
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_logo"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@drawable/line_colr_shape"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:paddingRight="25dp"
+                            android:paddingTop="10dp"
+                            android:layout_margin="0dp"
+                            android:layout_gravity="end">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Waiting Time"
+                                android:textSize="12sp"
+                                android:textColor="#9f9c9c"
+                                android:gravity="end"
+                                android:layout_gravity="top|end"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="00:27"
+                                android:layout_margin="5dp"
+                                android:textSize="13sp"
+                                android:textColor="#a30e0e"
+                                android:gravity="center"
+                                android:layout_gravity="center"/>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginTop="20dp">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:layout_margin="10dp"
+                                android:textSize="16sp"
+                                android:textColor="#9f9c9c"
+                                android:text="OTP has been sent to your "/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:textSize="16sp"
+                                android:textColor="#9f9c9c"
+                                android:layout_margin="0dp"
+                                android:text=" Mobile Number "/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#9f9c9c"
+                                android:gravity="center"
+                                android:textSize="18sp"
+                                android:layout_margin="15dp"
+                                android:text="[ + 91 ]    9599805321 "/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Enter OTP Code "
+                                android:layout_margin="10dp"
+                                android:textSize="24sp"
+                                android:gravity="center"/>
+
+                         <!--   <android.support.design.widget.TextInputLayout
+                                android:id="@+id/text_input_layout_username"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:hintAnimationEnabled="true"
+                                android:textColorHint="#6949FF"
+                                android:backgroundTint="@color/colorPrimaryDark">-->
+
+                                <EditText
+                                    android:id="@+id/edt_uname"
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#451dff"
+                                    android:gravity="center"
+                                    android:maxLines="1"
+                                    android:textColor="@color/btn_color"
+                                    android:textColorHint="@color/btn_color"
+                                    android:layout_gravity="center"
+                                    android:hint="  * * * * * * "/>
+
+                         <!--   </android.support.design.widget.TextInputLayout>-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="20dp"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="send OTP again ? "/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Click here"
+                                    android:textColor="@color/colorPrimaryDark"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/button_verify"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_gravity="bottom|end"
+                            android:background="@color/btn_color"
+                            android:text="VERIFY"
+                            android:layout_margin="30dp"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/id_image_profile_signup"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/id_edit_camera_iv"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/ic_sms_img"
+                app:civ_border_width="0dp"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="5" />
+
+            <!--<FrameLayout
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end|center"
+                android:background="@drawable/ksw_md_thumb"
+                android:padding="7dp"
+                android:layout_marginTop="0dp">
+                <ImageView
+                    android:id="@+id/id_edit_camera_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end|center"
+                    android:layout_marginTop="0dp"
+                    android:src="@drawable/ic_cam" />
+            </FrameLayout>-->
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+</LinearLayout>

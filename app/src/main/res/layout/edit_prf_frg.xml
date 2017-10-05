@@ -1,0 +1,304 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/id_tv_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Fragment"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:layout_weight="0.5">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_uname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:hint="User Name"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_user"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:inputType="number"
+                        android:hint="Mobile"/>
+
+
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_mail"/>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="#89695a91"
+                android:textColor="#6949FF"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="left|center"
+                android:text="Change Password " />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_oldpass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:hint="Current Password"/>
+
+
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_lock"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_con_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_new_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:hint="New Password"/>
+
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_con_pass"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/id_state"
+                android:layout_width="match_parent"
+                android:background="#98403b4b"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+<!--
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:hint="State"/>
+
+
+                </android.support.design.widget.TextInputLayout>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:text="Select State"
+                    android:textColor="#6949FF"/>
+
+                <Spinner
+                    android:id="@+id/id_spnner_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"></Spinner>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@android:drawable/arrow_down_float"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#98403b4b">
+
+              <!--  <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_con_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#451dff"
+                        android:ems="20"
+                        android:hint="City"/>
+
+
+                </android.support.design.widget.TextInputLayout>-->
+
+                <TextView
+                    android:id="@+id/id_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:textColor="#6949FF"
+                    android:text="Select City"/>
+
+                <Spinner
+                    android:id="@+id/id_spnner_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    ></Spinner>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@android:drawable/arrow_down_float"/>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/text_input_layout_pincode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="#6949FF"
+                    android:backgroundTint="@color/colorPrimaryDark">
+
+                    <EditText
+                        android:id="@+id/edt_pincode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:backgroundTint="#451dff"
+                        android:hint="Pincode"/>
+
+
+                </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ic_mail"/>
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/login_btn_shape"
+                android:text="Submit"
+                android:layout_marginTop="50dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

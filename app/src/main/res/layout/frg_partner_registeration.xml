@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Expandable_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="3dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Detail" />
+                <TextView
+                    android:layout_below="@+id/title1"
+                    android:layout_toLeftOf="@+id/switch_button1"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="College Detail wil provide Upstairs Ranking of College "
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_button1"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:outlineProvider="bounds">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            android:soundEffectsEnabled="true"
+                            android:outlineProvider="none"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_clg_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:allowUndo="true"
+                                android:hint="Enter College Name"
+                                android:soundEffectsEnabled="true"
+                                android:backgroundTint="#ffffff"
+                                android:textColor="@color/edt_text_color"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            android:soundEffectsEnabled="true"
+                            android:outlineProvider="none"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_short_clg_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:allowUndo="true"
+                                android:textColor="@color/edt_text_color"
+                                android:hint="Enter College Short Name"
+                                android:soundEffectsEnabled="true"
+                                android:backgroundTint="@color/colorAccent"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_phone"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="match_parent"
+                                android:hint="Enter Mobile Number"
+                                android:backgroundTint="@color/colorAccent"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_edt_land_number"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter LandLine Number "
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_email"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter E-Mail"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_website"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter Website"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_est_year"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter Established Year"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="@color/path_black"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_clg_about"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/path_black"
+                                android:textColorHint="@color/path_black"
+                                android:background="#ffffff"
+                                android:gravity="top"
+                                android:layout_height="100dp"
+                                android:hint="Type your Portfolio Description " />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Address " />
+                <TextView
+                    android:layout_below="@+id/menu"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provide Your College Address"
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_button2_address"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_expand_addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:outlineProvider="bounds">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            android:soundEffectsEnabled="true"
+                            android:outlineProvider="none"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_building_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:allowUndo="true"
+                                android:textColor="@color/edt_text_color"
+                                android:hint="Enter Building Number"
+                                android:soundEffectsEnabled="true"
+                                android:backgroundTint="@color/colorAccent"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_area"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="match_parent"
+                                android:hint="Enter Area Name"
+                                android:backgroundTint="@color/colorAccent"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_edt_location"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter Nearest Location "
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_state"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Choose State"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_edt_city"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Choose City"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_edt_dist"
+                                android:textSize="12sp"
+                                style="@style/CustomEditText"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter District"
+                                android:singleLine="true" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_tehshil"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter Tahsheel" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/colorPrimaryDark"
+                            android:textColorHint="#ffffff"
+                            app:hintAnimationEnabled="true">
+
+                            <EditText
+                                android:id="@+id/id_pincode"
+                                android:textSize="12sp"
+                                android:layout_width="match_parent"
+                                android:textColor="@color/edt_text_color"
+                                android:layout_height="35dp"
+                                android:backgroundTint="@color/colorAccent"
+                                android:hint="Enter Pincode" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="35dp"
+                            android:layout_height="25dp"
+                            android:layout_gravity="end|bottom"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="0dp"
+                            android:visibility="invisible"
+                            android:src="@drawable/ic_agent_profile" />
+                    </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <!--    -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/id_social_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="Social Detail" />
+                <TextView
+                    android:layout_below="@+id/id_social_title1"
+                    android:layout_toLeftOf="@+id/switch_button1_socail"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please Provide Your Social For improving your Social Ranking "
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_button1_socail"
+                    android:gravity="center"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_exp_social"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#b3aebc"
+                android:elevation="2dp">
+
+                <include android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    layout="@layout/social_btn"></include>
+
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/clg_images_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Images " />
+                <TextView
+                    android:layout_below="@+id/clg_images_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attach Your College Images"
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_btn_clg_img"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_expand_attach_images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text=" Attach College Gallery"
+                    android:textSize="20sp"
+                    android:typeface="serif"
+                    android:gravity="center"
+                    android:padding="5dp"/>
+                <include android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/attach_images"></include>
+
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+         <!--   -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/clg_certificates_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Certificates " />
+                <TextView
+                    android:layout_below="@+id/clg_certificates_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attach Your College Certificates"
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_btn_clg_crtficate"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_expand_attach_certificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text=" Attach Certificates"
+                    android:textSize="20sp"
+                    android:typeface="serif"
+                    android:gravity="center"
+                    android:padding="5dp"/>
+                <include android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/attach_images"></include>
+
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <!--   -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/clg_brochure_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Brochure " />
+                <TextView
+                    android:layout_below="@+id/clg_brochure_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Attach Your College Certificates"
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_btn_clg_brochure"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_expand_attach_brochre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text=" Attach Brochure"
+                    android:textSize="20sp"
+                    android:typeface="serif"
+                    android:gravity="center"
+                    android:padding="5dp"/>
+                <include android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/attach_brochre"></include>
+
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <!-- bank detail-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#ffffff"
+            android:layout_margin="3dp"
+            android:elevation="4dp"
+            android:outlineProvider="bounds">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/clg_bank_detail_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:text="College Bank Detail " />
+                <TextView
+                    android:layout_below="@+id/clg_bank_detail_tv"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Provide Your College Bank DEtail"
+                    android:textColor="#cccccc"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_btn_clg_bank_detail"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/id_expand_bank_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#7958ba"
+                android:elevation="2dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text=" Provide Bank Detail"
+                    android:textSize="20sp"
+                    android:typeface="serif"
+                    android:gravity="center"
+                    android:padding="5dp"/>
+                <include android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    layout="@layout/bank_detail"></include>
+
+            </LinearLayout>
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+        <Button
+            android:id="@+id/id_btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Submit"
+            android:textAllCaps="false"/>
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

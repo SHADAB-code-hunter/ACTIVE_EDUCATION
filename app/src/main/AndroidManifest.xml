@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gt.active_education">
+    -keepclassmembers class com.paytm.pgsdk.PaytmWebView$PaytmJavaScriptInterface {
+    public *;
+    }
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
+    <uses-permission android:name="android.hardware.camera.flash" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BIND_JOB_SERVICE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.media.action.IMAGE_CAPTURE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.provider.Telephony.SMS_RECEIVED" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
+
+    <uses-permission android:name="android.hardware.Telephony.SMS_RECEIVED" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+    <!--  -->
+    <permission
+        android:name="${applicationId}.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+
+    <application
+        android:name="utilities.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme_customBack">
+
+        <!-- kotMain_LoginActivityvity -->
+
+        <activity
+            android:name=".Target_Circle_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme_Full">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|keyboard"/>
+        <activity
+            android:name=".DashBoard_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MaterialAnimations" />
+        <activity
+            android:name=".User_Profile_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PopupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Agent_Deal_Offer_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".User_Login_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".Agent_Profile_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Gallery_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".About_Us_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DemoActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Agent_login_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Num_Verify_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".SignUp_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".SignUp_Succesfull_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".OTP_Verification_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".Sign_Up_Process_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".Filter_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme_customBack" />
+        <activity
+            android:name=".College_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Big_ImgView_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Admission_Form_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Pay_U_MyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Exam_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Website_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PayU_Money_Activity"
+            android:screenOrientation="portrait" />
+
+
+        <activity
+            android:name=".Partner_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Partner_Activity"/>
+        <activity
+            android:name=".GoogleSignInActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".GoogleSignInActivity"/>
+        <activity
+            android:name=".FacebookLoginActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".FacebookLoginActivity"/>
+
+        <!--
+        <activity android:name="fcm_chat_book.Notification_Detail_Activity">
+        <intent-filter>
+            <action android:name="com.ttnd.fcmtest.OPEN_ACTIVITY_1" />
+            <category
+                android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+        -->
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <receiver
+            android:name="utilities.SensorRestarterBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="YouWillNeverKillMe" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="utilities.wake_Up_Receiver">
+            <intent-filter>
+                <action android:name="android.intent.action.SCREEN_ON" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="utilities.SmsReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.permission.RECEIVE_SMS" />
+                <action android:name="android.intent.action.PROVIDER_CHANGED" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="utilities.UninstallIntentReceiver">
+            <intent-filter android:priority="0">
+                <action android:name="android.intent.action.QUERY_PACKAGE_RESTART" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+        <!--
+        <service
+            android:name="fcm_chat_book.MyFirebaseInstanceIDService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="fcm_chat_book.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        -->
+        <!--
+              <meta-data
+              android:name="com.google.firebase.messaging.default_notification_channel"
+              android:value="active-education-a7d2e"/>
+        -->
+
+
+        <!--
+                    <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_channel"
+                    android:value="active-education-a7d2e"/>
+                &lt;!&ndash; Set custom default icon. This is used when no icon is set for incoming notification messages.
+             See README(https://goo.gl/l4GJaQ) for more. &ndash;&gt;
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_icon"
+                    android:resource="@drawable/ic_notification_small" />
+                &lt;!&ndash; Set color used with incoming notification messages. This is used when no color is set for the incoming
+                     notification message. See README(https://goo.gl/6BKBk7) for more. &ndash;&gt;
+                <meta-data
+                    android:name="com.google.firebase.messaging.default_notification_color"
+                    android:resource="@color/colorAccent" />
+        -->
+
+
+        <!-- zendesk -->
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="${applicationId}" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+        <service
+            android:name=".push.ZendeskGcmListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".push.ZendeskInstanceIdListenerService"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID"/>
+            </intent-filter>
+        </service>
+        <service android:name=".push.RegistrationIntentService" />
+        -->
+        <!--  -->
+
+       <!-- <activity
+            android:name=".Partner_Activity"
+            android:label="@string/title_activity_partner_"
+            android:theme="@style/Theme_customBack"></activity>-->
+
+
+    </application>
+
+</manifest>

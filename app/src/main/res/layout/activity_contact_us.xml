@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:anandroid="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@drawable/light_layer"
+        android:id="@+id/toolbar2">
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/id_back_quicz_Quick_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:layout_margin="12dp"
+                            android:background="@drawable/ic_back_arrow"/>
+
+                        <TextView
+                            android:id="@+id/toolbar_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="50dp"
+                            android:gravity="center_vertical"
+                            android:text="Contact Us"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.05"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="0dp"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="2.1"
+                            android:visibility="invisible"
+                            android:layout_gravity="center"
+                            android:layout_margin="9dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="00:00:00"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp"
+                            android:layout_weight="2.1"
+                            android:textSize="9sp"
+                            android:textColor="@color/white"
+                            android:id="@+id/toolbar_timer" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="2.1"
+                            android:layout_margin="9dp"
+                            android:visibility="invisible"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="0dp"
+                            android:id="@+id/toolbar_skip" />
+                    </LinearLayout>
+                </TableRow>
+            </LinearLayout>
+
+        </TableLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/id_id_winner_framlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp">
+
+               <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:gravity="center">
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/id_website"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_distribution"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="5"
+                    app:civ_shadow_color="#8BC34A"/>
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/id_video_call"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_24_hours"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="5"
+                    app:civ_shadow_color="#8BC34A"/>
+
+        </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:orientation="horizontal"
+                       android:layout_height="20dp">
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:gravity="right"
+                           android:layout_marginRight="25dp"
+                           android:text="Website"
+                           android:layout_weight="1"/>
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_marginLeft="20dp"
+                           android:layout_height="match_parent"
+                           android:text="Video Call"
+                           android:layout_weight="1"/>
+                   </LinearLayout>
+                   <View
+                       android:layout_width="190dp"
+                       android:layout_height="1dp"
+
+                       android:layout_marginTop="5dp"
+                       android:background="@color/trans_grey"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|top">
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/id_sms"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_chat"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="5"
+                app:civ_shadow_color="#8BC34A"/>
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/id_v_call"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_v_call"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="5"
+                app:civ_shadow_color="#8BC34A"/>
+
+
+        </LinearLayout>
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:orientation="horizontal"
+
+                       android:layout_height="20dp">
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_height="match_parent"
+                           android:gravity="right"
+                           android:layout_marginRight="20dp"
+                           android:text="Chat"
+                           android:layout_weight="1"/>
+                       <TextView
+                           android:layout_width="match_parent"
+                           android:layout_marginLeft="20dp"
+                           android:layout_height="match_parent"
+                           android:text="Video Call"
+                           android:layout_weight="1"/>
+                   </LinearLayout>
+
+               </LinearLayout>
+    </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+</LinearLayout>

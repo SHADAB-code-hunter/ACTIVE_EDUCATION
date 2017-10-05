@@ -1,0 +1,13 @@
+package utilities;
+
+/**
+ * Created by GT on 7/21/2017.
+ */
+
+public class UpdateValues {
+
+    public static String loginPrefrence="AE_U_Login";
+    public static String LG_U_Prefrence ="AE_U_Login";
+    public static String OTP_Prefrence ="OTP_VERIFY";
+    public static String EDU_FORM="Form_Map_List";
+}

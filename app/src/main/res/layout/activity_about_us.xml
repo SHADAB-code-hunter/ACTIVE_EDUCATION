@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fafafa"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Arc_Layout_Package.ArcLayout
+            android:id="@+id/diagonalLayout"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:elevation="2dip"
+            app:arc_cropDirection="cropOutside"
+            app:arc_position="bottom"
+            app:arc_height="50dp">
+
+            <com.flaviofaria.kenburnsview.KenBurnsView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="0dp"
+                android:scaleType="center"
+                android:src="@drawable/img_director"
+                android:layout_gravity="center|right">
+
+
+            </com.flaviofaria.kenburnsview.KenBurnsView>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:paddingLeft="10dp"
+                    android:layout_alignParentTop="true"
+                    android:background="#4e2d2244"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/back_about"
+                        android:layout_gravity="center|left">
+
+                        <TextView
+                            android:id="@+id/id_back_btn_quiz"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@drawable/ic_back_arrow"/>
+                    </FrameLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="00:00:00"
+                        android:gravity="center"
+                        android:visibility="invisible"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:layout_weight="2.8"
+                        android:textSize="9sp"
+                        android:id="@+id/toolbar_timer" />
+                    <TextView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:textSize="9sp"
+                        android:background="@mipmap/ic_logo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:layout_marginBottom="0dp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="Company Profile"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.2"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp" />
+
+                    <TextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:visibility="invisible"
+                        android:background="@drawable/ic_power_button"
+                        android:layout_marginRight="9dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:layout_gravity="center" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </Arc_Layout_Package.ArcLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/id_floating_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="225dp"
+                android:src="@drawable/ic_cal_recever"
+                app:backgroundTint="#ce471d"
+                app:elevation="15dp"
+                app:fabSize="normal"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/diagonalLayout"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Our Director"
+                    android:textColor="#3A3A3A"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="sans-serif"
+                    android:text="A well-revered and renowned name in the education industry of India."
+                    android:textColor="#979696"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Vision"
+                    android:textColor="#3A3A3A"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Mr. R.K. Singh always dreamt for perfection. He indeed through his venture, Active Education Group, has turned many dreams come true and garnered true business associations. Today, to push his strategic leadershipand direction skills even more, he entered the world of Media and Communication via the naïve steps of Attentive Media one-stop-solution to India’s entire media/marketing needs! Mr. R.K. Singh remains to be a visionary whocould foresee the need for the untapped Edutainment Sector way before. It is only his brilliance that soon after launching Attentive, he created company’s first brainchild, called Active Quiz – India’s First Cultural T.V. Quiz Show which is all set to rule the world of Entertainment."
+                    android:textColor="#979696"
+                    android:textSize="12sp"
+                    />
+               <!-- <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Development"
+                    android:textColor="#3A3A3A"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/development"
+                    android:textColor="#979696"
+                    android:textSize="15sp"
+                    />-->
+            </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>

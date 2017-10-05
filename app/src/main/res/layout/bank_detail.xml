@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColorHint="#ffffff"
+                android:soundEffectsEnabled="true"
+                android:outlineProvider="none"
+                app:hintAnimationEnabled="true">
+
+                <EditText
+                    android:id="@+id/id_clg_bnk_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="12sp"
+                    style="@style/CustomEditText"
+                    android:allowUndo="true"
+                    android:hint="Enter Bank Name"
+                    android:soundEffectsEnabled="true"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/edt_text_color"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="0dp"
+                android:visibility="invisible"
+                android:src="@drawable/ic_agent_profile" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColorHint="#ffffff"
+                android:soundEffectsEnabled="true"
+                android:outlineProvider="none"
+                app:hintAnimationEnabled="true">
+
+                <EditText
+                    android:id="@+id/id_accnt_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="12sp"
+                    style="@style/CustomEditText"
+                    android:allowUndo="true"
+                    android:hint="Enter Account Number"
+                    android:soundEffectsEnabled="true"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/edt_text_color"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="0dp"
+                android:visibility="invisible"
+                android:src="@drawable/ic_agent_profile" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textColorHint="#ffffff"
+                android:soundEffectsEnabled="true"
+                android:outlineProvider="none"
+                app:hintAnimationEnabled="true">
+
+                <EditText
+                    android:id="@+id/id_ifsc_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:textSize="12sp"
+                    style="@style/CustomEditText"
+                    android:allowUndo="true"
+                    android:hint="Enter IFSC Code"
+                    android:soundEffectsEnabled="true"
+                    android:backgroundTint="#ffffff"
+                    android:textColor="@color/edt_text_color"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end|bottom"
+                android:layout_marginBottom="12dp"
+                android:layout_marginRight="0dp"
+                android:visibility="invisible"
+                android:src="@drawable/ic_agent_profile" />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

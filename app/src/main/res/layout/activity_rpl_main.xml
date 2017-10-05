@@ -1,0 +1,36 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="100dp">
+<com.gt.active_education.RippleBackground
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/chip_selected"
+    android:id="@+id/content"
+    app:rb_color="#0099CC"
+    app:rb_radius="32dp"
+    app:rb_rippleAmount="6"
+    app:rb_duration="3000"
+    app:rb_scale="6">
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/centerImage"
+        android:src="@drawable/ic_point_hand"/>
+    <ImageView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:id="@+id/foundDevice"
+        android:layout_above="@id/centerImage"
+        android:layout_marginBottom="32dp"
+        android:layout_toLeftOf="@id/centerImage"
+        android:layout_marginRight="6dp"
+        android:src="@drawable/ic_user_prfl"
+        android:visibility="invisible"/>
+</com.gt.active_education.RippleBackground>
+</LinearLayout>

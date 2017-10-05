@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/one"
+        android:title="Cut"
+        android:icon="@drawable/ic_vedio"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/two"
+        android:title="Copy"
+        android:icon="@drawable/ic_call_new"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/three"
+        android:title="Paste"
+        android:icon="@drawable/ic_chat"
+        android:orderInCategory="3"/>
+
+</menu>

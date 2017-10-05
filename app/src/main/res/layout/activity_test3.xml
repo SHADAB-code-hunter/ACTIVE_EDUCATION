@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--
+       <EditText
+          android:id="@+id/id_edt_a"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:hint="fisrst"
+           />
+       <EditText
+           android:id="@+id/id_edt_b"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:hint="second"
+
+           />
+       <EditText
+           android:id="@+id/id_edt_c"
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:hint="third"
+
+           />
+
+       <Button
+           android:id="@+id/id_btn"
+           android:layout_width="match_parent"
+           android:layout_height="50dp" />
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="100dp"
+           android:id="@+id/id_tv_map"/>-->
+    <utilities.BatteryProgressView
+        android:layout_height="250dp"
+        android:layout_width="250dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/progress"/>
+</LinearLayout>
