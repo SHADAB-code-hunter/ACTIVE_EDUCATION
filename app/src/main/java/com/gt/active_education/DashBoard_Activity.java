@@ -376,6 +376,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 }
         ));
 
+        Toast.makeText(this, "tesbbcn", Toast.LENGTH_SHORT).show();
         int[] Img_Bnr=new int[]{R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,
                 R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner};
         id_viewpager.setAdapter(new Banner_Adapter(getApplicationContext(),Img_Bnr));
