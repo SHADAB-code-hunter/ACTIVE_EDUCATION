@@ -68,7 +68,7 @@
         <!-- kotMain_LoginActivityvity -->
 
         <activity
-            android:name=".Target_Circle_Activity"
+            android:name=".SplashScreen_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme_Full">
             <intent-filter>
@@ -178,6 +178,10 @@
             android:name=".FacebookLoginActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".FacebookLoginActivity"/>
+        <activity
+            android:name=".Target_Circle_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Target_Circle_Activity"/>
 
         <!--
         <activity android:name="fcm_chat_book.Notification_Detail_Activity">

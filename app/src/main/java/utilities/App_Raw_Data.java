@@ -62,6 +62,40 @@ public class App_Raw_Data {
 
         return builder2;
     }
+
+    public static  String[] local_state_parseJson() {
+
+        Resources res = MyApplication.getAppContext().getResources();
+        InputStream is=res.openRawResource(R.raw.state);
+        Scanner scanner=new Scanner(is);
+        StringBuilder builder_json=new StringBuilder();
+
+        while(scanner.hasNextLine()){
+            builder_json.append(scanner.nextLine());
+        }
+
+        StringBuilder builder2=new StringBuilder();
+        try {
+            JSONObject root= new JSONObject(builder_json.toString());
+            JSONArray jsonArray=root.getJSONArray("state");
+             String [] str_state_name=null;
+            for (int i=0; i<jsonArray.length(); i++)
+            {
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                jsonObject.getString("name");
+
+                str_state_name[i]=jsonObject.getString("name");
+
+            }
+            return str_state_name;
+
+        }catch (JSONException e){
+            Log.d("jsonexception",e.getMessage());
+        }
+
+        return null;
+    }
+
     public static int getMatColor(int poss,String Arr_name)
     {
         int returnColor = Color.WHITE;

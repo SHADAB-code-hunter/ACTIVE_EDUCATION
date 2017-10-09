@@ -112,7 +112,7 @@ public class User_Login_Activity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void set_sign_in( String str_email, String str_pass)
+    private void set_sign_in(final String str_email, final String str_pass)
     {
         Log.d("urfgdffgdldg", ""+str_email+"  "+str_pass);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.LOGIN_API,

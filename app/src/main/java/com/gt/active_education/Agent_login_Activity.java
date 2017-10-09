@@ -134,28 +134,28 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                                     break;
                                 case "School":
 
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
                                 case "College":
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
                                 case "University":
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
                                 case "ITI / Diploma":
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
                                 case "Coaching":
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
 
                                 case "Training Center":
-                                    startActivity(new Intent(getApplicationContext(),Partner_Activity.class));
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
                                     break;
                             }
@@ -175,7 +175,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void set_sign_in(String str_email, String str_pass)
+    private void set_sign_in(final String str_email, final String str_pass)
     {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(true);

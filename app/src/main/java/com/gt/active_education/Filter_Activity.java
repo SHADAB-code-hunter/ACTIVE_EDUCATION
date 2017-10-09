@@ -113,7 +113,12 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
         id_city_filter=(LinearLayout)findViewById(R.id.id_city_filter);
         id_course_filter=(LinearLayout)findViewById(R.id.id_course_filter);
         id_branch_filter=(LinearLayout)findViewById(R.id.id_branch_filter);
-        id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(v -> finish());
+        id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Filter_Activity.this.finish();
+            }
+        });
         category_title=(TextView)findViewById(R.id.category_title);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab2 = (FloatingActionButton) findViewById(R.id.fab2);
@@ -216,26 +221,34 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
             }
         });
 
-        id_city_filter.setOnTouchListener((v, event) -> {
-            if(!open) {
-                open = true;
+        id_city_filter.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
 
-                if(id_tv_state.getText().toString()!=null) {
-                    StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_tv_state.getText().toString());
-                    state_city_search = new State_City_Search(s -> {
-                        if(s.equals(""))
-                            id_tv_city.setText("City");
-                        else
-                        id_tv_city.setText(s);
-                        state_city_search.cancel();
-                        open = false;
-                    }, Filter_Activity.this, GET_CITY+stringBuilder.toString());
-                    state_city_search.show();
-                }else {
-                    Toast.makeText(Filter_Activity.this, "Please Select State First !!!", Toast.LENGTH_SHORT).show();
+                if(!open) {
+                    open = true;
+
+                    if(id_tv_state.getText().toString()!=null) {
+                        StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_tv_state.getText().toString());
+                        state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
+                            @Override
+                            public void on_listdata(String s) {
+                                if (s.equals(""))
+                                    id_tv_city.setText("City");
+                                else
+                                    id_tv_city.setText(s);
+                                state_city_search.cancel();
+                                open = false;
+                            }
+                        }, Filter_Activity.this, GET_CITY+stringBuilder.toString());
+                        state_city_search.show();
+                    }else {
+                        Toast.makeText(Filter_Activity.this, "Please Select State First !!!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+                return false;
             }
-            return false;
         });
 
      /*   id_course_filter.setOnTouchListener(new View.OnTouchListener() {

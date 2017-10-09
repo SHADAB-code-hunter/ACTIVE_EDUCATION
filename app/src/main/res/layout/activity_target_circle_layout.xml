@@ -24,14 +24,6 @@
                 android:background="@drawable/back_about"
                 android:layout_gravity="center|left">
 
-                <TextView
-                    android:id="@+id/id_back_btn_quiz"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:background="@drawable/ic_back_arrow"/>
             </FrameLayout>
             <TextView
                 android:layout_width="match_parent"
@@ -50,8 +42,7 @@
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_margin="0dp"
-                android:textSize="9sp"
-                android:background="@mipmap/ic_logo" />
+                android:textSize="9sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -60,25 +51,24 @@
                 android:layout_marginBottom="0dp"
                 android:fontFamily="sans-serif"
                 android:gravity="center"
-                android:text="Company Profile"
+                android:text="Welcome "
                 android:textColor="#ffffff"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2.2"
+                android:id="@+id/id_profile"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_profile"
                 android:layout_gravity="center"
                 android:layout_margin="0dp" />
 
             <TextView
                 android:id="@+id/tv_logout"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:visibility="invisible"
-                android:background="@drawable/ic_power_button"
-                android:layout_marginRight="9dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
                 android:gravity="center"
                 android:textColor="#ffffff"
                 android:layout_gravity="center" />
@@ -114,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="637"
-                    android:textSize="50sp"
+                    android:textSize="35sp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="#ffffff"/>
@@ -128,8 +118,8 @@
 
             <utilities.BatteryProgressView
                 android:id="@+id/progress1"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="right|center">
 
             </utilities.BatteryProgressView>
@@ -166,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="150"
-                android:textSize="50sp"
+                android:textSize="35sp"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"/>
@@ -180,8 +170,8 @@
 
             <utilities.BatteryProgressView
                 android:id="@+id/progress2"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="right|center">
 
             </utilities.BatteryProgressView>
@@ -219,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="487"
-                android:textSize="50sp"
+                android:textSize="35sp"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="#ffffff"/>
@@ -233,8 +223,8 @@
 
             <utilities.BatteryProgressView
                 android:id="@+id/progress3"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
                 android:layout_gravity="right|center">
 
             </utilities.BatteryProgressView>

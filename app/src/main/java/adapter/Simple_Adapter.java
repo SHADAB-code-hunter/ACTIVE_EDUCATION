@@ -51,7 +51,13 @@ public class Simple_Adapter extends RecyclerView.Adapter<Simple_Adapter.MyViewHo
         });*/
 
         viewHolder.id_frst_letter.setText(String.valueOf((list_item.get(position).toString()).charAt(0)));
-        viewHolder.id_rlative.setOnClickListener(v ->   listener.on_id_listener(list_item.get(position)) );
+        viewHolder.id_rlative.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                listener.on_id_listener(list_item.get(position));
+            }
+        });
       //  viewHolder.id_frame_Layout.setBackgroundColor(App_Raw_Data.getMatColor(position,"mdcolor_A100"));
 
      /* StateListDrawable drawable = (StateListDrawable) viewHolder.id_frame_Layout.getBackground();

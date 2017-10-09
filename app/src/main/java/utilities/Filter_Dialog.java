@@ -418,21 +418,27 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
     private void isList_Avail(String result_url) {
 
         StringRequest stringRequest=new StringRequest(Request.Method.POST,result_url,
-                response -> {
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                    try {
-                        JSONObject jObj = new JSONObject(response);
+                        try {
+                            JSONObject jObj = new JSONObject(response);
 
-                        if (jObj.has("msg"))
+                            if (jObj.has("msg"))
 
-                            is_list=false;
+                                is_list = false;
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-                },error -> {
-
+            }
         });
         RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
         requestQueue.add(stringRequest);

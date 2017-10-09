@@ -72,7 +72,7 @@ public class Requestor {
         return jObj;
     }
 
-    public static JSONObject requestJSON_MAP(RequestQueue requestQueue, String url, Map<String, String> map) {
+    public static JSONObject requestJSON_MAP(RequestQueue requestQueue, String url, final Map<String, String> map) {
         String response = null;
         JSONObject jObj=null;
         RequestFuture<String> requestFuture = RequestFuture.newFuture();

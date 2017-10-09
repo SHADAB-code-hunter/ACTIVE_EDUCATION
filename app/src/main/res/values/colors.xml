@@ -9,6 +9,11 @@
     <color name="colorLock">#4d4339</color>
 
 
+
+    <color name="pure_red">#ED1B24</color>
+    <color name="darkpure_red">#BF1E24</color>
+
+
     <color name="circle_progress_color1">#FFFAAF3B</color>
     <color name="circle_progress_color2">#FF3BB1CF</color>
     <color name="circle_progress_color3">#FFEC6497</color>

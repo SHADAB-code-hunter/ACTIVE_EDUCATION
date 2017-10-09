@@ -102,22 +102,36 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
        // holder.card_view.setTag(position);
         holder.tv_quality.setText("Course: "+ mList.get(position).getC_course());
-        holder.card_view.setOnClickListener(v -> set_applynow(v,position));
-        holder.id_btn_apply.setOnClickListener(v -> set_applynow(v,position));
-        holder.img_call.setOnClickListener(v -> {
-            if (checkPermission(Manifest.permission.CALL_PHONE)) {
-                String dial = "tel:" + mList.get(position).getC_phone1();
-                _activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
-            } else {
-                Toast.makeText(_activity, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+        holder.card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoviesAdapter.this.set_applynow(v, position);
+            }
+        });
+        holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_applynow(v, position);
+            }
+        });
+        holder.img_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkPermission(Manifest.permission.CALL_PHONE)) {
+                    String dial = "tel:" + mList.get(position).getC_phone1();
+                    _activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                } else {
+                    Toast.makeText(_activity, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+                }
             }
         });
       //  img_course,img_call,img_broucher
-        holder.img_web.setOnClickListener(v ->
-
-                call_website(mList.get(position).getC_website())
-
-        );
+        holder.img_web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call_website(mList.get(position).getC_website());
+            }
+        });
 
         if (isSubstring("getTopList", str_url))
         {

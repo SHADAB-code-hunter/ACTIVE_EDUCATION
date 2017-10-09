@@ -79,7 +79,7 @@ public class Test3_Activity  extends AppCompatActivity {
         },2000);*/
     }
 
-    private void setTextWatcher(EditText id_edt_a) {
+    private void setTextWatcher(final EditText id_edt_a) {
 
         id_edt_a.addTextChangedListener(new TextWatcher() {
 
