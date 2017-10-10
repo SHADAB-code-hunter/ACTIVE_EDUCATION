@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import utilities.UrlEndpoints;
 
 public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.MyViewHolder> {
 
+    private final VP_PageChange_Listener vpPageChangeListener;
     public int i;
     private Context context;
     private ArrayList<Gallery_Model> quiz_Ans_List;
@@ -52,12 +54,13 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.MyView
         return quiz_Ans_List.size();
     }
 
-    public Gallery_Adapter(Context context, ArrayList<Gallery_Model> quiz_Ans_List) {
+    public Gallery_Adapter(Context context,VP_PageChange_Listener vpPageChangeListener, ArrayList<Gallery_Model> quiz_Ans_List) {
         this.quiz_Ans_List=quiz_Ans_List;
         this.context=context;
       //  this.vpPageChangeListener=vpPageChangeListener;
         mVolleySingleton = VolleySingleton.getInstance();
         mImageLoader = mVolleySingleton.getImageLoader();
+        this.vpPageChangeListener=vpPageChangeListener;
     }
 
     @Override
@@ -77,11 +80,11 @@ public class Gallery_Adapter extends RecyclerView.Adapter<Gallery_Adapter.MyView
             holder.id_img_glr.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((VP_PageChange_Listener)context).on_opt_next_Ques(quiz_Ans_List,position);
+                    (vpPageChangeListener).on_opt_next_Ques(quiz_Ans_List,position);
                 }
             });
         String strimg = UrlEndpoints.GALLERY_IMG_PATH + str_img;
-        //Log.d("strimg", strimg);
+        Log.d("strimg", strimg);
         loadImages(strimg, holder);
       final   int _poss= position;
        /* holder.id_img_glr.setOnClickListener(new View.OnClickListener() {

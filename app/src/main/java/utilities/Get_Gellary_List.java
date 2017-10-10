@@ -27,8 +27,19 @@ import pojo.Gallery_Model;
  */
 
 public class Get_Gellary_List {
+    public Gallery_list_listener get_gallery_listener;
+    public String url;
 
-    public static void get_galllery_list(final Activity activity, String getList)
+    public Get_Gellary_List(Gallery_list_listener get_gallery_listener,Context context,String url) {
+        this.get_gallery_listener=get_gallery_listener;
+        this.url=url;
+        get_galllery_list(context,url);
+    }
+    public interface Gallery_list_listener {
+        public void onListLoaded(ArrayList<Gallery_Model> listgallery);
+
+    }
+    public  void get_galllery_list(final Context activity, String getList)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,getList,
                 new Response.Listener<String>() {
@@ -57,7 +68,7 @@ public class Get_Gellary_List {
                                     Log.d("banner_imd",""+json.getString("image_name"));
                                     arrayList.add(sendDateModel);
                                 }
-                                ((Gallery_list_listener)activity).onListLoaded(arrayList);
+                                get_gallery_listener.onListLoaded(arrayList);
                             }
                             else if(response.has("msg"))
                             {

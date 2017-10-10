@@ -41,7 +41,7 @@ public class Partner_Regisration_Frg extends Fragment implements View.OnClickLis
             }
         };
 
-        layout1 = (ExpandableRelativeLayout)rootView. findViewById(R.id.expandableLayout1);
+        layout1 = (ExpandableRelativeLayout)rootView. findViewById(R.id.expandableLayout1);layout1.collapse();
         switch1 = (SwitchCompat)rootView. findViewById(R.id.switch_button1);
         switch1.setOnCheckedChangeListener(listener);
 
@@ -52,7 +52,7 @@ public class Partner_Regisration_Frg extends Fragment implements View.OnClickLis
 
         /*  */
 
-        socail_layout1 = (ExpandableRelativeLayout)rootView. findViewById(R.id.id_exp_social);
+        socail_layout1 = (ExpandableRelativeLayout)rootView. findViewById(R.id.id_exp_social);socail_layout1.collapse();
         switch_button1_socail = (SwitchCompat)rootView. findViewById(R.id.switch_button1_socail);
         switch_button1_socail.setOnCheckedChangeListener(listener);
 
@@ -63,17 +63,17 @@ public class Partner_Regisration_Frg extends Fragment implements View.OnClickLis
 
           /*  */
 
-        id_expand_attach_brochre = (ExpandableRelativeLayout)rootView. findViewById(R.id.id_expand_attach_brochre);
+        id_expand_attach_brochre = (ExpandableRelativeLayout)rootView. findViewById(R.id.id_expand_attach_brochre);id_expand_attach_brochre.collapse();
         switch_btn_clg_brochure = (SwitchCompat)rootView. findViewById(R.id.switch_btn_clg_brochure);
         switch_btn_clg_brochure.setOnCheckedChangeListener(listener);
 
         switch_btn_clg_crtficate = (SwitchCompat) rootView.findViewById(R.id.switch_btn_clg_crtficate);
         switch_btn_clg_crtficate.setOnCheckedChangeListener(listener);
-        id_expand_attach_certificate = (ExpandableRelativeLayout) rootView.findViewById(R.id.id_expand_attach_certificate);
+        id_expand_attach_certificate = (ExpandableRelativeLayout) rootView.findViewById(R.id.id_expand_attach_certificate);id_expand_attach_certificate.collapse();
 
         switch_btn_clg_bank_detail = (SwitchCompat) rootView.findViewById(R.id.switch_btn_clg_bank_detail);
         switch_btn_clg_bank_detail.setOnCheckedChangeListener(listener);
-        id_expand_bank_detail = (ExpandableRelativeLayout) rootView.findViewById(R.id.id_expand_bank_detail);
+        id_expand_bank_detail = (ExpandableRelativeLayout) rootView.findViewById(R.id.id_expand_bank_detail);id_expand_bank_detail.collapse();
          /*  */
         id_btn_submit=(Button)rootView.findViewById(R.id.id_btn_submit);id_btn_submit.setOnClickListener(this);
 
