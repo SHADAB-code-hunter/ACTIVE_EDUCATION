@@ -147,6 +147,7 @@
                     android:id="@+id/ntb_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    android:layout_marginTop="-5dp"
                     app:ntb_badge_gravity="top"
                     app:ntb_badge_position="right"
                     app:ntb_badged="true"
