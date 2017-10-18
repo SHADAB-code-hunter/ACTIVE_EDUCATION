@@ -119,27 +119,42 @@
             </LinearLayout>
 
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:background="#630c0b0d"
+                android:gravity="center"
                 android:orientation="vertical">
-
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="1dp"
                     android:layout_marginBottom="0.1dp"
                     android:text="Top Admission Deal"
+                    android:background="@color/white"
                     android:textColor="@color/white"
-                    android:textSize="16sp"
+                    android:textSize="12sp"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="17dp"
                     android:gravity="center"
-                    android:padding="0dp" />
+                    android:padding="10dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="0.1dp"
+                    android:text="Top Admission Deal"
+                    android:background="@drawable/back_title_cat"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:layout_gravity="center|top"
+                    android:gravity="center"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/dashboard_recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_marginTop="45dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="0dp"
                     android:layout_weight="1.5"
@@ -147,7 +162,7 @@
                     android:overScrollMode="never">
 
                 </android.support.v7.widget.RecyclerView>
-            </LinearLayout>
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/id_lnr_need"
@@ -155,16 +170,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="0.1dp"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
 
                 <com.gt.active_education.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/content"
-                    android:layout_width="match_parent"
+                    android:layout_width="302dp"
                     android:layout_height="40dp"
                     android:background="@drawable/find_your_need"
-                    app:rb_color="#d6433e5e"
+                    android:layout_gravity="center"
+                    app:rb_color="#c3b72222"
                     app:rb_duration="2500"
                     app:rb_radius="22dp"
                     app:rb_rippleAmount="8"
@@ -177,6 +193,21 @@
                         android:layout_gravity="center"
                         android:gravity="center">
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center|right"
+                                android:gravity="center|right"
+                                android:layout_marginRight="10dp"
+                                android:text="Find Your Need"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
                         <FrameLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -187,60 +218,55 @@
                             <ImageView
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
-                                android:layout_gravity="center|right"
-                                android:gravity="center"
-                                android:src="@drawable/ic_hand_arrow" />
-                        </FrameLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="2.5"></LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="1">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
                                 android:layout_gravity="center|left"
+                                android:layout_marginLeft="10dp"
                                 android:gravity="center"
-                                android:text="Find Your Need"
-                                android:textColor="@color/white" />
-                        </LinearLayout>
+                                android:src="@drawable/find_your_needs_icon" />
+                        </FrameLayout>
                     </LinearLayout>
 
                 </com.gt.active_education.RippleBackground>
 
             </LinearLayout>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#630c0b0d"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:background="#00ffffff"
                 android:layout_marginBottom="0.1dp">
-
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:gravity="center"
-                    android:padding="5dp"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="0.1dp"
+                    android:text="Top Admission Deal"
                     android:background="@color/white"
-                    android:text=" Top Courses"
-                    android:textColor="@color/colorPrimaryDark" />
-            </LinearLayout>
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:gravity="center" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginBottom="0.1dp"
+                    android:text="Top Courses"
+                    android:background="@drawable/back_title_cat"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp" />
+            </FrameLayout>
 
             <!--   -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#630c0b0d"
+
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="5dp">
@@ -255,28 +281,44 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0.1dp">
-
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="#ebffffff"
                     android:gravity="center"
-                    android:padding="5dp"
-                    android:text=" Top Exams"
-                    android:textColor="@color/colorPrimaryDark" />
-            </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:background="#00ffffff"
+                    android:layout_marginBottom="0.1dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="0.1dp"
+                        android:text="Top Admission Deal"
+                        android:background="@color/white"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="0.1dp"
+                        android:text="Top Exams"
+                        android:background="@drawable/back_title_cat"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp" />
+                </FrameLayout>
 
             <!--  -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#630c0b0d"
+
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="10dp">
@@ -289,26 +331,41 @@
                 </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="0.1dp">
-
-                <TextView
+             <!--   <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
                     android:gravity="center"
-                    android:padding="5dp"
-                    android:text=" All Your Needs"
-                    android:textColor="@color/colorPrimaryDark" />
-            </LinearLayout>
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:background="#00ffffff"
+                    android:layout_marginBottom="0.1dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="0.1dp"
+                        android:text="Top Admission Deal"
+                        android:background="@color/white"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:gravity="center" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginBottom="0.1dp"
+                        android:text="Top Courses"
+                        android:background="@drawable/back_title_cat"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp" />
+                </FrameLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
-                android:background="#630c0b0d"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="10dp">
@@ -318,13 +375,15 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <utilities.BatteryProgressView
+                   <!-- <utilities.BatteryProgressView
                         android:id="@+id/progress"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:gravity="center"></utilities.BatteryProgressView>
+                        android:gravity="center">
+
+                    </utilities.BatteryProgressView>-->
 
                     <TextView
                         android:id="@+id/id_tv_learn"
@@ -332,7 +391,7 @@
                         android:layout_height="55dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/ic_menu_learn"
+                        android:background="@drawable/ic_learn"
                         android:gravity="center"
                         android:textColor="@color/white" />
                 </FrameLayout>
@@ -346,19 +405,19 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <utilities.BatteryProgressView
+                 <!--   <utilities.BatteryProgressView
                         android:id="@+id/progress2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1" />
-
+-->
                     <TextView
                         android:id="@+id/id_tv_earn"
                         android:layout_width="60dp"
                         android:layout_height="55dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_menu_earn"
+                        android:background="@drawable/ic_earn"
                         android:gravity="center"
                         android:textColor="@color/white" />
                 </FrameLayout>
@@ -372,23 +431,31 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <utilities.BatteryProgressView
+                  <!--  <utilities.BatteryProgressView
                         android:id="@+id/progress3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1" />
-
+-->
                     <TextView
                         android:id="@+id/id_tv_fun"
                         android:layout_width="55dp"
                         android:layout_height="45dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_menu_fun"
+                        android:background="@drawable/ic_fun"
                         android:gravity="center"
                         android:textColor="@color/white" />
                 </FrameLayout>
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                </LinearLayout>
         </LinearLayout>
 
         </RelativeLayout>

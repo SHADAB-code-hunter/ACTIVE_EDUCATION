@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Arrays;
+
 /**
  * Demonstrate Firebase Authentication using a Facebook access token.
  */
@@ -45,13 +48,15 @@ public class FacebookLoginActivity extends BaseActivity implements
     // [END declare_auth]
 
     private CallbackManager mCallbackManager;
+    private Button id__fb_btn;
+    private boolean login_status=false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_fb_login);
-
+        id__fb_btn=(Button)findViewById(R.id.id__fb_btn);
         // Views
        /* mStatusTextView = findViewById(R.id.status);
         mDetailTextView = findViewById(R.id.detail);*/
@@ -92,6 +97,39 @@ public class FacebookLoginActivity extends BaseActivity implements
             }
         });
         // [END initialize_fblogin]
+
+
+
+        id__fb_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                LoginManager.getInstance().logInWithReadPermissions(FacebookLoginActivity.this, Arrays.asList("public_profile","email","user_friends",
+                        "user_birthday"));
+
+            }
+        });
+
+        LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+
+                Log.d("LoginResult", "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
+
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
     }
 
     // [START on_start_check_user]
@@ -120,38 +158,43 @@ public class FacebookLoginActivity extends BaseActivity implements
         // [START_EXCLUDE silent]
       //  showProgressDialog();
         // [END_EXCLUDE]
+       if(!login_status) {
+           AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+           mAuth.signInWithCredential(credential)
+                   .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                       @Override
+                       public void onComplete(@NonNull Task<AuthResult> task) {
+                           if (task.isSuccessful()) {
+                               // Sign in success, update UI with the signed-in user's information
+                               login_status = true;
+                               Log.d(TAG, "signInWithCredential:success");
+                               FirebaseUser user = mAuth.getCurrentUser();
+                               Log.d(TAG, "" + user.getPhotoUrl());
+                               Log.d(TAG, "" + user.getEmail());
+                               //   updateUI(user);
+                           } else {
+                               // If sign in fails, display a message to the user.
+                               Log.w(TAG, "signInWithCredential:failure", task.getException());
+                               Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",
+                                       Toast.LENGTH_SHORT).show();
+                               //  updateUI(null);
+                           }
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d(TAG, ""+user.getPhotoUrl());
-                            Log.d(TAG, ""+user.getEmail());
-                         //   updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(FacebookLoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                          //  updateUI(null);
-                        }
-
-                        // [START_EXCLUDE]
-                      //  hideProgressDialog();
-                        // [END_EXCLUDE]
-                    }
-                });
+                           // [START_EXCLUDE]
+                           //  hideProgressDialog();
+                           // [END_EXCLUDE]
+                       }
+                   });
+       }else if(login_status)
+       {
+           mAuth.signOut();
+           LoginManager.getInstance().logOut();
+           login_status = false;
+       }
     }
     // [END auth_with_facebook]
 
     public void signOut() {
-        mAuth.signOut();
-        LoginManager.getInstance().logOut();
 
       //  updateUI(null);
     }

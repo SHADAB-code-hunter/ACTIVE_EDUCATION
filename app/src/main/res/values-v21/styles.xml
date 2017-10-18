@@ -41,7 +41,8 @@
     </style>
 
     <style name="Theme_customBack" parent="AppTheme.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_app</item>
+        <item name="android:windowBackground">@color/pure_red</item>
+
     </style>
 
     <style name="MaterialAnimations.TextAppearance.Title.Inverse" parent="android:TextAppearance.Material.Title">

@@ -454,8 +454,8 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         if (requestCode == lower_CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             Log.d("datapack",data.toString());
-            View inflatedLayout=(View)verticalStepperForm.findViewById(R.layout.form_feild_layout);
-            ((ImageView)inflatedLayout.findViewById(R.id.id_doc_a)).setImageBitmap(photo);
+           /* View inflatedLayout=(View)verticalStepperForm.findViewById(R.layout.form_feild_layout);
+            ((ImageView)inflatedLayout.findViewById(R.id.id_doc_a)).setImageBitmap(photo);*/
         }else if(requestCode!= lower_CAMERA_REQUEST) {
             imagePicker.onActivityResult(requestCode, resultCode, data,"10001");
         }

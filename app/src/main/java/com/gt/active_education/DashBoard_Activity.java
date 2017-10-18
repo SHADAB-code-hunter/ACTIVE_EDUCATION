@@ -183,6 +183,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         id_image_profile=(ImageView)findViewById(R.id.id_image_profile);
         id_searchlayout=(FrameLayout)findViewById(R.id.id_searchlayout);id_searchlayout.setOnClickListener(this);
         id_edt_search=(EditText)findViewById(R.id.id_edt_search);
+        mRevealView = (LinearLayout) findViewById(R.id.reveal_items);
         picasso = Picasso.with(this);
         Drawer_Pojo drawer_pojo=new Drawer_Pojo();
         List<Drawer_Pojo> list_View=new ArrayList<>();list_View.add(drawer_pojo);list_View.add(drawer_pojo);list_View.add(drawer_pojo);
@@ -299,8 +300,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        int[] Img_Array=new int[]{R.drawable.test,R.drawable.icons_college,R.drawable.icons_university,
-                R.drawable.icons_maintenance,R.drawable.icons_coaching,R.drawable.icons_training};
+        int[] Img_Array=new int[]{R.drawable.ic_school,R.drawable.ic_college_new,R.drawable.ic_univercity,
+                R.drawable.ic_iti,R.drawable.ic_coacching,R.drawable.ic_training};
 
         String[] Tv_Array=new String[]{"School","College","University","ITI College","Coaching Center","Training Center"};
 
@@ -850,8 +851,9 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         },2000);
 
 
-        mRevealView = (LinearLayout) findViewById(R.id.reveal_items);
+
        */
+
 /* CardView id_cancle_frame=(CardView) findViewById(R.id.id_card_view);
         id_cancle_frame.setClickable(true);*//*
 

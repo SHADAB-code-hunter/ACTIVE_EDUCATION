@@ -69,8 +69,7 @@
 
         <activity
             android:name=".SplashScreen_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme_Full">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -84,7 +83,7 @@
         <activity
             android:name=".DashBoard_Activity"
             android:screenOrientation="portrait"
-            android:theme="@style/MaterialAnimations" />
+           />
         <activity
             android:name=".User_Profile_Activity"
             android:screenOrientation="portrait" />

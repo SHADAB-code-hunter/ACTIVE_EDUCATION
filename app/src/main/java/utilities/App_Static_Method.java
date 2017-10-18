@@ -388,6 +388,8 @@ public class App_Static_Method {
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.clear().commit();
                                         ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                    }else {
+                                        ((Log_Out_Listener)dashBoard_activity).on_logout(false);
                                     }
 
                             } catch (JSONException e) {

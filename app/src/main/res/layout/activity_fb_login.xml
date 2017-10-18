@@ -20,14 +20,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Facebook Login" />-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <com.facebook.login.widget.LoginButton
+        xmlns:fb="http://schemas.android.com/apk/res-auto"
         android:id="@+id/connectWithFbButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
-        android:text="connect_with_facebook"
-        />
+        android:text="connect_with_facebook" />
+
+        <Button
+            android:id="@+id/id__fb_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Custom Button"/>
+
+    </FrameLayout>
 
 
 </LinearLayout>

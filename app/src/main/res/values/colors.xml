@@ -7,6 +7,7 @@
     <color name="list_divider">#dedede</color>
     <color name="bg_bubble_self">#E1E1E1</color>
     <color name="colorLock">#4d4339</color>
+    <color name="circle_clr">#772D2D</color>
 
 
 
@@ -105,6 +106,7 @@
     <color name="smallCircleColor">#FFDF8D81</color>
     <color name="largeCircleColor">#FFAF3854</color>
     <color name="outerCircleColor">#FF533456</color>
+
 
     <!---->
 

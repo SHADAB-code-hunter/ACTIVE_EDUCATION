@@ -42,13 +42,13 @@ public class Common_pojo_adapter  extends RecyclerView.Adapter<Common_pojo_adapt
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txt_title,txt_id;
-        public CardView id_card_chips;
+       // public CardView id_card_chips;
 
         public MyViewHolder(View view) {
             super(view);
             txt_title = (TextView) view.findViewById(R.id.txt_title);
             txt_id = (TextView) view.findViewById(R.id.txt_id);
-            id_card_chips=(CardView)view.findViewById(R.id.id_card_chips);
+          //  id_card_chips=(CardView)view.findViewById(R.id.id_card_chips);
 
         }
 
@@ -73,7 +73,7 @@ public class Common_pojo_adapter  extends RecyclerView.Adapter<Common_pojo_adapt
         holder.txt_title.setText(common_pojos.get(position).getName());
         //Theme_Change_Prefrense(holder.txt_title);
        /* holder.txt_title.setBackgroundColor(getMatColor(String.valueOf(600)));*/
-        holder.id_card_chips.setCardBackgroundColor(getMatColor(position,"mdcolor_A100"));
+     //   holder.id_card_chips.setCardBackgroundColor(getMatColor(position,"mdcolor_A100"));
         if(common_pojos.get(position).getId()!=null)
         {
             holder.txt_id.setText(common_pojos.get(position).getId());
