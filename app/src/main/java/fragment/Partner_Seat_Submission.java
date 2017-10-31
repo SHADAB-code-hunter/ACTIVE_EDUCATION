@@ -80,80 +80,82 @@ public class Partner_Seat_Submission extends Fragment {
         id_phone=(EditText)rootView.findViewById(R.id.id_phone);
         id_term_con=(CheckBox)rootView.findViewById(R.id.id_term_con);
         btn_submit=(Button)rootView.findViewById(R.id.id_submit);
-        btn_submit.setOnClickListener(v -> {
-            Log.d("badfbba",""+"dgdgdg");
-            if (id_term_con.isChecked())
-            {
-                str_clg_name=id_clg_name.getText().toString();
-                str_course_name=id_course_name.getText().toString();
-                str_branch_name=id_brach_name.getText().toString();
-                str_course_duration=id_course_duration.getText().toString();
-                str_branch_fees=id_branch_fees.getText().toString();
-                str_discount=id_discnt_fees.getText().toString();
-                str_total_seat=id_total_seats.getText().toString();
-                str_remain_seat=id_remain_seats.getText().toString();
-                str_clg_phone=id_phone.getText().toString();
-                str_info=id_information.getText().toString();
-             //   str_clgestab_year=id_information.getText().toString();
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("badfbba", "" + "dgdgdg");
+                if (id_term_con.isChecked()) {
+                    str_clg_name = id_clg_name.getText().toString();
+                    str_course_name = id_course_name.getText().toString();
+                    str_branch_name = id_brach_name.getText().toString();
+                    str_course_duration = id_course_duration.getText().toString();
+                    str_branch_fees = id_branch_fees.getText().toString();
+                    str_discount = id_discnt_fees.getText().toString();
+                    str_total_seat = id_total_seats.getText().toString();
+                    str_remain_seat = id_remain_seats.getText().toString();
+                    str_clg_phone = id_phone.getText().toString();
+                    str_info = id_information.getText().toString();
+                    //   str_clgestab_year=id_information.getText().toString();
 
-                if (!App_Static_Method.isValidName(str_clg_name)) {     // fname
-                    id_clg_name.setError("You must more characters");
-                } else {
-                    if (!App_Static_Method.isValidName(str_course_name)) {     // fname
-                        id_course_name.setError("You must more characters");
+                    if (!App_Static_Method.isValidName(str_clg_name)) {     // fname
+                        id_clg_name.setError("You must more characters");
                     } else {
-
-                        if (!App_Static_Method.isValidName(str_branch_name)) {
-                            id_brach_name.setError("Please Enter a Valid State !!! ");
+                        if (!App_Static_Method.isValidName(str_course_name)) {     // fname
+                            id_course_name.setError("You must more characters");
                         } else {
 
-                            if (!App_Static_Method.isValidName(str_course_duration)) {
-                                id_course_duration.setError("Please Enter a Valid Address !!! ");
+                            if (!App_Static_Method.isValidName(str_branch_name)) {
+                                id_brach_name.setError("Please Enter a Valid State !!! ");
                             } else {
-                                if (!App_Static_Method.isValidPhone(str_clg_phone)) {
-                                    id_phone.setError("Please Enter a Valid Address !!! ");
-                                } else {
-                                    if (!App_Static_Method.isValidName(str_branch_fees)) {
-                                        id_branch_fees.setError("Please Enter a Valid Address !!! ");
-                                    } else {
 
-                                        if (!App_Static_Method.isValidName(str_discount)) {
-                                            id_discnt_fees.setError("Please Enter a Valid Website !!! ");
+                                if (!App_Static_Method.isValidName(str_course_duration)) {
+                                    id_course_duration.setError("Please Enter a Valid Address !!! ");
+                                } else {
+                                    if (!App_Static_Method.isValidPhone(str_clg_phone)) {
+                                        id_phone.setError("Please Enter a Valid Address !!! ");
+                                    } else {
+                                        if (!App_Static_Method.isValidName(str_branch_fees)) {
+                                            id_branch_fees.setError("Please Enter a Valid Address !!! ");
                                         } else {
 
-                                            if (!App_Static_Method.isValidName(str_total_seat)) {
-                                                id_total_seats.setError("Please Enter a Valid Website !!! ");
+                                            if (!App_Static_Method.isValidName(str_discount)) {
+                                                id_discnt_fees.setError("Please Enter a Valid Website !!! ");
                                             } else {
 
-                                                if (!App_Static_Method.isValidName(str_remain_seat)) {
-                                                    id_remain_seats.setError("Please Enter a Valid Website !!! ");
+                                                if (!App_Static_Method.isValidName(str_total_seat)) {
+                                                    id_total_seats.setError("Please Enter a Valid Website !!! ");
                                                 } else {
 
-                                                    if (!App_Static_Method.isValidName(str_info)) {
-                                                        id_information.setError("Please Enter a Valid Website !!! ");
+                                                    if (!App_Static_Method.isValidName(str_remain_seat)) {
+                                                        id_remain_seats.setError("Please Enter a Valid Website !!! ");
                                                     } else {
-                                                        map = new HashMap<String, String>();
-                                                        map.put("college", str_clg_name);
-                                                        map.put("course", str_course_name);
-                                                        map.put("branch", str_branch_name);
-                                                        map.put("branch_fee", str_branch_fees);
-                                                        map.put("discounted_fee",str_discount );
-                                                        map.put("total_seats", str_total_seat);
-                                                        map.put("remaining_seats", str_remain_seat);
+
+                                                        if (!App_Static_Method.isValidName(str_info)) {
+                                                            id_information.setError("Please Enter a Valid Website !!! ");
+                                                        } else {
+                                                            map = new HashMap<String, String>();
+                                                            map.put("college", str_clg_name);
+                                                            map.put("course", str_course_name);
+                                                            map.put("branch", str_branch_name);
+                                                            map.put("branch_fee", str_branch_fees);
+                                                            map.put("discounted_fee", str_discount);
+                                                            map.put("total_seats", str_total_seat);
+                                                            map.put("remaining_seats", str_remain_seat);
                                                      /* progressDialog = new ProgressDialog(Partner_Detail_Frag.this.getContext());
                                                         progressDialog.setCancelable(true);
                                                         progressDialog.show();
                                                         progressDialog.setMessage(getString(R.string.SignUp));
 */
-                                                        new Async_Respoce(new Async_Respoce.Responce_Obj_Lisatener() {
+                                                            new Async_Respoce(new Async_Respoce.Responce_Obj_Lisatener() {
 
-                                                            @Override
-                                                            public void on_responce(JSONObject listMovies) {
+                                                                @Override
+                                                                public void on_responce(JSONObject listMovies) {
 
-                                                            Log.d("objectggg",listMovies.toString());
+                                                                    Log.d("objectggg", listMovies.toString());
 
-                                                            }
-                                                        }, SEAT_SUBMIT, map).execute();
+                                                                }
+                                                            }, SEAT_SUBMIT, map).execute();
+                                                        }
                                                     }
                                                 }
                                             }
@@ -163,10 +165,10 @@ public class Partner_Seat_Submission extends Fragment {
                             }
                         }
                     }
-                  }
 
-            }else {
+                } else {
 
+                }
             }
         });
 

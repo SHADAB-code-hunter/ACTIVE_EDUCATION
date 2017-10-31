@@ -63,14 +63,13 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme_customBack">
+        android:theme="@style/SplashTheme_Full">
 
         <!-- kotMain_LoginActivityvity -->
 
         <activity
-            android:name=".Target_Circle_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme_Full">
+            android:name=".SplashScreen_Activity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -83,8 +82,7 @@
             android:configChanges="keyboardHidden|orientation|keyboard"/>
         <activity
             android:name=".DashBoard_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/MaterialAnimations" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".User_Profile_Activity"
             android:screenOrientation="portrait" />
@@ -141,8 +139,7 @@
             android:theme="@style/Theme_customBack" />
         <activity
             android:name=".Filter_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme_customBack" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".College_Detail_Activity"
             android:screenOrientation="portrait" />
@@ -178,6 +175,10 @@
             android:name=".FacebookLoginActivity"
             android:screenOrientation="portrait"
             android:parentActivityName=".FacebookLoginActivity"/>
+        <activity
+            android:name=".Target_Circle_Activity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Target_Circle_Activity"/>
 
         <!--
         <activity android:name="fcm_chat_book.Notification_Detail_Activity">

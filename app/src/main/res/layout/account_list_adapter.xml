@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="2dp"
+        android:paddingLeft="10dp"
+        android:background="#e2e45b63">
+        <ImageView
+            android:id="@+id/img_rupee"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:src="@drawable/rupeee"/>
+        <LinearLayout
+            android:id="@+id/id_relative_data"
+            android:layout_width="220dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/img_rupee"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/id_tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ICICI LIMITED BANK"
+                android:textStyle="bold"
+                android:gravity="left|bottom"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/id_tv_reciept_no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:gravity="bottom"
+                android:textSize="13sp"
+                android:text="Payment Receipt No: #30123423"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/id_tv_pay_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:text="September 23, 2017     05:05 AM"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/id_relative_data"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:text=" 20,000 /-"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
+            </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

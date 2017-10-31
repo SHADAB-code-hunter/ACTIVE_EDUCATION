@@ -16,15 +16,18 @@ import java.util.ArrayList;
 import adapter.Gallery_Adapter;
 import callbacks.Gallery_list_listener;
 import callbacks.VP_PageChange_Listener;
+import fragment.Partner_Gallery;
 import pojo.Gallery_Model;
 import utilities.Get_Gellary_List;
 import utilities.UrlEndpoints;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by GT on 8/17/2017.
  */
 
-public class Gallery_Activity  extends AppCompatActivity implements Gallery_list_listener, View.OnClickListener, VP_PageChange_Listener {
+public class Gallery_Activity  extends AppCompatActivity implements  View.OnClickListener, VP_PageChange_Listener {
 
     private GridLayoutManager verticleLayoutManager;
     private RecyclerView gallery_recycler_view;
@@ -36,18 +39,29 @@ public class Gallery_Activity  extends AppCompatActivity implements Gallery_list
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         gallery_recycler_view=(RecyclerView)findViewById(R.id.gallery_recycler_view);
-        Get_Gellary_List.get_galllery_list(Gallery_Activity.this, UrlEndpoints.URL_GET_GALLERY);
+        //Get_Gellary_List.get_galllery_list(Gallery_Activity.this, UrlEndpoints.URL_GET_GALLERY);
+
+        new Get_Gellary_List(new Get_Gellary_List.Gallery_list_listener() {
+            @Override
+            public void onListLoaded(ArrayList<Gallery_Model> listgallery) {
+                Log.d("sgetr",listgallery.toString());
+                verticleLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
+                gallery_recycler_view.setLayoutManager(verticleLayoutManager);
+                Gallery_Adapter galleryAdapter=new Gallery_Adapter(Gallery_Activity.this.getBaseContext(),(VP_PageChange_Listener)(Gallery_Activity.this),listgallery);
+                gallery_recycler_view.setAdapter(galleryAdapter);
+            }
+        },Gallery_Activity.this.getBaseContext(),UrlEndpoints.URL_GET_GALLERY);
         id_back_btn_quiz=(TextView)findViewById(R.id.id_back_btn_quiz);id_back_btn_quiz.setOnClickListener(this);
     }
 
-    @Override
+   /* @Override
     public void onListLoaded(ArrayList<Gallery_Model> listgallery) {
         Log.d("sgetr",listgallery.toString());
         verticleLayoutManager = new GridLayoutManager(getApplicationContext(), 2, LinearLayoutManager.VERTICAL, false);
         gallery_recycler_view.setLayoutManager(verticleLayoutManager);
         Gallery_Adapter galleryAdapter=new Gallery_Adapter(Gallery_Activity.this,listgallery);
         gallery_recycler_view.setAdapter(galleryAdapter);
-    }
+    }*/
 
     @Override
     public void onClick(View v) {

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -18,37 +17,26 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.gt.active_education.R;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import adapter.Simple_Adapter;
+import adapter.Simple_adb2;
 import callbacks.Call_Dilaog_Listener;
-
-import static utilities.App_Static_Method.show_load_progress;
+import callbacks.Call_newDialog_Listener;
 
 /**
  * Created by GT on 9/27/2017.
  */
 
-public class Custom_List_Dialog extends Dialog implements View.OnClickListener,Call_Dilaog_Listener {
+public class Custom_List_Dialog extends Dialog implements View.OnClickListener, Call_newDialog_Listener {
 
     private RecyclerView mRecyclerView;
     public EditText search;
     private List<String> list = new ArrayList<String>();
-    Simple_Adapter mAdapter;
+    Simple_adb2 mAdapter;
     private ImageView id_cancle;
     private Context context;
     private String str_lg_type[];
@@ -82,7 +70,7 @@ public class Custom_List_Dialog extends Dialog implements View.OnClickListener,C
       //  countryList();  // in this method, Create a list of items.
 
         // call the adapter with argument list of items and context.
-      /*  mAdapter = new Simple_Adapter(list,this);
+      /*  mAdapter = new Simple_adb2(list,this);
         mRecyclerView.setAdapter(mAdapter);*/
         //set_state_list(str_lg_type);
         on_list_data_new(server_list);
@@ -137,13 +125,13 @@ public class Custom_List_Dialog extends Dialog implements View.OnClickListener,C
                     }
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(Custom_List_Dialog.this.getContext()));
-                    mAdapter = new Simple_Adapter(filteredList, Custom_List_Dialog.this);
+                    mAdapter = new Simple_adb2(filteredList, Custom_List_Dialog.this);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();  // data set changed
                 }else {
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(Custom_List_Dialog.this.getContext()));
-                    mAdapter = new Simple_Adapter(Custom_List_Dialog.this.server_list, Custom_List_Dialog.this);
+                    mAdapter = new Simple_adb2(Custom_List_Dialog.this.server_list, Custom_List_Dialog.this);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -172,7 +160,7 @@ public class Custom_List_Dialog extends Dialog implements View.OnClickListener,C
    //    progressDialog.cancel();
         if(!server_list.isEmpty()) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(Custom_List_Dialog.this.getContext()));
-            mAdapter = new Simple_Adapter(server_list, Custom_List_Dialog.this);
+            mAdapter = new Simple_adb2(server_list, Custom_List_Dialog.this);
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }

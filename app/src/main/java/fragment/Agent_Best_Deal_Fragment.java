@@ -12,22 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import Fab_Filter.MoviesAdapter;
 import adapter.Agent_Deal_Adapter;
 import callbacks.Agent_deal_Listener;
-import callbacks.Upcoming_List_LoadedListener;
 import pojo.Agent_Deal_Pojo;
 import task.Agent_Async;
-import task.TaskLoad_List;
-import pojo.Cat_Model;
-import utilities.Common_Pojo;
 import utilities.MyApplication;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;

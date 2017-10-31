@@ -26,15 +26,20 @@ public class Website_Activity extends AppCompatActivity {
             str_intent=getIntent().getStringExtra("Url_Web");
         }
 
-        Toast.makeText(this, ""+str_intent, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, ""+str_intent, Toast.LENGTH_SHORT).show();
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(str_intent);
 
+        if(isSubstring(".pdf",str_intent)) {
+
+            finish();
+        }
+
+
 
 /*
         webView.getSettings().setJavaScriptEnabled(true);
-
 
 
         webView.setWebViewClient(new webViewClient());
@@ -42,5 +47,7 @@ public class Website_Activity extends AppCompatActivity {
         webView.loadUrl("https://cleankutz.appointy.com/");*/
 
     }
-
+    public static boolean isSubstring(String subStr, String mainStr){
+        return mainStr.matches(".*\\Q" + subStr + "\\E.*");
+    }
 }

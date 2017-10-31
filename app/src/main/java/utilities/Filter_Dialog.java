@@ -99,7 +99,7 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
         Log.d("widthsize",""+width);
         Log.d("heightsize",""+height);
        // act.getWindow().setLayout((width-20),new Layout);
-        getWindow().setBackgroundDrawable(new ColorDrawable(MyApplication.getAppContext().getResources().getColor(R.color.white)));
+        getWindow().setBackgroundDrawable(new ColorDrawable(MyApplication.getAppContext().getResources().getColor(R.color.trans_theme)));
         id_relative_dialog=(RelativeLayout)findViewById(R.id.id_relative_dialog);
         id_spn_cat=(SearchableSpinner) findViewById(R.id.id_spn_cat);
         id_spn_state=(Spinner) findViewById(R.id.id_spn_state);
@@ -116,8 +116,8 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
 
 
         //  String str_cat[]= new String[]{"School","College","University","Coaching / Institute ","Training Institute","ITI College"};
-        ArrayList<String> arrayList=new ArrayList<>();arrayList.add("School");arrayList.add("College");arrayList.add("University");
-        arrayList.add("Coaching / Institute");arrayList.add("Training Institute");arrayList.add("ITI College");
+        ArrayList<String> arrayList=new ArrayList<>();arrayList.add("School");arrayList.add("College");arrayList.add("University");arrayList.add("ITI / Diploma");
+        arrayList.add("Coaching / Institute");arrayList.add("Training Institute");
         ArrayAdapter<String> cat_adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item,arrayList);
         id_spn_cat.setAdapter(cat_adapter);
 
@@ -418,21 +418,27 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
     private void isList_Avail(String result_url) {
 
         StringRequest stringRequest=new StringRequest(Request.Method.POST,result_url,
-                response -> {
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
 
-                    try {
-                        JSONObject jObj = new JSONObject(response);
+                        try {
+                            JSONObject jObj = new JSONObject(response);
 
-                        if (jObj.has("msg"))
+                            if (jObj.has("msg"))
 
-                            is_list=false;
+                                is_list = false;
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
 
-                },error -> {
-
+            }
         });
         RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
         requestQueue.add(stringRequest);

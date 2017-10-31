@@ -16,7 +16,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import Fab_Filter.MoviesAdapter;
+import adapter.MoviesAdapter;
+import callbacks.Avail_Course_Listener;
 import callbacks.Upcoming_List_LoadedListener;
 import task.TaskLoad_List;
 import pojo.Cat_Model;
@@ -31,7 +32,7 @@ import static extras.Keys.KEY_USER_LOGIN.KEY_TOKEN;
  * Created by GT on 8/5/2017.
  */
 
-public class My_Booking_Fragment extends Fragment implements Upcoming_List_LoadedListener {
+public class My_Booking_Fragment extends Fragment implements Upcoming_List_LoadedListener , Avail_Course_Listener {
 
   private RecyclerView recyclerView;
     Picasso picasso;
@@ -79,6 +80,11 @@ public class My_Booking_Fragment extends Fragment implements Upcoming_List_Loade
 
     @Override
     public void onUpcomingexams(List<Common_Pojo> common_pojos) {
+
+    }
+
+    @Override
+    public void onAvailCourse(String str_id, String c_id, String course_id, String branch_id, String c_branch) {
 
     }
 }

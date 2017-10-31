@@ -125,7 +125,30 @@ public class App_Static_Method {
         }
         return null;
     }
+    public static Map<String,String> get_full_session_data() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+        Map<String,String> session_hm=new HashMap<>();
+        session_hm.put("clg_id",sharedPreferences.getString("clg_id", "na"));
+        session_hm.put("token",sharedPreferences.getString("token", "na"));
+        session_hm.put("email",sharedPreferences.getString("email", "na"));
+        session_hm.put("utype",sharedPreferences.getString("utype", "na"));
 
+        return session_hm;
+
+    }
+
+    public static Map<String,String> get_for_submit_partener_detail() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+        Map<String,String> session_hm=new HashMap<>();
+
+        session_hm.put("crd_email",sharedPreferences.getString("email", "na"));
+        session_hm.put("token",sharedPreferences.getString("token", "na"));
+        session_hm.put("utype",sharedPreferences.getString("utype", "na"));
+        session_hm.put("userid",sharedPreferences.getString("userid", "na"));
+
+        return session_hm;
+
+    }
 
     public static void list_not_get(final Activity activity, final String str_gate) {
         Log.d("nabsmenm",activity.getLocalClassName());
@@ -150,7 +173,7 @@ public class App_Static_Method {
                 .show();
     }
     public static void city_not_get(final Activity activity, final String str_gate) {
-        Log.d("nabsmenm",activity.getLocalClassName());
+//        Log.d("nabsmenm",activity.getLocalClassName());
         new DroidDialog.Builder(activity)
                 .icon(R.drawable.ic_null_list)
                 .title(str_gate)
@@ -388,6 +411,8 @@ public class App_Static_Method {
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
                                         editor.clear().commit();
                                         ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                    }else {
+                                        ((Log_Out_Listener)dashBoard_activity).on_logout(false);
                                     }
 
                             } catch (JSONException e) {
@@ -524,6 +549,12 @@ public class App_Static_Method {
     }
     public static String get_session_data(final String str_key) {
             SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+            String str_value=sharedPreferences.getString(str_key, "na");
+            return str_value;
+
+    }
+    public static String get_agent_session_data(final String str_key) {
+            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
             String str_value=sharedPreferences.getString(str_key, "na");
             return str_value;
 

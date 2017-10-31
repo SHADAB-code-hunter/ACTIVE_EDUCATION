@@ -40,7 +40,7 @@ public class DashBoard_Menu_Adapter extends RecyclerView.Adapter<DashBoard_Menu_
             super(view);
             audition_img = (ImageView) view.findViewById(R.id.img_sub);
             title = (TextView) view.findViewById(R.id.tv_url);
-            id_card=(CardView)view.findViewById(R.id.id_card);
+           // id_card=(CardView)view.findViewById(R.id.id_card);
         }
 
     }
@@ -64,8 +64,8 @@ public class DashBoard_Menu_Adapter extends RecyclerView.Adapter<DashBoard_Menu_
 
         holder.title.setText(tv_array[position]);
         holder.audition_img.setImageResource(img_array[position]);
-        holder.id_card.setCardBackgroundColor(getMatColor(position));
-        App_Static_Method.btn_animation(holder.id_card,context);
+       // holder.id_card.setCardBackgroundColor(getMatColor(position));
+      //  App_Static_Method.btn_animation(holder.id_card,context);
     }
 
     @Override

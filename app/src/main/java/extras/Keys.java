@@ -5,162 +5,150 @@ package extras;
  */
 public interface Keys {
      interface EndpointBoxOffice{
-       /* public static final String KEY_MOVIES="movies";
-        public static final String KEY_ID="id";
-        public static final String KEY_TITLE="title";
-        public static final String KEY_RELEASE_DATES="release_dates";
-        public static final String KEY_THEATER="theater";
-        public static final String KEY_RATINGS="ratings";
-        public static final String KEY_AUDIENCE_SCORE="audience_score";
-        public static final String KEY_SYNOPSIS="synopsis";
-        public static final String KEY_POSTERS="posters";
-        public static final String KEY_THUMBNAIL="thumbnail";
-        public static final String KEY_LINKS="links";
-        public static final String KEY_SELF="self";
-        public static final String KEY_CAST="cast";
-        public static final String KEY_REVIEWS="reviews";
-        public static final String KEY_SIMILAR="similar";*/
 
-        public static final String KEY_CATEGORY="category";
 
-        public static final String KEY_DATA_ARRAY="data";
+         String KEY_CATEGORY="category";
 
-        public static final String KEY_ADDED_DATE="added_date";
+         String KEY_DATA_ARRAY="data";
 
-        public static final String KEY_ADDRERSS="c_address";
+         String KEY_ADDED_DATE="added_date";
 
-        public static final String KEY_CITY="c_city";
+         String KEY_ADDRERSS="c_address";
 
-        public static final String KEY_COUNTRY="c_country";;
+         String KEY_CITY="c_city";
 
-        public static final String KEY_EMAIL="c_email";
+         String KEY_COUNTRY="c_country";;
 
-        public static final String KEY_ESTEBLISHED="c_established";
+         String KEY_EMAIL="c_email";
 
-        public static final String KEY_CID="c_id";
+         String KEY_ESTEBLISHED="c_established";
 
-        public static final String KEY_IMAGE="c_image";
+         String KEY_CID="c_id";
 
-        public static final String KEY_INFO="c_info";
+         String KEY_IMAGE="c_image";
 
-        public static final String KEY_C_NAME="c_name";
+         String KEY_INFO="c_info";
 
-        public static final String KEY_C_SHORT_NAME="c_short_name";
+         String KEY_C_NAME="c_name";
+
+         String KEY_C_SHORT_NAME="c_short_name";
 
         //public static final String KEY_C_INFO="c_info";
 
-        public static final String KEY_STATE="c_state";
+         String KEY_STATE="c_state";
 
-        public static final String KEY_RATING="c_rating";
+         String KEY_RATING="rating";
 
-        public static final String KEY_BROUCHER="broucher";
+         String KEY_BROUCHER="broucher";
 
-        public static final String KEY_BRANCH_FEES="branch_fee";
+         String KEY_BRANCH_FEES="branch_fee";
 
-        public static final String KEY_C_INFO="c_info";
+         String KEY_C_INFO="c_info";
 
-        public static final String KEY_T_SEAT="total_seats";
+         String KEY_T_SEAT="total_seats";
 
-        public static final String KEY_R_SEAT="remaining_seats";
+         String KEY_R_SEAT="remaining_seats";
 
-        public static final String KEY_ID="id";
+         String KEY_ID="id";
 
-        public static final String KEY_B_NAME="branch_name";
+         String KEY_B_NAME="branch_name";
 
-        public static final String KEY_BNAME="bname";
+         String KEY_BNAME="bname";
 
-        public static final String KEY_B_SHORT_NAME="b_short_anme";
+         String KEY_B_SHORT_NAME="b_short_anme";
 
-        public static final String KEY_B_INFO="branch_info";
+         String KEY_B_INFO="branch_info";
 
-        public static final String KEY_STATUS="statusArray";
+         String KEY_STATUS="statusArray";
 
 
-        public static final String KEY_CRS_ID="course_id";
+         String KEY_CRS_ID="course_id";
 
-        public static final String KEY_BRN_ID="branch_id";
+         String KEY_BRN_ID="branch_id";
 
-        public static final String KEY_COURSE="c_course";
+         String KEY_COURSE="c_course";
 
-        public static final String KEY_C_BRANCH="c_branch";
+         String KEY_C_BRANCH="c_branch";
 
-        public static final String KEY_C_WEBSITE="c_website";
+         String KEY_C_WEBSITE="c_website";
 
-        public static final String KEY_C_PHONE1="c_phone1";
+         String KEY_C_PHONE1="c_phone1";
 
-        public static final String KEY_DISCOUNT="discounted_fee";
+         String KEY_DISCOUNT="discount";
 
         /*  state keys  */
 
-        public static final String KEY_STATE_ARRAY="stateData";
+         String KEY_STATE_ARRAY="stateData";
 
-        public static final String KEY_STATE_NAME="state";
+         String KEY_STATE_NAME="state";
 
-        public static final String KEY_STATE_ID="id";
+         String KEY_STATE_ID="id";
 
          /*  city keys  */
 
-        public static final String KEY_CITY_ARRAY="cityData";
+         String KEY_CITY_ARRAY="cityData";
 
-        public static final String KEY_CITY_NAME="city_name";
+         String KEY_CITY_NAME="city_name";
 
-       // public static final String KEY_CITY_ID="cityid";
-        public static final String KEY_CITY_ID="id";
+       //  String KEY_CITY_ID="cityid";
+         String KEY_CITY_ID="id";
 
-        public static final String KEY_CONTAIN_CITY_ID="state_id";
+         String KEY_CONTAIN_CITY_ID="state_id";
 
         /*  Branch keys  */
 
-        public static final String KEY_BRANCH_ARRAY="branchData";
+         String KEY_BRANCH_ARRAY="branchData";
 
-        public static final String KEY_BRANCH_NAME="branch_name";
+         String KEY_BRANCH_NAME="branch_name";
 
-        public static final String KEY_BRANCH_SHORT_NAME="branch_short_name";
+         String KEY_BRANCH_SHORT_NAME="branch_short_name";
 
-        public static final String KEY_BRANCH_ID="id";
+         String KEY_BRANCH_ID="id";
 
          /*  courseData keys  */
 
-        public static final String KEY_COURSE_ARRAY="courseData";
+         String KEY_COURSE_ARRAY="courseData";
 
-        public static final String KEY_COURSE_NAME="c_name";
+         String KEY_COURSE_NAME="c_name";
 
-        public static final String KEY_COURSE_SHORT_NAME="c_short_name";
+         String KEY_COURSE_SHORT_NAME="c_short_name";
 
-        public static final String KEY_COURSE_ID="id";
+         String KEY_COURSE_ID="id";
 
-        public static final String KEY_CNAME="cname";
+         String KEY_CNAME="cname";
 
         /* common pojo key*/
 
-        public static final String KEY_COMNID="id";
+         String KEY_COMNID="id";
 
-        public static final String KEY_COMNNAME="name";
+         String KEY_COMNNAME="name";
 
-        public static final String KEY_DESC="c_info";
+         String KEY_COM_COURSENNAME="c_short_name";
+
+         String KEY_DESC="c_info";
 
     }
 
     public interface KEY_AGENT_NOTES {
 
-        public static final String KEY_A_ID="agent_id";
-        public static final String KEY_A_NAME="agent_name";
-        public static final String KEY_A_CATEGORY="category";
-        public static final String KEY_A_CATEGORY_NAME="category_name";
-        public static final String KEY_A_END_ADTE="end_date";
-        public static final String KEY_A_PROGRESS="progress";
-        public static final String KEY_A_SRT_DATE="start_date";
-        public static final String KEY_A_TOTAl_ADMISSION="total_admission";
-        public static final String KEY_A_TOTAL_ADM_DONE="total_admission_done";
-        public static final String KEY_A_BRANCH_ID="branch_id";
-        public static final String KEY_A_BRANCH_NAME="branch_name";
-        public static final String KEY_A_CLG_ID="clg_id";
-        public static final String KEY_A_CLG_NAME="clg_name";
-        public static final String KEY_A_COURSE_ID="course_id";
-        public static final String KEY_A_COURSE_NAME="course_name";
-        public static final String KEY_A_DEAL_ID="deal_id";
-        public static final String KEY_A_DEAL_MONEY="deal_money";
-        public static final String KEY_A_TOTAL_SEAT="total_seats";
+         String KEY_A_ID="agent_id";
+         String KEY_A_NAME="agent_name";
+         String KEY_A_CATEGORY="category";
+         String KEY_A_CATEGORY_NAME="category_name";
+         String KEY_A_END_ADTE="end_date";
+         String KEY_A_PROGRESS="progress";
+         String KEY_A_SRT_DATE="start_date";
+         String KEY_A_TOTAl_ADMISSION="total_admission";
+         String KEY_A_TOTAL_ADM_DONE="total_admission_done";
+         String KEY_A_BRANCH_ID="branch_id";
+         String KEY_A_BRANCH_NAME="branch_name";
+         String KEY_A_CLG_ID="clg_id";
+         String KEY_A_CLG_NAME="clg_name";
+         String KEY_A_COURSE_ID="course_id";
+         String KEY_A_COURSE_NAME="course_name";
+         String KEY_A_DEAL_ID="deal_id";
+         String KEY_A_DEAL_MONEY="deal_money";
+         String KEY_A_TOTAL_SEAT="total_seats";
 
 
     }
@@ -168,30 +156,30 @@ public interface Keys {
 
     public interface KEY_USER_LOGIN {
 
-        public static final String KEY_TOKEN="Login_Token";
-        public static final String KEY_NAME="agent_name";
-        public static final String KEY_IMAGE="image";
-        public static final String KEY_EMAIL="email";
-        public static final String KEY_MOBILE="mobile";
+         String KEY_TOKEN="Login_Token";
+         String KEY_NAME="agent_name";
+         String KEY_IMAGE="image";
+         String KEY_EMAIL="email";
+         String KEY_MOBILE="mobile";
 
     }
 
     public interface KEY_PARTNER_DETAIL {
 
-        public static final String KEY_COLLEGE_NAME="College_Name";
-        public static final String KEY_COLLGE_SHORT_NAME="College_Short_Name";
-        public static final String KEY_ADDRESS="Address";
-        public static final String KEY_STATE="State";
-        public static final String KEY_CITY="City";
-        public static final String KEY_TYPE="Type";
-        public static final String KEY_EMAIL="Email";
-        public static final String KEY_PHONE="Phone";
-        public static final String KEY_WEBSITE="Website";
-        public static final String KEY_ESTABLISHED="Established";
-        public static final String KEY_INFORMATION="Information";
-        public static final String KEY_IMAGE="Image";
-        public static final String KEY_BROUCHERE="Brochure";
-        public static final String KEY_STATUS="STATUS";
+         String KEY_COLLEGE_NAME="College_Name";
+         String KEY_COLLGE_SHORT_NAME="College_Short_Name";
+         String KEY_ADDRESS="Address";
+         String KEY_STATE="State";
+         String KEY_CITY="City";
+         String KEY_TYPE="Type";
+         String KEY_EMAIL="Email";
+         String KEY_PHONE="Phone";
+         String KEY_WEBSITE="Website";
+         String KEY_ESTABLISHED="Established";
+         String KEY_INFORMATION="Information";
+         String KEY_IMAGE="Image";
+         String KEY_BROUCHERE="Brochure";
+         String KEY_STATUS="STATUS";
 
 
 

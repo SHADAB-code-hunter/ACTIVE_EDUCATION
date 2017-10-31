@@ -61,13 +61,11 @@ public class User_Login_Activity extends AppCompatActivity implements View.OnCli
         id_forgot_password=(TextView)findViewById(R.id.id_forgot_password);
         Button btn_sign_up=(Button)findViewById(R.id.btn_sign_up);
         btn_sign_up.setOnClickListener(this);
-       /* SearchableSpinner spnr_login=(SearchableSpinner)findViewById(R.id.id_spn_login);
-
+       /* SearchableSpinner spnr_login=(SearchableSpinner)findViewById(R.id.id_spn_login);`
         ArrayList arrayList=new ArrayList();
         arrayList.add("User"); arrayList.add("School Partner"); arrayList.add("College Partner"); arrayList.add("Institute Partner"); arrayList.add("ITI/ DIPLOMA Partner"); arrayList.add("Coaching Partner");
         arrayList.add("Training Partner");
         ArrayAdapter arrayAdapter=new ArrayAdapter(getApplicationContext(),R.layout.spinner_list_item,arrayList);
-
         spnr_login.setAdapter(arrayAdapter);*/
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
@@ -112,7 +110,7 @@ public class User_Login_Activity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void set_sign_in( String str_email, String str_pass)
+    private void set_sign_in(final String str_email, final String str_pass)
     {
         Log.d("urfgdffgdldg", ""+str_email+"  "+str_pass);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.LOGIN_API,

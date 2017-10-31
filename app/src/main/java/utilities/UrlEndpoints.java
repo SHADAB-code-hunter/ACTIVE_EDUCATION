@@ -11,10 +11,14 @@ public class UrlEndpoints {
     public static String LOGIN_API = "http://activeeduindia.com/admin/webservices/signin.php?";//sa@gmail.com&pwd=12345";
     public static String Agent_Login = "http://activeeduindia.com/admin/webservices/agentSignIn.php?";//=sa@gmail.com&pwd=123456";
     public static String URL_DEAL_CAT_MAIN = "http://activeeduindia.com/admin/webservices/getTopList.php?";
+    public static String URL_GET_FULL_DETAIL = "http://activeeduindia.com/admin/webservices/getFullDetail.php?";//type=1&id=dps";
+    public static String URL_GET_AVAIL_COURSES = "http://activeeduindia.com/admin/webservices/getAvailableCourses.php?";//type=1&id=dps";
     public static String URL_IMAGE_APTH = "http://activeeduindia.com/admin/media/college/";
+    public static String URL_NO_IMAGE_APTH = "http://activeeduindia.com/admin/media/college/picture/";
     public static String URL_CUSTOM_IMAGE_APTH = "http://activeeduindia.com/admin/media/";
     public static String URL_TOP_COURSES = "http://activeeduindia.com/admin/webservices/getTopCourses.php";
     public static String URL_TOP_EXAMS = "http://activeeduindia.com/admin/webservices/getTopExams.php";
+    public static String URL_GET_FACILITY_IMG = "http://activeeduindia.com/admin/media/facility/";
     public static String URL_GET_GALLERY = "http://www.activequizindia.com/admin/webservices/getGallery.php";
     public static String URL_PROFILE_PATH="http://activeeduindia.com/admin/media/profile/";
     public static final String GALLERY_IMG_PATH = "http://www.activequizindia.com/images/event/";
@@ -40,5 +44,15 @@ public class UrlEndpoints {
     public static final String PARTNER_DETAIL="http://activeeduindia.com/admin/webservices/setCollegeDetails.php?";
     public static final String UPLOAD_FILE="http://activeeduindia.com/admin/webservices/uploadBrochure.php?";//brochurename=";//aa.pdf&brochure=";
     public static final String SEAT_SUBMIT="http://activeeduindia.com/admin/webservices/getPartnerSeatSubmission.php?";
+    public static final String IMAGE_PATH_ADAPTER="http://activeeduindia.com/admin/media/";
+    public static final String SEAT_PROVIDER_SIGNIN="http://activeeduindia.com/admin/webservices/seatProviderSignin.php?";//email=sb@ss.com&pwd=123456&type=1";
+    public static final String SEAT_PROVIDER_TARGET="http://activeeduindia.com/admin/webservices/getDashboardTarget.php?";//email=sb@ss.com&token=S6dqKXf8Zt&type=1&id=dps
+    public static final String SEAT_PROVIDER_PRFL_IMG="http://activeeduindia.com/admin/media/profile/";//email=sb@ss.com&token=S6dqKXf8Zt&type=1&id=dps
+    public static final String SEAT_PROVIDER_DETAIL="http://activeeduindia.com/admin/webservices/setDetails.php?";//crd_email=sb@ss.com&token=S6dqKXf8Zt&type=1&userid=7
+    public static final String BROUCHURE_DOWNLOAD="http://activeeduindia.com/admin/webservices/downloadBrochure.php?type=";//type=1&brochure=dpsdwarka.pdf";//crd_email=sb@ss.com&token=S6dqKXf8Zt&type=1&userid=7
+    public static final String SEAT_PROVIDER_SOCIAL="http://activeeduindia.com/admin/webservices/setSocialDetail.php?";//crd_email=sb@ss.com&token=S6dqKXf8Zt&type=1&userid=7
+    public static final String PAYMENT_API="http://activeeduindia.com/admin/webservices/getUserPayment.php?";//email=sa@gmail.com&token=J54DQ8dulW&category=2&subcategory=lmcp&dealid=1&price=1000&type=agent\n" +
+           // "{\"msg\":1}";
+           // "{\"msg\":1}";
 
 }

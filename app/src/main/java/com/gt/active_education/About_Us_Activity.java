@@ -19,7 +19,7 @@ public class About_Us_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_about_us);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        String phoneNumber = "01294014664";
+        final String phoneNumber = "01294014664";
 
         findViewById(R.id.id_floating_btn).setOnClickListener(new View.OnClickListener() {
             @Override

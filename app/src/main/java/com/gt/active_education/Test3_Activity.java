@@ -38,14 +38,14 @@ public class Test3_Activity  extends AppCompatActivity {
         setContentView(R.layout.activity_test3);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-       /* id_btn=(Button)findViewById(R.id.id_btn) ;
+        id_btn=(Button)findViewById(R.id.id_btn) ;
         id_edt_a=(EditText)findViewById(R.id.id_edt_a);
         id_edt_b=(EditText)findViewById(R.id.id_edt_b);
         id_edt_c=(EditText)findViewById(R.id.id_edt_c);
-        id_edt_c.getHint();
+     //   id_edt_c.getHint();
 
         setTextWatcher(id_edt_a); setTextWatcher(id_edt_b); setTextWatcher(id_edt_c);
-        id_btn.setOnClickListener(new View.OnClickListener() {
+      /*   id_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -79,7 +79,7 @@ public class Test3_Activity  extends AppCompatActivity {
         },2000);*/
     }
 
-    private void setTextWatcher(EditText id_edt_a) {
+    private void setTextWatcher(final EditText id_edt_a) {
 
         id_edt_a.addTextChangedListener(new TextWatcher() {
 

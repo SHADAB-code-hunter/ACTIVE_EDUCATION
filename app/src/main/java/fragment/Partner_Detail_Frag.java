@@ -2,17 +2,14 @@ package fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -201,8 +198,12 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
                                                             progressDialog.setCancelable(true);
                                                             progressDialog.show();
                                                             progressDialog.setMessage(getString(R.string.SignUp));*/
-
-                                                            new Async_Respoce(listMovies -> Log.d("objectggg",listMovies.toString()), PARTNER_DETAIL, map).execute();
+                                                            new Async_Respoce(new Async_Respoce.Responce_Obj_Lisatener() {
+                                                                @Override
+                                                                public void on_responce(JSONObject listMovies) {
+                                                                    Log.d("objectggg", listMovies.toString());
+                                                                }
+                                                            }, PARTNER_DETAIL, map).execute();
                                                         }
                                                     }
                                                 }
@@ -219,15 +220,16 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
             }
 
         });
-        id_state.setOnTouchListener(new View.OnTouchListener() {
+      /*  id_state.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(!open) {
                     open = true;
 
+
                     state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
                         @Override
-                        public void on_listdata(String s) {
+                        public void on_listdata(String s,String st_id) {
                             id_state.setText(s);id_city.setText("");
                             state_city_search.cancel();
                             open=false;
@@ -239,57 +241,74 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
             }
         });
 
-        id_city.setOnTouchListener((v, event) -> {
-            if(!open) {
-                open = true;
+        id_city.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!open) {
+                    open = true;
 
-                if(id_state.getText().toString()!=null) {
-                    StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_state.getText().toString());
-                    state_city_search = new State_City_Search(s -> {
-                        id_city.setText(s);
-                        state_city_search.cancel();
-                        open = false;
-                    }, Partner_Detail_Frag.this.getContext(), GET_CITY+stringBuilder.toString());
-                    state_city_search.show();
-                }else {
-                    Toast.makeText(Partner_Detail_Frag.this.getContext(), "Please Select State First !!!", Toast.LENGTH_SHORT).show();
+                    if (id_state.getText().toString() != null) {
+                        StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_state.getText().toString());
+                        state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
+                            @Override
+                            public void on_listdata(String s) {
+                                id_city.setText(s);
+                                state_city_search.cancel();
+                                open = false;
+                            }
+                        }, Partner_Detail_Frag.this.getContext(), GET_CITY + stringBuilder.toString());
+                        state_city_search.show();
+                    } else {
+                        Toast.makeText(Partner_Detail_Frag.this.getContext(), "Please Select State First !!!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+                return false;
             }
-            return false;
-        });
-
+        });*/
 
         permission_check(101,Partner_Detail_Frag.this);
         imagePicker =new Image_picker(Partner_Detail_Frag.this);
 
 
-        id_img_picker1.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= 23)
-                imagePicker.imagepicker(1,"10001");
-            else
-                lower_camera_call(20001);
+        id_img_picker1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23)
+                    imagePicker.imagepicker(1, "10001");
+                else
+                    Partner_Detail_Frag.this.lower_camera_call(20001);
+            }
         });
 
-        id_img_picker2.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= 23)
-                imagePicker.imagepicker(1,"10002");
-            else
-                lower_camera_call(20002);
+        id_img_picker2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23)
+                    imagePicker.imagepicker(1,"10002");
+                else
+                    lower_camera_call(20002);
+            }
         });
 
-        id_img_picker3.setOnClickListener(v -> {
-            if (Build.VERSION.SDK_INT >= 23)
-                imagePicker.imagepicker(1,"10003");
-            else
-                lower_camera_call(20003);
+        id_img_picker3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 23)
+                    imagePicker.imagepicker(1, "10003");
+                else
+                    Partner_Detail_Frag.this.lower_camera_call(20003);
+            }
         });
-        id_img_picker4.setOnClickListener(v -> {
+        id_img_picker4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             /*if (Build.VERSION.SDK_INT >= 23)
                 imagePicker.imagepicker(1,"10004");
             else
                 lower_camera_call(20004);*/
 
-            showFileChooser();
+                Partner_Detail_Frag.this.showFileChooser();
+            }
         });
 
         return rootView;
@@ -302,7 +321,7 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
     }
 
     @Override
-    public void on_id_listener(String str_id) {
+    public void on_id_listener(String str_id, String s) {
 
         open=false;
         id_state.setText(str_id);

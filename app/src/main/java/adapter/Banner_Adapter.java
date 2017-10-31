@@ -13,6 +13,8 @@ import android.widget.VideoView;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 import static android.R.attr.width;
 import static java.lang.System.load;
 
@@ -24,15 +26,27 @@ public class Banner_Adapter extends PagerAdapter {
 
     public int i;
     private Context context;
-    private  int[] Img_Bnr;
+    private ArrayList Img_Bnr_str;
+    private  int[] Img_Bnrint;
+    private String str_url;
 
-    public Banner_Adapter(Context context, int[] Img_Bnr) {
+    public Banner_Adapter(Context context, ArrayList<String> Img_Bnr_str, String str_url) {
         this.context=context;
-        this.Img_Bnr=Img_Bnr;
+        this.Img_Bnr_str=Img_Bnr_str;
+        this.str_url=str_url;
+    }
+
+    public Banner_Adapter(Context applicationContext, int[] Img_Bnrint) {
+        this.context=context;
+        this.Img_Bnrint=Img_Bnrint;
     }
 
     public int getCount() {
-        return Img_Bnr.length;
+        if(Img_Bnr_str!=null){
+        return Img_Bnr_str.size();}
+        if(Img_Bnrint!=null){
+            return Img_Bnrint.length;}
+        return 0;
     }
 
     public Object instantiateItem(View collection, final int position) {
@@ -40,16 +54,33 @@ public class Banner_Adapter extends PagerAdapter {
         View layout = inflater.inflate(R.layout.banner_adapter, null);
         ImageView id_iv_banner=(ImageView) layout.findViewById(R.id.id_iv_banner);
         id_iv_banner.setVisibility(View.VISIBLE);
-        id_iv_banner.setImageResource(Img_Bnr[position]);
-            /**/
-          /*  Picasso.with(context);
-                  //  .load("YOUR IMAGE URL HERE")
+
+        if(Img_Bnr_str!=null)
+        {
+            Log.d("jfkj",""+str_url+"/banner/"+Img_Bnr_str.get(position));
+            Picasso.with(context)
+                    .load(str_url+"/banner/"+Img_Bnr_str.get(position))
                     .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
-                    .error(DRAWABLE RESOURCE)      // optional
-                   // .resize(width, height)                        // optional
-                   // .rotate(degree)                             // optional
-                    .into(id_iv_banner);*/
+                    // .error(DRAWABLE RESOURCE)      // optional
+                    // .resize(width, height)                        // optional
+                    // .rotate(degree)                             // optional
+                    .into(id_iv_banner);
+      //  id_iv_banner.setImageResource(str_url+"/picture/"+Img_Bnr_str.get(position));
+        }else if(Img_Bnrint!=null) {
+            Log.d("jfkj",""+str_url+"/picture/"+Img_Bnrint[position]);
+            Picasso.with(context)
+                    .load(str_url+"/picture/"+Img_Bnrint[position])
+                    .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
+                    // .error(DRAWABLE RESOURCE)      // optional
+                    // .resize(width, height)                        // optional
+                    // .rotate(degree)                             // optional
+                    .into(id_iv_banner);
+        }
             /**/
+
+            /**/
+
+
         ((ViewPager) collection).addView(layout);
 
         return layout;

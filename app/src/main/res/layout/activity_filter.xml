@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/bgnew">
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/id_toolbar"
@@ -49,7 +48,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
-            android:fontFamily="@font/raleway_medium"
             android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="16sp" />
@@ -67,7 +65,7 @@
 
 
         <RelativeLayout
-
+            android:id="@+id/id_rv_filter"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"
@@ -75,7 +73,7 @@
 
 
             <FrameLayout
-                android:id="@+id/id_filter_search"
+
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/back_about">
@@ -89,7 +87,6 @@
                     android:gravity="center" />
             </FrameLayout>
             <FrameLayout
-            android:id="@+id/id_filter_upper"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/back_about">
@@ -108,10 +105,12 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/id_toolbar"
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/id_filter_layout" />
 
     <HorizontalScrollView
         android:id="@+id/id_filter_layout"
@@ -335,11 +334,12 @@
         android:id="@+id/id_lnr_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clickable="true"
         android:padding="2dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:background="@drawable/ic_comm_menu">
+        android:background="@drawable/chat_back">
 
         <LinearLayout
             android:id="@+id/id_linear_call"
@@ -350,6 +350,7 @@
 
 
             <FrameLayout
+                android:id="@+id/id_call"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -383,6 +384,7 @@
             android:orientation="vertical"
             android:layout_weight="1">
             <FrameLayout
+                android:id="@+id/id_frm_vcall"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -409,12 +411,12 @@
 
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/id_linear_chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_weight="1">
             <FrameLayout
+                android:id="@+id/id_frm_chat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -446,7 +448,8 @@
     <TextView
         android:id="@+id/id_list_url"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:clickable="true"
         android:textColor="@color/white"
         android:background="#464646"
         android:layout_marginTop="100dp"

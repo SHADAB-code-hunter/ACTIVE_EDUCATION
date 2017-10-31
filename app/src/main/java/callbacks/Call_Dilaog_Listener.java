@@ -5,5 +5,5 @@ package callbacks;
  */
 
 public interface Call_Dilaog_Listener {
-    public void on_id_listener(String str_id);
+    public void on_id_listener(String str_id, String s);
 }

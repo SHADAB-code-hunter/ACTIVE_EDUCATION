@@ -26,4 +26,5 @@
     <dimen name="dialog_layout_text_size">15sp</dimen>
     <dimen name="dialog_layout_button_space">10dp</dimen>
     <dimen name="thirtytwo">32dp</dimen>
+    <dimen name="fb_login">150dp</dimen>
 </resources>

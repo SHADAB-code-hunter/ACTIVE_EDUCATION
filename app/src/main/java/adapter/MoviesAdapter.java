@@ -1,4 +1,4 @@
-package Fab_Filter;
+package adapter;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,18 +21,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gt.active_education.College_Detail_Activity;
-import com.gt.active_education.Filter_Activity;
 import com.gt.active_education.R;
 import com.gt.active_education.Website_Activity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import RAting_BAr.MaterialRatingBar;
+import callbacks.Avail_Course_Listener;
 import pojo.Cat_Model;
 import utilities.UrlEndpoints;
+
+import static utilities.UrlEndpoints.BROUCHURE_DOWNLOAD;
+import static utilities.UrlEndpoints.IMAGE_PATH_ADAPTER;
+import static utilities.UrlEndpoints.URL_NO_IMAGE_APTH;
 
 /**
  * Created by krupenghetiya on 27/06/17.
@@ -43,7 +46,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     List<Cat_Model> mList = new ArrayList<>();
     Picasso picasso;
     Activity _activity;
-    String str_url,str_img_path;
+    String str_url,str_img_path, str_type="NA";
+
+    String[] str_imgpath=new String[]{" http://activeeduindia.com/admin/webservices/getTopList.php?type=1",
+                                        "http://activeeduindia.com/admin/webservices/getTopList.php?type=2",
+                                        "http://activeeduindia.com/admin/webservices/getTopList.php?type=3",
+                                        "http://activeeduindia.com/admin/webservices/getTopList.php?type=4"};
+    private String[] str_cat_arr;
 
     public MoviesAdapter(List<Cat_Model> list_urls, Picasso p, Activity a) {
         this.mList = list_urls;
@@ -70,8 +79,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_movie, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_movie, parent, false);
         return new MovieViewHolder(itemView);
     }
 
@@ -83,51 +91,159 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }else {
             layoutParams.setMargins((int) _activity.getResources().getDimension(R.dimen.card_margin),0,(int) _activity.getResources().getDimension(R.dimen.card_margin),(int) _activity.getResources().getDimension(R.dimen.card_margin));
         }
+
         holder.card_view.setLayoutParams(layoutParams);
-        Log.d("hjdh",""+mList.get(position).getC_image());
-        Log.d("urlimgpath",UrlEndpoints.URL_IMAGE_APTH+mList.get(position).getC_image());
-
-        if (str_img_path!=null)
-        {
-            Log.d("imgpath",""+str_img_path+mList.get(position).getC_image());
-            picasso.load(str_img_path+mList.get(position).getC_image())
-                    .placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);
-        }
-
         holder.tv_title.setText(mList.get(position).getC_name());
         holder.tv_genre.setText("Location : " +mList.get(position).getC_city()+", "+mList.get(position).getC_state());
         holder.tv_rating.setText("Avg Fees: " + mList.get(position).getBranch_fees()+"/ year");
-      //  holder.tv_year.setText("Year: " + mList.get(position).getYear());
-     //   holder.tv_quality.setText("Quality: " +mList.get(position).getQuality());
-
-       // holder.card_view.setTag(position);
         holder.tv_quality.setText("Course: "+ mList.get(position).getC_course());
-        holder.card_view.setOnClickListener(v -> set_applynow(v,position));
-        holder.id_btn_apply.setOnClickListener(v -> set_applynow(v,position));
-        holder.img_call.setOnClickListener(v -> {
-            if (checkPermission(Manifest.permission.CALL_PHONE)) {
-                String dial = "tel:" + mList.get(position).getC_phone1();
-                _activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
-            } else {
-                Toast.makeText(_activity, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+        holder.card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MoviesAdapter.this.set_applynow(v, position);
             }
         });
-      //  img_course,img_call,img_broucher
-        holder.img_web.setOnClickListener(v ->
+        holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_applynow(v, position);
+            }
+        });
+        holder.img_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkPermission(Manifest.permission.CALL_PHONE)) {
+                    String dial = "tel:" + mList.get(position).getC_phone1();
+                    _activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                } else {
+                    Toast.makeText(_activity, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        //  img_course,img_call,img_broucher
+        holder.img_web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call_website(mList.get(position).getC_website());
+            }
+        });
+        holder.img_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // continue
 
-                call_website(mList.get(position).getC_website())
+                ((Avail_Course_Listener)_activity).onAvailCourse(str_type,mList.get(position).getC_id(),
+                        mList.get(position).getCourse_id(),
+                        mList.get(position).getBranch_id(),
+                        mList.get(position).getC_branch());
 
-        );
+            }
+        });
+        holder.img_broucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                call_Download(mList.get(position).getBroucher());
+            }
+        });
 
+        if(str_url!=null){
         if (isSubstring("getTopList", str_url))
         {
             holder.is_discout_linear.setVisibility(View.VISIBLE);
-            holder.id_discout_text.setText("10" );//mList.get(position).getDiscount_fee()
+            if(!mList.get(position).getDiscount_fee().equals("NA")) {
+                holder.id_discout_text.setText(Math.round(Float.parseFloat(mList.get(position).getDiscount_fee())) + " %");//mList.get(position).getDiscount_fee()
+            }
+
+        }}
+
+        if(!mList.get(position).getRating().equals("NA")) {
+        //  holder.id_rating_bar.setRating(Float.parseFloat(mList.get(position).getRating()));
+        }
+
+        Float fl=Float.parseFloat("4.5");
+        if((fl%1)==0)
+        {
+            Log.d("jbjbvj", "hvhvh");
+        }else if((fl%1)!=0) {
+            Log.d("jbjbvj", "fhjfhjh");
+        }
+
+     //   ==============================================================
+        String halg_img_path=IMAGE_PATH_ADAPTER;
+        str_cat_arr= _activity.getResources().getStringArray(R.array.category_image);
+        if(str_url!=null) {
+            str_type=str_url.split("=")[1];
+            switch (str_url.split("=")[1]) {
+                case "1":
+                    halg_img_path = halg_img_path + str_cat_arr[0];
+                    break;
+
+                case "2":
+                    halg_img_path = halg_img_path + str_cat_arr[1];
+
+                    break;
+                case "3":
+                    halg_img_path = halg_img_path + str_cat_arr[2];
+
+                    break;
+                case "4":
+                    halg_img_path = halg_img_path + str_cat_arr[3];
+                    break;
+                case "5":
+                    halg_img_path = halg_img_path + str_cat_arr[4];
+                    break;
+                case "6":
+                    halg_img_path = halg_img_path + str_cat_arr[5];
+                    break;
+            }
+        }
+
+        Log.d("djgjhgjgdj",halg_img_path);
+
+        if(!mList.get(position).getC_image().equals("picture.png")) {
+            if (halg_img_path != null) {
+                Log.d("imgpath", "" + halg_img_path+"/picture/" + mList.get(position).getC_image());
+                picasso.load(halg_img_path+"/picture/" + mList.get(position).getC_image())
+                        .placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);
+            }
+        }else {
+
+            Log.d("noimage",halg_img_path);
+            if(!mList.get(position).getC_image().equals(null)){
+                Log.d("imgpddath", "" + halg_img_path+"/picture/" + mList.get(position).getC_image());
+                picasso.load(halg_img_path+"/picture/"  + mList.get(position).getC_image())
+                        .placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);}
+            else {
+
+            }
+        }
+    }
+
+    private void call_Download(String str_brouchuer) {
+
+     //   String brouchure_doewnload=BROUCHURE_DOWNLOAD+str_type+"&brochure="+str_brouchuer;
+         String brouchure_doewnload="http://activeeduindia.com/admin/webservices/downloadBrochure.php?type=1&brochure=dpsdwarka.pdf";
+
+        if (brouchure_doewnload!=null) {
+            if (isSubstring("http://", brouchure_doewnload)) {
+                Log.d("sswess", "" + brouchure_doewnload);
+                Intent intent = new Intent(_activity, Website_Activity.class);
+                intent.putExtra("Url_Web", brouchure_doewnload);
+                _activity.startActivity(intent);
+            } else {
+                Log.d("sswess", "" + brouchure_doewnload);
+                Intent intent = new Intent(_activity, Website_Activity.class);
+                intent.putExtra("Url_Web", "http://" + brouchure_doewnload);
+                _activity.startActivity(intent);
+            }
+        }else {
+
+            Toast.makeText(_activity, "Link Not Found !!!!", Toast.LENGTH_SHORT).show();
 
         }
 
-
     }
+
     private boolean checkPermission(String permission) {
         return ContextCompat.checkSelfPermission(_activity, permission) == PackageManager.PERMISSION_GRANTED;
     }
@@ -171,11 +287,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         if(!(mList.get(position).getCategory()).equals("NA"))// for
         {
             Log.d("djeejd","dhdh"+(mList.get(position).getCategory()));
-            i.putExtra("type",""+(mList.get(position).getCategory()));
+            i.putExtra("type",""+str_type);
         }
         else
         {
-            i.putExtra("type",""+(position+1));
+            i.putExtra("type",""+str_type);
         }
         _activity.startActivity(i);
     }
@@ -195,6 +311,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         private CardView card_view;
         private Button id_btn_apply;
         private LinearLayout is_discout_linear;
+        private MaterialRatingBar id_rating_bar;
 
         public MovieViewHolder(View x) {
             super(x);
@@ -207,6 +324,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             id_discout_text = (TextView) x.findViewById(R.id.id_discout_text);
             card_view = (CardView) x.findViewById(R.id.card_view);
             id_btn_apply=(Button)x.findViewById(R.id.id_btn_apply);
+          //  id_rating_bar=(MaterialRatingBar)x.findViewById(R.id.id_rating_bar);
 
             img_web=(ImageView)x.findViewById(R.id.img_web);
             img_course=(ImageView)x.findViewById(R.id.img_course);

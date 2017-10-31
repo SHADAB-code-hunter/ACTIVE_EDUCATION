@@ -30,15 +30,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
-                    android:text="College Detail" />
+                    android:text="College Detail"
+                   />
                 <TextView
+                    android:id="@+id/id_hint_tv"
                     android:layout_below="@+id/title1"
                     android:layout_toLeftOf="@+id/switch_button1"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="8dp"
+                    android:textSize="14sp"
+                    android:gravity="center|left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="College Detail wil provide Upstairs Ranking of College "
+                    android:text="College Detail wil provide Upstairs Ranking of College List "
                     android:textColor="#cccccc"/>
 
                 <android.support.v7.widget.SwitchCompat
@@ -49,6 +53,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp" />
+                <Button
+                    android:id="@+id/id_detail_save_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:text="save"
+                    android:inputType="number"
+                    android:textSize="10sp"
+                    android:layout_below="@+id/switch_button1"
+                    android:layout_toRightOf="@+id/id_hint_tv" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -65,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
 
 
@@ -82,10 +95,12 @@
                         android:layout_margin="0dp">
 
                         <android.support.design.widget.TextInputLayout
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter College Name"
                             android:soundEffectsEnabled="true"
                             android:outlineProvider="none"
                             app:hintAnimationEnabled="true">
@@ -94,11 +109,12 @@
                                 android:id="@+id/id_clg_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
+                                android:hint="Enter College Name"
                                 android:textSize="12sp"
                                 style="@style/CustomEditText"
                                 android:allowUndo="true"
-                                android:hint="Enter College Name"
                                 android:soundEffectsEnabled="true"
+                                android:textColorHint="@color/transparent"
                                 android:backgroundTint="#ffffff"
                                 android:textColor="@color/edt_text_color"
                                 android:singleLine="true" />
@@ -124,6 +140,7 @@
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter College Short Name"
                             android:soundEffectsEnabled="true"
                             android:outlineProvider="none"
                             app:hintAnimationEnabled="true">
@@ -136,9 +153,10 @@
                                 style="@style/CustomEditText"
                                 android:allowUndo="true"
                                 android:textColor="@color/edt_text_color"
+                                android:textColorHint="@color/transparent"
                                 android:hint="Enter College Short Name"
                                 android:soundEffectsEnabled="true"
-                                android:backgroundTint="@color/colorAccent"
+                                android:backgroundTint="@color/white"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -161,17 +179,20 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter Mobile Number"
                             app:hintAnimationEnabled="true">
 
                             <EditText
                                 android:id="@+id/id_phone"
                                 android:textSize="12sp"
                                 style="@style/CustomEditText"
+                                android:textColorHint="@color/transparent"
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
                                 android:layout_height="match_parent"
                                 android:hint="Enter Mobile Number"
-                                android:backgroundTint="@color/colorAccent"
+                                android:backgroundTint="@color/white"
+                                android:inputType="number"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -193,6 +214,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            android:hint="Enter LandLine Number "
                             android:textColorHint="#ffffff"
                             app:hintAnimationEnabled="true">
 
@@ -202,8 +224,10 @@
                                 style="@style/CustomEditText"
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
+                                android:textColorHint="@color/transparent"
                                 android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
+                                android:inputType="number"
+                                android:backgroundTint="@color/white"
                                 android:hint="Enter LandLine Number "
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
@@ -227,6 +251,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter E-Mail"
                             app:hintAnimationEnabled="true">
 
                             <EditText
@@ -235,8 +260,10 @@
                                 style="@style/CustomEditText"
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
+                                android:textColorHint="@color/transparent"
                                 android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
+                                android:inputType="textEmailAddress"
+                                android:backgroundTint="@color/white"
                                 android:hint="Enter E-Mail"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
@@ -260,16 +287,18 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter Website"
                             app:hintAnimationEnabled="true">
 
                             <EditText
                                 android:id="@+id/id_website"
                                 android:textSize="12sp"
                                 style="@style/CustomEditText"
+                                android:textColorHint="@color/transparent"
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
                                 android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
+                                android:backgroundTint="@color/white"
                                 android:hint="Enter Website"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
@@ -293,6 +322,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter Established Year"
                             app:hintAnimationEnabled="true">
 
                             <EditText
@@ -302,7 +332,9 @@
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
                                 android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
+                                android:inputType="number"
+                                android:backgroundTint="@color/white"
+                                android:textColorHint="@color/transparent"
                                 android:hint="Enter Established Year"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
@@ -324,20 +356,22 @@
                         <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:textColorHint="@color/path_black"
+                            android:background="#5c6f6093"
+                            android:backgroundTint="@color/transparent"
+                            android:textColorHint="@color/white"
+                            android:hint="Type your Portfolio Description"
                             app:hintAnimationEnabled="true">
 
                             <EditText
                                 android:id="@+id/id_clg_about"
                                 android:textSize="12sp"
                                 android:layout_width="match_parent"
-                                android:textColor="@color/path_black"
-                                android:textColorHint="@color/path_black"
-                                android:background="#ffffff"
+                                android:textColor="@color/white"
+                                android:textColorHint="@color/transparent"
+                                android:backgroundTint="@color/transparent"
                                 android:gravity="top"
                                 android:layout_height="100dp"
-                                android:hint="Type your Portfolio Description " />
+                                android:hint="Type your Portfolio Description" />
                         </android.support.design.widget.TextInputLayout>
 
                         <ImageView
@@ -404,7 +438,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
 
 
@@ -797,7 +831,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
@@ -866,7 +900,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
@@ -935,7 +969,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
@@ -1005,7 +1039,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#7958ba"
+                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
