@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_gravity="center"
+    android:background="#f68557b6">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/id_fil_img"
+            android:layout_width="25dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_filter_up"
+            android:layout_height="match_parent" />
+        <TextView
+
+            android:layout_toRightOf="@+id/id_fil_img"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="25dp"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text="Filter"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffff"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/id_state_frm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/outline_spinner">
+        <TextView
+            android:id="@+id/id_tv_state"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center|left"
+            android:text="Select State"/>
+        <ImageView
+            android:layout_toRightOf="@+id/id_tv"
+            android:layout_width="25dp"
+            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_round_sign_down"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/id_city_frm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/outline_spinner">
+        <TextView
+            android:id="@+id/id_tv_city"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center|left"
+            android:text="Select City"/>
+        <ImageView
+            android:layout_toRightOf="@+id/id_tv"
+            android:layout_width="25dp"
+            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_round_sign_down"/>
+
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/id_course_frm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/outline_spinner">
+
+        <ImageView
+            android:layout_toRightOf="@+id/id_tv"
+            android:layout_width="25dp"
+            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_round_sign_down"/>
+
+        <TextView
+            android:id="@+id/id_tv_course"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center|left"
+            android:text="Select Course"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/id_branch_frm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:background="@drawable/outline_spinner">
+
+        <ImageView
+            android:layout_toRightOf="@+id/id_tv"
+            android:layout_width="25dp"
+            android:layout_gravity="end"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_round_sign_down"/>
+
+        <TextView
+            android:id="@+id/id_tv_branch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center|left"
+            android:text="Select Branch"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/id_submit"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#ea7d35"
+        android:text="Submit"
+        android:layout_margin="10dp"
+        android:textColor="@color/white" />
+
+</LinearLayout>

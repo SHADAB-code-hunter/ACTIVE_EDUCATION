@@ -54,6 +54,7 @@ public  class Colleg_dialog extends Dialog implements Upcoming_List_LoadedListen
         this.applicationContext=applicationContext;
         this.str_course=str_course;
         this.clg_id=clg_id;
+        Log.d("hdjhj",clg_id);
     }
 
     @Override

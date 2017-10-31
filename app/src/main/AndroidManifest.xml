@@ -63,7 +63,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme_customBack">
+        android:theme="@style/SplashTheme_Full">
 
         <!-- kotMain_LoginActivityvity -->
 
@@ -82,8 +82,7 @@
             android:configChanges="keyboardHidden|orientation|keyboard"/>
         <activity
             android:name=".DashBoard_Activity"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".User_Profile_Activity"
             android:screenOrientation="portrait" />
@@ -140,8 +139,7 @@
             android:theme="@style/Theme_customBack" />
         <activity
             android:name=".Filter_Activity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme_customBack" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".College_Detail_Activity"
             android:screenOrientation="portrait" />

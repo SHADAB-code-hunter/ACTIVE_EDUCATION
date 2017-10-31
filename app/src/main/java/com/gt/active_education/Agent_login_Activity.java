@@ -129,34 +129,34 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                         }else{
                             switch (id_login_type.getText().toString().trim())
                             {
-                                case "Partner":
-                                    set_sign_in(str_uname,str_pass);
-                                    break;
-                                case "School":
 
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                case "School":
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"1");
+
                                     break;
                                 case "College":
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"2");
+
                                     break;
                                 case "University":
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"3");
+
                                     break;
                                 case "ITI / Diploma":
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"4");
+
                                     break;
                                 case "Coaching":
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"5");
+
                                     break;
 
                                 case "Training Center":
-                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
-                                    finish();
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"6");
+
+                                    break;
+                                case "Partner":
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.Agent_Login,"7");
                                     break;
                             }
                         }
@@ -175,14 +175,14 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void set_sign_in(final String str_email, final String str_pass)
+    private void set_sign_in(final String str_email, final String str_pass,String str_url,String str_type)
     {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(true);
         progressDialog.show();
         progressDialog.setMessage(getString(R.string.LogIn));
-        Log.d("agent_login_res", ""+str_email+"  "+str_pass);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.Agent_Login+"email="+str_email+"&pwd="+str_pass,
+        Log.d("agent_login_res", str_type+"  "+str_email+"  "+str_pass+" "+ str_type);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,str_url+"email="+str_email+"&pwd="+str_pass+"&type="+str_type,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response)
@@ -191,18 +191,26 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                             JSONObject jObj = new JSONObject(response);
                             Toast.makeText(Agent_login_Activity.this, str_email+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("a_login",response.toString());
-                            //{"data":[{"email":"sa@gmail.com","token":"wvCfUJwlBE"}]}
+                        //    {"data":[{"mobile":"9166833551","token":"S6dqKXf8Zt","image":null,"uname":"demo","email":"sb@ss.com","clg_id":"dps","utype":"1","type":"user"}]}
                             if(!jObj.has("exist")) {
                                 JSONArray jsonArray = jObj.getJSONArray("data");
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("login_Status", "L_OK");
-                                editor.putString("Login_Token", jsonObject.getString("token"));
+                                editor.putString("mobile", jsonObject.getString("mobile"));
+                                editor.putString("image", jsonObject.getString("image"));
+                                editor.putString("name", jsonObject.getString("name"));
+                                editor.putString("uname", jsonObject.getString("uname"));
                                 editor.putString("email", jsonObject.getString("email"));
+                                editor.putString("clg_id", jsonObject.getString("clg_id"));
+                                editor.putString("userid", jsonObject.getString("userid"));
+                                editor.putString("utype", jsonObject.getString("utype"));
+                                editor.putString("token", jsonObject.getString("token"));
                                 editor.putString("type", jsonObject.getString("type"));
+
                                 editor.commit();
-                                startActivity(new Intent(getApplicationContext(),Agent_Profile_Activity.class));
+                                startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                 progressDialog.cancel();
                                 finish();
                             }else if(jObj.has("exist"))
@@ -212,8 +220,13 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                                 Toast.makeText(Agent_login_Activity.this, "User Already Exist !!!", Toast.LENGTH_SHORT).show();
 
                             }
+                            else if(jObj.has("msg"))
+                            {
+                                progressDialog.cancel();
+                                // ConnectionCheck.user_Already_exist(SignUpActivity.this,"User Already Exist !!!");
+                                Toast.makeText(Agent_login_Activity.this, "User SignIn Unsuccessful !!!", Toast.LENGTH_SHORT).show();
 
-
+                            }
                         } catch (JSONException e) {
                             progressDialog.cancel();
                             e.printStackTrace();

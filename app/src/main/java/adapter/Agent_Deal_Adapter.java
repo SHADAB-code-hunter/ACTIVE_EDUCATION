@@ -71,7 +71,7 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
 
         // holder.card_view.setTag(position);
         //   holder.tv_quality.setText("Course: "+ mList.get(position).getC_());
-        holder.card_view.setOnClickListener(new View.OnClickListener() {
+       /* holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                // Log.d("k9","clicked");
@@ -80,21 +80,21 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
                 Log.d("porfdd",""+mList.get(position).getClg_id()+"   "+
                        mList.get(position).getCourse_id()+" "+
                        mList.get(position).getBranch_id());
-               /* form_map.put("clgid","lmcp");
+               *//* form_map.put("clgid","lmcp");
                 form_map.put("course","1");
-                form_map.put("branch","1");*/
+                form_map.put("branch","1");*//*
 
                 Bundle bundle = new Bundle();
                 bundle.putString("clg_id",""+mList.get(position).getClg_id());
                 bundle.putString("course",""+mList.get(position).getCourse_id());
                 bundle.putString("branch",""+mList.get(position).getBranch_id());
                 i.putExtras(bundle);
-               /* i.putExtra("clg_id",""+mList.get(position).getClg_id());
+               *//* i.putExtra("clg_id",""+mList.get(position).getClg_id());
                 i.putExtra("course",""+mList.get(position).getCourse_id());
-                i.putExtra("branch",""+mList.get(position).getBranch_id());*/
+                i.putExtra("branch",""+mList.get(position).getBranch_id());*//*
                 _activity.startActivity(i);
             }
-        });
+        });*/
 /*
         holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,6 +110,44 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
             }
         });
 */
+        holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_applynow(v, position);
+            }
+        });
+        holder.card_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                set_applynow(v, position);
+            }
+        });
+    }
+    private void set_applynow(View v, int position) {
+        Log.d("kdddd9","clicked"+
+                ""+mList.get(position).getClg_id()
+                +" "+mList.get(position).getCourse_id()
+                +" "+mList.get(position).getBranch_id());
+        String pos= (String) v.getTag();
+        Intent i=new Intent(_activity.getApplicationContext(),College_Detail_Activity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("clg_id",""+mList.get(position).getClg_id());
+        bundle.putString("course",""+mList.get(position).getCourse_id());
+        bundle.putString("branch",""+mList.get(position).getBranch_id());
+        bundle.putString("branch_name","Dummy Branch");
+        i.putExtras(bundle);
+
+        if(!(mList.get(position).getCategory()).equals("NA"))// for
+        {
+            Log.d("djeejd","dhdh"+(mList.get(position).getCategory()));
+            i.putExtra("type",""+(mList.get(position).getCategory()));
+        }
+        else
+        {
+            i.putExtra("type",""+(position+1));
+        }
+        _activity.startActivity(i);
     }
 
     @Override
@@ -140,7 +178,5 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
         }
 
     }
-
-
 
 }

@@ -30,6 +30,7 @@ import static extras.Keys.EndpointBoxOffice.KEY_CITY;
 import static extras.Keys.EndpointBoxOffice.KEY_CNAME;
 import static extras.Keys.EndpointBoxOffice.KEY_COMNID;
 import static extras.Keys.EndpointBoxOffice.KEY_COMNNAME;
+import static extras.Keys.EndpointBoxOffice.KEY_COM_COURSENNAME;
 import static extras.Keys.EndpointBoxOffice.KEY_COURSE;
 import static extras.Keys.EndpointBoxOffice.KEY_COURSE_ID;
 import static extras.Keys.EndpointBoxOffice.KEY_CRS_ID;
@@ -268,6 +269,49 @@ public class Parser {
                     //get the title of the current movie
                     if (Utils.contains(current_obj, KEY_COMNNAME)) {
                         name = current_obj.getString(KEY_COMNNAME);
+                    }
+
+                    //get the url of the related links
+                    Common_Pojo commonPojo = new Common_Pojo();
+                    commonPojo.setId(id);
+                    commonPojo.setName(name);
+
+                    // L.t(getActivity(), movie + "");
+                    if (!course_id.equals(-1) && !name.equals(Constants.NA)) {
+                        list_Sate.add(commonPojo);
+                    }
+                }
+            } catch (JSONException e) {
+
+            }
+        }
+        return list_Sate;
+    }
+    public static ArrayList<Common_Pojo> parse_coursecommon_list(JSONObject response, String str_key) {
+
+        ArrayList<Common_Pojo> list_Sate = new ArrayList<>();
+        if (response != null && response.length() > 0) {
+            try {
+                JSONArray jsonArray = response.getJSONArray(str_key);
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    String id = Constants.NA;
+                    String name = Constants.NA;
+                    String course_id = "-1";
+
+                    JSONObject current_obj = jsonArray.getJSONObject(i);
+                    //get the id of the current movie
+                    if (Utils.contains(current_obj, KEY_COMNID)) {
+                        id = current_obj.getString(KEY_COMNID);
+                    }
+                    //get the title of the current movie
+                  /*  if (Utils.contains(current_obj, KEY_COMNNAME)) {
+                        name = current_obj.getString(KEY_COMNNAME);
+                    }*/
+
+                    //get the title of the current movie
+                    if (Utils.contains(current_obj, KEY_COM_COURSENNAME)) {
+                        name = current_obj.getString(KEY_COM_COURSENNAME);
                     }
 
                     //get the url of the related links

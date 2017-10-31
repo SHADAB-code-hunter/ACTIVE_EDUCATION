@@ -1,14 +1,11 @@
 package utilities;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -16,10 +13,8 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,7 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
 
 import org.json.JSONArray;
@@ -40,9 +34,6 @@ import java.util.List;
 
 import adapter.Simple_Adapter;
 import callbacks.Call_Dilaog_Listener;
-import callbacks.Forgot_Close_Listener;
-
-import static utilities.App_Static_Method.show_load_progress;
 
 /**
  * Created by GT on 9/27/2017.
@@ -58,9 +49,10 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
     //private Fragment context;
     private String str_url;
     private Dialog_Spinner_Listener dialogSpinnerListener;
-    private List<String> server_list;
+    private List<String> server_list,arrayList_id;
     private ProgressDialog progressDialog;
     private Context mcontext;
+    private String str_key_array;
 
 
    /* public State_City_Search(Dialog_Spinner_Listener dialogSpinnerListener,Fragment context, String str_url) {
@@ -69,11 +61,12 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
         this.context=context;
         this.str_url=str_url;
     }*/
-    public State_City_Search(Dialog_Spinner_Listener dialogSpinnerListener, Context context, String str_url) {
+    public State_City_Search(Dialog_Spinner_Listener dialogSpinnerListener, Context context, String str_url,String str_key_array) {
         super(context);
         this.dialogSpinnerListener=dialogSpinnerListener;
         this.mcontext=context;
         this.str_url=str_url;
+        this.str_key_array=str_key_array;
     }
 
 
@@ -89,37 +82,10 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-
-      //  countryList();  // in this method, Create a list of items.
-
-        // call the adapter with argument list of items and context.
-      /*  mAdapter = new Simple_Adapter(list,this);
-        mRecyclerView.setAdapter(mAdapter);*/
         set_state_list(str_url);
         addTextListener(server_list);
 
     }
-
-   /* public void countryList(){
-
-        list.add("Afghanistan");
-        list.add("Albania");
-        list.add("Algeria");
-        list.add("Bangladesh");
-        list.add("Belarus");
-        list.add("Canada");
-        list.add("Cape Verde");
-        list.add("Central African Republic");
-        list.add("Denmark");
-        list.add("Dominican Republic");
-        list.add("Egypt");
-        list.add("France");
-        list.add("Germany");
-        list.add("Hong Kong");
-        list.add("India");
-        list.add("Iceland");
-
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -128,7 +94,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
             case R.id.id_cancle:
                 if(search.getText().toString()!=null)
                // ((Call_Dilaog_Listener)context).on_id_listener(search.getText().toString());
-                    dialogSpinnerListener.on_listdata(search.getText().toString());
+                    dialogSpinnerListener.on_listdata("na","na");
                 else
                     Toast.makeText(mcontext, "Please Select Any Option !!!!", Toast.LENGTH_LONG).show();
                 break;
@@ -157,6 +123,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                     query = query.toString().toLowerCase();
 
                     final List<String> filteredList = new ArrayList<>();
+                    final List<String> filteredList_id = new ArrayList<>();
 
                     for (int i = 0; i < State_City_Search.this.server_list.size(); i++) {
 
@@ -164,17 +131,18 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                         if (text.contains(query)) {
 
                             filteredList.add(State_City_Search.this.server_list.get(i));
+                            filteredList_id.add(State_City_Search.this.arrayList_id.get(i));
                         }
                     }
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(State_City_Search.this.getContext()));
-                    mAdapter = new Simple_Adapter(filteredList, State_City_Search.this);
+                    mAdapter = new Simple_Adapter(filteredList, arrayList_id, State_City_Search.this);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();  // data set changed
                 }else {
 
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(State_City_Search.this.getContext()));
-                    mAdapter = new Simple_Adapter(State_City_Search.this.server_list, State_City_Search.this);
+                    mAdapter = new Simple_Adapter(State_City_Search.this.server_list, arrayList_id, State_City_Search.this);
                     mRecyclerView.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -185,14 +153,14 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        dialogSpinnerListener.on_listdata("");
+        dialogSpinnerListener.on_listdata("na","na");
 
     }
 
     @Override
-    public void on_id_listener(String str_id) {
-        search.setText(str_id);
-        dialogSpinnerListener.on_listdata(str_id);
+    public void on_id_listener(String s, String str_id) {
+        search.setText(s);
+        dialogSpinnerListener.on_listdata(s,str_id);
        // dialogSpinnerListener.on_listdata(str_id);
     }
 
@@ -205,10 +173,11 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                         try{
                             Log.d("city",""+str_response);
                             ArrayList<String> arrayList=new ArrayList<>();
+                            ArrayList<String> arrayList_id=new ArrayList<>();
                             JSONObject response = new JSONObject(str_response);
-                            if(response.has("state"))
+                            if(response.has(str_key_array))
                             {
-                                JSONArray array = response.getJSONArray("state");
+                                JSONArray array = response.getJSONArray(str_key_array);
 
                                 for (int i = 0; i < array.length(); i++)
                                 {
@@ -218,8 +187,10 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                                     sendDateModel.setName(json.getString("name"));*/
                                     //  Log.d("banner_imd",""+json.getString("image_name"));
                                     arrayList.add(json.getString("name"));
+                                    arrayList_id.add(json.getString("id"));
+                                    Log.d("nndknd",json.getString("id"));
                                 }
-                                on_list_data_new(arrayList);
+                                on_list_data_new(arrayList,arrayList_id);
                                  // data set changed
                             }
                             else if(response.has("findCity"))
@@ -234,8 +205,9 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                                     sendDateModel.setName(json.getString("name"));*/
                                     //  Log.d("banner_imd",""+json.getString("image_name"));
                                     arrayList.add(json.getString("name"));
+                                    arrayList_id.add(json.getString("id"));
                                 }
-                                on_list_data_new(arrayList);
+                                on_list_data_new(arrayList, arrayList_id);
                                 // data set changed
                             }
                             else if(response.has("msg"))
@@ -263,13 +235,14 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
     }
 
 
-    public void on_list_data_new(List<String> s) {
+    public void on_list_data_new(List<String> s, List<String> arrayList_id) {
 
         server_list=s;
+        State_City_Search.this.arrayList_id=arrayList_id;
     //    progressDialog.cancel();
         if(!server_list.isEmpty()) {
             mRecyclerView.setLayoutManager(new LinearLayoutManager(State_City_Search.this.getContext()));
-            mAdapter = new Simple_Adapter(server_list, State_City_Search.this);
+            mAdapter = new Simple_Adapter(server_list,arrayList_id, State_City_Search.this);
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
         }
@@ -277,7 +250,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
 
     public interface Dialog_Spinner_Listener {
 
-        public void on_listdata(String s);
+        public void on_listdata(String s,String sid);
 
     }
 

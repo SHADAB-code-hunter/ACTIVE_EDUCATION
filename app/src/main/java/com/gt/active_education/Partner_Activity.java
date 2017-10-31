@@ -2,31 +2,16 @@ package com.gt.active_education;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import adapter.Agent_Profile_VP_Adpter;
-import adapter.Common_pojo_adapter;
-import callbacks.Upcoming_List_LoadedListener;
+import adapter.Partner_VP_Adpter;
 import nav_tabbar.NavigationTabBar;
-import pojo.Cat_Model;
-import task.Load_Courses_Data;
-import utilities.Common_Pojo;
-import utilities.UrlEndpoints;
 
 public class Partner_Activity extends AppCompatActivity {//implements Upcoming_List_LoadedListener {
     private RecyclerView id_recyclerview;
@@ -44,7 +29,7 @@ public class Partner_Activity extends AppCompatActivity {//implements Upcoming_L
     private void set_partner_layout_apger() {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
-        Agent_Profile_VP_Adpter agentProfileVpAdpter=new Agent_Profile_VP_Adpter(getSupportFragmentManager());
+        Partner_VP_Adpter agentProfileVpAdpter=new Partner_VP_Adpter(getSupportFragmentManager());
         viewPager.setAdapter(agentProfileVpAdpter);
         final String[] colors = getResources().getStringArray(R.array.default_preview);
         final NavigationTabBar navigationTabBar = (NavigationTabBar) findViewById(R.id.ntb_horizontal);

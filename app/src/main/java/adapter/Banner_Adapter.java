@@ -24,15 +24,21 @@ public class Banner_Adapter extends PagerAdapter {
 
     public int i;
     private Context context;
-    private  int[] Img_Bnr;
+    private  String[] Img_Bnr;
+    private  int[] Img_Bnrint;
 
-    public Banner_Adapter(Context context, int[] Img_Bnr) {
+    public Banner_Adapter(Context context, String[] Img_Bnr) {
         this.context=context;
         this.Img_Bnr=Img_Bnr;
     }
 
+    public Banner_Adapter(Context applicationContext, int[] Img_Bnrint) {
+        this.context=context;
+        this.Img_Bnrint=Img_Bnrint;
+    }
+
     public int getCount() {
-        return Img_Bnr.length;
+        return Img_Bnrint.length;
     }
 
     public Object instantiateItem(View collection, final int position) {
@@ -40,7 +46,8 @@ public class Banner_Adapter extends PagerAdapter {
         View layout = inflater.inflate(R.layout.banner_adapter, null);
         ImageView id_iv_banner=(ImageView) layout.findViewById(R.id.id_iv_banner);
         id_iv_banner.setVisibility(View.VISIBLE);
-        id_iv_banner.setImageResource(Img_Bnr[position]);
+//        Log.d("jfkj",""+Img_Bnr[position]);
+        id_iv_banner.setImageResource(Img_Bnrint[position]);
             /**/
           /*  Picasso.with(context);
                   //  .load("YOUR IMAGE URL HERE")

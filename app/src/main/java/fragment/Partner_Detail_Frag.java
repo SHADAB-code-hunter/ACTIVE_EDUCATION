@@ -2,17 +2,14 @@ package fragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.util.Log;
@@ -201,7 +198,6 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
                                                             progressDialog.setCancelable(true);
                                                             progressDialog.show();
                                                             progressDialog.setMessage(getString(R.string.SignUp));*/
-
                                                             new Async_Respoce(new Async_Respoce.Responce_Obj_Lisatener() {
                                                                 @Override
                                                                 public void on_responce(JSONObject listMovies) {
@@ -224,7 +220,7 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
             }
 
         });
-        id_state.setOnTouchListener(new View.OnTouchListener() {
+      /*  id_state.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(!open) {
@@ -233,7 +229,7 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
 
                     state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
                         @Override
-                        public void on_listdata(String s) {
+                        public void on_listdata(String s,String st_id) {
                             id_state.setText(s);id_city.setText("");
                             state_city_search.cancel();
                             open=false;
@@ -268,7 +264,7 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
                 }
                 return false;
             }
-        });
+        });*/
 
         permission_check(101,Partner_Detail_Frag.this);
         imagePicker =new Image_picker(Partner_Detail_Frag.this);
@@ -325,7 +321,7 @@ public class Partner_Detail_Frag extends Fragment implements Call_Dilaog_Listene
     }
 
     @Override
-    public void on_id_listener(String str_id) {
+    public void on_id_listener(String str_id, String s) {
 
         open=false;
         id_state.setText(str_id);

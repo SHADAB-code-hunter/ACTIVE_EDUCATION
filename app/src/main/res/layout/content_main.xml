@@ -123,14 +123,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
+                android:background="#1e6d5e93"
                 android:gravity="center"
                 android:orientation="vertical">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="1px"
                     android:layout_marginBottom="0.1dp"
                     android:text="Top Admission Deal"
-                    android:background="@color/white"
+                    android:background="#ece5f5"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:layout_gravity="center|top"
@@ -141,8 +142,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginBottom="0.1dp"
+                    android:textStyle="bold"
                     android:text="Top Admission Deal"
-                    android:background="@drawable/back_title_cat"
+                    android:background="@drawable/border_gradiant"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:layout_gravity="center|top"
@@ -167,8 +169,10 @@
             <LinearLayout
                 android:id="@+id/id_lnr_need"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="0.1dp"
+                android:background="@drawable/back_find_need"
                 android:orientation="vertical"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp">
@@ -180,7 +184,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/find_your_need"
                     android:layout_gravity="center"
-                    app:rb_color="#c3b72222"
+                    app:rb_color="#ff6363"
                     app:rb_duration="2500"
                     app:rb_radius="22dp"
                     app:rb_rippleAmount="8"
@@ -239,10 +243,10 @@
                 android:layout_marginBottom="0.1dp">
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="1px"
                     android:layout_marginBottom="0.1dp"
                     android:text="Top Admission Deal"
-                    android:background="@color/white"
+                    android:background="#ece5f5"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     android:layout_gravity="center"
@@ -291,10 +295,10 @@
                     android:layout_marginBottom="0.1dp">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="1px"
                         android:layout_marginBottom="0.1dp"
                         android:text="Top Admission Deal"
-                        android:background="@color/white"
+                        android:background="#ece5f5"
                         android:textColor="@color/white"
                         android:textSize="12sp"
                         android:layout_gravity="center"
@@ -368,7 +372,7 @@
                 android:layout_height="140dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="5dp">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -387,13 +391,20 @@
 
                     <TextView
                         android:id="@+id/id_tv_learn"
-                        android:layout_width="60dp"
-                        android:layout_height="55dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
+                        android:layout_margin="5dp"
                         android:background="@drawable/ic_learn"
                         android:gravity="center"
                         android:textColor="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Learn"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
                 </FrameLayout>
 
                 <android.support.v4.widget.Space
@@ -414,12 +425,19 @@
 -->
                     <TextView
                         android:id="@+id/id_tv_earn"
-                        android:layout_width="60dp"
-                        android:layout_height="55dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:background="@drawable/ic_earn"
                         android:gravity="center"
                         android:textColor="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Earn"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
                 </FrameLayout>
 
                 <android.support.v4.widget.Space
@@ -440,12 +458,19 @@
 -->
                     <TextView
                         android:id="@+id/id_tv_fun"
-                        android:layout_width="55dp"
-                        android:layout_height="45dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:background="@drawable/ic_fun"
                         android:gravity="center"
                         android:textColor="@color/white" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fun"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"/>
                 </FrameLayout>
             </LinearLayout>
                 <LinearLayout
@@ -467,7 +492,7 @@
         android:padding="0dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff653f"
+        android:background="@drawable/back_new"
         android:clickable="true"
         android:orientation="vertical">
 

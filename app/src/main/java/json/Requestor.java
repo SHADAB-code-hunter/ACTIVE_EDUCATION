@@ -72,11 +72,35 @@ public class Requestor {
         return jObj;
     }
 
+    public static JSONObject requestJSON(RequestQueue requestQueue, String url,Map<String,String> map) {
+        String response = null;
+        JSONObject jObj=null;
+        RequestFuture<String> requestFuture = RequestFuture.newFuture();
+        Log.d("urlbg",""+url);
+        StringRequest request = new StringRequest(Request.Method.POST,
+                url,
+                requestFuture, requestFuture);
+        requestQueue.add(request);
+        try {
+            response = requestFuture.get(5000, TimeUnit.MILLISECONDS);
+            jObj = new JSONObject(response);
+        } catch (InterruptedException e) {
+            L.m(e + "");
+        } catch (ExecutionException e) {
+            L.m(e + "");
+        } catch (TimeoutException e) {
+            L.m(e + "");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jObj;
+    }
+
     public static JSONObject requestJSON_MAP(RequestQueue requestQueue, String url, final Map<String, String> map) {
         String response = null;
         JSONObject jObj=null;
         RequestFuture<String> requestFuture = RequestFuture.newFuture();
-        Log.d("urlbg",""+PARTNER_DETAIL+"   "+map.get("remaining_seats")  );
+       // Log.d("urlbg",""+PARTNER_DETAIL+"   "+map.get("remaining_seats")  );
         StringRequest request = new StringRequest(Request.Method.POST,
                 url,
                 requestFuture, requestFuture){
@@ -91,13 +115,13 @@ public class Requestor {
             response = requestFuture.get(5000, TimeUnit.MILLISECONDS);
             jObj = new JSONObject(response);
         } catch (InterruptedException e) {
-            L.m(e + "");
+          //  L.m(e + "");
         } catch (ExecutionException e) {
-            L.m(e + "");
+          //  L.m(e + "");
         } catch (TimeoutException e) {
-            L.m(e + "");
+           // L.m(e + "");
         } catch (JSONException e) {
-            e.printStackTrace();
+          //  e.printStackTrace();
         }
         return jObj;
     }

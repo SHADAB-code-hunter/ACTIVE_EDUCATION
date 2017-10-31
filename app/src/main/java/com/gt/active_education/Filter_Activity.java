@@ -1,6 +1,6 @@
 package com.gt.active_education;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,16 +12,15 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,28 +43,28 @@ import java.util.Map;
 
 import Fab_Filter.AAH_FabulousFragment;
 import Fab_Filter.MovieData;
-import Fab_Filter.MoviesAdapter;
+import adapter.MoviesAdapter;
 import Fab_Filter.MyFabFragment;
+import callbacks.Avail_Course_Listener;
 import callbacks.Filter_List_Listener;
+import callbacks.Inner_Dialog_Listener;
+import callbacks.JOBJ_Listener;
 import callbacks.Upcoming_List_LoadedListener;
-import fragment.Partner_Detail_Frag;
 import task.Filter_Task;
 import task.TaskLoad_List;
 import network.VolleySingleton;
-import utilities.App_Raw_Data;
 import utilities.App_Static_Method;
 import pojo.Cat_Model;
+import utilities.Available_Courses_Dialog;
 import utilities.Common_Pojo;
 import utilities.ConnectionCheck;
-import utilities.Custom_List_Dialog;
+import utilities.Inner_Filter_Dialog;
 import utilities.State_City_Search;
 import utilities.UrlEndpoints;
 
-import static utilities.UrlEndpoints.GET_CITY;
-
 
 public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFragment.Callbacks,
-        Upcoming_List_LoadedListener,Filter_List_Listener, View.OnClickListener {
+        Upcoming_List_LoadedListener,Filter_List_Listener, View.OnClickListener, Inner_Dialog_Listener, JOBJ_Listener, Avail_Course_Listener {
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -94,6 +93,9 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
     private boolean open=false;
     private TextView id_tv_state,id_tv_city,id_tv_course,id_tv_branch;
     private TextView id_list_url;
+    private RelativeLayout id_rv_filter;
+    private Inner_Filter_Dialog inner_filter_dialog;
+    private Available_Courses_Dialog availableCoursesDialog;
 
 
     @Override
@@ -119,6 +121,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
                 Filter_Activity.this.finish();
             }
         });
+        id_rv_filter=(RelativeLayout)findViewById(R.id.id_rv_filter);id_rv_filter.setOnClickListener(this);
         category_title=(TextView)findViewById(R.id.category_title);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab2 = (FloatingActionButton) findViewById(R.id.fab2);
@@ -142,9 +145,9 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
         });
 
         id_filter_layout=(HorizontalScrollView)findViewById(R.id.id_filter_layout);
-        id_filter_upper=(FrameLayout)findViewById(R.id.id_filter_upper);id_filter_upper.setOnClickListener(this);
-        id_filter_search=(FrameLayout)findViewById(R.id.id_filter_search);id_filter_search.setOnClickListener(this);
-      //  ll = (LinearLayout) findViewById(R.id.ll);
+//        id_filter_upper=(FrameLayout)findViewById(R.id.id_filter_upper);id_filter_upper.setOnClickListener(this);
+      //  id_filter_search=(FrameLayout)findViewById(R.id.id_filter_search);id_filter_search.setOnClickListener(this);
+        //  ll = (LinearLayout) findViewById(R.id.ll);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setAllowEnterTransitionOverlap(false);
@@ -198,7 +201,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
             }
         });*/
         set_state_list(UrlEndpoints.get_filter_list+1);
-        id_state_filter.setOnTouchListener(new View.OnTouchListener() {
+      /*  id_state_filter.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if(!open) {
@@ -206,7 +209,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
 
                     state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
                         @Override
-                        public void on_listdata(String s) {
+                        public void on_listdata(String s,String s_id) {
                             if(s.equals("")){
                                 id_tv_state.setText("State"); id_tv_city.setText("City");}
                             else id_tv_state.setText(s);
@@ -214,7 +217,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
                             state_city_search.cancel();
                             open=false;
                         }
-                    }, Filter_Activity.this, UrlEndpoints.get_filter_list + 1);
+                    }, Filter_Activity.this, UrlEndpoints.get_filter_list + 1,"");
                     state_city_search.show();
                 }
                 return false;
@@ -250,46 +253,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
                 return false;
             }
         });
-
-     /*   id_course_filter.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(!open) {
-                    open = true;
-                    state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
-                        @Override
-                        public void on_listdata(String s) {
-                            id_tv_course.setText(s);id_tv_city.setText("");
-                            state_city_search.cancel();
-                            open=false;
-                        }
-                    }, Filter_Activity.this, UrlEndpoints.get_filter_list + 1);
-                    state_city_search.show();
-                }
-                return false;
-            }
-        });*/
-
-       /* id_branch_filter.setOnTouchListener((v, event) -> {
-            if(!open) {
-                open = true;
-
-                if(id_tv_state.getText().toString()!=null) {
-                    StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_tv_state.getText().toString());
-                    state_city_search = new State_City_Search(s -> {
-                        id_tv_branch.setText(s);
-
-                        state_city_search.cancel();
-                        open = false;
-                    }, Filter_Activity.this, GET_CITY+stringBuilder.toString());
-                    state_city_search.show();
-                }else {
-                    Toast.makeText(Filter_Activity.this, "Please Select State First !!!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return false;
-        });*/
-
+*/
     }
 
 
@@ -588,6 +552,10 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
     public void on_Filter_Loaded(List<Cat_Model> filter_list) {
         if(!filter_list.isEmpty()) {
             Log.d("filterd", "" + filter_list);
+            if(inner_filter_dialog!=null)
+            {
+                inner_filter_dialog.cancel();
+            }
             mList.clear();
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(mLayoutManager);
@@ -634,26 +602,28 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
 
                 break;
 
-            case R.id.id_filter_search:
+            case R.id.id_rv_filter:
 
                 if(!vis_bl) {
-                    Animation animation2;
+                   /* Animation animation2;
                     animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.filter_down);
                     id_filter_layout.setAnimation(animation2);
                     id_filter_layout.setVisibility(View.VISIBLE);
                     id_filter_upper.setVisibility(View.GONE);
-                    id_filter_search.setVisibility(View.VISIBLE);
-                    vis_bl = true;
+                    id_filter_search.setVisibility(View.VISIBLE);*/
+                    inner_filter_dialog=new Inner_Filter_Dialog(Filter_Activity.this,str_Url,Filter_Activity.this);
+                    inner_filter_dialog.show();
+                    vis_bl = false;
                 }
-                else if(vis_bl) {
-                   /* Animation animation2;
+                /*else if(vis_bl) {
+                   *//* Animation animation2;
                     animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.filter_up);
-                    id_filter_layout.setAnimation(animation2);*/
+                    id_filter_layout.setAnimation(animation2);*//*
                     id_filter_layout.setVisibility(View.INVISIBLE);
                     id_filter_upper.setVisibility(View.VISIBLE);
                     id_filter_search.setVisibility(View.INVISIBLE);
                     vis_bl = false;
-                }
+                }*/
 
 
                 // call final URL
@@ -694,4 +664,59 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
     }
 
 
+    @Override
+    public void onInner_Dialog(Map<String, String> map) {
+        Log.d("kdkdk",map.toString());
+        new Filter_Task(Filter_Activity.this,str_Url,map).execute();
+    }
+
+    @Override
+    public void onLJsonLoaded(JSONObject jsonObject) {
+
+
+    }
+
+    @Override
+    public void onLJsonLoaded_new(JSONObject jsonObject) {
+
+    }
+
+    @Override
+    public void onAvailCourse(final String str_type,final String clg_id,final String course_id,final String branch_id,final String branch_name) {
+        // avail courses
+
+        Log.d("ncvkcnvm",str_type+"  "+ clg_id);
+
+         availableCoursesDialog=new Available_Courses_Dialog(new Available_Courses_Dialog.Dialog_Spinner_Listener() {
+            @Override
+            public void on_listdata(String s, String sid) {
+                Log.d("ncvkcnvm",s+"  "+ sid);
+                availableCoursesDialog.cancel();
+
+                Intent i=new Intent(Filter_Activity.this,College_Detail_Activity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("clg_id",""+clg_id);
+                bundle.putString("course",""+course_id);
+                bundle.putString("branch",""+branch_id);
+                bundle.putString("branch_name",""+branch_name);
+                i.putExtras(bundle);
+                Log.d("courseid","cvcvcv"+(course_id));
+                if(!(str_type).equals("NA"))// for
+                {
+                    Log.d("djeejd","dhdh"+(str_type));
+                    i.putExtra("type",""+str_type);
+                }
+                else
+                {
+                    i.putExtra("type",""+str_type);
+                }
+                startActivity(i);
+            }
+        },Filter_Activity.this,UrlEndpoints.URL_GET_AVAIL_COURSES+"id="+clg_id+"&type="+str_type);
+        availableCoursesDialog.show();
+    }
+
+  /*  private void set_applynow() {
+
+    }*/
 }

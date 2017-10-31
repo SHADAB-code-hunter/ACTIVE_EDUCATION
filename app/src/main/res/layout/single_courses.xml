@@ -45,9 +45,9 @@
 -->
 
 <FrameLayout
-    android:layout_width="50dp"
-    android:layout_height="50dp"
-    android:background="@drawable/round_adapter">
+    android:layout_width="75dp"
+    android:layout_height="30dp"
+    android:background="@drawable/border_gradiand_line">
     <TextView
         android:clickable="true"
         android:id="@+id/txt_title"
@@ -55,10 +55,11 @@
         android:layout_height="match_parent"
         android:layout_margin="2dp"
         android:gravity="center"
+        android:textStyle="bold"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
-        android:textColor="@color/white"
-        android:textSize="10sp"
+        android:textColor="#fa513183"
+        android:textSize="8sp"
         tools:text="Filter 1" />
 
     <TextView

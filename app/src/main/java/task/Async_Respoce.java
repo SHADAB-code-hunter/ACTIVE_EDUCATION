@@ -29,6 +29,7 @@ public class Async_Respoce extends AsyncTask<Void, Void, JSONObject> {
 
     public Async_Respoce(Responce_Obj_Lisatener myComponent, String url, Map<String, String> map) {
         Log.d("urlrft",""+url);
+        Log.d("mapsting",""+map.toString());
         this.url=url;
         this.map=map;
         this.myComponent = myComponent;

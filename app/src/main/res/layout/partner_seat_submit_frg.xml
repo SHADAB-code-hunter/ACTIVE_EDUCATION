@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:background="#49790406"
+        android:background="#3b2b2361"
         android:orientation="vertical">
 
 
@@ -290,64 +290,6 @@
                 android:layout_marginRight="0dp"
                 android:visibility="invisible"
                 android:src="@drawable/ic_agent_profile" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColorHint="#ffffff"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:id="@+id/id_phone"
-                    android:textSize="12sp"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/edt_text_color"
-                    android:layout_height="match_parent"
-                    android:hint="Enter Phone"
-                    android:inputType="number"
-                    android:backgroundTint="@color/colorAccent"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="12dp"
-                android:layout_marginRight="0dp"
-                android:visibility="invisible"
-                android:src="@drawable/ic_agent_profile" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColorHint="#7869ea"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:id="@+id/id_information"
-                    android:hint="Enter Information About Courses"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#ffffff"
-                    android:background="@color/white"
-                    android:textColor="#7869ea"
-                    android:gravity="top"
-                    android:maxLines="5" />
-            </android.support.design.widget.TextInputLayout>
-
         </FrameLayout>
 
 

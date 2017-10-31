@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,8 @@ import utilities.App_Static_Method;
  */
 
 public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out_Listener, View.OnClickListener {
-    TextView tv_logout,id_back_btn_quiz;
+    TextView id_back_btn_quiz;
+    ImageView tv_logout;
     ProgressDialog progressDialog;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             id_back_btn_quiz=(TextView)findViewById(R.id.id_back_btn_quiz);id_back_btn_quiz.setOnClickListener(this);
-             tv_logout=(TextView)findViewById(R.id.tv_logout);
+             tv_logout=(ImageView)findViewById(R.id.tv_logout);
              tv_logout.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {

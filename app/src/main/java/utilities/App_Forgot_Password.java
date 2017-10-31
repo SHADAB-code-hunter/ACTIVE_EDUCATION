@@ -1,54 +1,20 @@
 package utilities;
 
-import android.animation.Animator;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
-import com.gt.active_education.User_Login_Activity;
-import com.zopim.android.sdk.api.ZopimChat;
-import com.zopim.android.sdk.prechat.PreChatForm;
-import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Map;
-
-import Zend_Chat.UserProfile;
-import Zend_Chat.UserProfileStorage;
 import callbacks.Call_Dilaog_Listener;
 import callbacks.Forgot_Close_Listener;
-import callbacks.Form_Responce_Listener;
 
 /**
  * Created by GT on 9/18/2017.
@@ -83,7 +49,7 @@ public class App_Forgot_Password extends Dialog implements View.OnClickListener 
         switch (v.getId())
         {
             case R.id.id_website:
-                ((Call_Dilaog_Listener)act).on_id_listener("WEBSITE");
+              //  ((Call_Dilaog_Listener)act).on_id_listener("WEBSITE", arrayList_id.get(position));
                 break;
 
             case R.id.btn_forgot:

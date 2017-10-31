@@ -91,6 +91,7 @@
                             android:layout_gravity="center"
                             android:textColor="#615d5d"/>
                         <TextView
+                            android:id="@+id/id_total_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="60"
@@ -143,7 +144,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Seats"
+                        android:text="Fill Seats"
                         android:layout_gravity="center"
                         android:textSize="20sp"
                         android:gravity="center|top"
@@ -202,6 +203,7 @@
                             android:layout_gravity="center"
                             android:textColor="#615d5d"/>
                         <TextView
+                            android:id="@+id/id_fill_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="60"
@@ -221,13 +223,13 @@
 
                     android:orientation="horizontal">
 
-                    <utilities.BatteryProgressView
+                    <utilities.BatteryProgressView2
                         android:id="@+id/progress2"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="right|center">
 
-                    </utilities.BatteryProgressView>
+                    </utilities.BatteryProgressView2>
 
                 </FrameLayout>
             </FrameLayout>
@@ -254,7 +256,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total Seats"
+                        android:text="Remain Seats"
                         android:layout_gravity="center"
                         android:textSize="20sp"
                         android:gravity="center|top"
@@ -313,6 +315,7 @@
                             android:layout_gravity="center"
                             android:textColor="#615d5d"/>
                         <TextView
+                            android:id="@+id/id_remain_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:text="60"
@@ -332,13 +335,13 @@
 
                     android:orientation="horizontal">
 
-                    <utilities.BatteryProgressView
+                    <utilities.BatteryProgressView3
                         android:id="@+id/progress3"
                         android:layout_width="150dp"
                         android:layout_height="150dp"
                         android:layout_gravity="right|center">
 
-                    </utilities.BatteryProgressView>
+                    </utilities.BatteryProgressView3>
 
                 </FrameLayout>
             </FrameLayout>

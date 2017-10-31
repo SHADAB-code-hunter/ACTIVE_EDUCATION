@@ -73,7 +73,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Fab_Filter.MoviesAdapter;
+import adapter.MoviesAdapter;
 import Zend_Chat.UserProfile;
 import Zend_Chat.UserProfileStorage;
 import adapter.Banner_Adapter;
@@ -85,7 +85,8 @@ import adapter.Recycler_Drawer_Adapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import callbacks.Call_Dilaog_Listener;
+import callbacks.Avail_Course_Listener;
+import callbacks.Call_newDialog_Listener;
 import callbacks.Log_Out_Listener;
 import callbacks.Profile_Image_Listener;
 import callbacks.Upcoming_List_LoadedListener;
@@ -97,7 +98,6 @@ import task.Load_Courses_Data;
 import task.Load_Exams_Data;
 import task.TaskLoad_List;
 import utilities.App_Static_Method;
-import utilities.BatteryProgressView;
 import pojo.Cat_Model;
 import utilities.CirclePageIndicator;
 import utilities.Common_Pojo;
@@ -110,10 +110,11 @@ import utilities.RecyclerTouchListener;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_full_session_data;
 import static utilities.App_Static_Method.show_load_progress;
 
 public class DashBoard_Activity extends AppCompatActivity implements View.OnClickListener , Upcoming_List_LoadedListener,
-        Log_Out_Listener, Call_Dilaog_Listener, Profile_Image_Listener {
+        Log_Out_Listener, Call_newDialog_Listener, Profile_Image_Listener, Avail_Course_Listener {
 
     private RecyclerView top_deal_recyclerView,top_univerty_recyclerView,top_college_recyclerView,top_school_recyclerView;
     private CustomGridLayoutManager verticleLayoutManager,verticleLayoutManager1;
@@ -241,24 +242,41 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
                 String str_tkn=sharedPreferences.getString("Login_Token", "na");
+                SharedPreferences sharedPreferences_agent = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                String agent_str_tkn=sharedPreferences_agent.getString("token", "na");
+                String agent_str_type=sharedPreferences_agent.getString("type", "na");
                 /*editor.putString("login_Status", "L_OK");
                 editor.putString("Login_Token", jsonObject.getString("token"));
                 editor.putString("email", jsonObject.getString("email"));*/
                 String str_email=sharedPreferences.getString("email", "na");
                 String str_token=sharedPreferences.getString("Login_Token", "na");
                 String str_type=sharedPreferences.getString("type", "na");
-                Log.d("gfhgfhgfhg",str_email+"  "+str_token);
+                Log.d("gfhgfhgfhg",str_type+"  "+agent_str_type);
 
-                if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  !(str_type.equals("agent"))) {
-                   // Toast.makeText(DashBoard_Activity.this, "You have already Login ff!!! ", Toast.LENGTH_SHORT).show();
-                    show_dialog(" You have Already Login !!!!");
-                }
-                else if (str_tkn.equals("na")) {
+                if((agent_str_type.equals("na") )&& (str_type.equals("na") ) ){
                     startActivity(new Intent(getApplicationContext(), Agent_login_Activity.class));
+                }else {
+                    Log.d("sessiondata",get_full_session_data().toString());
+
+                    if(!agent_str_type.equals("na"))
+                    {
+                        startActivity(new Intent(getApplicationContext(), Target_Circle_Activity.class));
+                    }else if(!str_type.equals("na"))
+                    {
+                        startActivity(new Intent(getApplicationContext(), Agent_login_Activity.class));
+                    }
+
+                   /* if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  !(str_type.equals("agent"))) {
+                        // Toast.makeText(DashBoard_Activity.this, "You have already Login ff!!! ", Toast.LENGTH_SHORT).show();
+                        show_dialog(" You have Already Login !!!!");
+                    } else if (str_tkn.equals("na")) {
+                        startActivity(new Intent(getApplicationContext(), Agent_login_Activity.class));
+                    }
+                    else if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  (str_type.equals("agent")))  {
+                        startActivity(new Intent(getApplicationContext(), Agent_Profile_Activity.class));
+                    }*/
                 }
-                else if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  (str_type.equals("agent")))  {
-                    startActivity(new Intent(getApplicationContext(), Agent_Profile_Activity.class));
-                }
+
             }
         });
 
@@ -300,8 +318,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        int[] Img_Array=new int[]{R.drawable.ic_school,R.drawable.ic_college_new,R.drawable.ic_univercity,
-                R.drawable.ic_iti,R.drawable.ic_coacching,R.drawable.ic_training};
+        int[] Img_Array=new int[]{R.drawable.school,R.drawable.college,R.drawable.iuniversity,
+                R.drawable.tr,R.drawable.coach,R.drawable.tra};
 
         String[] Tv_Array=new String[]{"School","College","University","ITI College","Coaching Center","Training Center"};
 
@@ -1110,6 +1128,14 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
      //   }else {
       //      id_image_profile.setImageResource(R.drawable.ic_profile);
      //   }
+    }
+
+    @Override
+    public void onAvailCourse(String str_id, String c_id, String course_id, String branch_id, String c_branch) {
+
+        // availcourses
+
+
     }
 
     public class CustomGridLayoutManager extends GridLayoutManager {
