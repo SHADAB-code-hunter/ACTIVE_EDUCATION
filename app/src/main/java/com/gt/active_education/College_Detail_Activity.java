@@ -38,6 +38,7 @@ import java.util.Map;
 import adapter.Adapter_Facility;
 import adapter.Banner_Adapter;
 import adapter.Common_pojo_adapter;
+import adapter.Gallery_Dapter_College_Detail;
 import adapter.Gallery_demo_adapter;
 import callbacks.CLG_DESC_Listener;
 import callbacks.Choose_newCourses_Listener;
@@ -53,6 +54,7 @@ import utilities.App_Static_Method;
 import utilities.Common_Pojo;
 import utilities.UrlEndpoints;
 
+import static utilities.UrlEndpoints.IMAGE_PATH_ADAPTER;
 import static utilities.UrlEndpoints.URL_GET_FULL_DETAIL;
 
 /**
@@ -81,6 +83,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
     private GridLayoutManager verticleLayoutManager;
     private ViewPager id_collge_banner;
     private LinearLayout id_download_broucher;
+    private String[] str_cat_arr;
 
 
     @Override
@@ -92,7 +95,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         id_name_tv=(TextView)findViewById(R.id.id_name_tv);
         id_add_tv=(TextView)findViewById(R.id.id_add_tv);
         id_college_desc=(TextView)findViewById(R.id.id_college_desc);
-     //   id_recycler_view=(RecyclerView)findViewById(R.id.id_recycler_view);
+     // id_recycler_view=(RecyclerView)findViewById(R.id.id_recycler_view);
         id_gallery_recycler_view=(RecyclerView)findViewById(R.id.id_gallery_recycler_view);
         id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(this);
         id_branch_name=(TextView)findViewById(R.id.id_branch_name);
@@ -160,11 +163,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         int[] Img_Bnr=new int[]{R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,
                 R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner};
 
-        Gallery_demo_adapter galleryDemoAdapter=new Gallery_demo_adapter(College_Detail_Activity.this,Img_Bnr);
-        GridLayoutManager horizontal_LayoutManager = new GridLayoutManager(getApplicationContext(),1, LinearLayoutManager.HORIZONTAL, false);
-        id_gallery_recycler_view.setLayoutManager(horizontal_LayoutManager);
-        id_gallery_recycler_view.setItemAnimator(new DefaultItemAnimator());
-        id_gallery_recycler_view.setAdapter(galleryDemoAdapter);
+
 
         new Async_Respoce(College_Detail_Activity.this,URL_GET_FULL_DETAIL, map).execute();
 
@@ -299,19 +298,72 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
                    }
             Adapter_Facility adapter_city=new Adapter_Facility(College_Detail_Activity.this,facility_list);
             id_rv_facility.setAdapter(adapter_city);
+            /*  ==================== facility ==========================       */
 
-            int[] Img_Bnr=new int[]{R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,
-                    R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner};
-            JSONArray jsongallery=jsonObject.getJSONArray("gallery");
-            JSONObject jsonobject= jsongallery.getJSONObject(0);
-            Log.d("hcjcvvhdcj",""+jsongallery.toString());
 
-            /*String[] Img_Bnr=null;
-            for(int i=0; i<jsongallery.length();i++)
+            JSONArray json_banner=jsonObject.getJSONArray("banner");
+
+            Log.d("hcjcvvhdcj",""+json_banner.toString());
+            ArrayList<String> al_str=new ArrayList<>();
+            for(int i=0; i<json_banner.length();i++)
             {
-                Img_Bnr=jsongallery.get(i);
-            }*/
-            id_collge_banner.setAdapter(new Banner_Adapter(getApplicationContext(),Img_Bnr));
+                JSONObject jsonobject= json_banner.getJSONObject(i);
+                String Img_Bnr_ = jsonobject.getString("name");
+
+                al_str.add(Img_Bnr_);
+            }
+
+
+            String halg_img_path=IMAGE_PATH_ADAPTER;
+           // Log.d("kfjk",map.get("id"));
+            str_cat_arr= getResources().getStringArray(R.array.category_image);
+            if(str_type!=null) {
+               // str_type=str_url.split("=")[1];
+
+                switch (str_type) {
+                    case "1":
+                        halg_img_path = halg_img_path + str_cat_arr[0];
+                        break;
+
+                    case "2":
+                        halg_img_path = halg_img_path + str_cat_arr[1];
+
+                        break;
+                    case "3":
+                        halg_img_path = halg_img_path + str_cat_arr[2];
+
+                        break;
+                    case "4":
+                        halg_img_path = halg_img_path + str_cat_arr[3];
+                        break;
+                    case "5":
+                        halg_img_path = halg_img_path + str_cat_arr[4];
+                        break;
+                    case "6":
+                        halg_img_path = halg_img_path + str_cat_arr[5];
+                        break;
+                }
+            }
+            id_collge_banner.setAdapter(new Banner_Adapter(getApplicationContext(),al_str,halg_img_path));
+
+            /* ==================      banner  =====================*/
+            JSONArray json_gallery=jsonObject.getJSONArray("gallery");
+            //  JSONArray jsonArray=jsonObject1.getJSONArray("facility");
+            Log.d("hcjhdcj",""+json_gallery.toString());
+            ArrayList<Common_Pojo> gallery_lis=new ArrayList<>();
+            for(int i=0; i<json_gallery.length();i++)
+            {
+                Common_Pojo common_pojo=new Common_Pojo();
+                JSONObject jsonObject2=json_gallery.getJSONObject(i);
+                common_pojo.setName(jsonObject2.getString("name"));
+                gallery_lis.add(common_pojo);
+                Log.d("galleryimg",""+json_gallery.length()+"  "+jsonObject2.getString("name"));
+            }
+          //  Gallery_Dapter_College_Detail adapter_gallery=new Gallery_Dapter_College_Detail(College_Detail_Activity.this,jsonObject.getJSONArray("gallery"),halg_img_path);
+            Gallery_Dapter_College_Detail adapter_gallery=new Gallery_Dapter_College_Detail(College_Detail_Activity.this,gallery_lis,halg_img_path);
+            GridLayoutManager horizontal_LayoutManager = new GridLayoutManager(getApplicationContext(),1, LinearLayoutManager.HORIZONTAL, false);
+            id_gallery_recycler_view.setLayoutManager(horizontal_LayoutManager);
+            id_gallery_recycler_view.setAdapter(adapter_gallery);
 
         } catch (JSONException e) {
                 Log.d("nmchbbh","hhfhfh");

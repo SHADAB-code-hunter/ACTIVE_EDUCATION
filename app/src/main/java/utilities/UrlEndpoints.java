@@ -44,6 +44,7 @@ public class UrlEndpoints {
     public static final String PARTNER_DETAIL="http://activeeduindia.com/admin/webservices/setCollegeDetails.php?";
     public static final String UPLOAD_FILE="http://activeeduindia.com/admin/webservices/uploadBrochure.php?";//brochurename=";//aa.pdf&brochure=";
     public static final String SEAT_SUBMIT="http://activeeduindia.com/admin/webservices/getPartnerSeatSubmission.php?";
+    public static final String IMAGE_PATH_ADAPTER="http://activeeduindia.com/admin/media/";
     public static final String SEAT_PROVIDER_SIGNIN="http://activeeduindia.com/admin/webservices/seatProviderSignin.php?";//email=sb@ss.com&pwd=123456&type=1";
     public static final String SEAT_PROVIDER_TARGET="http://activeeduindia.com/admin/webservices/getDashboardTarget.php?";//email=sb@ss.com&token=S6dqKXf8Zt&type=1&id=dps
     public static final String SEAT_PROVIDER_PRFL_IMG="http://activeeduindia.com/admin/media/profile/";//email=sb@ss.com&token=S6dqKXf8Zt&type=1&id=dps

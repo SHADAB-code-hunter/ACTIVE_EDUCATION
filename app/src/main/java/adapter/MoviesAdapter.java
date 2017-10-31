@@ -34,6 +34,7 @@ import pojo.Cat_Model;
 import utilities.UrlEndpoints;
 
 import static utilities.UrlEndpoints.BROUCHURE_DOWNLOAD;
+import static utilities.UrlEndpoints.IMAGE_PATH_ADAPTER;
 import static utilities.UrlEndpoints.URL_NO_IMAGE_APTH;
 
 /**
@@ -168,7 +169,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }
 
      //   ==============================================================
-        String halg_img_path="http://activeeduindia.com/admin/media/";
+        String halg_img_path=IMAGE_PATH_ADAPTER;
         str_cat_arr= _activity.getResources().getStringArray(R.array.category_image);
         if(str_url!=null) {
             str_type=str_url.split("=")[1];
