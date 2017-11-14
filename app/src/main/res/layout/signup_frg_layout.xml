@@ -35,6 +35,10 @@
             android:paddingBottom="30dp"
             android:orientation="vertical">
             <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <FrameLayout
+                android:id="@+id/id_frm_prfl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal">
@@ -68,7 +72,22 @@
                         android:src="@drawable/ic_cam" />
                 </FrameLayout>
             </FrameLayout>
-
+            <FrameLayout
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+              <TextView
+                  android:id="@+id/id_skip_tv"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text=" Skip"
+                  android:drawableRight="@drawable/ic_arrow_point_to_right"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  android:textColor="#6949FF" />
+            </FrameLayout>
+            </FrameLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +144,8 @@
                             android:hint="User Name"
                             android:maxLines="1"
                             android:lines="1"
-                            android:singleLine="true" />
+                            android:singleLine="true"
+                            />
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
@@ -311,6 +331,17 @@
                     android:textColor="@color/white" />
                 <Button
                     android:id="@+id/btn_submit_cancle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:visibility="gone"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/login_btn_shape"
+                    android:text="Cancle"
+                    android:layout_marginTop="20dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+                <Button
+                    android:id="@+id/btn_submit_bt"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:visibility="gone"

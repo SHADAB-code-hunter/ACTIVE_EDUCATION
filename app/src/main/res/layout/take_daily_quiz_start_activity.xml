@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/idtake_quiz_linear">
+<!--
+    <android.support.v7.widget.Toolbar
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/id_back_btn_quiz"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:layout_margin="14dp"
+            android:background="@drawable/ic_back_drawer"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Daily Quiz"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:id="@+id/toolbar_title" />
+    </android.support.v7.widget.Toolbar>
+-->
+    <android.support.v7.widget.Toolbar
+        android:layout_height="60dp"
+        android:layout_width="match_parent"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/light_layer"
+        android:id="@+id/toolbar_daily_quiz">
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:paddingLeft="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/id_back_btn_quiz"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_previous_btn"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="00:00:00"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp"
+                            android:layout_weight="2.1"
+                            android:textSize="9sp"
+                            android:textColor="@color/white"
+                            android:id="@+id/toolbar_timer" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.2"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:layout_margin="10dp"
+                            android:gravity="center"
+                            android:background="@drawable/ic_calnder"
+                            android:layout_gravity="center_vertical"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:id="@+id/toolbar_title" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1.5"
+                            android:gravity="left|center"
+                            android:text="Daily Quiz"
+                            android:textSize="20sp"
+                            android:layout_gravity="left"
+                            android:layout_marginRight="0dp"
+                            android:textColor="@color/white" />
+
+
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="1.8"
+                            android:layout_margin="9dp"
+                            android:visibility="invisible"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="0dp"
+                            android:id="@+id/toolbar_skip" />
+                    </LinearLayout>
+                </TableRow>
+            </LinearLayout>
+
+        </TableLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:layout_weight="1.7">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
+                    android:textSize="20sp"
+                    android:text="Time Start for activation of quiz"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:paddingTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/id_img_timer"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_weight="1.5"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/grey"
+                    android:src="@drawable/icn_timer"/>
+
+                <TextView
+                    android:id="@+id/btn_hr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAllCaps="false"
+                    android:textSize="46sp"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1"
+                    android:text="00"
+                    android:textColor="@color/grey"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/grey"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="-10dp"
+                    android:layout_gravity="top"
+                    android:textSize="40sp"
+                    android:text=":"/>
+                <TextView
+                    android:id="@+id/btn_min"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAllCaps="false"
+                    android:textSize="46sp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:text="00"
+                    android:textColor="@color/grey"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="12dp"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/grey"
+                    android:gravity="center"
+                    android:layout_marginTop="0dp"
+                    android:textSize="40sp"
+                    android:text=":"/>
+                <TextView
+                    android:id="@+id/btn_sec"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:textAllCaps="false"
+                    android:text="00"
+                    android:textColor="@color/grey"
+                    android:textSize="46sp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        android:layout_weight="1.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#f1f8ff"
+                android:text=" Today Quiz will start at Scheduled TIme Please take Quiz at particular suited time"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <FrameLayout
+            android:id="@+id/id_frm_thank"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/frm_menu_shap">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+           android:text="Thank You !!!"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="vertical"
+            android:layout_weight="1.5">
+        <Button
+            android:id="@+id/take_quiz_btn"
+            android:layout_width="120dp"
+            android:layout_height="35dp"
+            android:textAllCaps="false"
+            android:text="Take Quiz"
+            android:layout_marginBottom="40dp"
+            android:textColor="#e62222"
+            android:background="@drawable/take_btn_shape"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:id="@+id/id_bottom_linear"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center|bottom"
+                android:layout_gravity="center|bottom"
+                android:background="@drawable/light_layer">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/img_call_now"
+                    android:layout_margin="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

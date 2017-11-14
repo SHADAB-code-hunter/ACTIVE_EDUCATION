@@ -21,11 +21,9 @@ public class MaterialRatingDrawable extends LayerDrawable {
 
     public MaterialRatingDrawable(Context context, boolean fillBackgroundStars) {
         super(new Drawable[] {
-                createLayerDrawable(fillBackgroundStars ? R.drawable.mrb_star_icon_black_36dp
-                        : R.drawable.mrb_star_border_icon_black_36dp, fillBackgroundStars ?
-                        R.attr.colorControlHighlight : R.attr.colorControlNormal, context),
-                fillBackgroundStars ? createClippedTransparentLayerDrawable()
-                        : createClippedLayerDrawable(R.drawable.mrb_star_border_icon_black_36dp,
+                createLayerDrawable(fillBackgroundStars ? R.drawable.mrb_star_icon_black_36dp : R.drawable.mrb_star_border_icon_black_36dp,
+                        fillBackgroundStars ? R.attr.colorControlHighlight : R.attr.colorControlNormal, context),
+                fillBackgroundStars ? createClippedTransparentLayerDrawable() : createClippedLayerDrawable(R.drawable.mrb_star_border_icon_black_36dp,
                         R.attr.colorControlActivated, context),
                 createClippedLayerDrawable(R.drawable.mrb_star_icon_black_36dp,
                         R.attr.colorControlActivated, context)
@@ -38,8 +36,7 @@ public class MaterialRatingDrawable extends LayerDrawable {
 
     private static Drawable createLayerDrawable(int tileRes, int tintAttrRes, Context context) {
         int tintColor = ThemeUtils.getColorFromAttrRes(tintAttrRes, context);
-        TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context,
-                tileRes));
+        TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context, tileRes));
         drawable.mutate();
         //noinspection RedundantCast
         ((TintableDrawable) drawable).setTint(tintColor);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="5dip"
+    android:id="@+id/mainView">
+
+
+    <Button
+        android:id="@+id/pick_from_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pick_from_activity" />
+
+    <fragment
+        android:id="@+id/sample_fragment"
+        class="com.gt.active_education.SampleFragment"
+        android:layout_marginTop="100dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

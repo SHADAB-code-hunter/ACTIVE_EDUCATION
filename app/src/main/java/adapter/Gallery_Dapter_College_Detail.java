@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import callbacks.VP_PageChange_Listener;
 import extras.Constants;
@@ -35,17 +36,10 @@ public class Gallery_Dapter_College_Detail extends RecyclerView.Adapter<Gallery_
 
 
     public int i;
-  /*  private Context context;
-    private ArrayList<Gallery_Model> quiz_Ans_List;
-
-    private String str_type;
-    private Gallery_Model answerQuizMdl;
-    private VolleySingleton mVolleySingleton;
-    private ImageLoader mImageLoader;*/
     College_Detail_Activity college_detail_activity;
     JSONArray json_gallery;
     private String halg_img_path;
-    private ArrayList<Common_Pojo> gallery_lis;
+    private List<Common_Pojo> gallery_lis;
 
     public Gallery_Dapter_College_Detail(College_Detail_Activity college_detail_activity, JSONArray json_gallery, String halg_img_path) {
         this.college_detail_activity=college_detail_activity;
@@ -53,7 +47,7 @@ public class Gallery_Dapter_College_Detail extends RecyclerView.Adapter<Gallery_
         this.halg_img_path=halg_img_path;
     }
 
-    public Gallery_Dapter_College_Detail(College_Detail_Activity college_detail_activity, ArrayList<Common_Pojo> gallery_lis, String halg_img_path) {
+    public Gallery_Dapter_College_Detail(College_Detail_Activity college_detail_activity, List<Common_Pojo> gallery_lis, String halg_img_path) {
         this.college_detail_activity=college_detail_activity;
         this.gallery_lis=gallery_lis;
         this.halg_img_path=halg_img_path;
@@ -88,39 +82,13 @@ public class Gallery_Dapter_College_Detail extends RecyclerView.Adapter<Gallery_
     @Override
     public void onBindViewHolder(Gallery_Dapter_College_Detail.MyViewHolder holder, final int position) {
 
-       /* try {
-            Log.d("dkjkdjk",""+json_gallery.toString());
-            String str_img_name= (json_gallery.getJSONObject(position)).getString("name");
-            Log.d("jfkcggtj",halg_img_path+"/picture/"+str_img_name);
-
-        if(str_img_name!=null)
-        {
-            Picasso.with(college_detail_activity)
-                    .load(halg_img_path+"/picture/"+str_img_name)
-                    .placeholder(R.drawable.picture)   // optional
-                    // .error(DRAWABLE RESOURCE)      // optional
-                    // .resize(width, height)                        // optional
-                    // .rotate(degree)                             // optional
-                    .into(holder.id_img_glr);
-        }
-        } catch (JSONException e) {
-           Log.d("jsonexception",e.getMessage());
-        }*/
-        Log.d("jccffkj",""+halg_img_path+"/picture/"+gallery_lis.get(position).getName());
-       /* if(gallery_lis!=null)
-        {
-            Log.d("jfkj",""+gallery_lis);
-            Picasso.with(college_detail_activity)
-                    .load(halg_img_path+"/picture/"+gallery_lis.get(position).getName())
-                    .placeholder(R.drawable.picture)   // optional
-                    // .error(DRAWABLE RESOURCE)      // optional
-                     .resize(120, 120)                        // optional
-                    // .rotate(degree)                             // optional
-                    .into(holder.id_img_glr);
-            //  id_iv_banner.setImageResource(str_url+"/picture/"+Img_Bnr_str.get(position));
-        }*/
         Glide.with(college_detail_activity).load(halg_img_path+"/picture/"+gallery_lis.get(position).getName()).into(holder.id_img_glr);
-
+        holder.id_img_glr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // (vpPageChangeListener).on_opt_next_Ques(quiz_Ans_List,position);
+            }
+        });
 
     }
 

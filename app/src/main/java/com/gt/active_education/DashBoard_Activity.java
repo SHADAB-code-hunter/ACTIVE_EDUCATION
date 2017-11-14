@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -19,6 +20,7 @@ import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -57,6 +59,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.zopim.android.sdk.api.ZopimChat;
@@ -64,15 +72,20 @@ import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
+import active.Gift_Winner__Activity;
+import active.Quiz_SubList_Activity;
+import active.Take_Daily_Quiz_Activity;
 import adapter.MoviesAdapter;
 import Zend_Chat.UserProfile;
 import Zend_Chat.UserProfileStorage;
@@ -87,22 +100,32 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import callbacks.Avail_Course_Listener;
 import callbacks.Call_newDialog_Listener;
+import callbacks.JOBJ_Listener;
 import callbacks.Log_Out_Listener;
 import callbacks.Profile_Image_Listener;
+import callbacks.Spinner_Date_Listener;
 import callbacks.Upcoming_List_LoadedListener;
 import fab_below.FabSpeedDial;
+import fragment.Agent_Profile_Detail_Fragment;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import pojo.Drawer_Pojo;
+import pojo.Send_date_Model;
+import pojo.Winner_Model;
+import task.Asynch_Agent_Form_JObject;
+import task.Asynch_Book_Responce;
+import task.Asynch_Responce_OBJ;
 import task.Load_Courses_Data;
 import task.Load_Exams_Data;
 import task.TaskLoad_List;
+import utilities.AnimUtils;
 import utilities.App_Static_Method;
 import pojo.Cat_Model;
 import utilities.CirclePageIndicator;
 import utilities.Common_Pojo;
 import utilities.ConnectionCheck;
-import utilities.CustomDialogClass;
+import utilities.Custom_DialogClass;
+import utilities.DroidDialog;
 import utilities.Filter_Dialog;
 import utilities.MyApplication;
 import utilities.NotifyingScrollView;
@@ -110,11 +133,14 @@ import utilities.RecyclerTouchListener;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
-import static utilities.App_Static_Method.get_full_session_data;
+import static utilities.App_Static_Method.session_type;
 import static utilities.App_Static_Method.show_load_progress;
+import static utilities.UrlEndpoints.GET_OFFER_BANNER;
+import static utilities.UrlEndpoints.GET_PROFILE;
+import static utilities.UrlEndpoints.UPDATE_PROFILE;
 
 public class DashBoard_Activity extends AppCompatActivity implements View.OnClickListener , Upcoming_List_LoadedListener,
-        Log_Out_Listener, Call_newDialog_Listener, Profile_Image_Listener, Avail_Course_Listener {
+        Log_Out_Listener, Call_newDialog_Listener, Profile_Image_Listener, Avail_Course_Listener, Spinner_Date_Listener , JOBJ_Listener {
 
     private RecyclerView top_deal_recyclerView,top_univerty_recyclerView,top_college_recyclerView,top_school_recyclerView;
     private CustomGridLayoutManager verticleLayoutManager,verticleLayoutManager1;
@@ -151,8 +177,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     @BindView(R.id.id_btn_test)Button id_btn_test;
    // @BindView(R.id.id_login_tv)TextView id_login_tv;
    /* @BindView(R.id.top_univerty_recyclerView) RecyclerView top_univerty_recyclerView;
-    @BindView(R.id.top_college_recyclerView) RecyclerView top_college_recyclerView;
-    @BindView(R.id.top_school_recyclerView) RecyclerView top_school_recyclerView;*/
+      @BindView(R.id.top_college_recyclerView) RecyclerView top_college_recyclerView;
+      @BindView(R.id.top_school_recyclerView) RecyclerView top_school_recyclerView;*/
 
     private RecyclerView rclv_menu_dwr;
     private boolean scroll_bln=false;
@@ -163,6 +189,9 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     private Picasso picasso;
     private MoviesAdapter mAdapter;
     private EditText  id_edt_search;
+    private FrameLayout id_Learn_frm,id_earn_frm,id_fun_frm;
+    private TextView id_name_mobile,id_location_add;
+    private LinearLayout id_login_linear;
 
 
     @Override
@@ -179,12 +208,21 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         //  id_tv_close=(ImageView) findViewById(R.id.id_tv_close);id_tv_close.setOnClickListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         id_rght_serach_menu=(TextView)findViewById(R.id.id_rght_serach_menu); id_rght_serach_menu.setOnClickListener(this);
+        id_name_mobile=(TextView)findViewById(R.id.id_name_mobile);
+        id_location_add=(TextView)findViewById(R.id.id_location_add);
         circleIndicator = (CirclePageIndicator)findViewById(R.id.titles);
         rclv_menu_dwr=(RecyclerView)findViewById(R.id.rclv_menu_dwr);
         id_image_profile=(ImageView)findViewById(R.id.id_image_profile);
         id_searchlayout=(FrameLayout)findViewById(R.id.id_searchlayout);id_searchlayout.setOnClickListener(this);
         id_edt_search=(EditText)findViewById(R.id.id_edt_search);
         mRevealView = (LinearLayout) findViewById(R.id.reveal_items);
+        id_login_linear = (LinearLayout) findViewById(R.id.id_login_linear);id_login_linear.setOnClickListener(this);
+
+        id_Learn_frm=(FrameLayout)findViewById(R.id.id_Learn_frm);id_Learn_frm.setOnClickListener(this);
+        id_earn_frm=(FrameLayout)findViewById(R.id.id_earn_frm);id_earn_frm.setOnClickListener(this);
+        id_fun_frm=(FrameLayout)findViewById(R.id.id_fun_frm);id_fun_frm.setOnClickListener(this);
+
+        final Handler handler = new Handler();
         picasso = Picasso.with(this);
         Drawer_Pojo drawer_pojo=new Drawer_Pojo();
         List<Drawer_Pojo> list_View=new ArrayList<>();list_View.add(drawer_pojo);list_View.add(drawer_pojo);list_View.add(drawer_pojo);
@@ -240,14 +278,14 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.id_rght_agent).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+               /* SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
                 String str_tkn=sharedPreferences.getString("Login_Token", "na");
                 SharedPreferences sharedPreferences_agent = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
                 String agent_str_tkn=sharedPreferences_agent.getString("token", "na");
                 String agent_str_type=sharedPreferences_agent.getString("type", "na");
-                /*editor.putString("login_Status", "L_OK");
+                *//*editor.putString("login_Status", "L_OK");
                 editor.putString("Login_Token", jsonObject.getString("token"));
-                editor.putString("email", jsonObject.getString("email"));*/
+                editor.putString("email", jsonObject.getString("email"));*//*
                 String str_email=sharedPreferences.getString("email", "na");
                 String str_token=sharedPreferences.getString("Login_Token", "na");
                 String str_type=sharedPreferences.getString("type", "na");
@@ -266,7 +304,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                         startActivity(new Intent(getApplicationContext(), Agent_login_Activity.class));
                     }
 
-                   /* if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  !(str_type.equals("agent"))) {
+                   *//* if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  !(str_type.equals("agent"))) {
                         // Toast.makeText(DashBoard_Activity.this, "You have already Login ff!!! ", Toast.LENGTH_SHORT).show();
                         show_dialog(" You have Already Login !!!!");
                     } else if (str_tkn.equals("na")) {
@@ -274,7 +312,26 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     }
                     else if(!str_tkn.equals("na")&& !(str_email.equals("na")) &&  (str_type.equals("agent")))  {
                         startActivity(new Intent(getApplicationContext(), Agent_Profile_Activity.class));
-                    }*/
+                    }*//*
+                }*/
+                SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+                switch (shprf_seater.getString("type", "na"))
+                {
+                    case "agent":
+                        startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
+                        //  finish();
+                        break;
+                    case "user":
+                        startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
+                        //  finish();
+                        break;
+                    case "seater":
+                        startActivity(new Intent(DashBoard_Activity.this,Target_Circle_Activity.class));
+                        //  finish();
+                        break;
+                    default:
+                        startActivity(new Intent(DashBoard_Activity.this,Agent_login_Activity.class));
+                        break;
                 }
 
             }
@@ -336,7 +393,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 new RecyclerTouchListener.ClickListener() {
                     @Override
                     public void onClick(View view, int position) {
-                       /* progressDialog = new ProgressDialog(DashBoard_Activity.this);
+                       /*progressDialog = new ProgressDialog(DashBoard_Activity.this);
                         progressDialog.setCancelable(true);
                         progressDialog.show();
                         progressDialog.setMessage(getString(R.string.Loading));*/
@@ -395,36 +452,12 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 }
         ));
 
-        Toast.makeText(this, "tesbbcn", Toast.LENGTH_SHORT).show();
-        int[] Img_Bnr=new int[]{R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,
-                R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner};
-        id_viewpager.setAdapter(new Banner_Adapter(getApplicationContext(),Img_Bnr));
 
-        final int NUM_PAGES=Img_Bnr.length;
-        final float density = getResources().getDisplayMetrics().density;
-        Log.d("dhghdghgfffh",""+Img_Bnr.length);
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == NUM_PAGES) {
-                    currentPage = 0;
-                }
-                id_viewpager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 000, NUM_PAGES*2500);
 
         //setProgressView();
         setNotify_scrollView();
 
-        findViewById(R.id.id_login_btn).setOnClickListener(this);
+      //  findViewById(R.id.id_login_btn).setOnClickListener(this);
 
         final LinearLayout id_linear_find=(LinearLayout)findViewById(R.id.id_linear_find);
         final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
@@ -471,9 +504,9 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
         int[] img_drwr=new int[]{R.drawable.ic_edit_prfl,R.drawable.ic_gallery,R.drawable.ic_gps,R.drawable.ic_share,
                 R.drawable.ic_stars,R.drawable.ic_contactus, R.drawable.ic_info,
-                R.drawable.ic_setting,R.drawable.ic_power_button};
+                R.drawable.ic_setting};
        String[] str_menu_name=new String[]{"My Profile","Gallery","Find Your Need","Share App","Rate This App","Contact Us",
-       "About Us","Setting","Log Out"};
+       "About Us","Setting"};
 
         verticleLayoutManager1=new CustomGridLayoutManager(getApplicationContext(),1);
         verticleLayoutManager1.setScrollEnabled(false);
@@ -509,8 +542,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     }
                 }
         ));
-        circleIndicator.setViewPager(id_viewpager);
-        circleIndicator.setOnPageChangeListener(viewPagerPageChangeListener);
+
 
         scrollview.setOnTouchListener( new View.OnTouchListener( ) {
 
@@ -544,10 +576,58 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         } );
 
        App_Static_Method.set_profile_img(DashBoard_Activity.this);
-        getHashKey();
-         //  id_image_profile.setImageResource();
-        // on create end
+       getHashKey();
+
+        new Asynch_Responce_OBJ(new Asynch_Responce_OBJ.OBJ_LISTENER() {
+            @Override
+            public void obn_obj_find(JSONObject jsonObject) {
+
+                try {
+                    JSONArray jsonArray=jsonObject.getJSONArray("data");
+                    Log.d("knknggknknk", "" + jsonObject);
+                    if (jsonArray.getJSONObject(0).has("image")) {
+                        Picasso.with(DashBoard_Activity.this)
+                                .load(GET_PROFILE + "partner/" + (jsonArray.getJSONObject(0).getString("image")))
+                                //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
+                                // .error(DRAWABLE RESOURCE)      // optional
+                                // .resize(width, height)                        // optional
+                                // .rotate(degree)                             // optional
+                                .into(id_image_profile);
+                        // id_image_profile.setImageResource();
+
+                        id_name_mobile.setText(jsonArray.getJSONObject(0).getString("mobile"));
+                        id_location_add.setText(jsonArray.getJSONObject(0).getString("address"));
+                    }
+                }catch (Exception e)
+                {
+                    Log.d("ecaprui",e.getMessage());
+                }
+
+            }
+        }, UrlEndpoints.GET_PROFILE_DATA,session_type()).execute();
+
+        new Asynch_Book_Responce(DashBoard_Activity.this,GET_OFFER_BANNER,session_type()).execute();
+        set_logindrawer();
+        // oncreate end
     }
+
+    private void set_logindrawer() {
+
+        if(session_type().get("token")==null)
+        {
+            TextView tv_menu_name=(TextView)findViewById(R.id.tv_menu_name);
+            tv_menu_name.setText("Login");
+            ImageView imageView=(ImageView)findViewById(R.id.flt_btn);
+            imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.ic_login));
+        }else {
+            TextView tv_menu_name=(TextView)findViewById(R.id.tv_menu_name);
+            tv_menu_name.setText("Logout");
+            ImageView imageView=(ImageView)findViewById(R.id.flt_btn);
+            imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.logout));
+        }
+    }
+
+
     private void getHashKey() {
         try
         {
@@ -583,7 +663,27 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
 
     }
+    @Override
+    public void onSpinner_Date(String str_choose_daet,View v) {
+        //Log.d("getdata",str_choose_daet);
 
+
+        String str_url=UrlEndpoints.URL_Send_DAte+str_choose_daet;
+        get_intent_data(str_url,"GIFT_VOUVHER");
+
+       /* switch(v.getId())
+        {
+            case R.id.id_tv_gift_voucher:
+                String str_url=UrlEndpoints.URL_Send_DAte+str_choose_daet;
+                get_intent_data(str_url,"GIFT_VOUVHER");
+                break;
+            case R.id.id_tv_winner:
+                String str_winner_url=UrlEndpoints.URL_Winner+str_choose_daet;
+                get_intent_data(str_winner_url,"WINNER");
+                break;
+        }*/
+
+    }
     @Override
     protected void onStop() {
         super.onStop();
@@ -629,12 +729,32 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         switch (postion)
         {
             case 0: // profile
-                if(App_Static_Method.is_login(DashBoard_Activity.this)) {
-                    startActivity(new Intent(getApplicationContext(), User_Profile_Activity.class));
+
+                SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+                switch (shprf_seater.getString("type", "na"))
+                {
+                    case "agent":
+                        startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
+                      //  finish();
+                        break;
+                    case "user":
+                        startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
+                      //  finish();
+                        break;
+                    case "seater":
+                        startActivity(new Intent(DashBoard_Activity.this,Target_Circle_Activity.class));
+                      //  finish();
+                        break;
+                    case "na":
+                        startActivity(new Intent(DashBoard_Activity.this,Agent_login_Activity.class));
+                        break;
+                }
+              /*  if(App_Static_Method.is_any_login(DashBoard_Activity.this).equals("agent")) {
+
                 }else {
                     Toast.makeText(this, "Please Login !!!!!", Toast.LENGTH_SHORT).show();
                 }
-
+*/
                 break;
             case 1:// gallery
                // drawer.closeDrawer(Gravity.LEFT);
@@ -675,8 +795,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
             case 5:// contact us
             //    drawer.closeDrawer(Gravity.LEFT);
-                CustomDialogClass dialogClass=new CustomDialogClass(DashBoard_Activity.this);
-                dialogClass.show();
+               /* CustomDialogClass dialogClass=new CustomDialogClass(DashBoard_Activity.this,);
+                dialogClass.show();*/
 
                 break;
             case 6:// About us
@@ -689,27 +809,10 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 /*CustomDialogClass dialogClass=new CustomDialogClass(DashBoard_Activity.this);
                 dialogClass.show();*/
                 break;
-            case 8:// Login/ logout
+           /* case 8:// Login/ logout
              // drawer.closeDrawer(Gravity.LEFT);
-                progressDialog = new ProgressDialog(this);
-                progressDialog.setCancelable(true);
-                progressDialog.show();
-                progressDialog.setMessage(getString(R.string.LogOut));
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1500);
-
-                            App_Static_Method.logout(DashBoard_Activity.this);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-
-                break;
+               logout_method();
+                break;*/
 
           /*  case R.id.id_linear_call:
 
@@ -725,6 +828,28 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 */
 
         }
+
+    }
+
+    private void logout_method() {
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        progressDialog.setMessage(getString(R.string.LogOut));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+
+                    App_Static_Method.logout(DashBoard_Activity.this);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
     }
 
@@ -799,7 +924,6 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void run() {
 
-
                         Animation animation;
                         animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.up_from_bottom);
 
@@ -813,76 +937,9 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
     }
 
-/*
-    private void setProgressView() {
-
-        final BatteryProgressView  progress= (BatteryProgressView) findViewById(R.id.progress);
-        progress.setProgress(100, circle_progress_color1);
-        handler=new android.os.Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progress.setProgress(100, circle_progress_color1);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress.setProgress(100, circle_progress_color1);
-                    }
-                },500);
-            }
-        },2000);
-
-        ///////////////////////////////
-
-        final BatteryProgressView  progress2= (BatteryProgressView) findViewById(R.id.progress2);
-        progress2.setProgress(100, circle_progress_color1);
-        handler=new android.os.Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progress2.setProgress(100, circle_progress_color1);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress2.setProgress(100, circle_progress_color1);
-                    }
-                },500);
-            }
-        },2000);
-
-        /////////////////////////////////////
-
-        final BatteryProgressView  progress3= (BatteryProgressView) findViewById(R.id.progress3);
-        progress3.setProgress(100, circle_progress_color1);
-        handler=new android.os.Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                progress3.setProgress(100, circle_progress_color1);
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        progress3.setProgress(100, circle_progress_color1);
-                    }
-                },500);
-            }
-        },2000);
-
-
-
-       */
-
-/* CardView id_cancle_frame=(CardView) findViewById(R.id.id_card_view);
-        id_cancle_frame.setClickable(true);*//*
-
-        mRevealView.setVisibility(View.INVISIBLE);
-
-    }
-*/
-
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
@@ -916,7 +973,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.id_login_btn:
+            /*case R.id.id_login_btn:
                 SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
                 String str_email=sharedPreferences.getString("email", "na");
                 String str_token=sharedPreferences.getString("Login_Token", "na");
@@ -927,8 +984,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                  //   Toast.makeText(this, "Login !!!!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),User_Login_Activity.class));
                 }
-
-                break;
+                break;*/
 
             case R.id.id_lnr_need:
                 filterDialog=new Filter_Dialog(DashBoard_Activity.this);
@@ -976,14 +1032,141 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
             case R.id.id_searchlayout:
 
-
                 new TaskLoad_List(DashBoard_Activity.this,UrlEndpoints.SEARCH_API+id_edt_search.getText().toString()).execute();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                 break;
+
+            case R.id.id_Learn_frm:
+
+                if(session_type().get("type").equals("user")) {
+                startActivity(new Intent(getApplicationContext(), Quiz_SubList_Activity.class));
+                }else
+                    {
+                        Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
+                      /*  new DroidDialog.Builder(this)
+                                .icon(R.drawable.ic_null_list)
+                                .title("Please Login as User !!")
+                                .cancelable(true, false)
+                                .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
+                                    @Override
+                                    public void onNegative(Dialog droidDialog) {
+                                        droidDialog.dismiss();
+                                        // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
+                                    @Override
+                                    public void onNeutral(Dialog droidDialog) {
+                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
+                                        startActivity(intent);
+                                        droidDialog.dismiss();
+                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
+                                    }
+                                })*//*
+                                .typeface("regular.ttf")
+                                .animation(AnimUtils.AnimZoomInOut)
+                                *//*.color(R.color.colorAccent, R.color.colorPrimaryDark),
+                                        ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                                .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))*//*
+                                .show();*/
+                    }
+                break;
+            case R.id.id_earn_frm:
+
+                if(session_type().get("type").equals("user")) {
+                    Custom_DialogClass cdd = new Custom_DialogClass(DashBoard_Activity.this, v);
+                    cdd.show();
+                }else
+                {
+                    Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
+                  /*  new DroidDialog.Builder(this)
+                            .icon(R.drawable.ic_null_list)
+                            .title("Please Login as User !!")
+                            .cancelable(true, false)
+                            .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
+                                @Override
+                                public void onNegative(Dialog droidDialog) {
+                                    droidDialog.dismiss();
+                                    // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
+                                    @Override
+                                    public void onNeutral(Dialog droidDialog) {
+                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
+                                        startActivity(intent);
+                                        droidDialog.dismiss();
+                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
+                                    }
+                                })*//*
+                            .typeface("regular.ttf")
+                            .animation(AnimUtils.AnimZoomInOut)
+                            .color(ContextCompat.getColor(this, R.color.colorAccent), ContextCompat.getColor(this, R.color.colorPrimaryDark),
+                                    ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                            .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                            .show();*/
+                }
+                break;
+            case R.id.id_fun_frm:
+
+                if(session_type().get("type").equals("user")) {
+                    startActivity(new Intent(getApplicationContext(), Take_Daily_Quiz_Activity.class));
+                }else
+                {
+                    Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
+                  /*  new DroidDialog.Builder(this)
+                            .icon(R.drawable.ic_null_list)
+                            .title("Please Login as User !!")
+                            .cancelable(true, false)
+                            .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
+                                @Override
+                                public void onNegative(Dialog droidDialog) {
+                                    droidDialog.dismiss();
+                                    // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
+                                }
+                            })
+                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
+                                    @Override
+                                    public void onNeutral(Dialog droidDialog) {
+                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
+                                        startActivity(intent);
+                                        droidDialog.dismiss();
+                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
+                                    }
+                                })*//*
+                            .typeface("regular.ttf")
+                            .animation(AnimUtils.AnimZoomInOut)
+                            .color(ContextCompat.getColor(this, R.color.colorAccent), ContextCompat.getColor(this, R.color.colorPrimaryDark),
+                                    ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                            .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))
+                            .show();*/
+                }
+                break;
+            case R.id.id_login_linear:
+                set_login_switch();
+                break;
         }
     }
-// conticnue  http://activeeduindia.com/admin/webservices/getMainList.php?type=2&state=1&city=1&branch=1&course=1&mode=1
+
+    private void set_login_switch() {
+
+        if(session_type().get("token")!=null)
+        {
+            logout_method();
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        }else {
+
+           startActivity(new Intent(getBaseContext(),Agent_login_Activity.class));
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
+        }
+    }
+
+    // conticnue  http://activeeduindia.com/admin/webservices/getMainList.php?type=2&state=1&city=1&branch=1&course=1&mode=1
     @Override
     protected void onPause() {
         super.onPause();
@@ -1132,11 +1315,67 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onAvailCourse(String str_id, String c_id, String course_id, String branch_id, String c_branch) {
-
         // availcourses
+    }
 
+    @Override
+    public void onLJsonLoaded(JSONObject jsonObject) {
 
     }
+
+    @Override
+    public void onLJsonLoaded_new(JSONObject jsonObject) {
+            // continue
+        Log.d("jjkjk",""+jsonObject);
+
+        try {
+            JSONArray jsonArray=jsonObject.getJSONArray("data");
+            id_viewpager.setAdapter(new Banner_Adapter(getApplicationContext(),jsonArray));
+
+     /*   final int NUM_PAGES=jsonArray.length();
+        final float density = getResources().getDisplayMetrics().density;
+        Log.d("dhghdghgfffh",""+jsonArray.length());
+        // Auto start of viewpager
+
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                id_viewpager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 000, NUM_PAGES*2500);*/
+
+     /*   circleIndicator.setViewPager(id_viewpager);
+        circleIndicator.setOnPageChangeListener(viewPagerPageChangeListener);*/
+
+     //Log.d("knknknknk",GET_PROFILE+"/user/"+(jsonArray.getJSONObject(0).getString("image")));
+     Log.d("knknknknk",""+jsonArray.getJSONObject(0));
+        if(jsonArray.getJSONObject(0).has("image"))
+        {
+            Picasso.with(DashBoard_Activity.this)
+                    .load(GET_PROFILE+"partner/"+(jsonArray.getJSONObject(0).getString("image")))
+                    //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
+                    // .error(DRAWABLE RESOURCE)      // optional
+                    // .resize(width, height)                        // optional
+                    // .rotate(degree)                             // optional
+                    .into(id_image_profile);
+           // id_image_profile.setImageResource();
+        }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public class CustomGridLayoutManager extends GridLayoutManager {
         private boolean isScrollEnabled = false;
@@ -1176,7 +1415,6 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 mRevealView.setVisibility(View.VISIBLE);
                 mAnimator.start();
                 hidden = false;
-
             }
         }
         else {
@@ -1262,17 +1500,48 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     }
     @Override
     public void on_logout(boolean bl) {
+
+        Log.d("blelogin",""+bl);
         if(bl)
         {
+            SharedPreferences sharedPreferences;
+            SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+            switch (shprf_.getString("type", "na"))
+            {
+                case "agent":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                    SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                    editor1.clear().commit();
+                    shprf_.edit().clear().commit();
+                    break;
+                case "user":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                    SharedPreferences.Editor editor2 = sharedPreferences.edit();
+                    editor2.clear().commit();
+                    shprf_.edit().clear().commit();
+                    break;
+                case "seater":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+                    SharedPreferences.Editor editor3 = sharedPreferences.edit();
+                    editor3.clear().commit();
+                    shprf_.edit().clear().commit();
+                    break;
+
+            }
+
             Log.d("ssssssww","dffffff"+bl);
             id_image_profile.setImageResource(R.drawable.ic_profile);
             if(progressDialog!=null)
                 progressDialog.cancel();
+
+            set_logindrawer();
         }else if(!bl){
 
             if(progressDialog!=null)
             progressDialog.cancel();
             Log.d("notlogout","dffffff"+bl);
+
+            set_logindrawer();
 
         }
     }
@@ -1287,5 +1556,101 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
         builder.create().show();
     }
+    private void get_intent_data(String str_url, final String str_dialog_status) {
+        //Log.d("vvbhv",str_url);
+        final JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,str_url,new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject responseObj) {
+                //Log.d("hjrtibbvcc", responseObj.toString()+" "+str_dialog_status);
+                try {
+                    if(responseObj.has("msg"))
+                    {
+                      /*  mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
+                        mPlay.start();
+                        ConnectionCheck.list_not_get(New_Dashboard_Activity.this," Gift Voucher List Not Get");*/
+                    }
+                    else if(str_dialog_status.equals("GIFT_VOUVHER"))
+                    {
 
+                        ArrayList<Send_date_Model> arrayList = new ArrayList<>();
+                        JSONArray array = responseObj.getJSONArray("data");
+                        for (int i = 0; i < array.length(); i++) {
+                            //Log.d("bcjkdcb","cm,,");
+                            Send_date_Model sendDateModel = new Send_date_Model();
+                            JSONObject json = array.getJSONObject(i);
+                            sendDateModel.setId(json.getString("id"));
+                            sendDateModel.setName(json.getString("name"));
+                            sendDateModel.setImage(json.getString("image"));
+                            sendDateModel.setRank(json.getString("rank"));
+                            sendDateModel.setRdate(json.getString("rdate"));
+                            sendDateModel.setAdded_date(json.getString("added_date"));
+                            sendDateModel.setIs_active(json.getString("is_active"));
+                            arrayList.add(sendDateModel);
+                        }
+                        //Log.d("lidtsta", String.valueOf(arrayList));
+                        if (arrayList.size() != 0) {
+                            //Log.d("hjfhlis", "" + arrayList.size());
+                            Intent i = new Intent(getApplicationContext(), Gift_Winner__Activity.class);
+                            i.putParcelableArrayListExtra("list", arrayList);
+                            i.putExtra("str_dialog_status", str_dialog_status);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                        }
+                    }
+                    //  finish();
+
+                    else if(str_dialog_status.equals("WINNER"))
+                    {
+                        //Log.d("hdgch", "dbcdc");
+                        //Log.d("ojbject", String.valueOf(responseObj));
+                        ArrayList<Winner_Model> arrayList = new ArrayList<>();
+                        // arrayList=null;
+                        if(responseObj.has("data")) {
+                            JSONArray array = responseObj.getJSONArray("data");
+                            for (int i = 0; i < array.length(); i++) {
+                                Winner_Model sendDateModel = new Winner_Model();
+                                JSONObject json = array.getJSONObject(i);
+                                //sendDateModel.setUid(json.getString("id"));
+                                sendDateModel.setUname(json.getString("uname"));
+                                sendDateModel.setTotal_marks(json.getString("total_marks"));
+                                sendDateModel.setUser_marks(json.getString("user_marks"));
+                                sendDateModel.setPer(json.getString("per"));
+                                // sendDateModel.setTotal_attempted(json.getString("total_attempted"));
+                                sendDateModel.setImage(json.getString("image"));
+                                arrayList.add(sendDateModel);
+                            }
+                            //  //Log.d("lidtsta", String.valueOf(arrayList));
+                            if (arrayList.size() != 0) {
+                                //Log.d("winbnblidst", "" + arrayList);
+                                Intent i = new Intent(getApplicationContext(), Gift_Winner__Activity.class);
+                                i.putParcelableArrayListExtra("list", arrayList);
+                                i.putExtra("str_dialog_status", str_dialog_status);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                            }
+                        }else if(responseObj.has("msg"))
+                        {
+                          /*  mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
+                            mPlay.start();
+                            ConnectionCheck.list_not_get(New_Dashboard_Activity.this,"Winner List Not Get");*/
+                        }
+
+                        //  finish();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley_error_otp_verify", "Error: " + error.getMessage());
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(req);
+
+    }
 }

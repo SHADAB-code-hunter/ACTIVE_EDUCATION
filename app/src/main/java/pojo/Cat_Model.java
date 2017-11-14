@@ -32,6 +32,16 @@ public class Cat_Model {
     public String branch_id;// common
     public String c_course;// common
     public String c_branch;// common
+    public String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String discount_fee;// common
 
     public String getDiscount_fee() {

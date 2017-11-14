@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="0dp"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:layout_weight="4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:clickable="true"
+                    android:gravity="bottom|center"
+                    android:layout_gravity="center">
+
+                    <FrameLayout
+                        android:id="@+id/quiz_preveious_action_button"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:paddingBottom="10dp"
+                        android:background="@drawable/circle_oval"
+                        android:clickable="true"
+                        android:layout_gravity="center|right"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true">
+
+                        <TextView
+                            android:id="@+id/id_ques_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|end"
+                            android:layout_marginRight="12dp"
+                            android:layout_marginBottom="2dp"
+                            android:visibility="gone"
+                            android:text="1"
+                            android:textSize="12sp"
+                            android:textColor="#ca231a"/>
+
+                        <TextView
+                            android:id="@+id/question_timer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone" />
+
+
+                    </FrameLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/id_daily_question"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/color_golden"
+                    android:text="Who Was the First Prime Minister Of India ?"
+                    android:gravity="bottom|center"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:background="@color/transparent"
+            android:padding="10dp"
+            android:layout_weight="1.5">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_gravity="center"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:orientation="vertical">
+
+                    <utilities.SingleSelectToggleGroup
+                        android:id="@+id/group_choices"
+                        android:layout_gravity="bottom"
+                        android:padding="0dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <utilities.CircularToggle
+                            android:id="@+id/choice_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/light_circle_oval"
+                            android:layout_margin="12dp"
+                            android:text="A"
+                            android:textColor="@color/white"/>
+
+                        <utilities.CircularToggle
+                            android:id="@+id/choice_b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/light_circle_oval"
+                            android:layout_margin="12dp"
+                            android:text="B"
+                            android:textColor="@color/white"/>
+
+
+                        <utilities.CircularToggle
+                            android:id="@+id/choice_c"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/light_circle_oval"
+                            android:layout_margin="12dp"
+                            android:text="C"
+                            android:textColor="@color/white"/>
+
+                        <utilities.CircularToggle
+                            android:id="@+id/choice_d"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/light_circle_oval"
+                            android:layout_margin="12dp"
+                            android:text="D"
+                            android:textColor="@color/white"/>
+
+                    </utilities.SingleSelectToggleGroup>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/opt_a"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:text="Option A"/>
+                <TextView
+                    android:id="@+id/opt_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginLeft="10dp"
+                    android:text="Option A"/>
+                <TextView
+                    android:id="@+id/opt_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginLeft="10dp"
+                    android:text="Option A"/>
+                <TextView
+                    android:id="@+id/opt_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:text="Option A"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/id_linear_number"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/light_layer"
+        android:layout_gravity="right"
+        android:visibility="gone"
+        android:gravity="right"
+        android:padding="0dp"
+        android:layout_weight="6">
+
+        <LinearLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginRight="1dp"
+            android:background="#FFF212"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/id_tv_q_no"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textColor="@color/black"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -3,16 +3,18 @@ package com.gt.active_education;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import callbacks.SignUp_Pager_Swape_Listener;
 
 /**
  * Created by GT on 7/7/2017.
  */
 
-public class Num_Verify_Activity extends AppCompatActivity implements View.OnClickListener {
+public class Num_Verify_Activity extends AppCompatActivity implements View.OnClickListener, SignUp_Pager_Swape_Listener {
     private Button  verify_btn;
 
     @Override
@@ -36,5 +38,10 @@ public class Num_Verify_Activity extends AppCompatActivity implements View.OnCli
                 startActivity(new Intent(getApplicationContext(),OTP_Verification_Activity.class));
                 break;
         }
+    }
+
+    @Override
+    public void onPager_swap_method(String login_page) {
+        Log.d("onPage_swap_method","onPage_swap_method");
     }
 }

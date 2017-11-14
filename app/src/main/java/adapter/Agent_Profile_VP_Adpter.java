@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import fragment.Agent_Account_Frg;
 import fragment.Agent_Best_Deal_Fragment;
+import fragment.Agent_Book_FRG;
 import fragment.Agent_Profile_Detail_Fragment;
 import fragment.Agent_Progress_Fragment;
 import fragment.Agent_Target_Frg;
@@ -36,7 +37,7 @@ public class Agent_Profile_VP_Adpter extends FragmentPagerAdapter {
                 break;
             case 1:
 
-                fragment =new Partner_Seat_Submission();
+                fragment =new Agent_Book_FRG();
                 break;
             case 2:
 

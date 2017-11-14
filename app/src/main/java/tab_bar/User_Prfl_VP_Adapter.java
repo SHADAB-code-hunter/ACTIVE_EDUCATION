@@ -20,14 +20,14 @@ public class User_Prfl_VP_Adapter extends AwesomeTabBarAdapter
     ArrayList<String> titles=new ArrayList<>();
     int[] colors={R.color.transparent,R.color.transparent};
     int[] textColors={R.color.theme1};
-    int[] icons={R.drawable.ic_edt_prfl,R.drawable.ic_my_booking,R.drawable.ic_suitcase};
+    int[] icons={R.drawable.ic_edt_prfl,R.drawable.ic_my_booking};
 
     public User_Prfl_VP_Adapter(FragmentManager fragmentManager)
     {
         super(fragmentManager);
         titles.add("Edit Profile");
         titles.add("My Booking");
-        titles.add("Business Account");
+        //titles.add("Business Account");
     }
 
     @Override
@@ -51,11 +51,11 @@ public class User_Prfl_VP_Adapter extends AwesomeTabBarAdapter
                 bundle.putString("url","my_test_url");
                 fragment.setArguments(bundle);
                 return  fragment;
-            case 2:
+           /* case 2:
                 fragment= new My_Booking_Fragment();
-               /* bundle.putString("url","my_test_url222");
-                fragment.setArguments(bundle);*/
-                return  fragment;
+               *//* bundle.putString("url","my_test_url222");
+                fragment.setArguments(bundle);*//*
+                return  fragment;*/
         }
         return null;
     }

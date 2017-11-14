@@ -1,5 +1,5 @@
 
-package utilities;
+package callbacks;
 
 import android.support.v4.view.ViewPager;
 

@@ -54,8 +54,17 @@ public class Simple_Adapter extends RecyclerView.Adapter<Simple_Adapter.MyViewHo
     @Override
     public void onBindViewHolder(final MyViewHolder viewHolder, final int position ) {
 
-        Log.d("ncmn"," "+common_pojos.get(position).getName());
-        viewHolder.country_name.setText(common_pojos.get(position).getName());
+        if(common_pojos!=null) {
+            Log.d("common_pojos", " " + common_pojos.get(position).getName());
+            viewHolder.country_name.setText(common_pojos.get(position).getName());
+            viewHolder.id_frst_letter.setText(String.valueOf((common_pojos.get(position).toString()).charAt(0)));
+        }
+        if(list_item!=null)
+        {
+            Log.d("list_item", " " + list_item.get(position));
+            viewHolder.country_name.setText(list_item.get(position));
+            viewHolder.id_frst_letter.setText(String.valueOf((list_item.get(position).toString()).charAt(0)));
+        }
        /* viewHolder.country_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,12 +74,16 @@ public class Simple_Adapter extends RecyclerView.Adapter<Simple_Adapter.MyViewHo
             }
         });*/
 
-//        viewHolder.id_frst_letter.setText(String.valueOf((list_item.get(position).toString()).charAt(0)));
+//
         viewHolder.id_rlative.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                listener.on_id_listener(common_pojos.get(position).getId(),common_pojos.get(position).getName());
+                if(common_pojos!=null) {
+                    listener.on_id_listener(common_pojos.get(position).getId(), common_pojos.get(position).getName());
+                }else {
+                    Log.d("kjkjkj",""+list_item.get(position).toString()+" "+arrayList_id.get(position));
+                    listener.on_id_listener(list_item.get(position).toString(), arrayList_id.get(position));
+                }
             }
         });
       //  viewHolder.id_frame_Layout.setBackgroundColor(App_Raw_Data.getMatColor(position,"mdcolor_A100"));

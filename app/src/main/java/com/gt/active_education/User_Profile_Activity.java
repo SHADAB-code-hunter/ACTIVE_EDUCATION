@@ -62,7 +62,7 @@ public class User_Profile_Activity extends AppCompatActivity implements View.OnC
                         // .badgeTitle("777")
                         .build()
         );
-        models.add(
+       /* models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_bus_acc),
                         Color.parseColor(colors[0]))
@@ -70,7 +70,7 @@ public class User_Profile_Activity extends AppCompatActivity implements View.OnC
                         .title("Business Account")
                         // .badgeTitle("NTB")
                         .build()
-        );
+        );*/
 
 
         viewpager.setAdapter(new User_Prfl_VP_Adapter(getSupportFragmentManager()));

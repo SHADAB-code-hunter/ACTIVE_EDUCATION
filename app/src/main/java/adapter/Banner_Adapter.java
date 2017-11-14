@@ -13,6 +13,10 @@ import android.widget.VideoView;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 import static android.R.attr.width;
@@ -29,6 +33,7 @@ public class Banner_Adapter extends PagerAdapter {
     private ArrayList Img_Bnr_str;
     private  int[] Img_Bnrint;
     private String str_url;
+    private JSONArray jsonArray;
 
     public Banner_Adapter(Context context, ArrayList<String> Img_Bnr_str, String str_url) {
         this.context=context;
@@ -41,49 +46,41 @@ public class Banner_Adapter extends PagerAdapter {
         this.Img_Bnrint=Img_Bnrint;
     }
 
+    public Banner_Adapter(Context applicationContext, JSONArray jsonArray) {
+        this.context=applicationContext;
+        this.jsonArray=jsonArray;
+    }
+
     public int getCount() {
-        if(Img_Bnr_str!=null){
-        return Img_Bnr_str.size();}
+       // if(Img_Bnr_str!=null){
+        return jsonArray.length();
+   /* }
         if(Img_Bnrint!=null){
             return Img_Bnrint.length;}
-        return 0;
+        return 0;*/
     }
 
     public Object instantiateItem(View collection, final int position) {
         LayoutInflater inflater = (LayoutInflater) collection.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.banner_adapter, null);
-        ImageView id_iv_banner=(ImageView) layout.findViewById(R.id.id_iv_banner);
-        id_iv_banner.setVisibility(View.VISIBLE);
+        try {
 
-        if(Img_Bnr_str!=null)
-        {
-            Log.d("jfkj",""+str_url+"/banner/"+Img_Bnr_str.get(position));
-            Picasso.with(context)
-                    .load(str_url+"/banner/"+Img_Bnr_str.get(position))
-                    .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
-                    // .error(DRAWABLE RESOURCE)      // optional
-                    // .resize(width, height)                        // optional
-                    // .rotate(degree)                             // optional
-                    .into(id_iv_banner);
-      //  id_iv_banner.setImageResource(str_url+"/picture/"+Img_Bnr_str.get(position));
-        }else if(Img_Bnrint!=null) {
-            Log.d("jfkj",""+str_url+"/picture/"+Img_Bnrint[position]);
-            Picasso.with(context)
-                    .load(str_url+"/picture/"+Img_Bnrint[position])
-                    .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
-                    // .error(DRAWABLE RESOURCE)      // optional
-                    // .resize(width, height)                        // optional
-                    // .rotate(degree)                             // optional
-                    .into(id_iv_banner);
+            JSONObject jsonObject=jsonArray.getJSONObject(position);
+            String str_img=jsonObject.getString("images");
+            ImageView id_iv_banner = (ImageView) layout.findViewById(R.id.id_iv_banner);
+                // id_iv_banner.setVisibility(View.VISIBLE);
+                Log.d("jfkj", "http://activeeduindia.com/admin/media/offer/"+ str_img);
+                Picasso.with(context)
+                        .load("http://activeeduindia.com/admin/media/offer/"+ str_img)
+                        .into(id_iv_banner);
+
+            ((ViewPager) collection).addView(layout);
+
+        }catch (JSONException e){
+
         }
-            /**/
-
-            /**/
-
-
-        ((ViewPager) collection).addView(layout);
-
         return layout;
+
     }
 
 

@@ -1,8 +1,10 @@
 package com.gt.active_education;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.content.res.AppCompatResources;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,10 +12,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import RAting_BAr.ThemeUtils;
+import RAting_BAr.TileDrawable;
+import RAting_BAr.TintableDrawable;
 import utilities.BatteryProgressView;
 
 /**
@@ -30,21 +37,23 @@ public class Test3_Activity  extends AppCompatActivity {
     private Button id_btn;
     private BatteryProgressView progress;
     private Handler handler;
+    private LinearLayout id_linear;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test3);
+        View view = (View) findViewById(R.layout.activity_test3);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        id_btn=(Button)findViewById(R.id.id_btn) ;
+       /* id_btn=(Button)findViewById(R.id.id_btn) ;
         id_edt_a=(EditText)findViewById(R.id.id_edt_a);
         id_edt_b=(EditText)findViewById(R.id.id_edt_b);
         id_edt_c=(EditText)findViewById(R.id.id_edt_c);
      //   id_edt_c.getHint();
 
-        setTextWatcher(id_edt_a); setTextWatcher(id_edt_b); setTextWatcher(id_edt_c);
+        setTextWatcher(id_edt_a); setTextWatcher(id_edt_b); setTextWatcher(id_edt_c);*/
       /*   id_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +86,40 @@ public class Test3_Activity  extends AppCompatActivity {
                 },1000);
             }
         },2000);*/
+
+
+       /* int tintColor = ThemeUtils.getColorFromAttrRes(tintAttrRes, context);
+        TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context,
+                tileRes));
+        drawable.mutate();
+        //noinspection RedundantCast
+        ((TintableDrawable) drawable).setTint(tintColor);*/
+
+
+
+        ImageView imageView=new ImageView(this);
+        imageView.setImageResource(R.drawable.mrb_star_icon_black_36dp);
+        Drawable layerDrawable = imageView.getDrawable();
+        layerDrawable.setTint(getResources().getColor(R.color.tumblr_red));
+
+
+
+      /*  TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(Test3_Activity.this,));
+        drawable.mutate();
+        //noinspection RedundantCast
+        ((TintableDrawable) drawable).setTint(getResources().getColor(R.color.tumblr_red));*/
+       /* id_linear=(LinearLayout)findViewById(R.id.id_linear);//id_linear.removeView();
+
+      //  for(int i=0; i<4; i++) {
+            id_linear.addView(imageView);
+      //  }*/
+
+        LinearLayout picLL = new LinearLayout(Test3_Activity.this);
+        picLL.layout(0, 0, 100, 0);
+        picLL.setLayoutParams(new LinearLayout.LayoutParams(1000, 60));
+        picLL.setOrientation(LinearLayout.HORIZONTAL);
+        picLL.addView(imageView);
+
     }
 
     private void setTextWatcher(final EditText id_edt_a) {

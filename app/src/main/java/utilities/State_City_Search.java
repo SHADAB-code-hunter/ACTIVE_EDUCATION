@@ -54,7 +54,6 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
     private Context mcontext;
     private String str_key_array;
 
-
    /* public State_City_Search(Dialog_Spinner_Listener dialogSpinnerListener,Fragment context, String str_url) {
         super(context.getContext());
         this.dialogSpinnerListener=dialogSpinnerListener;
@@ -67,6 +66,8 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
         this.mcontext=context;
         this.str_url=str_url;
         this.str_key_array=str_key_array;
+
+        Log.d("str_key",str_key_array);
     }
 
 
@@ -98,7 +99,6 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                 else
                     Toast.makeText(mcontext, "Please Select Any Option !!!!", Toast.LENGTH_LONG).show();
                 break;
-
         }
     }
 
@@ -171,7 +171,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                     @Override
                     public void onResponse(String str_response) {
                         try{
-                            Log.d("city",""+str_response);
+                            Log.d("responce_",""+str_response);
                             ArrayList<String> arrayList=new ArrayList<>();
                             ArrayList<String> arrayList_id=new ArrayList<>();
                             JSONObject response = new JSONObject(str_response);
@@ -212,7 +212,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
                             }
                             else if(response.has("msg"))
                             {
-                                App_Static_Method.city_not_get(State_City_Search.this.getOwnerActivity()," Please Select Correct State !!!");
+                               // App_Static_Method.city_not_get(State_City_Search.this.getOwnerActivity()," Please Select Correct State !!!");
                             }
                         } catch (JSONException e) {
                             //pd.dismiss();
@@ -237,6 +237,7 @@ public class State_City_Search extends Dialog implements View.OnClickListener,Ca
 
     public void on_list_data_new(List<String> s, List<String> arrayList_id) {
 
+        Log.d("stringckeck",""+s.toString()+"  "+arrayList_id.toString());
         server_list=s;
         State_City_Search.this.arrayList_id=arrayList_id;
     //    progressDialog.cancel();

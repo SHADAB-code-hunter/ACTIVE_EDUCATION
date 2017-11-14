@@ -97,6 +97,7 @@ public class Partner_Gallery extends Fragment implements View.OnClickListener, V
         Intent i = new Intent(getApplicationContext(), Big_ImgView_Activity.class);
         i.putParcelableArrayListExtra("list", quiz_Ans_List);
         i.putExtra("position_click",""+poss);
+        i.putExtra("URL", UrlEndpoints.GALLERY_IMG_PATH );
         i.putExtra("click_page","Gallery");
         /*  i.putExtra("quiz_type","1");
         i.putExtra("quiz_time","0");*/

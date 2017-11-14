@@ -15,7 +15,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,13 +31,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.gt.active_education.Agent_Profile_Activity;
-import com.gt.active_education.Agent_login_Activity;
-import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.Filter_Activity;
 import com.gt.active_education.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,14 +49,8 @@ import java.util.regex.Pattern;
 import callbacks.Form_Responce_Listener;
 import callbacks.Log_Out_Listener;
 import callbacks.Profile_Image_Listener;
-import extras.Keys;
-import fragment.SignUp_Fragment;
 import network.VolleySingleton;
-import pojo.BranchData;
 import pojo.Cat_Model;
-import pojo.CityData;
-import pojo.CourseData;
-import pojo.StateData;
 
 import static extras.Keys.KEY_USER_LOGIN.KEY_EMAIL;
 import static extras.Keys.KEY_USER_LOGIN.KEY_IMAGE;
@@ -74,6 +63,8 @@ import static extras.Keys.KEY_USER_LOGIN.KEY_TOKEN;
 public class App_Static_Method {
     public static final int lower_CAMERA_REQUEST = 1888;
     public static ProgressDialog progressDialog;
+    private static SharedPreferences sharedPreferences;
+
 
     public static List<Cat_Model> get_cat_model_list() {
         SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences("Temp_List",0);
@@ -93,6 +84,12 @@ public class App_Static_Method {
         }
     }
 
+
+/* public static  void hide_input(Context activity){
+
+        InputMethodManager imm = (InputMethodManager)activity. getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }*/
     public static ArrayList<String> get_status_list() {
         SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences("Temp_List",0);
         String str_list=sharedPreferences.getString("TAB_LIST", "na");
@@ -177,7 +174,7 @@ public class App_Static_Method {
         new DroidDialog.Builder(activity)
                 .icon(R.drawable.ic_null_list)
                 .title(str_gate)
-                .content(activity.getResources().getString(R.string.list_null))
+                .content(MyApplication.getAppContext().getResources().getString(R.string.list_null))
                 .cancelable(true, false)
                 .neutralButton("OK", new DroidDialog.onNeutralListener() {
                     @Override
@@ -386,17 +383,71 @@ public class App_Static_Method {
         Log.d("mmm",""+res_mob);
         return "na";
     }
-    public static void logout(final Activity dashBoard_activity) {
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-        String str_email=sharedPreferences.getString("email", "na");
-        String str_token=sharedPreferences.getString("Login_Token", "na");
-        String str_type=sharedPreferences.getString("type", "na");
 
-        Log.d("gfhgfhdddgfhg",str_email+"  "+str_token+" "+str_type);
-        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {
-            Log.d("gfhgfhgfhg",str_email+"  "+str_token+" "+str_type);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"email="+ str_email
-                    + "&token=" + str_token+"&type="+str_type,
+    public static Map<String, String>  session_type() {
+        SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+        final SharedPreferences sharedPreferences;
+        String str_token = null;
+        String str_mobie = null;
+
+        Map<String,String> map=new HashMap<>();
+
+        switch (shprf_.getString("type", "na")) {
+            case "agent":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                str_mobie = sharedPreferences.getString("mobile", "na");
+                str_token = sharedPreferences.getString("token", "na");
+                break;
+            case "user":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                str_mobie = sharedPreferences.getString("mobile", "na");
+                str_token = sharedPreferences.getString("token", "na");
+                break;
+            case "seater":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+                str_mobie = sharedPreferences.getString("mobile", "na");
+                str_token = sharedPreferences.getString("token", "na");
+                break;
+        }
+
+        map.put("mobile",str_mobie);
+        map.put("token",str_token);
+        map.put("type",shprf_.getString("type", "na"));
+        return map;
+    }
+
+    public static void logout(final Activity dashBoard_activity) {
+        SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+        final    SharedPreferences sharedPreferences;
+        String  str_token=null;
+        String  str_mobie=null;
+
+        switch (shprf_.getString("type", "na"))
+        {
+            case "agent":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                str_mobie=   sharedPreferences.getString("mobile","na");
+                str_token=   sharedPreferences.getString("token","na");
+                break;
+            case "user":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                str_mobie=   sharedPreferences.getString("mobile","na");
+                str_token=   sharedPreferences.getString("token","na");
+                break;
+            case "seater":
+                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+                str_mobie=   sharedPreferences.getString("mobile","na");
+                str_token=   sharedPreferences.getString("token","na");
+                break;
+
+        }
+
+       /* Log.d("gfhgfhdddgfhg",str_email+"  "+str_token+" "+str_type);
+        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {*/
+            Log.d("gfhgfhgfhg",str_mobie+"  "+str_token+" "+shprf_.getString("type", "na"));
+        // SharedPreferences finalSharedPreferences = sharedPreferences;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"mobile="+ str_mobie
+                    + "&token=" + str_token+"&type="+shprf_.getString("type", "na"),
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -405,12 +456,40 @@ public class App_Static_Method {
                                 Log.d("lougour", response.toString());
                                 //{"msg":1}
                                     Log.d("ffff",""+jObj.getString("msg"));
-                                    if ((""+(jObj.getString("msg"))).equals("1")) { // have to must convert in to string
+                                    if ((""+(jObj.getString("msg"))).equals("1"))
+                                    { // have to must convert in to string
                                         Log.d("udpgad", response.toString());
-                                        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.clear().commit();
+                                      /*  SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+                                        SharedPreferences sharedPreferences =null;*/
+                                       /* switch (shprf_seater.getString("type", "na"))
+                                        {
+                                            case "agent":
+                                                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                                                SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                                                editor1.clear().commit();
+                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                                //  finish();
+                                                break;
+                                            case "user":
+                                                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                                                SharedPreferences.Editor editor2 = sharedPreferences.edit();
+                                                editor2.clear().commit();
+                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                                //  finish();
+                                                break;
+                                            case "seater":
+                                                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+                                                SharedPreferences.Editor editor3 = sharedPreferences.edit();
+                                                editor3.clear().commit();
+                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);//  finish();
+                                                break;
+
+                                        }
+*/
+
                                         ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                        //  finish();
+
                                     }else {
                                         ((Log_Out_Listener)dashBoard_activity).on_logout(false);
                                     }
@@ -437,11 +516,11 @@ public class App_Static_Method {
             RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
             requestQueue.add(stringRequest);
 
-        }else {
+        /*}else {
 
             Log.d("hfhfhfh","fhfhf");
             ((Log_Out_Listener)dashBoard_activity).on_logout(false);
-        }
+        }*/
 
     }
     public static void user_session(final Activity _activity) {
@@ -514,6 +593,55 @@ public class App_Static_Method {
         }
     }
 
+     public static String is_any_login(final Activity _activity) {
+
+        SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+         if(!shprf_seater.getString("type", "na").equals("NA"))
+         {
+             return shprf_seater.getString("type", "NA");
+         }
+         return "NA";
+    }
+    public static  Map<String,String> is_token(final String shrd_prf_name) {
+
+        SharedPreferences shprf = MyApplication.getAppContext().getSharedPreferences(shrd_prf_name,0);
+          Map<String,String> map=new HashMap<>();
+          map.put("type",shprf.getString("type", "NA"));
+          map.put("mobile",shprf.getString("mobile", "NA"));
+          map.put("token",shprf.getString("token", "NA"));
+         return map;
+    }
+    public static  String checked_num(final String sharedprefrence, String str_key) {
+
+        SharedPreferences shprf = MyApplication.getAppContext().getSharedPreferences(sharedprefrence,0);
+
+         return shprf.getString(str_key,"NA");
+    }
+    /* SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence,0);
+            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
+            String str_email=sharedPreferences.getString("email", "na");
+            String str_token=sharedPreferences.getString("token", "na");
+            String str_type=sharedPreferences.getString("type", "na");
+
+            if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {
+                Log.d("gfhgfhgfhg",str_email+"  "+str_token+" "+str_type);
+                return true;
+            }else {
+                return false;
+            }*/
+    public static boolean create_logout(final Activity dashBoard_activity) {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref,0);
+        String str_email=sharedPreferences.getString("email", "na");
+        String str_token=sharedPreferences.getString("Login_Token", "na");
+        String str_type=sharedPreferences.getString("type", "na");
+
+        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {
+            Log.d("gfhgfhgfhg",str_email+"  "+str_token+" "+str_type);
+            return true;
+        }else {
+            return false;
+        }
+    }
     public static void user_session(final Activity _activity, JSONObject jsonObject) {
         try {
             SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
@@ -697,7 +825,7 @@ public static void set_profile_img(final Activity _activity) {
     if(!(str_email.equals("na")) && !(str_token.equals("na"))) {
         Log.d("dedede", "daddada");
         //
-         String strurl=UrlEndpoints.GET_PROFILE_IMAGE+"email="+str_email+"&token="+str_token;
+         String strurl=UrlEndpoints.GET_PROFILE_DATA +"email="+str_email+"&token="+str_token;
        //  String strurl="http://activeeduindia.com/admin/webservices/getProfilePicture.php?email=san@gmail.com&token=s0e2iZViIC";
          StringRequest stringRequest = new StringRequest(Request.Method.POST,strurl ,
                 new Response.Listener<String>() {

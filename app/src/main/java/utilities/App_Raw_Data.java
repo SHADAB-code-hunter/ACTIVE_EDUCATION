@@ -37,7 +37,6 @@ public class App_Raw_Data {
         while(scanner.hasNextLine()){
             builder_json.append(scanner.nextLine());
         }
-
         StringBuilder builder2=new StringBuilder();
         try {
             JSONObject root= new JSONObject(builder_json.toString());
@@ -52,8 +51,6 @@ public class App_Raw_Data {
                     builder2.append(jsonObject.getString("id"));
                     return builder2;
                 }
-
-
             }
 
         }catch (JSONException e){

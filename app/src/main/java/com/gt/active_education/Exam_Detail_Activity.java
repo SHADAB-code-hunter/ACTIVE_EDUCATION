@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -32,11 +33,12 @@ import utilities.UrlEndpoints;
  * Created by GT on 8/30/2017.
  */
 
-public class Exam_Detail_Activity extends AppCompatActivity {
+public class Exam_Detail_Activity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView id,name,e_seats,exam_date,e_info;
+    TextView id_exname,post_vacan,exam_date_tv,exam_info_tv;
     ProgressDialog progressDialog;
     String str_exam_id;
+    private FrameLayout id_frm_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,11 @@ public class Exam_Detail_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_exam_detail);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        id=(TextView)findViewById(R.id.id);
-        name=(TextView)findViewById(R.id.name);
-        e_seats=(TextView)findViewById(R.id.e_seats);
-        exam_date=(TextView)findViewById(R.id.exam_date);
-        e_info=(TextView)findViewById(R.id.e_info);
+        id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(this);
+        id_exname=(TextView)findViewById(R.id.id_exname);
+        post_vacan=(TextView)findViewById(R.id.post_vacan);
+        exam_date_tv=(TextView)findViewById(R.id.exam_date_tv);
+        exam_info_tv=(TextView)findViewById(R.id.exam_info_tv);
         if(!getIntent().equals(null))
         {
             str_exam_id=getIntent().getStringExtra("id");
@@ -75,11 +76,10 @@ public class Exam_Detail_Activity extends AppCompatActivity {
                             if(!jObj.has("msg")) {
                                 JSONArray jsonArray = jObj.getJSONArray("data");
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                id.setText(jsonObject.getString("id"));
-                                name.setText("name   "+jsonObject.getString("name"));
-                                e_seats.setText("Posts   "+jsonObject.getString("e_seats"));
-                                exam_date.setText("Exam Date    "+jsonObject.getString("exam_date"));
-                                e_info.setText("Exam info    "+jsonObject.getString("e_info"));
+                                id_exname.setText(jsonObject.getString("name"));
+                                post_vacan.setText(jsonObject.getString("e_seats"));
+                                exam_date_tv.setText(jsonObject.getString("exam_date"));
+                                exam_info_tv.setText(jsonObject.getString("e_info"));
 
                                 progressDialog.cancel();
 
@@ -114,4 +114,13 @@ public class Exam_Detail_Activity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.id_frm_back:
+                finish();
+                break;
+        }
+    }
 }

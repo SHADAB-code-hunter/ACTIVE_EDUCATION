@@ -170,4 +170,81 @@
     <color name="path_green">#5FB336</color>
     <color name="path_purple">#49098A</color>
     <color name="rippelColor">#FFFFFF</color>
+
+    <!-- active color-->
+    <color name="colorAccent">#ffffff</color>
+
+    <color name="colorPrimary2">#89AF3E</color>
+    <color name="colorPrimaryDark2">#6b8931</color>
+    <color name="colorAccent2">#ffffff</color>
+
+    <color name="colorPrimary3">#B262FF</color>
+    <color name="colorPrimaryDark3">#8a4fc2</color>
+    <color name="colorAccent3">#ffffff</color>
+
+    <!-- theme color -->
+    <color name="op_theme_clr">#333333</color>
+    <color name="theme_color_dark">#FF5412</color>
+    <color name="half_black">#4e4e4e</color>
+    <color name="light_half_black">#779d9d9d</color>
+    <color name="button_bg">#4E515E</color>
+    <color name="color_default_marker">#07262E</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="black">#000000</color>
+
+    <color name="color_golden">#FFF212</color>
+    <!---->
+    <!--toggle-->
+
+
+
+    <!--                        -->
+    <color name="white_transparent">#4fcfcfcf</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="txt_blek">#000000</color>
+    <color name="btn_golden">#c58a1d</color>
+    <color name="txt_white">#FFFFFF</color>
+
+
+    <!---->
+
+
+    <color name="red">#FF0000</color>
+
+    <color name="green">#008000</color>
+
+    <color name="white_color">#FFFFFF</color>
+
+    <!-- New Design Colors-->
+    <color name="bg_color">#E6E6E6</color>
+
+    <color name="float_color_default">#01668e</color>
+    <color name="float_green_color_default">#129f87</color>
+    <color name="float_blue_color_default">#dc0c151b</color>
+
+
+    <!--chat fb-->
+
+    <color name="quiz_ques_color">#094C5E</color>
+    <color name="divider_color">#c5347080</color>
+
+    <!--login new-->
+
+    <color name="colorPrimaryTrans">#a0673AB7</color>
+    <color name="colorAccentTrans">#a0009688</color>
+    <color name="colorBlackTrans">#a0000000</color>
+    <color name="text_selected">#888</color>
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#757575</color>
+
+    <!--dialog-->
+    <color name="colorWhite">#FFFFFF</color>
+
+
+    <!--Pie chart color-->
+
+    <color name="skip_color">#00AEEB</color>
+    <color name="right_color">#00A759</color>
+    <color name="wrong_color">#EC3237</color>
 </resources>

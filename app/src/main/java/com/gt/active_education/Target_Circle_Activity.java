@@ -1,10 +1,7 @@
 package com.gt.active_education;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -20,13 +17,11 @@ import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import callbacks.Frg_Act_Listener;
-import fragment.Partner_Detail_Frag;
 import fragment.Partner_Gallery;
 import fragment.Partner_Regisration_Frg;
 import fragment.Partner_Seat_Submission;
 import fragment.Target_fragment;
 import utilities.App_Static_Method;
-import utilities.BatteryProgressView;
 import utilities.UrlEndpoints;
 
 /**
@@ -62,13 +57,13 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
             @Override
             public void onClick(View v) {
                 layout1.toggle();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+              /*  InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);*/
             }
         });
         id_fragment_partner=(FrameLayout)findViewById(R.id.id_fragment_partner);
         id_linear_trgt_menu=(LinearLayout)findViewById(R.id.id_linear_trgt_menu);id_linear_trgt_menu.setOnClickListener(this);
-        id_linear_abtus_menu=(LinearLayout)findViewById(R.id.id_linear_abtus_menu);id_linear_abtus_menu.setOnClickListener(this);
+        id_linear_abtus_menu=(LinearLayout)findViewById(R.id.id_linear_logout_menu);id_linear_abtus_menu.setOnClickListener(this);
         id_linear_gallery_menu=(LinearLayout)findViewById(R.id.id_linear_gallery_menu);id_linear_gallery_menu.setOnClickListener(this);
         id_linear_prfl_menu=(LinearLayout)findViewById(R.id.id_linear_prfl_menu);id_linear_prfl_menu.setOnClickListener(this);
         id_linear_acc_menu=(LinearLayout)findViewById(R.id.id_linear_acc_menu);id_linear_acc_menu.setOnClickListener(this);
@@ -93,9 +88,10 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
         FragmentTransaction ft = fm.beginTransaction();
         switch (v.getId())
         {
-            case R.id.id_linear_abtus_menu:
+            case R.id.id_linear_logout_menu:
                 layout1.toggle();
-                id_fragment_title.setText("About Us");
+                set_logout();
+               // id_fragment_title.setText("Log Us");
                 ft.replace(R.id.id_fragment_partner, new Target_fragment());
                 ft.commit();
                 break;
@@ -127,6 +123,23 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
                 ft.commit();
                 break;
         }
+    }
+
+    private void set_logout() {
+        Thread t=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+
+
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
     }
 
     @Override

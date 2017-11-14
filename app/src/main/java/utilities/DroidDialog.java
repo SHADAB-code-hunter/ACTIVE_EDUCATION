@@ -219,10 +219,10 @@ public class DroidDialog {
 
         public Builder(Context context) {
             this.context = context;
-            titleBgColor = ContextCompat.getColor(context, R.color.colorAccent);
-            iconTintColor = ContextCompat.getColor(context, R.color.colorPrimaryDark);
-            buttonTextColor = ContextCompat.getColor(context, R.color.colorPrimaryDark);
-            dividerColor = ContextCompat.getColor(context, R.color.colorAccent);
+            titleBgColor = MyApplication.getAppContext().getResources().getColor(R.color.white);//ContextCompat.getColor(context, );
+            iconTintColor = MyApplication.getAppContext().getResources().getColor( R.color.circle_clr);
+            buttonTextColor = MyApplication.getAppContext().getResources().getColor( R.color.circle_clr);
+            dividerColor = MyApplication.getAppContext().getResources().getColor(R.color.white);
         }
 
         public DroidDialog show() {

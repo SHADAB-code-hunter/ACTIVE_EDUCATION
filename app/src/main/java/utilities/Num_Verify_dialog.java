@@ -1,32 +1,17 @@
 package utilities;
 
-import android.animation.Animator;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.ContextCompat;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.transition.TransitionManager;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -40,25 +25,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gt.active_education.R;
 import com.gt.active_education.Sign_Up_Process_Activity;
-import com.zopim.android.sdk.api.ZopimChat;
-import com.zopim.android.sdk.prechat.PreChatForm;
-import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import Zend_Chat.UserProfile;
-import Zend_Chat.UserProfileStorage;
-import callbacks.Call_Dilaog_Listener;
 import callbacks.Num_Verify_Listener;
 import callbacks.SignUp_Pager_Swape_Listener;
 import fragment.Num_Verify_Fragment;
+import fragment.OTP_Verification_Frg;
 
 /**
  * Created by GT on 9/9/2017.
@@ -101,7 +75,7 @@ public class Num_Verify_dialog extends Dialog implements View.OnClickListener ,
         id_edt_m_num=(EditText)findViewById(R.id.id_edt_m_num);
         id_edt_m_num.setText(str_num);
         id_otp_btn_verif=(Button)findViewById(R.id.id_otp_btn_verif);
-        receiver = new SmsReceiver();//1
+       // receiver = new SmsReceiver(OTP_Verification_Frg.this);//1
         edt_otp=(EditText)findViewById(R.id.edt_otp);
         id_otp_verify=(LinearLayout)findViewById(R.id.id_otp_verify);
         id_linear_upper=(LinearLayout)findViewById(R.id.id_linear_upper);

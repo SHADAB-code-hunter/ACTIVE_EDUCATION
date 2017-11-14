@@ -12,6 +12,19 @@ public class Agent_Deal_Pojo  {
 
     private String branch_name;
 
+    public String getBranch_fee() {
+        return branch_fee;
+    }
+
+    public void setBranch_fee(String branch_fee) {
+        this.branch_fee = branch_fee;
+    }
+
+    private String branch_fee;
+
+
+    private String cat_id;
+
     private String clg_id;
 
     private String clg_name;
@@ -27,6 +40,12 @@ public class Agent_Deal_Pojo  {
     private String total_seats;
 
 
+    private String dis_offer;
+
+
+    private String image;
+
+
     /*  target*/
 
     private String agent_name;
@@ -40,6 +59,32 @@ public class Agent_Deal_Pojo  {
     private String progress;
 
     private String start_date;
+
+    public String getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(String cat_id) {
+        this.cat_id = cat_id;
+    }
+
+
+    public String getDis_offer() {
+        return dis_offer;
+    }
+
+    public void setDis_offer(String dis_offer) {
+        this.dis_offer = dis_offer;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 
     public String getAgent_name() {
         return agent_name;

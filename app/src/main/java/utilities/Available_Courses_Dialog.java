@@ -1,5 +1,6 @@
 package utilities;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -30,14 +31,13 @@ import task.Load_Course_AVail_Data;
 
 public class Available_Courses_Dialog extends Dialog implements View.OnClickListener, Load_Course_AVail_Data.List_LoadedListener, Call_Dilaog_Listener {
 
-
     private final String url;
     private final Dialog_Spinner_Listener dialogSpinnerListener;
     private RecyclerView mRecyclerView;
     private Simple_Adapter mAdapter;
 
-    public Available_Courses_Dialog(Dialog_Spinner_Listener dialogSpinnerListener ,Context context, String s) {
-        super(context);
+    public Available_Courses_Dialog(Dialog_Spinner_Listener dialogSpinnerListener , Context activity, String s) {
+        super(activity);
         this.url=s;
         this.dialogSpinnerListener=dialogSpinnerListener;
     }
@@ -52,7 +52,6 @@ public class Available_Courses_Dialog extends Dialog implements View.OnClickList
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         new Load_Course_AVail_Data(Available_Courses_Dialog.this, url).execute();
-
 
 /*
         id_course_frm.setOnTouchListener(new View.OnTouchListener() {
@@ -105,10 +104,14 @@ public class Available_Courses_Dialog extends Dialog implements View.OnClickList
         State_City_Search.this.arrayList_id=arrayList_id;*/
         //    progressDialog.cancel();
         if(common_pojos!=null) {
-//            Log.d("jnvmfnvm",common_pojos.get(0).getId()+"   "+common_pojos.get(0).getName());
+          //  Log.d("jnvdcdczmfnvm",common_pojos.get(0).getId()+"   "+common_pojos.get(0).getName());
+            Log.d("jnvdcdczmfnvm",common_pojos.toString());
             mAdapter = new Simple_Adapter(common_pojos, Available_Courses_Dialog.this);
             mRecyclerView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
+        }else {
+
+         //   ConnectionCheck.list_not_get(activity,"List Not Get");
         }
 
     }

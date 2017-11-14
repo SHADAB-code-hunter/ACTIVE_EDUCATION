@@ -207,7 +207,7 @@ public class Agent_Registered_frg extends Fragment implements View.OnClickListen
                                 //  editor.putString("prf_pic", jsonObject.getString("image"));
                                 editor.commit();
 
-                                mListener.onPager_swap_method();
+                                mListener.onPager_swap_method("Login_page");
                             }else if(jObj.has("exist"))
                             {
                                 Log.d("existm",""+jObj.getString("exist"));

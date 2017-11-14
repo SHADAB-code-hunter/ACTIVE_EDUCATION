@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,7 +30,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
+import com.gt.active_education.Sign_Up_Process_Activity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,11 +73,14 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
     private String st_email;
     private Map<String,String> map;
     private CheckBox id_term_con;
+    private TextView id_skip_tv;
+    private Context context;
 
     //SIGN_UP_API
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context=context;
 
         try {
             mListener = (SignUp_Pager_Swape_Listener) context;
@@ -97,6 +103,10 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
         id_image_profile_signup=(ImageView)rootView.findViewById(R.id.id_image_profile_signup);
         id_edit_camera_iv=(ImageView)rootView.findViewById(R.id.id_edit_camera_iv);id_edit_camera_iv.setOnClickListener(this);
         btn_submit=(Button)rootView.findViewById(R.id.btn_submit_bt);
+
+        SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+        Log.d("map_tostring",sharedPreferences2.getString("type","NA"));
+
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,6 +161,8 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
 
         });
 
+        id_skip_tv=(TextView)rootView.findViewById(R.id.id_skip_tv);id_skip_tv.setOnClickListener(this);
+
         return rootView;
     }
 
@@ -181,7 +193,7 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                               //  editor.putString("prf_pic", jsonObject.getString("image"));
                                 editor.commit();
 
-                                mListener.onPager_swap_method();
+                                mListener.onPager_swap_method("Login_page");
                             }else if(jObj.has("exist"))
                             {
                                 Log.d("existm",""+jObj.getString("exist"));
@@ -234,7 +246,80 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                     App_Static_Method.lower_camera_call(SignUp_Fragment.this);
                 }
                 break;
+            case R.id.id_skip_tv:
+
+                register_only_num();
+
+                startActivity(new Intent(SignUp_Fragment.this.getContext(), DashBoard_Activity.class));
+                ((Sign_Up_Process_Activity)context).finish();
+                break;
         }
+    }
+
+    private void register_only_num() {
+        Log.d("call_method","method call");
+        SharedPreferences  shrd_otp_prf =MyApplication.getAppContext().getSharedPreferences(UpdateValues.OTP_Prefrence, 0);
+        final String str_otp_api_key = shrd_otp_prf.getString("otp_api_key", "");
+        final String str_otp_session = shrd_otp_prf.getString("otp_session", "");
+        final String str_otp_mbl = shrd_otp_prf.getString("otp_mbl", "");
+        Log.d("gfdser",   str_otp_api_key + "  " + str_otp_session + "   " + str_otp_mbl);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.REG_NUM+str_otp_mbl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response)
+                    {
+                        try {
+                            JSONObject jObj = new JSONObject(response);
+                            Log.d("rdfesruts",response.toString());
+                            // image left
+                            // mListener.onPager_swap_method();
+                            //   {"msg":1,"data":[{"mobile":"9599805321","token":"N4ijuWn7Cy","image":"","uname":"dvdbdb","email":"asdf@gndd.vbn"}]}
+                            //{"msg":1,"data":[{"mobile":"9599805321","token":"N4ijuWn7Cy","image":"","uname":"dvdbdb","email":"asdf@gndd.vbn"}]}
+                            if(!jObj.has("exist")) {
+                                JSONArray jsonArray = jObj.getJSONArray("data");
+                                JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("login_Status", "L_OK");
+                                editor.putString("Login_Token", jsonObject.getString("token"));
+                                editor.putString("L_username", jsonObject.getString("uname"));
+                                editor.putString("mobile", jsonObject.getString("mobile"));
+                                //  editor.putString("prf_pic", jsonObject.getString("image"));
+                                editor.commit();
+
+                                mListener.onPager_swap_method("Login_page");
+                            }else if(jObj.has("exist"))
+                            {
+                                Log.d("existm",""+jObj.getString("exist"));
+                                // ConnectionCheck.user_Already_exist(SignUpActivity.this,"User Already Exist !!!");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                            Log.d("expdcc",""+e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), ""+error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Log.d("imge",""//+map.get("image")
+                        +"  "+
+                        map.get("uname")+"  "+
+                        map.get("email")+"  "+
+                        map.get("mobile")+"  "+
+                        map.get("pwd") );
+                return map;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(MyApplication.getAppContext());
+        requestQueue.add(stringRequest);
     }
 
     @Override

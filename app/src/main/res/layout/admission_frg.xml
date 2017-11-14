@@ -315,51 +315,81 @@
                          android:layout_weight="0.17"/>
                 </LinearLayout>
 
+
                 <!-- Father linear layout-->
-
-                <LinearLayout
-                    android:orientation="horizontal"
+                <RelativeLayout
+                    android:id="@+id/id_frm_state"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="0dp"
-                    android:layout_weight="1">
+                    android:clickable="true"
+                    android:layout_height="40dp">
+
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:id="@+id/id_img"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_new_state"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"/>
-                    <EditText
-                        android:id="@+id/id_edt_state"
+                        android:layout_marginLeft="15dp" />
+                    <TextView
+                        android:id="@+id/id_text_tv_state"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="14sp"
-                        android:singleLine="true"
-                        android:hint="State "
-                         android:layout_weight="0.17"/>
-                </LinearLayout>
+                        android:layout_height="38dp"
+                        android:gravity="center|left"
+                        android:layout_marginLeft="60dp"
+                        android:textColor="@color/grey_home"
+                        android:textSize="16sp"
+                        android:backgroundTint="#ffffff"
+                        android:text="State"/>
+                    <TextView
+                        android:layout_below="@+id/id_text_tv_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="60dp"
+                        android:background="@color/grey_home"
+                        android:layout_gravity="bottom"/>
 
-                <!-- Second layout-->
-                <LinearLayout
-                    android:orientation="horizontal"
+
+                    <!-- </android.support.design.widget.TextInputLayout>-->
+
+                </RelativeLayout>
+
+                <!-- Father linear layout-->
+                <RelativeLayout
+                    android:id="@+id/id_frm_city"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="0dp"
-                    android:layout_weight="1">
+                    android:clickable="true"
+                    android:layout_height="40dp">
+
                     <ImageView
+                        android:id="@+id/id_img_city"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_city"
+                        android:layout_marginLeft="15dp" />
+                    <TextView
+                        android:id="@+id/id_text_tv_city"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_new_city"
-                        android:layout_weight="1"/>
-                    <EditText
-                        android:id="@+id/id_edt_city"
+                        android:layout_height="38dp"
+                        android:gravity="center|left"
+                        android:layout_marginLeft="60dp"
+                        android:textColor="@color/grey_home"
+                        android:textSize="16sp"
+                        android:backgroundTint="#ffffff"
+                        android:text="City"/>
+                    <TextView
+                        android:layout_below="@+id/id_text_tv_city"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:textSize="14sp"
-                        android:hint="City"
-                         android:layout_weight="0.17"/>
-                </LinearLayout>
+                        android:layout_height="2dp"
+                        android:layout_marginLeft="60dp"
+                        android:background="@color/grey_home"
+                        android:layout_gravity="bottom"/>
+
+
+                    <!-- </android.support.design.widget.TextInputLayout>-->
+
+                </RelativeLayout>
+                <!-- Second layout-->
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

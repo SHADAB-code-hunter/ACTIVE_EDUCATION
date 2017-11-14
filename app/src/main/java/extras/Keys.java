@@ -76,6 +76,8 @@ public interface Keys {
 
          String KEY_DISCOUNT="discount";
 
+         String KEY_TYPE="type";
+
         /*  state keys  */
 
          String KEY_STATE_ARRAY="stateData";
@@ -127,6 +129,8 @@ public interface Keys {
 
          String KEY_DESC="c_info";
 
+         String KEY_DURATION="c_duration";
+
     }
 
     public interface KEY_AGENT_NOTES {
@@ -149,6 +153,10 @@ public interface Keys {
          String KEY_A_DEAL_ID="deal_id";
          String KEY_A_DEAL_MONEY="deal_money";
          String KEY_A_TOTAL_SEAT="total_seats";
+         String KEY_DIS_OFFER="display_offer";
+         String KEY_BRANCH_FEE="branch_fee";
+         String KEY_CAT_ID="cat_id";
+         String KEY__IMAGE="image";
 
 
     }
@@ -182,6 +190,81 @@ public interface Keys {
          String KEY_STATUS="STATUS";
 
 
+
+    }
+
+    /* active quiz*/
+    public interface EndpointBox_Office {
+        public static final String KEY_AUD_ID = "id";
+        public static final String KEY_MOVIES = "data";
+        public static final String KEY_ANAME = "aname";
+        public static final String KEY_DATE_TIME = "date_time";
+        public static final String KEY_VANUE = "venue";
+        public static final String KEY_ADDRESS = "address";
+        public static final String KEY_SPONSERS = "sponsers_name";
+        public static final String KEY_IMAGES = "images";
+        public static final String KEY_VIDEO = "video";
+        public static final String KEY_CELEB = "celeb_name";
+        public static final String KEY_AMOUNT = "amount";
+        public static final String KEY_RELEASE_DATES = "release_dates";
+        public static final String KEY_THEATER = "theater";
+    }
+
+    public interface Endpoint_BoxOffice{
+
+        public static final String KEY_AUD_ID="id";
+        public static final String KEY_MOVIES="data";
+        public static final String KEY_ANAME="aname";
+        public static final String KEY_DATE_TIME="date_time";
+        public static final String KEY_VANUE="venue";
+        public static final String KEY_ADDRESS="address";
+        public static final String KEY_SPONSERS="sponsers_name";
+        public static final String KEY_IMAGES="images";
+        public static final String KEY_VIDEO="video";
+        public static final String KEY_CELEB="celeb_name";
+        public static final String KEY_AMOUNT="amount";
+        public static final String KEY_RELEASE_DATES="release_dates";
+        public static final String KEY_THEATER="theater";
+    }
+
+    public interface EndpointDailyQuiz{
+
+        public static final String KEY_ID="id";
+        public static final String KEY_IS_ACTIVE="is_active";
+        public static final String KEY_OPTIION1="option1";
+        public static final String KEY_OPTIION2="option2";
+        public static final String KEY_OPTIION3="option3";
+        public static final String KEY_OPTIION4="option4";
+        public static final String KEY_QNAME="qname";
+        public static final String KEY_SUBJECT="subject";
+        public static final String KEY_ANSWER="answer";
+        public static final String KEY_OPT_ANSWER="option_answer";
+        public static final String KEY_S_No="s_no";
+
+    }
+
+    public interface EndpointDailyQuizPending{
+
+        public static final String KEY_ST_HOUR="st_Hour";
+        public static final String KEY_ST_MIN="st_Min";
+        public static final String KEY_ST_SEC="st_Sec";
+        public static final String KEY_ST_DATE="st_Date";
+        public static final String KEY_ST_MON="st_Mon";
+        public static final String KEY_ST_YEAR="st_Year";
+        public static final String KEY_CR_HOUR="cr_Hour";
+        public static final String KEY_CR_MIN="cr_Min";
+        public static final String KEY_CR_SEC="cr_Sec";
+
+    }
+    public interface EndpointColor_Theme{
+
+        public static final String KEY_COLOR_THEME="COLOR_THEME";
+        public static final String KEY_THEME_NUM= "KEY_THEME_NUM";
+        public static final String KEY_BACK_THEME="ic_back_theme";
+        public static final String KEY_COLO_THEME="ic_color_theme";
+        public static final String KEY_BACK_THEME1="ic_back_main";
+        public static final String KEY_BACK_THEME2="ic_img_blur_back";
+        public static final String KEY_BACK_THEME3="blur_img";
 
     }
 

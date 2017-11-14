@@ -80,7 +80,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
     // compile 'com.nineoldandroids:library:2.4.0'
-
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     //compile 'com.github.Commit451:InkPageIndicator:1.0.2'
 
     //  compile 'com.cleveroad:splittransformation:0.9.0' //new Library
@@ -136,5 +136,10 @@ dependencies {
     compile project(path: ':payUMoneysdk')
     compile 'com.github.bumptech.glide:glide:4.2.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+
+    /* file picker  */
+    compile 'com.nbsp:library:1.8'
+    compile 'nl.dionsegijn:konfetti:1.0.2'
+
 }
 apply plugin: 'com.google.gms.google-services'

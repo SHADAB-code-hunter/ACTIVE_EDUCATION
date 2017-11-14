@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:background="@drawable/light_layer"
+        android:id="@+id/toolbar2">
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/id_back_quicz_Quick_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:layout_margin="12dp"
+                            android:background="@drawable/ic_previous_btn"/>
+
+                        <TextView
+                            android:id="@+id/toolbar_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.1"
+                            android:layout_marginLeft="50dp"
+                            android:gravity="center_vertical"
+                            android:text="Winner List"
+                            android:textColor="@color/text_white"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2.05"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_gravity="right"
+                            android:layout_marginRight="0dp"
+                            android:textColor="@color/text_white" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="2.1"
+                            android:visibility="invisible"
+                            android:layout_gravity="center"
+                            android:layout_margin="9dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="00:00:00"
+                            android:gravity="center"
+                            android:visibility="invisible"
+                            android:layout_gravity="center"
+                            android:layout_margin="0dp"
+                            android:layout_weight="2.1"
+                            android:textSize="9sp"
+                            android:textColor="@color/text_white"
+                            android:id="@+id/toolbar_timer" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:layout_weight="2.1"
+                            android:layout_margin="9dp"
+                            android:visibility="invisible"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="0dp"
+                            android:id="@+id/toolbar_skip" />
+                    </LinearLayout>
+                </TableRow>
+            </LinearLayout>
+
+        </TableLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/id_id_winner_framlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--  bubble-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingLeft="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/container1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/container4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:id="@+id/container7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/container9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--  bubble-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/id_img_rank1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_profile_pictures"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="5"
+                    app:civ_shadow_color="#8BC34A"/>
+                <TextView
+                    android:id="@+id/id_name_rank1"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:text="Sanjit"
+                    android:textColor="@color/theme_color_dark"
+                    android:gravity="center"
+                  />
+
+                <TextView
+                    android:id="@+id/id_rank1"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:text="Rank 1"
+                    android:textColor="@color/cardview_dark_background"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_winner_back"
+                        android:scaleType="fitXY"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                     <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/id_img_rank5"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_profile_pictures"
+                            app:civ_border_color="#EEEEEE"
+                            app:civ_border_width="1dp"
+                            app:civ_shadow="true"
+                            app:civ_shadow_radius="5"
+                            app:civ_shadow_color="#8BC34A"/>
+                         <TextView
+                             android:id="@+id/id_name_rank5"
+                             android:layout_width="match_parent"
+                             android:layout_height="15dp"
+                             android:text="Sanjit"
+                             android:textColor="@color/theme_color_dark"
+                             android:gravity="center"
+                             />
+
+                         <TextView
+                             android:id="@+id/id_rank5"
+                             android:layout_width="match_parent"
+                             android:layout_height="15dp"
+                             android:text="Rank 5"
+                             android:textColor="@color/cardview_dark_background"
+                             android:gravity="center"
+                             />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="120dp"
+                            android:visibility="invisible"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <com.mikhaellopez.circularimageview.CircularImageView
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_profile_pictures"
+                                app:civ_border_color="#EEEEEE"
+                                app:civ_border_width="1dp"
+                                app:civ_shadow="true"
+                                app:civ_shadow_radius="5"
+                                app:civ_shadow_color="#8BC34A"/>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:text="Rank5"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                              />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:text="Rank5"
+                                android:textColor="@color/white"
+                                android:gravity="center"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <com.mikhaellopez.circularimageview.CircularImageView
+                                android:id="@+id/id_img_rank2"
+                                android:layout_width="100dp"
+                                android:layout_height="100dp"
+                                android:layout_marginLeft="0dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_profile_pictures"
+                                app:civ_border_color="#EEEEEE"
+                                app:civ_border_width="1dp"
+                                app:civ_shadow="true"
+                                app:civ_shadow_radius="5"
+                                app:civ_shadow_color="#8BC34A"/>
+                            <TextView
+                                android:id="@+id/id_name_rank2"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:text="Sanjit"
+                                android:textColor="@color/theme_color_dark"
+                                android:gravity="center"
+                                />
+
+                            <TextView
+                                android:id="@+id/id_rank2"
+                                android:layout_width="match_parent"
+                                android:layout_height="15dp"
+                                android:gravity="center"
+                                android:text="Rank 2"
+                                android:textColor="@color/cardview_dark_background" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="20dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/id_img_rank4"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_profile_pictures"
+                            app:civ_border_color="#EEEEEE"
+                            app:civ_border_width="1dp"
+                            app:civ_shadow="true"
+                            app:civ_shadow_radius="5"
+                            app:civ_shadow_color="#8BC34A"/>
+                        <TextView
+                            android:id="@+id/id_name_rank4"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Sanjit"
+                            android:textColor="@color/theme_color_dark"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+
+                            android:id="@+id/id_rank4"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Rank 4"
+                            android:textColor="@color/cardview_dark_background"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_profile_pictures"
+                            app:civ_border_color="#EEEEEE"
+                            app:civ_border_width="1dp"
+                            app:civ_shadow="true"
+                            app:civ_shadow_radius="5"
+                            app:civ_shadow_color="#8BC34A"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Rank5"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Rank5"
+                            android:textColor="@color/white"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/id_img_rank3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_profile_pictures"
+                            app:civ_border_color="#EEEEEE"
+                            app:civ_border_width="1dp"
+                            app:civ_shadow="true"
+                            app:civ_shadow_radius="5"
+                            app:civ_shadow_color="#8BC34A"/>
+                        <TextView
+                            android:id="@+id/id_name_rank3"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Sanjit"
+                            android:textColor="@color/theme_color_dark"
+                            android:gravity="center"
+                            />
+
+                        <TextView
+                            android:id="@+id/id_rank3"
+                            android:layout_width="match_parent"
+                            android:layout_height="15dp"
+                            android:text="Rank 3"
+                            android:textColor="@color/cardview_dark_background"
+                            android:gravity="center"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_new_logo"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/id_gift_lv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
+    <nl.dionsegijn.konfetti.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</FrameLayout>
