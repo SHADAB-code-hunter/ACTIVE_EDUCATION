@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text=" Seat Status Form "/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:layout_weight="1"
+            android:orientation="vertical">
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" Student Name "/>
+        <TextView
+            android:id="@+id/id_f_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" First : Shadab "/>
+            <TextView
+                android:id="@+id/id_l_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_margin="5dp"
+                android:text=" Last : Ahmad "/>
+            </LinearLayout>
+        <ImageView
+            android:id="@+id/id_prfl_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:src="#6545"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/id_clg_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" College Name :xxxxxxxxxxxxxxxxxxxxxxxxx "/>
+
+        <TextView
+
+            android:id="@+id/course_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text=" Course  : xxxxxxxxx "
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/id_brnch_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" Branch : xxxxxxxxxxxxxxxxx "/>
+        <!-- //////////////////////////////////////////////////////// -->
+
+
+        <TextView
+
+            android:id="@+id/fees_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text=" Fees Staus : xxxxxxxxxxxx "
+            android:textColor="@color/white" />
+
+        <TextView
+
+            android:id="@+id/mobile_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text=" Mobile : xxxxxxxxxxxx "
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/id_booking_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" Booking Date: 20/10/2017 "/>
+        <TextView
+            android:id="@+id/id_fees_yearly"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" Fees (Yearly) : 5000/Rs. "/>
+
+
+
+        <TextView
+            android:id="@+id/id_clg_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" College Address : sec 23 Faridabad ,UP "/>
+
+
+        <!--  ///////////////////////////////////////////////////// -->
+
+
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <TextView
+            android:id="@+id/id_st_add"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text="Student Address : 156/1 Vijay Nagar, Kanpur "/>
+
+        <TextView
+            android:id="@+id/id_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" City : Kanpur "/>
+
+
+        <TextView
+            android:id="@+id/id_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" State : Uttar Pradesh "/>
+        <TextView
+            android:id="@+id/id_pincode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="5dp"
+            android:text=" Pincode : 208005 "/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

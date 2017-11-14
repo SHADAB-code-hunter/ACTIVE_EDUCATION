@@ -40,7 +40,7 @@
                 android:layout_weight="1.5"
                 android:fontFamily="sans-serif"
                 android:gravity="center|left"
-                android:text="Manav Rachna University "
+                android:text="Title Name "
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -292,7 +292,7 @@
                             />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/id_linear_abtus_menu"
+                        android:id="@+id/id_linear_logout_menu"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:gravity="center|left"
@@ -302,7 +302,7 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:fontFamily="sans-serif"
-                            android:background="@drawable/ic_info_icn"
+                            android:background="@drawable/logout"
                             android:backgroundTint="@color/white"
                             android:textColor="@color/white"/>
                         <TextView
@@ -312,7 +312,7 @@
                             android:textSize="20sp"
                             android:layout_marginLeft="30dp"
                             android:fontFamily="sans-serif"
-                            android:text="About Us"
+                            android:text="Logout"
                             android:textColor="@color/white"/>
 
                     </LinearLayout>
@@ -330,7 +330,7 @@
             </LinearLayout>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
-     <FrameLayout
+<!--     <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
@@ -403,7 +403,7 @@
          </FrameLayout>
 
 
-        </FrameLayout>
+        </FrameLayout>-->
      <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"

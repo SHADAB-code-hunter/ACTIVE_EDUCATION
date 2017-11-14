@@ -19,6 +19,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+
         app:cardCornerRadius="20dp"
         app:cardElevation="10dp">
 
@@ -188,13 +189,7 @@
                         android:src="@drawable/ic_lock" />
                 </FrameLayout>
 
-                <TextView
-                    android:id="@+id/id_forgot_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Forgot Password ?"
-                    android:textColor="#6949FF" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -212,12 +207,17 @@
                         android:text="Log In"
                         android:textAllCaps="false"
                         android:textColor="@color/white" />
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text=" --- OR ---"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        android:orientation="horizontal">
                     <Button
                         android:id="@+id/fb_in_button"
                         android:layout_width="wrap_content"
@@ -242,18 +242,48 @@
                         android:textSize="10sp"
                         android:layout_marginRight="10dp"
                         android:visibility="visible" />
+                </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:paddingBottom="10dp"
+                        android:gravity="end">
+                        <TextView
+                            android:id="@+id/id_forgot_password"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:textSize="12sp"
+                            android:text="Forgot Password ?"
+                            android:textColor="#6949FF" />
+                        <TextView
+                            android:id="@+id/id_Reg_here"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@+id/id_forgot_password"
+                            android:text="Register Here "
+                            android:textColor="@color/tumblr_red" />
+                    </RelativeLayout>
 
 
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/btn_sign_up"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="bottom|end"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:background="@drawable/signup_btn_shape"
-                    android:text="Sign Up"
+
                     android:textAllCaps="false"
                     android:textColor="@color/theme_color" />
             </LinearLayout>

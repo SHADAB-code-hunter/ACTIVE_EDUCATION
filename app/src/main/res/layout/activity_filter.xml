@@ -98,7 +98,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/ic_filter_up"/>
-        </FrameLayout>
+            </FrameLayout>
         </RelativeLayout>
 
     </LinearLayout>
@@ -450,6 +450,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:clickable="true"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:background="#464646"
         android:layout_marginTop="100dp"

@@ -13,6 +13,15 @@ public class Get_Course_desc {
     public String branch_short_name ;
     public String branch_info ;
     public String branch_fee ;
+    public String c_duration ;
+
+ public String getC_duration() {
+  return c_duration;
+ }
+
+ public void setC_duration(String c_duration) {
+  this.c_duration = c_duration;
+ }
 
  public String getId() {
   return id;

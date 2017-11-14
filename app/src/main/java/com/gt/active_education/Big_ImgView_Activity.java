@@ -50,6 +50,7 @@ public class Big_ImgView_Activity extends AppCompatActivity {
     public static final String BITMAPS = "bitmaps";
     public ArrayList<Gallery_Model> quiz_Ans_List;
     static final BitmapFactory.Options BITMAP_FACTORY_OPTIONS;
+    private String strimg;
     
     static {
         BITMAP_FACTORY_OPTIONS = new BitmapFactory.Options();
@@ -63,10 +64,10 @@ public class Big_ImgView_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_imgview);
-
         quiz_Ans_List = this.getIntent().getParcelableArrayListExtra("list");
         String  poss= this.getIntent().getStringExtra("position_click");
         String st_page=this.getIntent().getStringExtra("click_page");
+        strimg=this.getIntent().getStringExtra("URL");
         //Log.d("popodp",""+poss);
         imageViewPagerAdapter = new ImageViewPagerAdapter(quiz_Ans_List,st_page);
 
@@ -184,7 +185,7 @@ public class Big_ImgView_Activity extends AppCompatActivity {
     /**
      *
      */
-    private static class ImageViewPagerAdapter extends PagerAdapter {
+    private class ImageViewPagerAdapter extends PagerAdapter {
 
         private ArrayList<Gallery_Model> quiz_Ans_List;
         private VolleySingleton mVolleySingleton;
@@ -213,11 +214,11 @@ public class Big_ImgView_Activity extends AppCompatActivity {
 
                 if(st_page.equals("Gallery"))
                 {
-                    String strimg = UrlEndpoints.GALLERY_IMG_PATH + str_img;
-                    //Log.d("strimg", strimg);
+                   // String strimg = UrlEndpoints.GALLERY_IMG_PATH + str_img;
+                    Log.d("strimg", strimg+"  "+st_page+" "+strimg+str_img);
                    if (!strimg.equals(Constants.NA)) {
-                    //Log.d("strimg", strimg);
-                    mImageLoader.get(strimg, new ImageLoader.ImageListener() {
+                    Log.d("strimg", strimg);
+                    mImageLoader.get(strimg+str_img, new ImageLoader.ImageListener() {
                         @Override
                         public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
                             imageView.setImageBitmap(response.getBitmap());

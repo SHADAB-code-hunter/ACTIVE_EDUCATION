@@ -20,12 +20,15 @@ import android.support.v7.app.AlertDialog;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -35,7 +38,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
+import com.gt.active_education.SplashScreen_Activity;
+import com.gt.active_education.Target_Circle_Activity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,10 +57,15 @@ import java.util.regex.Pattern;
 
 import callbacks.SignUp_Pager_Swape_Listener;
 import callbacks.Pager_Change_listener;
+import utilities.App_Raw_Data;
 import utilities.Image_picker;
 import utilities.MyApplication;
+import utilities.State_City_Search;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
+
+import static utilities.UrlEndpoints.GET_CITY;
+import static utilities.UrlEndpoints.GET_STATE;
 
 /**
  * Created by GT on 8/24/2017.
@@ -76,6 +87,14 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
     private String file_name;
     private Map<String, String> map;
     private Bundle bundle;
+    private  String cat_type;
+    private Bitmap str_image_prfl;
+    private boolean open=false;
+    private State_City_Search state_city_search;
+    private TextView id_text_tv_state;
+    private TextView id_text_tv_city;
+    private Map<String,String> map2=new HashMap<>();
+    private RelativeLayout id_frm_city,id_frm_state;
 
     //SIGN_UP_API
     @Override
@@ -107,13 +126,22 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
         edt_cat=(EditText)rootView.findViewById(R.id.id_edt_cat);
         edt_dob=(EditText)rootView.findViewById(R.id.id_edt_dob);
         edt_add=(EditText)rootView.findViewById(R.id.id_edt_add);
-        edt_state=(EditText)rootView.findViewById(R.id.id_edt_state);
-        edt_city=(EditText)rootView.findViewById(R.id.id_edt_city);
+       // edt_state=(EditText)rootView.findViewById(R.id.id_edt_state);
+     //   edt_city=(EditText)rootView.findViewById(R.id.id_edt_city);
+
         edt_pincode=(EditText)rootView.findViewById(R.id.id_edt_pincode);
+        id_frm_state=(RelativeLayout)rootView.findViewById(R.id.id_frm_state);
+        id_frm_city=(RelativeLayout)rootView.findViewById(R.id.id_frm_city);
+
+        id_text_tv_state=(TextView)rootView.findViewById(R.id.id_text_tv_state);
+        id_text_tv_city=(TextView)rootView.findViewById(R.id.id_text_tv_city);
+
         if(getArguments()!=null)
         {
-            Log.d("bundrrle","null");
             bundle=getArguments();
+            cat_type=bundle.getString("type");
+           // Log.d("bundrrle",""+bundle.getString("type"));
+            //str_type=getIntent().getStringExtra("type");
         }
         /* image pick*/
         permission_check(101);
@@ -176,16 +204,16 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                         if (!isValidName(st_add)) {
                                             edt_add.setError("Address is too short");
                                         } else {
-                                            st_state = edt_state.getText().toString().trim();
+                                            /*st_state = edt_state.getText().toString().trim();
                                             if (!isValidName(st_state)) {
                                                 edt_state.setError("State Is not Correct ");
                                                 // Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                st_city = edt_city.getText().toString().trim();
+                                            } else {*/
+                                               /* st_city = edt_city.getText().toString().trim();
                                                 if (!isValidName(st_city)) {
                                                     edt_state.setError("City Is not Correct ");
                                                     // Toast.makeText(getActivity(), "Please Select Gender", Toast.LENGTH_SHORT).show();
-                                                } else {
+                                                } else {*/
                                                     st_pincode = edt_pincode.getText().toString().trim();
                                                     if (!isValidPincode(st_pincode)) {
                                                         edt_pincode.setError("Pincode Is not Correct ");
@@ -199,6 +227,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                                             if (!(str_profile_bitmap.equals("")) || (str_profile_bitmap.length() >= 0)) {
                                                                 //    http://activequizindia.com/admin/webservices/signup.php?
                                                                 //     uname=shadab ahmed&father_name=ahmed&dob=10/09/1991&mobile=9599805321&address=faridabad&state=1&city=1&sex=Male&pwd=123456&filename=shadab.png&email=ahmed.shadab221@gmail.com
+
                                                                 map = new HashMap<String, String>();
                                                                 map.put("f_name", st_fname);
                                                                 map.put("l_name", st_lname);
@@ -208,26 +237,23 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                                                 map.put("caste_category", st_cat);
                                                                 map.put("dob", st_dob);
                                                                 map.put("address", st_add);
-                                                                map.put("state", st_state);
-                                                                map.put("city", st_city);
                                                                 map.put("pincode", st_pincode);
                                                                 map.put("gender", "male");
                                                                 map.put("filename", st_fname + ".png");
                                                                 map.put("image", str_profile_bitmap);
                                                                 Log.d("sruts","gdgdg"+str_profile_bitmap);
-                                                                call_submit_methos();
+                                                                call_submit_methos(map);
                                                             } else {
 
                                                             }
                                                         }
-                                                    }
-                                                }
+                                                   /* }
+                                                }*/
                                           //  }
                                         }
                                     }
-                                }
-                             }
-
+                                  }
+                               }
                            }
                         }
                     }
@@ -236,10 +262,73 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
             }
         });
 
+
+        id_frm_state.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(!open) {
+                    Log.d("kkjkjkjkj",""+open);
+                    open = true;
+                    state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
+                        @Override
+                        public void on_listdata(String s,String s_id) {
+                            // id_tv_state.setText(s);id_tv_city.setText("Select City");
+                            Log.d("kkjkjkjkj",""+s_id+" "+s);
+                            if(!s.equals("na")){
+                                id_text_tv_state.setText(s);
+                                id_text_tv_city.setText("City");
+                                map2.put("state", ""+ App_Raw_Data.local_parseJson(s));
+                                Log.d("sgsdfe",""+App_Raw_Data.local_parseJson(s))  ;
+                            }
+                            else {
+                                id_text_tv_state.setText("State"); id_text_tv_city.setText("City");
+                            }
+                            state_city_search.cancel();
+                            open=false;
+                        }
+                    }, Personal_Fragment.this.getContext(), GET_STATE,"data");
+                    state_city_search.show();
+                }
+                return false;
+            }
+        });
+
+
+        id_frm_city.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (!open) {
+                    if (!id_text_tv_state.getText().toString().equals("State")) {
+                        open = true;
+                        StringBuilder stringBuilder = App_Raw_Data.local_parseJson(id_text_tv_state.getText().toString());
+                        state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
+                            @Override
+                            public void on_listdata(String s,String s_id) {
+                                //  Log.d("jdjfhf",""+s);
+                                if(!s.equals("na")){
+                                    id_text_tv_city.setText(s);
+                                    map2.put("city",s);
+                                   // map.put("city", st_city);
+                                }else {
+                                    id_text_tv_city.setText("City");
+                                }
+                                state_city_search.cancel();
+                                open = false;
+                            }
+                        }, Personal_Fragment.this.getContext(), GET_CITY +map2.get("state"),"findCity");
+                        state_city_search.show();
+                    } else if(id_text_tv_state.getText().toString().equals("State")) {
+                        Toast.makeText(Personal_Fragment.this.getContext(), "Please Select State First !!!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return false;
+            }
+        });
+
         return rootView;
     }
 
-    public void call_submit_methos()
+    public void call_submit_methos(final Map<String, String> map)
     {
         Log.d("frgg","cac");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.GET_admission_personal,
@@ -284,35 +373,39 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-               /* Log.d("map_value",
-                map.get("f_name")+
-                map.get("l_name")+
-                map.get("father_name")+
-                map.get("email")+
-                map.get("mobile")+
-                map.get("caste_category")+
-                map.get("dob")+
-                map.get("address")+
-                map.get("state")+
-                map.get("city")+
-                map.get("pincode")+
-                map.get("gender")+
-                map.get("filename")+
-                map.get("image")
-                );*/
-              //  Log.d("map_value",map.get("email")+map.get("father_name"));
-//&crd_email=sa@gmail.com&token=u4Rtws6ok3&clgid=lmcp&course=1&branch=1&type=agent&userid=1
-                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-                String str_email=sharedPreferences.getString("email", "na");
-                String str_token=sharedPreferences.getString("Login_Token", "na");
+
+                String str_types=(MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0)).getString("type","NA");
+                SharedPreferences sharedPreferences=null;
+                switch (str_types)
+                {
+                    case "agent":
+
+                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence,0);
+
+                        break;
+                    case "seater":
+                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref,0);
+
+                        break;
+                    case "user":
+                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
+
+                        break;
+                }
+
+                String str_mobile=sharedPreferences.getString("mobile", "na");
+                String str_token=sharedPreferences.getString("token", "na");
                 String str_type=sharedPreferences.getString("type", "na");
-                map.put("crd_email",str_email);
+                map.put("crd_mobile",str_mobile);
                 map.put("token",str_token);
                 map.put("clgid",bundle.getString("clg_id"));
                 map.put("course",bundle.getString("course"));
                 map.put("branch",bundle.getString("branch"));
                 map.put("type",str_type);
+                map.put("category",cat_type);
+                map.putAll(map2);
                // map.put("userid",);
+                Log.d("mappy",map.toString());
                 return map;
             }
         };
@@ -355,18 +448,22 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.d("datapack",data.toString());
-        // programmitically set screen orientation of activity (landscape)
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        if(resultCode!=0) {
+            super.onActivityResult(requestCode, resultCode, data);
+            Log.d("datapack", data.toString());
+            // programmitically set screen orientation of activity (landscape)
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        // programmitically set screen orientation of activity (portrait)
-        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        if (requestCode == lower_CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            id_img_picker.setImageBitmap(photo);
-        }else if(requestCode!= lower_CAMERA_REQUEST) {
-            imagePicker.onActivityResult(requestCode, resultCode, data,"10001");
+            // programmitically set screen orientation of activity (portrait)
+            //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            if (requestCode == lower_CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                id_img_picker.setImageBitmap(photo);
+            } else if (requestCode != lower_CAMERA_REQUEST) {
+                imagePicker.onActivityResult(requestCode, resultCode, data, "10001");
+            }
+        }else {
+            Toast.makeText(Personal_Fragment.this.getContext(), "You Did'nt have Choosen any Image !!!", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -374,10 +471,10 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
     public void image_attachment(int from, String filename, Bitmap file, Uri uri, String s,String str_status) {
         this.bitmap=file;
         this.file_name=filename; //Log.d("callll","call");
-
-        //Log.d("bitmapp",file.toString());
+        str_image_prfl=file;
+        Log.d("bitcdcmapp",file.toString());
         //Log.d("urlir",uri.toString()+"  "+from);
-
+        id_img_picker.setImageBitmap(file);
         switch (str_status)
         {
             case "img1":

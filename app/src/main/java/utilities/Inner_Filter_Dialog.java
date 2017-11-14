@@ -49,6 +49,7 @@ public class Inner_Filter_Dialog extends Dialog implements View.OnClickListener 
     public Inner_Filter_Dialog(@NonNull Context context, String str_Url, Inner_Dialog_Listener inner_dialog_listener) {
         super(context);
         this.str_Url=str_Url;
+        Log.d("urlstring",""+str_Url);
         this.inner_dialog_listener=inner_dialog_listener;
     }
 
@@ -85,13 +86,13 @@ public class Inner_Filter_Dialog extends Dialog implements View.OnClickListener 
                         @Override
                         public void on_listdata(String s,String s_id) {
                            // id_tv_state.setText(s);id_tv_city.setText("Select City");
+                            Log.d("kkjkjkjkj",""+s_id);
                             if(!s.equals("na")){
                                 id_tv_state.setText(s);
                                 id_tv_city.setText("Select City");
                                 map.put("state_id", ""+App_Raw_Data.local_parseJson(s));
-                          }
+                                Log.d("sgsdfe",""+App_Raw_Data.local_parseJson(s))  ;                                                      }
                             else {
-
                                 id_tv_state.setText("Select State"); id_tv_city.setText("Select City");
                             }
                             state_city_search.cancel();

@@ -6,5 +6,5 @@ package callbacks;
 
 public interface SignUp_Pager_Swape_Listener {
 
-    public void onPager_swap_method();
+    public void onPager_swap_method(String login_page);
 }

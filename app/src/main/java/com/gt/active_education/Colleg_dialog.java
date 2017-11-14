@@ -68,7 +68,7 @@ public  class Colleg_dialog extends Dialog implements Upcoming_List_LoadedListen
 
         id_btn_submit=(Button)findViewById(R.id.id_btn_submit);
         id_btn_submit.setOnClickListener(this);
-        
+        Log.d("dhdhdhdh",str_course);
         new Load_Courses_Data(Colleg_dialog.this,str_course).execute();
     }
 
@@ -97,7 +97,7 @@ public  class Colleg_dialog extends Dialog implements Upcoming_List_LoadedListen
          id_course_spinner.setAdapter(course_adapter);
          id_course_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
              public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {   //  str_choose_date=arrayList.get(position);
-                 Log.d("strr", "fgrt");
+                 Log.d("strr", UrlEndpoints.GET_BRANCH_LIST + str_course_id);
                  //  type_postion=(position+1);
                  str_course_id = common_pojos.get(position).getId();
                  set_state_list(UrlEndpoints.GET_BRANCH_LIST + str_course_id, position);

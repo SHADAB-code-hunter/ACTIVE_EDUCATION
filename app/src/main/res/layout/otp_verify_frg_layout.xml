@@ -56,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingRight="25dp"
+                        android:visibility="invisible"
                         android:paddingTop="10dp"
                         android:layout_margin="0dp"
                         android:layout_gravity="end">
@@ -88,7 +89,7 @@
                         android:layout_gravity="center"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="0dp">
 
 
                         <TextView
@@ -110,13 +111,13 @@
                             android:text=" Mobile Number "/>
 
                         <TextView
+                            android:id="@+id/id_mobile_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#9f9c9c"
                             android:gravity="center"
                             android:textSize="18sp"
-                            android:layout_margin="15dp"
-                            android:text="[ + 91 ]    9599805321 "/>
+                            android:layout_margin="15dp" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -141,6 +142,7 @@
                             android:backgroundTint="#451dff"
                             android:gravity="center"
                             android:maxLines="1"
+                            android:inputType="number"
                             android:textColor="@color/btn_color"
                             android:textColorHint="@color/btn_color"
                             android:layout_gravity="center"
@@ -149,15 +151,17 @@
                         <!--   </android.support.design.widget.TextInputLayout>-->
 
                         <LinearLayout
+                            android:id="@+id/id_otp_again"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="20dp"
+                            android:padding="10dp"
+                            android:visibility="gone"
                             android:gravity="center">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="send OTP again ? "/>
+                                android:text="get OTP again ? "/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -173,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_gravity="bottom|end"
-                        android:background="@color/btn_color"
+                        android:background="@color/txt_color"
                         android:text="VERIFY"
                         android:layout_margin="30dp"
                         android:textAllCaps="false"

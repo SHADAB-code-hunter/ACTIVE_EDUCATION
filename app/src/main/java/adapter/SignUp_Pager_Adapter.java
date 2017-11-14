@@ -21,7 +21,7 @@ import fragment.SignUp_Successfull_Frg;
  */
 
 public class SignUp_Pager_Adapter extends FragmentPagerAdapter {
-    private static final int FRAGMENT_COUNT = 4;
+    private static final int FRAGMENT_COUNT = 3;
     private Activity activity;
     private String str_status;
 
@@ -47,19 +47,14 @@ public class SignUp_Pager_Adapter extends FragmentPagerAdapter {
 
             case 2:
 
-                if (str_status.equals("User")) {
-                    Log.d("fgr",""+str_status);
+               /* if (str_status.equals("User")) {
+                    Log.d("fgr",""+str_status);*/
                     fragment = new SignUp_Fragment();
-                }else if(str_status.equals("Agent")) {
+               /* }else if(str_status.equals("Agent")) {
                     Log.d("fgr",""+str_status);
                     fragment = new Agent_Registered_frg();
                 }
-
-                break;
-
-            case 3:
-
-                fragment=new SignUp_Successfull_Frg();
+*/
                 break;
 
         }

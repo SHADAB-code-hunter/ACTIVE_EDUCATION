@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/pure_red"
     android:fitsSystemWindows="true">
 
     <ScrollView
@@ -67,22 +66,24 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:visibility="invisible"
                         android:layout_weight="2.2"
-                        android:layout_marginTop="5dp">
+                        android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/tv_logout"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/logout_icon"
-                        android:layout_gravity="center|top" />
+                        android:id="@+id/tv_home"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="7dp"
+                        android:backgroundTint="@color/color1"
+                        android:background="@drawable/round_btn1"
+                        android:src="@drawable/ic_home_front"
+                        android:layout_gravity="center" />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Logout"
                         android:gravity="center"
-                        android:layout_gravity="center|bottom"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="5dp"
                         android:textColor="@color/white" />
                     </FrameLayout>
                 </LinearLayout>
@@ -90,38 +91,48 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
-                    android:layout_marginTop="0dp">
-
-
+                    android:layout_marginLeft="10dp">
 
                         <LinearLayout
                             android:id="@+id/id_profile_left"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+                            <FrameLayout
 
-                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                            <com.mikhaellopez.circularimageview.CircularImageView
                                 android:id="@+id/id_image_profile_signup"
                                 android:layout_width="100dp"
-                                android:layout_height="70dp"
-                                android:layout_alignParentTop="true"
+                                android:layout_height="80dp"
                                 android:layout_alignStart="@+id/id_edit_camera_iv"
-                                android:layout_marginLeft="0dp"
-                                android:layout_marginRight="10dp"
+                                android:layout_marginRight="0dp"
+                                android:layout_gravity="center|right"
                                 android:src="@drawable/ic_profiledemo" />
+                                <FrameLayout
+                                    android:id="@+id/id_frm"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:clickable="true"
+                                    android:layout_gravity="end|center"
+                                    android:background="@drawable/ksw_md_thumb"
+                                    android:padding="7dp"
+                                    android:layout_marginTop="0dp">
+                                    <ImageView
+
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="end|center"
+                                        android:layout_marginTop="0dp"
+                                        android:src="@drawable/ic_cam" />
+                                </FrameLayout>
+                            </FrameLayout>
 
                            <LinearLayout
                                android:layout_width="wrap_content"
                                android:layout_height="match_parent"
                                android:orientation="vertical">
-                               <TextView
-                                   android:layout_width="wrap_content"
-                                   android:layout_height="wrap_content"
-                                   android:textColor="@color/white"
-                                   android:textSize="14sp"
-                                   android:layout_marginLeft="10dp"
-                                   android:text=" Shadab Ahmad"/>
-
 
                            </LinearLayout>
 
@@ -131,24 +142,39 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:paddingRight="20dp"
+                        android:paddingBottom="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
                         android:orientation="vertical"
-                        android:gravity="right"
                         android:layout_toRightOf="@+id/id_profile_left">
+
+                        <TextView
+                            android:id="@+id/id_name_prfl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginLeft="00dp"
+                            android:text="Shadab Ahmad"/>
 
                         <ImageView
                             android:id="@+id/imageView2"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
+                            android:layout_width="40dp"
+                            android:visibility="gone"
+                            android:layout_height="40dp"
                             android:layout_marginRight="30dp"
                             android:backgroundTint="@color/white"
                             android:src="@drawable/location"/>
                         <TextView
+                            android:id="@+id/id_add"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
                             android:layout_margin="5dp"
-                            android:text="sec 23 Faridabad"
-                            android:layout_gravity="right"/>
+                            android:backgroundTint="@color/color2"
+                            android:drawableLeft="@drawable/ic_map"
+                            android:text=" sec 23 Faridabad"
+                            android:layout_gravity="start"/>
                     </LinearLayout>
 
                 </RelativeLayout>

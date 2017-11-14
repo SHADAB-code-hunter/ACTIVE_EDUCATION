@@ -1,7 +1,9 @@
 package com.gt.active_education;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -37,6 +39,7 @@ import java.util.Map;
 
 import adapter.Adapter_Facility;
 import adapter.Banner_Adapter;
+import adapter.Banner_Adapter_Clg;
 import adapter.Common_pojo_adapter;
 import adapter.Gallery_Dapter_College_Detail;
 import adapter.Gallery_demo_adapter;
@@ -44,6 +47,7 @@ import callbacks.CLG_DESC_Listener;
 import callbacks.Choose_newCourses_Listener;
 import callbacks.Upcoming_List_LoadedListener;
 import pojo.Cat_Model;
+import pojo.Gallery_Model;
 import pojo.Get_Course_desc;
 import task.Async_Respoce;
 import task.Load_Async_Course_desc;
@@ -51,9 +55,14 @@ import task.Load_College_Desc_Async;
 import task.Load_Course_AVail_Data;
 import task.Load_Courses_Data;
 import utilities.App_Static_Method;
+import utilities.Change_Courses_Dialog;
 import utilities.Common_Pojo;
+import utilities.RecyclerTouchListener;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.show_load_progress;
+import static utilities.UrlEndpoints.GET_CLG_COURSE;
+import static utilities.UrlEndpoints.GET_COURSE_LIST;
 import static utilities.UrlEndpoints.IMAGE_PATH_ADAPTER;
 import static utilities.UrlEndpoints.URL_GET_FULL_DETAIL;
 
@@ -84,7 +93,16 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
     private ViewPager id_collge_banner;
     private LinearLayout id_download_broucher;
     private String[] str_cat_arr;
-
+    private TextView id_mail;
+    private TextView id_website;
+    private ProgressDialog progressDialog;
+    private ArrayList<Common_Pojo> gallery_lis;
+    private TextView id_below_location;
+    private String str_course_name;
+    private Change_Courses_Dialog change_courses_dialog;
+    private LinearLayout id_view_more_linear;
+    private TextView id_duration;
+    private TextView id_fees2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +113,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         id_name_tv=(TextView)findViewById(R.id.id_name_tv);
         id_add_tv=(TextView)findViewById(R.id.id_add_tv);
         id_college_desc=(TextView)findViewById(R.id.id_college_desc);
+        id_below_location=(TextView)findViewById(R.id.id_below_location);
      // id_recycler_view=(RecyclerView)findViewById(R.id.id_recycler_view);
         id_gallery_recycler_view=(RecyclerView)findViewById(R.id.id_gallery_recycler_view);
         id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(this);
@@ -107,11 +126,19 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         id_avail_recycler_view=(RecyclerView) findViewById(R.id.id_avail_recycler_view);
         id_collge_banner=(ViewPager)findViewById(R.id.id_collge_banner);
         id_download_broucher=(LinearLayout)findViewById(R.id.id_download_broucher);id_download_broucher.setOnClickListener(this);
+        id_mail=(TextView)findViewById(R.id.id_mail);
+        id_website=(TextView)findViewById(R.id.id_website);
+        id_view_more_linear=(LinearLayout)findViewById(R.id.id_view_more_linear);id_view_more_linear.setOnClickListener(this);
+        id_duration=(TextView)findViewById(R.id.id_duration);
+        id_fees2=(TextView)findViewById(R.id.id_fees2);
+
+        progressDialog =show_load_progress(College_Detail_Activity.this,getString(R.string.Loading));
 
         ((Button) findViewById(R.id.id_btn_apply)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(getIntent()!=null) {
+                 //   Log.d("dlkldkl",""+)
                     Intent intent=new Intent(getApplicationContext(),Admission_Form_Activity.class);
                     intent.putExtras(getIntent().getExtras());
                     startActivity(intent);
@@ -123,6 +150,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             str_clg_id=getIntent().getStringExtra("clg_id");
             str_course_id=getIntent().getStringExtra("course");
             str_brn_id=getIntent().getStringExtra("branch");
+            str_course_name=getIntent().getStringExtra("course_name");
        //     Toast.makeText(this, ""+str_brn_id, Toast.LENGTH_SHORT).show();
             if (getIntent().getStringExtra("type")!=null)
             {
@@ -140,7 +168,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         id_course=(TextView)findViewById(R.id.id_course);
         id_course_desc=(TextView)findViewById(R.id.id_course_desc);
         id_tv_clg_desc=(TextView)findViewById(R.id.id_tv_clg_desc);
-        viewPager=(ViewPager)findViewById(R.id.id_collge_banner);
+        id_course.setText(str_course_name);
         id_linear_change_course=(LinearLayout)findViewById(R.id.id_linear_change_course);
         id_linear_change_course.setOnClickListener(this);
 
@@ -149,42 +177,79 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
 
         LinearLayout id_change_courses_linear=(LinearLayout)findViewById(R.id.id_change_courses_linear);
         id_change_courses_linear.setOnClickListener(this);
-        Toast.makeText(this,""+str_clg_id+" "+str_type, Toast.LENGTH_SHORT).show();
+     //   Toast.makeText(this,""+str_clg_id+" "+str_type, Toast.LENGTH_SHORT).show();
         Log.d("collegeid_",""+str_clg_id+" "+str_type);
         id_college_desc_url.setText(UrlEndpoints.GET_CLG_DESC+"id="+str_clg_id+"&type="+str_type);
         new Load_College_Desc_Async(College_Detail_Activity.this, UrlEndpoints.GET_CLG_DESC+"id="+str_clg_id+"&type="+str_type).execute();
-        //  new Load_Courses_Data(College_Detail_Activity.this,UrlEndpoints.GET_COURSE_LIST+str_clg_id).execute();
-        String url=UrlEndpoints.GET_CLG_COURSE+"clgid="+str_clg_id+"&branch="+str_brn_id+"&course="+str_course_id;
+
         String status_call="activity";
-        id_corse_url.setText(url+" _________________________   desc ________________"+UrlEndpoints.URL_TOP_COURSES);
-        new Load_Async_Course_desc(College_Detail_Activity.this,url,status_call).execute();
+      /*  id_corse_url.setText(url+" _________________________   desc ________________"+UrlEndpoints.URL_TOP_COURSES);
+        *//* hit api */
+        new Load_Async_Course_desc(College_Detail_Activity.this,GET_CLG_COURSE+
+                "clgid="+str_clg_id
+                +"&branch="+str_brn_id
+                +"&type="+str_type
+                +"&course="+str_course_id,status_call).execute();
         new Load_Courses_Data(College_Detail_Activity.this, UrlEndpoints.URL_TOP_COURSES).execute();
-
-        int[] Img_Bnr=new int[]{R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,
-                R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner,R.drawable.ic_manav_rcahna_banner};
-
-
-
         new Async_Respoce(College_Detail_Activity.this,URL_GET_FULL_DETAIL, map).execute();
+
+
+        id_avail_recycler_view.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), id_avail_recycler_view,
+                new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, final int position) {
+
+                        show_Chenge_Courses_Dialog();
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                }
+        ));
 
     }
 
+
+    public void show_Chenge_Courses_Dialog()
+    {
+        change_courses_dialog=new Change_Courses_Dialog(College_Detail_Activity.this, GET_COURSE_LIST + str_clg_id,
+                new Change_Courses_Dialog.Change_Course_Listener() {
+                    @Override
+                    public void onCourse_Dialog(Map<String, String> map) {
+                        Log.d("mdmdmmd",""+map);
+                        change_courses_dialog.cancel();
+                        new Load_Async_Course_desc(((Choose_newCourses_Listener)College_Detail_Activity.this),GET_CLG_COURSE+
+                                "clgid="+str_clg_id
+                                +"&branch="+map.get("branch_id")
+                                +"&type="+str_type
+                                +"&course="+map.get("course_id"),"dialog").execute();
+
+                    }
+                });
+        change_courses_dialog.show();
+
+    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.id_linear_change_course:
-                clg_dialog=new Colleg_dialog(College_Detail_Activity.this,
-                        UrlEndpoints.GET_COURSE_LIST+str_clg_id,str_clg_id);
-                clg_dialog.show();
+                show_Chenge_Courses_Dialog();
                 break;
 
             case R.id.id_frm_back:
                 finish();
                 break;
+
              case R.id.id_download_broucher:
+
                  call_Download();
+                    break;
+            case R.id.id_view_more_linear:
+
                     break;
         }
     }
@@ -228,9 +293,13 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             if (listMovies.get(0).getC_info()!=null)
             id_course_desc.setText(listMovies.get(0).getC_info());
             if (status_call.equals("dialog")) {
-                clg_dialog.cancel();
+                change_courses_dialog.cancel();
             }
         id_branch_name.setText(listMovies.get(0).getCname());
+        if(!listMovies.get(0).getC_duration().equals("NA"))
+        id_duration.setText("  "+listMovies.get(0).getC_duration()+" Year /"+(2*Integer.parseInt(listMovies.get(0).getC_duration()))+" Semester ");
+
+        id_fees2.setText("  "+listMovies.get(0).getBranch_fee()+"/Annually");
       }
 
     @Override
@@ -267,6 +336,20 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        progressDialog =show_load_progress(College_Detail_Activity.this,getString(R.string.Loading));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(progressDialog!=null);
+        progressDialog.cancel();
+    }
+
+    @Override
     public void on_responce(JSONObject jsonObject) {
        // {"data":[{"added_date":"2017-10-23 05:44:07","c_address":"Sector 3, Phase-I Dwarka, New Delhi","c_city":"1038","c_country":"INDIA","c_email":"mail@dpsdwarka.com","c_established":"1997","c_id":"dps","c_image":"dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg","c_info":"The core philosophy of DPS Dwarka is its endeavour to instill a value system in each individual, so as to help him withstand all the tests of time. We believe that true education is training of both the head & the heart. Academic excellence is desirable but inculcating good values is the essence of education.","c_name":"Delhi Public School","c_phone1":"011 25074472-75","c_phone2":null,"c_state":"36","c_type":"PRIVATE","c_website":"http:\/\/www.dpsdwarka.com\/dpsdwarka\/","edit_date":"2017-10-27 13:21:25","rating":"4","brochure":"dpsdwarka.pdf","id":"2","is_active":"1","user_id":null,"c_banner":"dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg","class":"10","c_facility":"2,3,4,9,12,22,29,30","gallery":["dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg"],"banner":["dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg"],"facility":[{"name":"MATH LAB","image":"picture.png"},{"name":"Placement","image":"picture.png"},{"name":"A\/C","image":"desig12.jpg"},{"name":"CANTEEN","image":"picture.png"},{"name":"COUNSELLING","image":"picture.png"},{"name":"LIBRARY","image":"picture.png"},{"name":"SHOPPING","image":"picture.png"},{"name":"CLUB","image":"picture.png"}]},{"added_date":"2017-10-23 05:44:07","c_address":"Sector 3, Phase-I Dwarka, New Delhi","c_city":"1038","c_country":"INDIA","c_email":"mail@dpsdwarka.com","c_established":"1997","c_id":"dps","c_image":"dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg","c_info":"The core philosophy of DPS Dwarka is its endeavour to instill a value system in each individual, so as to help him withstand all the tests of time. We believe that true education is training of both the head & the heart. Academic excellence is desirable but inculcating good values is the essence of education.","c_name":"Delhi Public School","c_phone1":"011 25074472-75","c_phone2":null,"c_state":"36","c_type":"PRIVATE","c_website":"http:\/\/www.dpsdwarka.com\/dpsdwarka\/","edit_date":"2017-10-27 13:21:25","rating":"4","brochure":"dpsdwarka.pdf","id":"2","is_active":"1","user_id":null,"c_banner":"dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg,dpsdwarka.jpg","class":"1","c_facility":"2,3,4,9,12,22,29,30","gallery":["dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg"],"banner":["dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg","dpsdwarka.jpg"],"facility":[{"name":"MATH LAB","image":"picture.png"},{"name":"Placement","image":"picture.png"},{"name":"A\/C","image":"desig12.jpg"},{"name":"CANTEEN","image":"picture.png"},{"name":"COUNSELLING","image":"picture.png"},{"name":"LIBRARY","image":"picture.png"},{"name":"SHOPPING","image":"picture.png"},{"name":"CLUB","image":"picture.png"}]}]}
         Log.d("ccvv",""+jsonObject.toString());
@@ -274,15 +357,22 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             String str_add="na";
             String str_info="na";
             String str_nameclg="na";
+            String str_email="na";
+            String str_website="na";
             JSONArray jsonArray1= jsonObject.getJSONArray("data");
             JSONObject jsonObject1= jsonArray1.getJSONObject(0);
             str_nameclg=jsonObject1.getString("c_name");
             str_add=jsonObject1.getString("c_address");
             str_info=jsonObject1.getString("c_info");
+            str_email=jsonObject1.getString("c_email");
+            str_website=jsonObject1.getString("c_website");
 
             id_name_tv.setText(str_nameclg);
             id_add_tv.setText(str_add);
+            id_below_location.setText(str_add);
             id_college_desc.setText(str_info);
+            id_mail.setText(str_email);
+            id_website.setText(str_website);
             JSONArray jsonArray2=jsonObject.getJSONArray("facility");
           //  JSONArray jsonArray=jsonObject1.getJSONArray("facility");
             Log.d("hcjhdcj",""+jsonArray2.toString());
@@ -299,7 +389,6 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             Adapter_Facility adapter_city=new Adapter_Facility(College_Detail_Activity.this,facility_list);
             id_rv_facility.setAdapter(adapter_city);
             /*  ==================== facility ==========================       */
-
 
             JSONArray json_banner=jsonObject.getJSONArray("banner");
 
@@ -344,13 +433,13 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
                         break;
                 }
             }
-            id_collge_banner.setAdapter(new Banner_Adapter(getApplicationContext(),al_str,halg_img_path));
+            id_collge_banner.setAdapter(new Banner_Adapter_Clg(getApplicationContext(),al_str,halg_img_path));
 
             /* ==================      banner  =====================*/
             JSONArray json_gallery=jsonObject.getJSONArray("gallery");
             //  JSONArray jsonArray=jsonObject1.getJSONArray("facility");
             Log.d("hcjhdcj",""+json_gallery.toString());
-            ArrayList<Common_Pojo> gallery_lis=new ArrayList<>();
+            gallery_lis=new ArrayList<>();
             for(int i=0; i<json_gallery.length();i++)
             {
                 Common_Pojo common_pojo=new Common_Pojo();
@@ -364,13 +453,64 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             GridLayoutManager horizontal_LayoutManager = new GridLayoutManager(getApplicationContext(),1, LinearLayoutManager.HORIZONTAL, false);
             id_gallery_recycler_view.setLayoutManager(horizontal_LayoutManager);
             id_gallery_recycler_view.setAdapter(adapter_gallery);
+            final String finalHalg_img_path = halg_img_path;
+            id_gallery_recycler_view.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), id_gallery_recycler_view,
+                    new RecyclerTouchListener.ClickListener() {
+                        @Override
+                        public void onClick(View view, final int position) {
+
+                            Gallery_Model sendDateModel = new Gallery_Model();
+                            sendDateModel.setImage_name(gallery_lis.get(position).getName());
+
+                            ArrayList<Gallery_Model> gallerylist=new ArrayList<Gallery_Model>();gallerylist.add(sendDateModel);
+
+                            Intent i = new Intent(getApplicationContext(), Big_ImgView_Activity.class);
+                            Log.d("vkkcvkcnk", finalHalg_img_path+"/picture/" +"     :    "+gallery_lis.get(0).getName());
+                            i.putExtra("URL", finalHalg_img_path+"/picture/");
+                            i.putParcelableArrayListExtra("list", gallerylist);
+                            i.putExtra("position_click",""+position);
+                            i.putExtra("click_page","Gallery");
+                            startActivity(i);
+                        }
+
+                        @Override
+                        public void onLongClick(View view, int position) {
+
+                        }
+                    }
+            ));
+
+            Thread t=new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    if(progressDialog!=null)
+                        progressDialog.cancel();
+
+                    Log.d("gggggdd","jfghgrt");
+                }
+            });
+            t.start();
 
         } catch (JSONException e) {
                 Log.d("nmchbbh","hhfhfh");
         }
 
     }
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
 
+        /*if(progressDialog!=null)
+            progressDialog.cancel();
+
+        Log.d("gggggdd","jfghgrt");*/
+    }
         // avail courses
     @Override
     public void onavail_courses(List<Common_Pojo> common_pojos) {

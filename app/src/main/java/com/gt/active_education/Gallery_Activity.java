@@ -84,6 +84,7 @@ public class Gallery_Activity  extends AppCompatActivity implements  View.OnClic
         //Log.d("popodp", String.valueOf(poss));
         Intent i = new Intent(getApplicationContext(), Big_ImgView_Activity.class);
         i.putParcelableArrayListExtra("list", quiz_Ans_List);
+        i.putExtra("URL", UrlEndpoints.GALLERY_IMG_PATH );
         i.putExtra("position_click",""+poss);
         i.putExtra("click_page","Gallery");
         /*  i.putExtra("quiz_type","1");

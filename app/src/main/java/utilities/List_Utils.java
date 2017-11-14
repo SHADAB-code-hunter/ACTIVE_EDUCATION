@@ -33,6 +33,12 @@ public class List_Utils {
         JSONObject response = Requestor.requestJSON_MAP(requestQueue, URL,map);
         return response;
     }
+    public static JSONObject load_JSONOBJECT(RequestQueue requestQueue, String URL) {
+        //////////  UrlEndpoints.URL_DEAL_CAT_MAIN   should be dynamic according to click listener............
+        Log.d("responce_pojojuk", "" + URL);
+        JSONObject response = Requestor.requestMoviesJSON(requestQueue, URL);
+        return response;
+    }
 
     public static ArrayList<Cat_Model> load_Cat_List(RequestQueue requestQueue, String URL) {
     //////////  UrlEndpoints.URL_DEAL_CAT_MAIN   should be dynamic according to click listener............
@@ -72,23 +78,14 @@ public class List_Utils {
 
         return Parser.parse_common_list(response,filter_key);
     }
+    public static ArrayList<Agent_Deal_Pojo> load_agent_deal_list(RequestQueue requestQueue, String URL, Map<String, String> map) {
+        JSONObject response = Requestor.requestJSON_MAP(requestQueue, URL,map);
+        ArrayList<Agent_Deal_Pojo> list_default = Parser.parse_List_agent(response);
+        return list_default;
+    }
     public static ArrayList<Agent_Deal_Pojo> load_agent_deal_list(RequestQueue requestQueue, String URL) {
-        //////////  UrlEndpoints.URL_DEAL_CAT_MAIN   should be dynamic according to click listener............
-       //   Log.d("res_url",""+URL);
         JSONObject response = Requestor.requestMoviesJSON(requestQueue, URL);
         ArrayList<Agent_Deal_Pojo> list_default = Parser.parse_List_agent(response);
-        //   Log.d("responce_pojojuk",""+list_default.size());
-
-
-      //  ArrayList<String> status_list=Parser.parse_List_agent(response);
-     //   Log.d("stsdrter", ""+status_list.size());
-      /*  for (int i=0; i<status_list.size();i++)
-        {
-            Log.d("stsder", String.valueOf(status_list.size()));
-            save_shared_prefrece(Parser.parse_common_list(response,status_list.get(i)),status_list.get(i),status_list);
-        }*/
-
-        //  Log.d("listt",""+str_list);
         return list_default;
     }
 
@@ -193,10 +190,10 @@ public class List_Utils {
         //////////  UrlEndpoints.URL_DEAL_CAT_MAIN   should be dynamic according to click listener............
         JSONObject response = Requestor.requestMoviesJSON(requestQueue, str_url);
 
-        Log.d("responce_pojo_filter",""+response);
+        Log.d("responce_filter",""+response);
         ArrayList<Get_Course_desc> list_default = Parser.parse_Course_JSON(response);//for parsing json data
 
-        Log.d("filter_request",""+list_default.size());
+      //  Log.d("filter_request",""+list_default.size());
 
         return list_default;
       // return null;

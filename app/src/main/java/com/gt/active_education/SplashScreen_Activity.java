@@ -21,9 +21,13 @@ import android.widget.TextView;
 
 import adapter.Splash_Banner_Adapter;
 import rubber_indicator.RubberIndicator;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.MyApplication;
 import utilities.UpdateValues;
+import utilities.UrlEndpoints;
+
+import static utilities.App_Static_Method.checked_num;
 /*
 import com.crashlytics.android.Crashlytics;
 
@@ -74,11 +78,42 @@ public class SplashScreen_Activity extends AppCompatActivity {
 
             @Override
             public void run() {
+                if(!App_Static_Method.is_any_login(SplashScreen_Activity.this).equals("NA"))
+                {
+                    // if each are na
+                    if((checked_num(UpdateValues.LG_Seater_Pref,"mobile").equals("NA")) && (checked_num(UpdateValues.LG_PARTNER_Prefrence,"mobile").equals("NA")) && (checked_num(UpdateValues.LG_U_Prefrence,"mobile").equals("NA")))
+                    {
+                        startActivity(new Intent(SplashScreen_Activity.this,Agent_login_Activity.class));
+                        finish();
+                    }else {
+                        SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+                        switch (shprf_seater.getString("type", "na"))
+                        {
+                            case "agent":
+                                startActivity(new Intent(SplashScreen_Activity.this,DashBoard_Activity.class));
+                                finish();
+                                break;
+                            case "user":
+                                startActivity(new Intent(SplashScreen_Activity.this,DashBoard_Activity.class));
+                                finish();
+                                break;
+                            case "seater":
+                                startActivity(new Intent(SplashScreen_Activity.this,Target_Circle_Activity.class));
+                                finish();
+                                break;
+                        }
 
-                Intent i = new Intent(SplashScreen_Activity.this, DashBoard_Activity.class);
-                startActivity(i);
-                finish();
+                    }
+                }
+                else{
+
+                    Intent i = new Intent(SplashScreen_Activity.this, Agent_login_Activity.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
+
         }, 2000);
     }
    /* private void swap_page_audio_call() {

@@ -36,8 +36,7 @@ public Load_Async_Course_desc(Choose_newCourses_Listener myComponent,String url,
     protected List<Get_Course_desc> doInBackground(Void... params) {
           Log.d("jdhjhdddcjhch",url);
             List<Get_Course_desc> list= List_Utils.get_course_descs(requestQueue,url);
-            return list;
-            }
+            return list;}
 
     @Override
     protected void onPostExecute(List<Get_Course_desc> listMovies) {

@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gt.active_education.Agent_Deal_Offer_Detail_Activity;
 import com.gt.active_education.College_Detail_Activity;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
@@ -27,6 +26,8 @@ import pojo.Agent_Deal_Pojo;
 import pojo.Agent_Deal_Pojo;
 import utilities.UrlEndpoints;
 
+import static utilities.UrlEndpoints.IMAGE_PATH_ADAPTER;
+
 /**
  * Created by GT on 8/28/2017.
  */
@@ -36,18 +37,21 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
     List<Agent_Deal_Pojo> mList = new ArrayList<>();
     Picasso picasso;
     Activity _activity;
+    private String[] str_cat_arr;
+    String str_url,str_img_path, str_type="NA";
 
     public Agent_Deal_Adapter(List<Agent_Deal_Pojo> list_urls, Picasso p, Activity a) {
         this.mList = list_urls;
         this.picasso = p;
         this._activity = a;
+        this.str_type=list_urls.get(0).getCat_id();
     }
 
 
     @Override
     public Agent_Deal_Adapter.MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.single_movie, parent, false);
+                .inflate(R.layout.agent_deal_adapter, parent, false);
         return new Agent_Deal_Adapter.MovieViewHolder(itemView);
     }
 
@@ -60,56 +64,66 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
             layoutParams.setMargins((int) _activity.getResources().getDimension(R.dimen.card_margin),0,(int) _activity.getResources().getDimension(R.dimen.card_margin),(int) _activity.getResources().getDimension(R.dimen.card_margin));
         }
         holder.card_view.setLayoutParams(layoutParams);
-     /*   Log.d("hjdh",""+mList.get(position).getC_image());
-        Log.d("urlimgpath", UrlEndpoints.URL_IMAGE_APTH+mList.get(position).getC_image());
-        picasso.load(UrlEndpoints.URL_IMAGE_APTH+mList.get(position).getC_image()).placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);
-        holder.tv_title.setText(mList.get(position).getC_name());
-        holder.tv_genre.setText("Location : " +mList.get(position).getC_city()+", "+mList.get(position).getC_state());
-        holder.tv_rating.setText("Avg Fees: " + mList.get(position).getBranch_fees()+"/ year");*/
-        //  holder.tv_year.setText("Year: " + mList.get(position).getYear());
-        //   holder.tv_quality.setText("Quality: " +mList.get(position).getQuality());
+        holder.tv_title.setText(mList.get(position).getClg_name());
 
-        // holder.card_view.setTag(position);
-        //   holder.tv_quality.setText("Course: "+ mList.get(position).getC_());
-       /* holder.card_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // Log.d("k9","clicked");
-              //  String pos= (String) v.getTag();
-                Intent i=new Intent(_activity.getApplicationContext(),Agent_Deal_Offer_Detail_Activity.class);
-                Log.d("porfdd",""+mList.get(position).getClg_id()+"   "+
-                       mList.get(position).getCourse_id()+" "+
-                       mList.get(position).getBranch_id());
-               *//* form_map.put("clgid","lmcp");
-                form_map.put("course","1");
-                form_map.put("branch","1");*//*
+        holder.id_discout_text.setText(mList.get(position).getDis_offer()+"%");
+        holder.tv_quality.setText("Course: " +mList.get(position).getCourse_name());
+        holder.tv_rating.setText("Avg Fees: " +mList.get(position).getBranch_fee()+"/ year");
+        //   ==============================================================
+        Log.d("dgdggd", "" + str_url + "   " + str_type);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("clg_id",""+mList.get(position).getClg_id());
-                bundle.putString("course",""+mList.get(position).getCourse_id());
-                bundle.putString("branch",""+mList.get(position).getBranch_id());
-                i.putExtras(bundle);
-               *//* i.putExtra("clg_id",""+mList.get(position).getClg_id());
-                i.putExtra("course",""+mList.get(position).getCourse_id());
-                i.putExtra("branch",""+mList.get(position).getBranch_id());*//*
-                _activity.startActivity(i);
+        String halg_img_path = IMAGE_PATH_ADAPTER;
+        str_cat_arr = _activity.getResources().getStringArray(R.array.category_image);
+       // if (str_url != null) {
+           /* if ( !isSubstring("getSearchResult.php",str_url)) {
+                str_type = str_url.split("=")[1];
+            }else {
+                str_type = mList.get(position).getCat_id();
+            }*/
+            switch (str_type) {
+                case "1":
+                    halg_img_path = halg_img_path + str_cat_arr[0];
+                    break;
+
+                case "2":
+                    halg_img_path = halg_img_path + str_cat_arr[1];
+
+                    break;
+                case "3":
+                    halg_img_path = halg_img_path + str_cat_arr[2];
+
+                    break;
+                case "4":
+                    halg_img_path = halg_img_path + str_cat_arr[3];
+                    break;
+                case "5":
+                    halg_img_path = halg_img_path + str_cat_arr[4];
+                    break;
+                case "6":
+                    halg_img_path = halg_img_path + str_cat_arr[5];
+                    break;
             }
-        });*/
-/*
-        holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("k9","clicked");
-                String pos= (String) v.getTag();
-                Intent i=new Intent(_activity.getApplicationContext(),College_Detail_Activity.class);
-                Log.d("porfdd",""+mList.get(position).getC_id());
-                i.putExtra("course_id",mList.get(position).getCourse_id());
-                i.putExtra("clg_id",mList.get(position).getC_id());
-                i.putExtra("brn_id",mList.get(position).getBranch_id());
-                _activity.startActivity(i);
+       // }
+
+        Log.d("djgjhgjgdj",halg_img_path);
+
+        if(!mList.get(position).getImage().equals("picture.png")) {
+            if (halg_img_path != null) {
+                Log.d("imgpath", "" + halg_img_path+"/picture/" + mList.get(position).getImage());
+                picasso.load(halg_img_path+"/picture/" + mList.get(position).getImage())
+                        .placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);
             }
-        });
-*/
+        }else {
+
+            Log.d("noimage",halg_img_path);
+            if(!mList.get(position).getImage().equals(null)){
+                Log.d("imgpddath", "" + halg_img_path+"/picture/" + mList.get(position).getImage());
+                picasso.load(halg_img_path+"/picture/"  + mList.get(position).getImage())
+                        .placeholder(android.R.color.darker_gray).config(Bitmap.Config.RGB_565).into(holder.iv_cover);}
+            else {
+
+            }
+        }
         holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,6 +176,7 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
         private TextView tv_rating;
         private TextView tv_year;
         private TextView tv_quality;
+        private TextView id_discout_text;
         private CardView card_view;
         private Button id_btn_apply;
 
@@ -172,11 +187,15 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
             tv_genre = (TextView) x.findViewById(R.id.tv_genre);
             tv_rating = (TextView) x.findViewById(R.id.tv_rating);
             tv_year = (TextView) x.findViewById(R.id.tv_year);
+            id_discout_text = (TextView) x.findViewById(R.id.id_discout_text);
             tv_quality = (TextView) x.findViewById(R.id.tv_quality);
             card_view = (CardView) x.findViewById(R.id.card_view);
             id_btn_apply=(Button)x.findViewById(R.id.id_btn_apply);
         }
 
+    }
+    public static boolean isSubstring(String subStr, String mainStr){
+        return mainStr.matches(".*\\Q" + subStr + "\\E.*");
     }
 
 }

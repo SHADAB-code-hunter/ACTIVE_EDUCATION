@@ -10,7 +10,7 @@ import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 
-class TileDrawable extends BaseDrawable {
+public class TileDrawable extends BaseDrawable {
 
     private Drawable mDrawable;
     private int mTileCount = -1;

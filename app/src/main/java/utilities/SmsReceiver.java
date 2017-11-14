@@ -4,22 +4,28 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
+
+import callbacks.SMS_RECEIVER_LISTENER;
 
 /**
  * Created by GT on 5/18/2017.
  */
 
 public class SmsReceiver extends BroadcastReceiver {
-    public SmsReceiver() {
-    }
+    Fragment otp_verification_frg;
 
-    private static SmsListener mListener;
+
+    private static SMS_RECEIVER_LISTENER mListener;
     private static String otpApiKey,OTP_Session,mobile;
     private static int TIME_OUT = 4000;
 
+
+    public SmsReceiver() {
+    }
     @Override
     public void onReceive(Context context, final Intent intent) {
 
@@ -49,7 +55,7 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    private void sms_fetch(Intent intent) {
+    private static void sms_fetch(Intent intent) {
 
 
         Log.d("hvchbvh", "statusfvfv");
@@ -73,7 +79,9 @@ public class SmsReceiver extends BroadcastReceiver {
                     String otp = extractOTP(message);
                     if (otp != null) {
                         Log.d("oottpp", otp);
-                        mListener.messageReceived(otp);
+
+                        // shared ptrefrences saved
+                        mListener.on_otp_listener(otp);
                     }
                 }
             }
@@ -84,7 +92,7 @@ public class SmsReceiver extends BroadcastReceiver {
         }
     }
 
-    public String extractOTP(String sms) {
+    public static String extractOTP(String sms) {
         String[] nbs = sms.split("\\s+");
         if (nbs.length != 0) {
             for (String number : nbs) {
@@ -95,10 +103,9 @@ public class SmsReceiver extends BroadcastReceiver {
         }
         return null;
     }
-    public static void bindListener(SmsListener listener) {
+    public static void bindListener(SMS_RECEIVER_LISTENER listener) {
         mListener = listener;
-        Log.d("listener","bindlistener");
-
+        Log.d("bind_listener","bindlistener");
     }
 
     public interface SmsListener {

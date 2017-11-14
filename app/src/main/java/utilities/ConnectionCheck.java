@@ -34,7 +34,34 @@ public class ConnectionCheck {
 		return isConnected;
 
 	  }
-
+	public static void openDialog(Boolean bl_ok_true, final Activity activity) {
+		new DroidDialog.Builder(activity)
+				.icon(R.drawable.ic_checked)
+				.title("Internet Not Found !!")
+				.cancelable(true, false)
+				.negativeButton("Cancle", new DroidDialog.onNegativeListener() {
+					@Override
+					public void onNegative(Dialog droidDialog) {
+						droidDialog.dismiss();
+						// Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
+					}
+				})
+				.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
+					@Override
+					public void onNeutral(Dialog droidDialog) {
+						Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
+						activity.startActivity(intent);
+						droidDialog.dismiss();
+						// Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
+					}
+				})
+				.typeface("regular.ttf")
+				.animation(AnimUtils.AnimZoomInOut)
+				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
+						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
+				.divider(true, ContextCompat.getColor(activity, R.color.colorPrimaryDark))
+				.show();
+	}
 	public static void check_network( final Activity activity) {
 		new DroidDialog.Builder(activity)
 				.icon(R.drawable.ic_checked)
@@ -55,8 +82,55 @@ public class ConnectionCheck {
 				.divider(true, ContextCompat.getColor(activity, R.color.orange))
 				.show();
 	}
+	public static void success( final Activity activity) {
+		new DroidDialog.Builder(activity)
+				.icon(R.drawable.ic_checked)
+				.title("Successfull Updated !!!")
+				.cancelable(true, false)
 
+				.neutralButton("Cancle", new DroidDialog.onNeutralListener() {
+					@Override
+					public void onNeutral(Dialog droidDialog) {
+						//	activity.getParent().onBackPressed();
+						activity.finish();
+						droidDialog.dismiss();
+					}
+				})
+				.animation(AnimUtils.AnimZoomInOut)
+				.color(ContextCompat.getColor(activity, R.color.colorPrimary), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
+						ContextCompat.getColor(activity, R.color.colorAccent))
+				.divider(true, ContextCompat.getColor(activity, R.color.orange))
+				.show();
+	}
 
+	public static void list_not_get(final Activity activity,final String str_gate) {
+		Log.d("nabsmenm",activity.getLocalClassName());
+		new DroidDialog.Builder(activity.getApplicationContext())
+				.icon(R.drawable.ic_null_list)
+				.title(str_gate)
+				.content(activity.getResources().getString(R.string.list_null))
+				.cancelable(true, false)
+				.neutralButton("OK", new DroidDialog.onNeutralListener() {
+					@Override
+					public void onNeutral(Dialog droidDialog) {
+
+						if(activity.getLocalClassName().equals("New_Dashboard_Activity"))
+						{
+							droidDialog.dismiss();
+						}else{
+							droidDialog.dismiss();
+							activity.finish();
+						}
+						//
+					}
+				})
+				.typeface("regular.ttf")
+				.animation(AnimUtils.AnimZoomInOut)
+				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
+						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
+				.divider(true, ContextCompat.getColor(activity, R.color.orange))
+				.show();
+	}
 /*
 	public static void exit_open_Dialog(Boolean bl_ok_true, final Activity activity) {
 		new DroidDialog.Builder(activity)
@@ -185,34 +259,7 @@ public class ConnectionCheck {
 	}
 
 
-	public static void list_not_get(final Activity activity,final String str_gate) {
-		Log.d("nabsmenm",activity.getLocalClassName());
-		new DroidDialog.Builder(activity)
-				.icon(R.drawable.ic_null_list)
-				.title(str_gate)
-				.content(activity.getResources().getString(R.string.list_null))
-				.cancelable(true, false)
-				.neutralButton("OK", new DroidDialog.onNeutralListener() {
-					@Override
-					public void onNeutral(Dialog droidDialog) {
 
-						if(activity.getLocalClassName().equals("New_Dashboard_Activity"))
-						{
-							droidDialog.dismiss();
-						}else{
-							droidDialog.dismiss();
-							activity.finish();
-						}
-						//
-					}
-				})
-				.typeface("regular.ttf")
-				.animation(AnimUtils.AnimZoomInOut)
-				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
-						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
-				.divider(true, ContextCompat.getColor(activity, R.color.orange))
-				.show();
-	}
 	public static void quiz_time_not_get(final Activity activity) {
 		Log.d("nabsmenm",activity.getLocalClassName());
 		new DroidDialog.Builder(activity)
@@ -350,4 +397,23 @@ public class ConnectionCheck {
 			.divider(true, ContextCompat.getColor(activity, R.color.orange))
 			.show();
      }
+	public static void user_Already_exist_frg(final Context activity,final String str_gate) {
+		new DroidDialog.Builder(activity)
+				.icon(R.drawable.ic_login)
+				.title(str_gate)
+				.content(" Already Exists !!!!")
+				.cancelable(true, false)
+				.neutralButton("OK", new DroidDialog.onNeutralListener() {
+					@Override
+					public void onNeutral(Dialog droidDialog) {
+						droidDialog.dismiss();
+					}
+				})
+				.typeface("regular.ttf")
+				.animation(AnimUtils.AnimZoomInOut)
+				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
+						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
+				.divider(true, ContextCompat.getColor(activity, R.color.orange))
+				.show();
+	}
 }

@@ -29,6 +29,7 @@ import Zend_Chat.UserProfile;
 import Zend_Chat.UserProfileStorage;
 import callbacks.Call_Dilaog_Listener;
 import callbacks.Call_newDialog_Listener;
+import callbacks.Spinner_Date_Listener;
 
 
 /**
@@ -40,10 +41,16 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     private View btnRed;
     private Activity act;
     private ImageView id_website,id_video_call,id_sms,id_call;
+    private View find_v;
+    public Activity c;
+    private Spinner_Date_Listener spinnerDateListener;
 
-    public CustomDialogClass(Activity act) {
-        super(act);
-        this.act=act;
+    public CustomDialogClass(Activity a,View find_v) {
+        super(a);
+        // TODO Auto-generated constructor stub
+        this.c = a;
+        this.find_v=find_v;
+        this.spinnerDateListener=(Spinner_Date_Listener) a;
     }
 
     @Override
@@ -76,7 +83,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
             }
         },this.getContext()));
 
-        revealRed();
+        //revealRed();
     }
 
 

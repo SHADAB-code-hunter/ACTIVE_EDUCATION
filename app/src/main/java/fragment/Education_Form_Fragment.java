@@ -1,7 +1,5 @@
 package fragment;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
@@ -15,10 +13,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -32,8 +28,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,14 +38,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
-import com.gt.active_education.SplashScreen_Activity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Step_Form_Validator.BackConfirmationFragment;
@@ -62,6 +55,8 @@ import callbacks.Postion_Listener_Education_Form;
 import droidninja.filepicker.FilePickerBuilder;
 import permissions.dispatcher.NeedsPermission;*/
 import utilities.App_Static_Method;
+import utilities.Attach_Dialog;
+import utilities.Custom_Dialog_FTP;
 import utilities.Image_picker;
 import utilities.MyApplication;
 import utilities.UpdateValues;
@@ -116,23 +111,25 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     private Map<String, HashMap<String,String>> gens;
     private int poss;
     private EditText id_mark_percent,id_edt_duration,id_edt_pass_year,id_edt_b_name,id_edt_s_name;
-
     private HashMap<String,String> hashMap=new HashMap<String,String>();
     private Bundle bundle;
     private Image_picker imagePicker;
-
     private  String str_final_hashmap;
     private Bitmap bitmap;
     private String file_name;
     private ImageView id_img_picker_h;
     private String str_profile_bitmap="";
     private int MAX_ATTACHMENT_COUNT = 10;
-    private  View inflatedLayout;
+    private View inflatedLayout;
     private View rootView;
+    private LinearLayout id_linear_attach;
+    private FrameLayout id_frm;
+    private Context context;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context=context;
 
     }
 
@@ -145,6 +142,15 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.activity_vertical_stepper_form, container, false);
+        id_frm=(FrameLayout)rootView.findViewById(R.id.id_frm);
+        id_frm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Attach_Dialog attach_dialog=new Attach_Dialog(context);
+                attach_dialog.show();
+
+            }
+        });
         if(getArguments()!=null)
         {
             Log.d("bundrrle","null");
@@ -194,19 +200,19 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         View view = null;
         switch (stepNumber) {
             case TITLE_STEP_NUM:
-                view = create_H_School_Step();
+                view = create_H_School_Step(TITLE_STEP_NUM);
                 break;
             case DESCRIPTION_STEP_NUM:
                // view = createAlarmDescriptionStep();
-                view = create_H_School_Step();
+                view = create_H_School_Step(DESCRIPTION_STEP_NUM);
                 break;
             case TIME_STEP_NUM:
               //  view = createAlarmTimeStep();
-                view = create_H_School_Step();
+                view = create_H_School_Step(TIME_STEP_NUM);
                 break;
             case DAYS_STEP_NUM:
                // view = createAlarmDaysStep();
-                view = create_H_School_Step();
+                view = create_H_School_Step(DAYS_STEP_NUM);
                 break;
         }
         return view;
@@ -269,90 +275,24 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         }).start(); // You should delete getContext() code and add yours
     }
 
-    private View create_H_School_Step() {
-        // getContext() step view is generated programmatically
-       /* titleEditText = new EditText(getContext());
-        titleEditText.setHint(R.string.form_hint_title);
-        titleEditText.setSingleLine(true);
-        titleEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+    private View create_H_School_Step(final int titleStepNum) {
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                checkTitleStep(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
-        titleEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(checkTitleStep(v.getText().toString())) {
-                    verticalStepperForm.goToNextStep();
-                }
-                return false;
-            }
-        });*/
-
-        /*inflatedLayout.findViewById(R.id.id_attach_tv).setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                *//* FilePickerBuilder.getInstance().setMaxCount(10)
-                         .setSelectedFiles(filePaths)
-                         .setActivityTheme(R.style.AppTheme)
-                         .pickFile(getActivity());*//*
-             }
-         });*/
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflatedLayout= inflater.inflate(R.layout.form_feild_layout, null, false);
-        id_img_picker_h=(ImageView)inflatedLayout.findViewById(R.id.id_doc_a);
+        id_linear_attach=(LinearLayout)inflatedLayout.findViewById(R.id.id_linear_attach);
         id_mark_percent=(EditText)inflatedLayout.findViewById(R.id.id_mark_percent);
         id_edt_duration=(EditText)inflatedLayout.findViewById(R.id.id_edt_duration);
         id_edt_pass_year=(EditText)inflatedLayout.findViewById(R.id.id_edt_pass_year);
         id_edt_b_name=(EditText)inflatedLayout.findViewById(R.id.id_edt_b_name);
         id_edt_s_name=(EditText)inflatedLayout.findViewById(R.id.id_edt_s_name);
 
-        id_img_picker_h.setOnClickListener(new View.OnClickListener() {
+        id_linear_attach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                new Handler().postDelayed(new Runnable() {
-
-                    @SuppressLint("ResourceAsColor")
-                    @Override
-                    public void run() {
-
-                        if (Build.VERSION.SDK_INT >= 23)
-                        {
-                            imagePicker.imagepicker(1,"img1");
-
-                            new Image_picker(new Image_picker.ImageAttachmentListener() {
-                                @Override
-                                public void image_attachment(int from, String filename, Bitmap file, Uri uri, String s,String str_img) {
-
-
-                                    id_img_picker_h.setImageBitmap(file);
-                                    Log.d("dgdgdg","dhdhdhdhdhd"+file.toString());
-
-                                }
-                            },Education_Form_Fragment.this);
-                            //  CallerFragmentPermissionsDispatcher.onPickPhotoWithCheck(Education_Form_Fragment.this);
-                        }
-                        else
-                        {
-                            lower_camera_call();
-                        }
-
-                    }
-                },10);
-
-
+               /* Custom_Dialog_FTP custom_dialog_ftp=new Custom_Dialog_FTP(Education_Form_Fragment.this.getContext(),titleStepNum);
+                custom_dialog_ftp.show();*/
             }
         });
-        String str_sname,str_b_name,str_mark,str_duration,str_pass_year;
         id_edt_s_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -459,14 +399,8 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         }else if(requestCode!= lower_CAMERA_REQUEST) {
             imagePicker.onActivityResult(requestCode, resultCode, data,"10001");
         }
-
     }
 
-
-    public void image_Attach_Run(Bitmap file){
-
-
-    }
 
     @Override
     public void image_attachment(int from, String filename, Bitmap file, Uri uri, String s,String str_img) {

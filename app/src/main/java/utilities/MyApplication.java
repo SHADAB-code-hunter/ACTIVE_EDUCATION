@@ -3,6 +3,10 @@ package utilities;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -29,7 +33,8 @@ public class MyApplication extends Application {
     private static MyApplication sInstance;
 
     private static DBMovies mDatabase;
-   // private MyPreferenceManager pref;
+    private SharedPreferences sharedPref;
+    // private MyPreferenceManager pref;
 
     public static MyApplication getInstance() {
         return sInstance;
@@ -45,13 +50,25 @@ public class MyApplication extends Application {
         }
         return mDatabase;
     }
-
+    public boolean is_User_Login(Context baseContext)
+    {
+        sharedPref =baseContext.getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+        String str_status=sharedPref.getString("login_Status", "");
+        if(str_status.equals("L_OK")||str_status.equals("F_OK")||str_status.equals("G_OK")) {
+            return true;
+        }
+        else if (!(str_status.equals("L_OK")||str_status.equals("F_OK")||str_status.equals("G_OK")))
+        {
+            return false;
+        }
+        return  false;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
         mDatabase = new DBMovies(this);
-
+      //  startCatcher();
 
 
 
@@ -106,4 +123,79 @@ public class MyApplication extends Application {
         startActivity(intent);
     }
 */
+
+    private void startCatcher() {
+        Log.d("catch","startCather");
+        Thread.UncaughtExceptionHandler systemUncaughtHandler = Thread.getDefaultUncaughtExceptionHandler();
+        // the following handler is used to catch exceptions thrown in background threads
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtHandler(new Handler()));
+
+        while (true) {
+            try {
+                Log.v(LOG_TAG, "Starting crash catch Looper");
+                Looper.loop();
+                Thread.setDefaultUncaughtExceptionHandler(systemUncaughtHandler);
+                throw new RuntimeException("Main thread loop unexpectedly exited");
+            } catch (BackgroundException e) {
+                Log.e(LOG_TAG, "Caught the exception in the background thread " + e.threadName + ", TID: " + e.tid, e.getCause());
+                showCrashDisplayActivity(e.getCause());
+            } catch (Throwable e) {
+                Log.e(LOG_TAG, "Caught the exception in the UI thread, e:", e);
+                showCrashDisplayActivity(e);
+            }
+        }
+    }
+
+    void showCrashDisplayActivity(Throwable e) {
+        Intent i = new Intent(this, CrashDisplayActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.putExtra("e", e);
+        startActivity(i);
+    }
+
+
+    /**
+     * This handler catches exceptions in the background threads and propagates them to the UI thread
+     */
+    static class UncaughtHandler implements Thread.UncaughtExceptionHandler {
+
+        private final Handler mHandler;
+
+        UncaughtHandler(Handler handler) {
+            mHandler = handler;
+        }
+
+        public void uncaughtException(Thread thread, final Throwable e) {
+            Log.v(LOG_TAG, "Caught the exception in the background " + thread + " propagating it to the UI thread, e:", e);
+            final int tid = Process.myTid();
+            final String threadName = thread.getName();
+            mHandler.post(new Runnable() {
+                public void run() {
+                    throw new BackgroundException(e, tid, threadName);
+                }
+            });
+        }
+    }
+
+    /**
+     * Wrapper class for exceptions caught in the background
+     */
+    static class BackgroundException extends RuntimeException {
+
+        final int tid;
+        final String threadName;
+
+        /**
+         * @param e original exception
+         * @param tid id of the thread where exception occurred
+         * @param threadName name of the thread where exception occurred
+         */
+        BackgroundException(Throwable e, int tid, String threadName) {
+            super(e);
+            this.tid = tid;
+            this.threadName = threadName;
+        }
+    }
+
+
 }

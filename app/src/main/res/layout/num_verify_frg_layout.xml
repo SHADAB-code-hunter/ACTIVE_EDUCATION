@@ -14,7 +14,7 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             app:cardCornerRadius="0dp"
             android:layout_weight="1.5"
             android:layout_marginTop="10dp"
@@ -38,8 +38,6 @@
             android:layout_marginBottom="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="0dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:background="@color/grey"
             android:orientation="vertical">
 
@@ -47,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textColor="@color/txt_color_head"
@@ -61,6 +59,123 @@
                 android:layout_weight="1.2"
                 android:textColor="@color/txt_color"
                 android:text="Please enter your Phone number. You will receive a text message with your verification code. "/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:textColor="@color/txt_color_head"
+                android:text="Please Choose Login Type First"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_height="wrap_content">
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:id="@+id/id_lg_typ1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="@color/tumblr_red"
+                    android:background="@drawable/round_btn1">
+                    <FrameLayout
+                        android:id="@+id/id_check1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/ic_check_round"></FrameLayout>
+                    <ImageView
+                        android:id="@+id/id_img1"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_lgtype_1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center|bottom"
+                        android:text="Seat Provider"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/id_lg_typ2"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:backgroundTint="@color/tumblr_red"
+                    android:background="@drawable/round_btn1">
+                    <FrameLayout
+                        android:id="@+id/id_check2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/ic_check_round"></FrameLayout>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_lgtype_2"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center|bottom"
+                        android:text="Franchiser"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/id_lg_typ3"
+                    android:backgroundTint="@color/tumblr_red"
+                    android:background="@drawable/round_btn1">
+                    <FrameLayout
+                        android:id="@+id/id_check3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/ic_check_round"></FrameLayout>
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_study"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:textSize="8sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center|bottom"
+                        android:gravity="center"
+                        android:text="Student"/>
+                </FrameLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

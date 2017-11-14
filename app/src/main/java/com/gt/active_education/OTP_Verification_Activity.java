@@ -18,7 +18,7 @@ import utilities.UpdateValues;
  * Created by GT on 7/7/2017.
  */
 
-public class OTP_Verification_Activity extends AppCompatActivity implements View.OnClickListener, SmsReceiver.SmsListener {
+public class OTP_Verification_Activity extends AppCompatActivity implements View.OnClickListener {
     private Button button_verify;
 
     @Override
@@ -42,9 +42,11 @@ public class OTP_Verification_Activity extends AppCompatActivity implements View
                 break;
         }
     }
+/*
 
     @Override
     public void messageReceived(String str_otp) {
+*/
 
        /* bln_status=true;
         if(bln_status) {
@@ -84,5 +86,5 @@ public class OTP_Verification_Activity extends AppCompatActivity implements View
             });
         }*/
         //otp_verification(str_otp_api_key,str_otp_session,str_otp_mbl,str_otp);
-    }
+  //  }
 }

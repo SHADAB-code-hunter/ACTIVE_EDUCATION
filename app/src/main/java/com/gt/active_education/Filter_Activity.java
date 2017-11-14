@@ -685,7 +685,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
     public void onAvailCourse(final String str_type,final String clg_id,final String course_id,final String branch_id,final String branch_name) {
         // avail courses
 
-        Log.d("ncvkcnvm",str_type+"  "+ clg_id);
+    //    Log.d("ncvkcnvm",str_type+"  "+ clg_id);
 
          availableCoursesDialog=new Available_Courses_Dialog(new Available_Courses_Dialog.Dialog_Spinner_Listener() {
             @Override

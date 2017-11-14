@@ -55,6 +55,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
     private Custom_List_Dialog custom_list_dialog;
     private String[] str_log_array;
     private Button sign_in_button,fb_in_button;
+    private TextView id_Reg_here;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
         fb_in_button=(Button)findViewById(R.id.fb_in_button);fb_in_button.setOnClickListener(this);
         Button btn_sign_up=(Button)findViewById(R.id.btn_sign_up);
         btn_sign_up.setOnClickListener(this);
+        id_Reg_here=(TextView)findViewById(R.id.id_Reg_here);id_Reg_here.setOnClickListener(this);
         id_login_type=(EditText)findViewById(R.id.id_login_type);
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
@@ -92,6 +94,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                 return false;
             }
         });
+
     }
 
     @Override
@@ -130,6 +133,10 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                             switch (id_login_type.getText().toString().trim())
                             {
 
+                                case "Student":
+                                    set_sign_in(str_uname,str_pass,UrlEndpoints.LOGIN_API,"0");
+
+                                    break;
                                 case "School":
                                     set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"1");
 
@@ -171,46 +178,107 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
             case R.id.sign_in_button:
                startActivity(new Intent(getApplicationContext(),GoogleSignInActivity.class));
                 break;
+            case R.id.id_Reg_here:
+                startActivity(new Intent(Agent_login_Activity.this,Sign_Up_Process_Activity.class));
+               // finish();
+                break;
 
         }
     }
 
-    private void set_sign_in(final String str_email, final String str_pass,String str_url,String str_type)
+    private void set_sign_in(final String str_mobile, final String str_pass,String str_url,String str_type)
     {
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(true);
         progressDialog.show();
         progressDialog.setMessage(getString(R.string.LogIn));
-        Log.d("agent_login_res", str_type+"  "+str_email+"  "+str_pass+" "+ str_type);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,str_url+"email="+str_email+"&pwd="+str_pass+"&type="+str_type,
+        Log.d("agent_login_res",str_url+"  "+ str_type+"  "+str_mobile+"  "+str_pass+" "+ str_type);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,str_url+"mobile="+str_mobile+"&pwd="+str_pass+"&type="+str_type,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response)
                     {
                         try {
                             JSONObject jObj = new JSONObject(response);
-                            Toast.makeText(Agent_login_Activity.this, str_email+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Agent_login_Activity.this, str_mobile+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("a_login",response.toString());
+
+                          /*  SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("type", "agent");
+                            editor.putString("token", "f654tjlT9Y");
+                            //   editor.putString("email", jsonObject.getString("email"));
+                            editor.putString("mobile", "9166833552");
+                            editor.commit();
+                            startActivity(new Intent(getApplicationContext(),Agent_Profile_Activity.class));
+                            finish();*/
+                            // agent :  {"data":[{"email":"sa@gmail.com","token":"Y62McIws6P","type":"agent"}]}
                         //    {"data":[{"mobile":"9166833551","token":"S6dqKXf8Zt","image":null,"uname":"demo","email":"sb@ss.com","clg_id":"dps","utype":"1","type":"user"}]}
-                            if(!jObj.has("exist")) {
+                           if(!jObj.has("exist"))
+                            {
                                 JSONArray jsonArray = jObj.getJSONArray("data");
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
-                                SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("login_Status", "L_OK");
-                                editor.putString("mobile", jsonObject.getString("mobile"));
-                                editor.putString("image", jsonObject.getString("image"));
-                                editor.putString("name", jsonObject.getString("name"));
-                                editor.putString("uname", jsonObject.getString("uname"));
-                                editor.putString("email", jsonObject.getString("email"));
-                                editor.putString("clg_id", jsonObject.getString("clg_id"));
-                                editor.putString("userid", jsonObject.getString("userid"));
-                                editor.putString("utype", jsonObject.getString("utype"));
-                                editor.putString("token", jsonObject.getString("token"));
-                                editor.putString("type", jsonObject.getString("type"));
 
-                                editor.commit();
-                                startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
+                                if(jsonObject.getString("type").equals("agent"))
+                                {
+                                    SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+                                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                    editor2.putString("type",jsonObject.getString("type"));
+                                    editor2.commit();
+
+                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("type", jsonObject.getString("type"));
+                                    editor.putString("token", jsonObject.getString("token"));
+                                 //   editor.putString("email", jsonObject.getString("email"));
+                                    editor.putString("mobile", jsonObject.getString("mobile"));
+                                    editor.commit();
+                                    startActivity(new Intent(getApplicationContext(),Agent_Profile_Activity.class));
+                                    finish();
+                                }
+                                else if(jsonObject.getString("type").equals("user"))
+                                {
+                                    //{"mobile":"9166833552","token":"rhRwoL9x5C","image":null,"uname":"sanjit","type":"user"}]}
+                                    SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+                                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                    editor2.putString("type",jsonObject.getString("type"));
+                                    editor2.commit();
+
+
+                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("type", jsonObject.getString("type"));
+                                    editor.putString("token", jsonObject.getString("token"));
+                                 //   editor.putString("email", jsonObject.getString("email"));
+                                    editor.putString("mobile", jsonObject.getString("mobile"));
+                                    editor.commit();
+                                    startActivity(new Intent(getApplicationContext(),DashBoard_Activity.class));
+                                    finish();
+                                }else if(jsonObject.has("utype")) {
+
+                                    SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+                                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                    editor2.putString("type",jsonObject.getString("type"));
+                                    editor2.commit();
+
+
+                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("type", jsonObject.getString("type"));
+                                    editor.putString("mobile", jsonObject.getString("mobile"));
+                                    editor.putString("image", jsonObject.getString("image"));
+                                    editor.putString("name", jsonObject.getString("name"));
+                                    editor.putString("uname", jsonObject.getString("uname"));
+                                    editor.putString("email", jsonObject.getString("email"));
+                                    editor.putString("clg_id", jsonObject.getString("clg_id"));
+                                    editor.putString("userid", jsonObject.getString("userid"));
+                                    editor.putString("utype", jsonObject.getString("utype"));
+                                    editor.putString("token", jsonObject.getString("token"));
+                                    editor.commit();
+                                    startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
+                                    finish();
+                                }
+
                                 progressDialog.cancel();
                                 finish();
                             }else if(jObj.has("exist"))

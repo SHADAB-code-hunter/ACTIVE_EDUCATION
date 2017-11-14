@@ -375,6 +375,7 @@
                 android:padding="5dp">
 
                 <FrameLayout
+                    android:id="@+id/id_Learn_frm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -412,6 +413,7 @@
                     android:layout_height="match_parent" />
 
                 <FrameLayout
+                    android:id="@+id/id_earn_frm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -445,6 +447,7 @@
                     android:layout_height="match_parent" />
 
                 <FrameLayout
+                    android:id="@+id/id_fun_frm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
