@@ -25,9 +25,12 @@ import pojo.Quiz_Subject_Ques_Model;
 import quiz_adapter.Subject_list_Adapter;
 import task.TaskLoad_Sub_Quiz;
 import task.TaskQuizSubject_Async;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.MyApplication;
 import utilities.RecyclerTouchListener;
+
+import static utilities.App_Static_Method.session_type;
 
 /**
  * Created by GT on 4/11/2017.
@@ -76,7 +79,10 @@ public class Quiz_SubList_Activity extends AppCompatActivity implements Quiz_Sub
             common_click_sound();
             ConnectionCheck.openDialog(Conn_Status,Quiz_SubList_Activity.this);
         }*/
-        new TaskQuizSubject_Async(Quiz_SubList_Activity.this,"9599805321", "heUj8jhR6l").execute();
+
+        App_Static_Method.get_session_data("token");
+
+        new TaskQuizSubject_Async(Quiz_SubList_Activity.this,session_type().get("mobile"), session_type().get("token")).execute();
         subject_recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), subject_recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
@@ -87,7 +93,7 @@ public class Quiz_SubList_Activity extends AppCompatActivity implements Quiz_Sub
                 if(!str_sub_id.equals("")) {
                     //Log.d("dede",str_sub_id);
 
-                    new TaskLoad_Sub_Quiz(Quiz_SubList_Activity.this,"9599805321", "heUj8jhR6l","5").execute();
+                    new TaskLoad_Sub_Quiz(Quiz_SubList_Activity.this,session_type().get("mobile"), session_type().get("token"),"5").execute();
                 }
             }
 
@@ -115,7 +121,7 @@ public class Quiz_SubList_Activity extends AppCompatActivity implements Quiz_Sub
         //Log.d("gdgd",""+listSubQuiz.size());
         if(listSubQuiz.size()==0) {
             common_click_sound();
-            ConnectionCheck.list_not_get(Quiz_SubList_Activity.this, "List Not Get !!!!");
+//            ConnectionCheck.list_not_get(Quiz_SubList_Activity.this, "List Not Get !!!!");
         }else {
             subjectListAdapter = new Subject_list_Adapter(getApplicationContext(), listSubQuiz);
             verticleLayoutManager = new GridLayoutManager(getApplicationContext(), 3, LinearLayoutManager.VERTICAL, false);

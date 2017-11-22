@@ -5,7 +5,6 @@
         <layer-list>
             <item>
                 <shape android:shape="oval">
-
                     <solid android:color="@android:color/transparent"/>
                 </shape>
             </item>

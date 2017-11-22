@@ -166,6 +166,37 @@
                         android:src="@drawable/ic_mail"/>
                 </FrameLayout>
                 <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="0dp">
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/text_input_layout_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintAnimationEnabled="true"
+                        android:textColorHint="#ffffff"
+                        android:backgroundTint="@color/white">
+
+                        <EditText
+                            android:id="@+id/edt_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="#ffffff"
+                            android:textColor="@color/white"
+                            android:hint="Address"/>
+
+                    </android.support.design.widget.TextInputLayout>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="end|bottom"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/ic_mail"/>
+                </FrameLayout>
+
+                <FrameLayout
                     android:id="@+id/id_frm_state"
                     android:layout_width="match_parent"
                     android:clickable="true"

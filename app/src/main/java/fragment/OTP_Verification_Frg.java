@@ -84,8 +84,7 @@ public class OTP_Verification_Frg extends Fragment implements View.OnClickListen
         id_mobile_number=(TextView)rootView.findViewById(R.id.id_mobile_number);
         SmsReceiver.bindListener((SMS_RECEIVER_LISTENER)OTP_Verification_Frg.this);
         SharedPreferences  shrd_otp_prf =MyApplication.getAppContext().getSharedPreferences(UpdateValues.OTP_Prefrence, 0);
-        final String str_otp_mbl = shrd_otp_prf.getString("otp_mbl", "");
-        id_mobile_number.setText(" [ Mobile Number : +91 - "+str_otp_mbl+" ] ");
+        id_mobile_number.setText(" [ Mobile Number : +91 - "+shrd_otp_prf.getString("otp_mbl", "")+" ] ");
 
         return rootView;
     }

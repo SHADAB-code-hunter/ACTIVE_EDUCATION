@@ -1,4 +1,4 @@
-package adapter;
+package active;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -18,7 +18,6 @@ import com.gt.active_education.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
-
 import callbacks.Quiz_Opt_Choose_Event_Listener;
 import callbacks.VP_PageChange_Listener;
 import pojo.Quiz_Answer_Model;
@@ -156,22 +155,25 @@ public class Sub_quiz_VP_Adapter extends PagerAdapter implements Quiz_Opt_Choose
             }
 
         }
-        single.setTag(position);
+        //single.setTag(position);
         single.setOnCheckedChangeListener(new SingleSelectToggleGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SingleSelectToggleGroup group, int checkedId, View toggle) {
 
+                Log.d("drererre"," toggleel");
+
+
                 int[] myList = {tgl_choice_a.getId(),tgl_choice_b.getId(), tgl_choice_c.getId(), tgl_choice_d.getId()};
 
-                //Log.d("idtgl",myList[0]+" "+myList[1]+" "+myList[2]+" "+myList[3]+" ");
+                Log.d("idtgl",myList[0]+" "+myList[1]+" "+myList[2]+" "+myList[3]+" ");
                 //Log.d("toggle_cked", "onCheckedChanged(): checkedId = " +  single.getCheckedId()+"possghj"+toggle.getTag()+"id  "+((SingleSelectToggleGroup)toggle).getCheckedId());
-                Log.d("listdfrf","dffdffdf");
+
                 int poss= (int) toggle.getTag();
                 int tbgl_id=((SingleSelectToggleGroup)toggle).getCheckedId();
                 int opt_choose_no=getChooseOpt_No(myList,tbgl_id);// change
                 Quiz_Model quiz_model=mlistDailyQuiz.get(poss);
               /*  //Log.d("mnmnc",""+quiz_model);
-                 *//* creating model liost for save in shared prefrences*//*
+                        *//* creating model liost for save in shared prefrences*//*
                 //Log.d("fvff",""+mlistDailyQuiz);*/
                 quizAnswerModel.setQ_id(quiz_model.getId());
                 quizAnswerModel.setQname(quiz_model.getQname());
@@ -180,7 +182,6 @@ public class Sub_quiz_VP_Adapter extends PagerAdapter implements Quiz_Opt_Choose
                 quizAnswerModel.setOption3(quiz_model.getOption3());
                 quizAnswerModel.setOption4(quiz_model.getOption4());
                 quizAnswerModel.setQ_number(String.valueOf(poss));
-                Log.d("listdfrf","dffdffdf2");
                 if(opt_choose_no!=-1) {
                   //  //Log.d("hgfds", String.valueOf(opt_choose_no));
                     quizAnswerModel.setChoose_Opt_Number(String.valueOf(opt_choose_no));
@@ -188,10 +189,9 @@ public class Sub_quiz_VP_Adapter extends PagerAdapter implements Quiz_Opt_Choose
                 }
              //   //Log.d("hsggfdfcvd",quiz_model.getOpt_answe());
                 quizAnswerModel.setOrig_Ans(quiz_model.getOpt_answe());
-             //   //Log.d("njdocjo",""+quizAnswerModel.getQ_id());
+                Log.d("njdocjo",""+quizAnswerModel.getQ_id());
                 update_shared_prefrences_quiz_data(quizAnswerModel);
                 quizOptChooseEventListener.onOption_Choosen(poss,getChoos_ans(opt_choose_no, quiz_model),quiz_model.getId());
-                Log.d("listdfrf","dffdffdf3");
 
                 vpPageChangeListener.on_opt_next_Ques();
 

@@ -67,8 +67,8 @@ public class SampleFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_sample, container, false);
 
       //  linearLayout = (LinearLayout) view.findViewById(R.id.id_linear_success);
-        btnNegative = (Button) view.findViewById(R.id.btnNegative);
-        btnNegative.setOnClickListener(this);
+     /*   btnNegative = (Button) view.findViewById(R.id.btnNegative);
+        btnNegative.setOnClickListener(this);*/
 
         sharedPreferences= MyApplication.getAppContext().getSharedPreferences("Dialog_Callback",0);
         str_poss=sharedPreferences.getString("Position_School","NA");

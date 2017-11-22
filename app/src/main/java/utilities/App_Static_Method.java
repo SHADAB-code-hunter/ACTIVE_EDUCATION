@@ -386,7 +386,7 @@ public class App_Static_Method {
 
     public static Map<String, String>  session_type() {
         SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
-        final SharedPreferences sharedPreferences;
+        SharedPreferences sharedPreferences=null;
         String str_token = null;
         String str_mobie = null;
 
@@ -407,18 +407,32 @@ public class App_Static_Method {
                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
                 str_mobie = sharedPreferences.getString("mobile", "na");
                 str_token = sharedPreferences.getString("token", "na");
+                Log.d("kkkhkh",sharedPreferences.getString("userid", "na"));
                 break;
         }
 
         map.put("mobile",str_mobie);
         map.put("token",str_token);
         map.put("type",shprf_.getString("type", "na"));
+        if(shprf_.getString("type", "na").equals("seater"))
+        {
+         map.put("userid",""+sharedPreferences.getString("userid", "na"));
+         map.put("crd_mobile",""+sharedPreferences.getString("mobile", "na"));
+         map.put("utype",""+sharedPreferences.getString("utype", "na"));
+         map.put("clg_id",""+sharedPreferences.getString("clg_id", "na"));
+         map.put("image",""+sharedPreferences.getString("image", "na"));
+         map.put("name",""+sharedPreferences.getString("name", "na"));
+
+        }
+
+
+//        Log.d("gdgdsgbvvbnbbsklvgn",""+sharedPreferences.getAll());
         return map;
     }
 
     public static void logout(final Activity dashBoard_activity) {
         SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-        final    SharedPreferences sharedPreferences;
+        SharedPreferences sharedPreferences=null;
         String  str_token=null;
         String  str_mobie=null;
 
@@ -444,10 +458,17 @@ public class App_Static_Method {
 
        /* Log.d("gfhgfhdddgfhg",str_email+"  "+str_token+" "+str_type);
         if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {*/
-            Log.d("gfhgfhgfhg",str_mobie+"  "+str_token+" "+shprf_.getString("type", "na"));
+
+           // Log.d("gfhgfhgfhg",""+sharedPreferences.getAll());
+
+        final Map<String,String> map=new HashMap<>();
+        map.put("mobile",""+sharedPreferences.getAll().get("mobile"));
+        map.put("token",""+sharedPreferences.getAll().get("token"));
+        map.put("type",""+sharedPreferences.getAll().get("type"));
+        Log.d("gfhgfhgfhg",""+map);
         // SharedPreferences finalSharedPreferences = sharedPreferences;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"mobile="+ str_mobie
-                    + "&token=" + str_token+"&type="+shprf_.getString("type", "na"),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT /*+"mobile="+ str_mobie
+                    + "&token=" + str_token+"&type="+shprf_.getString("type", "na")*/,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -509,7 +530,7 @@ public class App_Static_Method {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
 
-                    return null;
+                    return map;
                 }
             };
 

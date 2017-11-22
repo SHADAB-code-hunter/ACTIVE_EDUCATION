@@ -24,7 +24,6 @@ import org.json.JSONObject;
 import java.util.List;
 import java.util.Map;
 
-import adapter.Agent_Deal_Adapter;
 import adapter.Agent_Target_Adapter;
 import callbacks.Agent_deal_Listener;
 import callbacks.Responce_Obj_Lisatener;

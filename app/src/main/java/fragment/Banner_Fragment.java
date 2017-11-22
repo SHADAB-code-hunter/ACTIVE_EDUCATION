@@ -18,7 +18,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import adapter.Agent_Deal_Adapter;
 import pojo.Agent_Deal_Pojo;
 import task.Agent_Async;
 import utilities.MyApplication;

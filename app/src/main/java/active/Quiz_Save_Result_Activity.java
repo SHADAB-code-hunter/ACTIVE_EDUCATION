@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,17 +19,15 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gt.active_education.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import callbacks.Pie_Chart_data_Set;
 import pojo.Quiz_Answer_Model;
 import pojo.Quiz_Model;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.MyApplication;
 import utilities.UrlEndpoints;
@@ -59,25 +56,40 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
         prefs = getApplicationContext().getSharedPreferences("Sub_Answer_Array_List", 0);
         final String storedHashMapString = prefs.getString("SrdPrf_ArrayList", "");
         final String total_list_no_ques = prefs.getString("LIST_NO", "");
-
-        Log.d("hrhrhrh",storedHashMapString);
         Gson gson = new Gson();
         java.lang.reflect.Type types;
         types = new TypeToken<ArrayList<Quiz_Answer_Model>>() {}.getType();
         Quiz_Ans_List = (ArrayList<Quiz_Answer_Model>) gson.fromJson(storedHashMapString, types);
+       //Log.d("gjhdgjhg",""+mDailyQuizList);
+       //Log.d("list_quisdecznbg",""+Quiz_Ans_List);
 
+      //  final SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext()); // hold
+
+       //Log.d("gdvcbhv",shrd_prf_login.getString("mobile", "")+"  "+shrd_prf_login.getString("Login_Token", ""));
+       /* map.put("mobile",shrd_prf_login.getString("mobile", ""));
+        map.put("token",shrd_prf_login.getString("Login_Token", ""));*/
+
+
+        Map<String, String> map = App_Static_Method.session_type();
+        map.put("total",""+total_list_no_ques);
+        map.put("jsonData",storedHashMapString);
+        Log.d("gdvcbhv",""+storedHashMapString);
+        String Url= UrlEndpoints.URL_save_result_practice;//+shrd_prf_login.getString("mobile", "")+"&token="+shrd_prf_login.getString("Login_Token", "")+"&total="+total_list_no_ques+"&jsonData="+storedHashMapString;
+       //Log.d("urlsezxc",Url);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.URL_save_result_practice,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String str_response) {
                         try {
-                            Log.d("quiz_open_responce",""+str_response);
+                           //Log.d("quiz_open_responce",""+str_response);
                             JSONObject response = new JSONObject(str_response);
 
                             if(response.has("data")) {
                                 JSONObject jsonObject = response.getJSONObject("data");
                                 if (jsonObject.getString("status").equals("1")) {
-                                    //Log.d("hdghgdhcghchg", "dbcjdbcjdbcj");
+
+                                   //Log.d("hdghgdhcghchg", "dbcjdbcjdbcj");
+
                                     int int_attempt = Integer.parseInt(jsonObject.getString("total_attempted"));
                                     int int_totle_ques = Integer.parseInt(jsonObject.getString("total_questions"));
                                     int int_skip_ques = Integer.parseInt(jsonObject.getString("skip_questions"));
@@ -87,8 +99,10 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
                                     Quiz_Save_Result_Activity.this.on_piechart_set_data(Quiz_Save_Result_Activity.this, int_skip_ques, int_wng_ques, int_rgt_ques);
                                   }
                                 } else if (response.getString("status").equals("0")) {
-                                   // ConnectionCheck.result_zero(Quiz_Save_Result_Activity.this);
+                                Log.d("ghghgh","zerooo");
+                                    //ConnectionCheck.result_zero(Quiz_Save_Result_Activity.this);
                                 }
+
 
                         } catch (JSONException e) {
                             //pd.dismiss();
@@ -105,32 +119,36 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                if(myApplication.is_User_Login(getBaseContext())) {
-                //    SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
+                Map<String, String> map = App_Static_Method.session_type();
+               // if(myApplication.is_User_Login(getBaseContext())) {
+                   // SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
 
-                   Log.d("gdvcbhv"," total_quesnop"+total_list_no_ques+" "+storedHashMapString);
-                    map.put("mobile","9599805321");
-                    map.put("token","heUj8jhR6l");
+                   //Log.d("gdvcbhv",shrd_prf_login.getString("mobile", "")+"  "+shrd_prf_login.getString("Login_Token", "")+"  "+" total_quesnop"+total_list_no_ques+" "+storedHashMapString);
+                  /*  map.put("mobile",shrd_prf_login.getString("mobile", ""));
+                    map.put("token",shrd_prf_login.getString("Login_Token", ""));*/
                     map.put("total",""+total_list_no_ques);
                     map.put("jsonData",storedHashMapString);
+                    Log.d("gdvcbhv",""+map);
                     return map;
-                }else if(!myApplication.is_User_Login(getBaseContext())){
+               /* }else if(!myApplication.is_User_Login(getBaseContext())){
                     mPlay= MediaPlayer.create(Quiz_Save_Result_Activity.this, R.raw.dialog_aud);
                     mPlay.start();
-                  //  ConnectionCheck.login_Dialog("Take_Quiz_Page",Quiz_Save_Result_Activity.this,false);
-                }
-                return map;
+                    Log.d("gdvcbhv","");
+                   // ConnectionCheck.login_Dialog("Take_Quiz_Page",Quiz_Save_Result_Activity.this,false);
+                }*/
+              //  return map;
             }
         };
+
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
         requestQueue.add(stringRequest);
+
     }
 
     @Override
     public void on_piechart_set_data(Quiz_Save_Result_Activity quiz_calculation_activity, int int_skip_ques, int int_wng_ques, int int_rgt_ques) {
 
-        Log.d("leystquiz",mDailyQuizList.toString());
+        Log.d("bbnbnbn",int_skip_ques+" "+int_wng_ques+" "+int_wng_ques+"  "+int_rgt_ques);
         Intent i=new Intent(getApplicationContext(),Result_Pie_Quiz_Activity.class);
         i.putParcelableArrayListExtra("quiz_ques_list",mDailyQuizList);
         i.putExtra("skip_ques",int_skip_ques);

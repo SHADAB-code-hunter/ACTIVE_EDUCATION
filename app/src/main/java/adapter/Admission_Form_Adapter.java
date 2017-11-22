@@ -44,11 +44,10 @@ public class Admission_Form_Adapter extends FragmentPagerAdapter {
                 fragment=new Education_Form_Fragment();
                 fragment.setArguments(bundle);
                 break;
-
-
             case 2:
 
                 fragment=new Payment_Page();
+                fragment.setArguments(bundle);
                 break;
 
         }

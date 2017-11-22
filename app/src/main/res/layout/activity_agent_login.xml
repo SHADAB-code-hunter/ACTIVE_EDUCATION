@@ -117,8 +117,14 @@
                                     android:layout_height="wrap_content"
                                     android:backgroundTint="#451dff"
                                     android:hint="Please Choose Login Type"
-                                    android:drawableRight="@drawable/ic_shield"/>
+                                   />
+
                             </android.support.design.widget.TextInputLayout>
+                            <ImageView
+                                android:layout_width="35dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="end|center"
+                                android:src="@drawable/ic_agent_profile" />
 
                         </FrameLayout>
 
@@ -144,16 +150,16 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#451dff"
                             android:singleLine="true"
-                            android:hint="sa@gmail.com" />
+                            android:hint="Enter Mobile Number" />
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="25dp"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
                         android:layout_gravity="end|bottom"
                         android:layout_marginBottom="12dp"
                         android:layout_marginRight="0dp"
-                        android:src="@drawable/ic_agent_profile" />
+                        android:src="@drawable/ic_call_receiver" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -175,7 +181,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#451dff"
                             android:singleLine="true"
-                            android:hint="123456" />
+                            android:hint="Enter Password" />
 
 
                     </android.support.design.widget.TextInputLayout>
@@ -216,7 +222,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-
+                        android:visibility="gone"
                         android:orientation="horizontal">
                     <Button
                         android:id="@+id/fb_in_button"

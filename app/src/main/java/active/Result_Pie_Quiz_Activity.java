@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,17 +21,13 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.gt.active_education.R;
-import com.gt.active_education.Review_Answer_Activity;
 import com.mikhaellopez.circularimageview.CircularImageView;
-
 import java.util.ArrayList;
-
 import network.VolleySingleton;
 import pojo.Quiz_Model;
-import utilities.ConnectionCheck;
+import utilities.App_Static_Method;
 import utilities.MyApplication;
 import utilities.UrlEndpoints;
-
 
 /**
  * Created by akashdeep on 31-Mar-17.
@@ -45,7 +40,6 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
     private TextView textClock;
     private PieChart pieChart;
     private ArrayList<Quiz_Model> mDailyQuizList;
- //   private CircleProgressView mCircleProgressView;
     private SharedPreferences Shrd_prefs;
     private String str_ans_list;
     private MyApplication myApplication=new MyApplication();
@@ -72,7 +66,7 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scoreborad_pie_layout);
         id_btn_close=(Button)findViewById(R.id.id_btn_close);
-      //  total_time_quiz=(TextView)findViewById(R.id.total_time_quiz);
+      //total_time_quiz=(TextView)findViewById(R.id.total_time_quiz);
         btn_review=(Button)findViewById(R.id.btn_review);
         toolbar2=(Toolbar)findViewById(R.id.toolbar2);
         id_back_btn_quiz=(TextView)findViewById(R.id.id_back_btn_quiz);
@@ -90,8 +84,8 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
 
         Shrd_prefs = getApplicationContext().getSharedPreferences("Sub_Answer_Array_List", 0);
         str_ans_list=Shrd_prefs.getString("SrdPrf_ArrayList", "");
-        Log.d("counterr","oncreate");
-     //   set_percentage();
+        //Log.d("count","oncreate");
+        //set_percentage();
 
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,15 +109,17 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
             }
         });
 
-       /* SharedPreferences shrd_prf_login=null;
-        if(myApplication.is_User_Login(getBaseContext()))
+        SharedPreferences shrd_prf_login=null;
+
+        // hold st
+        /*if(myApplication.is_User_Login(getBaseContext()))
         {
             shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
         }else if(!myApplication.is_User_Login(getBaseContext()))
         {
             ConnectionCheck.login_Dialog("Quiz_Calc_Page",Result_Pie_Quiz_Activity.this,false);
         }*/
-
+ // hold end
 
         pieChart= (PieChart) findViewById(R.id.piechart);
         pieChart.setCenterTextSize(50);
@@ -143,7 +139,7 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
         //Log.d("pie_chart_value",""+p1+" "+ p2+ " "+p3);
        /* yvalues.add(new Entry(p1,1));
         yvalues.add(new Entry(p2, 2));
-        yvalues.add(new Entry(p3, 3));*//*
+        yvalues.add(new Entry(p3, 3));*/
         yvalues.add(new Entry(str_pie1,1));
         yvalues.add(new Entry(str_pie2, 2));
         yvalues.add(new Entry(str_pie3, 3));
@@ -166,20 +162,27 @@ public class Result_Pie_Quiz_Activity extends AppCompatActivity{// implements Pi
                 finish();
             }
         });
-        sharedPreferences_theme=myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0");
-        if(myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0").equals("0"))
+
+        // hold start
+
+      //  sharedPreferences_theme=myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0");
+       /* if(myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0").equals("0"))
         {
 
         }else if(!(myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0").equals("0")))
         {
             set_theme(myApplication.getTheme_Preferences(getApplicationContext(),KEY_COLOR_THEME,"0"));
-        }
-        SharedPreferences sharedPref=myApplication.get_shrd_prf_login(getBaseContext());
+        }*/
+      //  SharedPreferences sharedPref=myApplication.get_shrd_prf_login(getBaseContext());
 
 
-       TextView tv=(TextView) findViewById(R.id.id_name_tv);
-               tv.setText(sharedPref.getString("L_username","NA"));
-        loadImages(id_image_profile,sharedPref.getString("mobile","NA"), mImageLoader);
+      /*
+       */
+
+      /// hold end
+        TextView tv=(TextView) findViewById(R.id.id_name_tv);
+        tv.setText(App_Static_Method.session_type().get("mobile"));
+        loadImages(id_image_profile, App_Static_Method.session_type().get("mobile"), mImageLoader);
 
     }
 

@@ -33,8 +33,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
+import task.Asynch_Obj;
+import utilities.UrlEndpoints;
+
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static utilities.App_Static_Method.progressDialog;
+import static utilities.App_Static_Method.session_type;
 
 /**
  * Created by GT on 8/25/2017.
@@ -46,6 +51,7 @@ public class Payment_Page extends Fragment implements View.OnClickListener {
     Button pay = null;
 
     public static final String TAG = "PayUMoneySDK Sample";
+    private Bundle bundle;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +59,18 @@ public class Payment_Page extends Fragment implements View.OnClickListener {
         final View rootView = inflater.inflate(R.layout.activity_my, container, false);
         amt = (EditText) rootView.findViewById(R.id.amount);
         pay = (Button) rootView.findViewById(R.id.pay_btn);pay.setOnClickListener(this);
+
+        if(getArguments()!=null)
+        {
+            bundle=getArguments();
+            //cat_type=bundle.getString("type");
+            // Log.d("bundrrle",""+bundle.getString("type"));
+            //str_type=getIntent().getStringExtra("type");
+            Log.d("json_Object",bundle.toString());
+
+            amt.setText(bundle.getString("branch_fee"));
+        }
+
         return rootView;
     }
     private boolean isDouble(String str) {
@@ -280,8 +298,33 @@ public class Payment_Page extends Fragment implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.pay_btn:
-                makePayment();
+               // makePayment();
+                 fake_apyment();
+
                 break;
         }
+    }
+
+    private void fake_apyment() {
+
+        Map<String,String> map=session_type();
+        map.put("category",bundle.getString("type"));
+        map.put("subcategory",bundle.getString("clg_id"));
+      //  if(bundle.getString("dealid")==null) {
+        map.put("dealid", ""+bundle.getString("dealid"));//}
+       // if(bundle.getString("id")==null) {
+        map.put("id",bundle.getString("id"));
+      //  }
+        map.put("price",bundle.getString("branch_fee"));
+
+        Log.d("jjhjhjhjhjh",bundle.toString());
+        new Asynch_Obj(new Asynch_Obj.OBJ_Lister() {
+            @Override
+            public void on_lis_obj(JSONObject jsonObject, String str_key) {
+                Log.d("jsonObject",jsonObject.toString());
+
+            }
+        }, UrlEndpoints.SEAT_USER_PAYEMNT, map, "payment").execute();
+
     }
 }

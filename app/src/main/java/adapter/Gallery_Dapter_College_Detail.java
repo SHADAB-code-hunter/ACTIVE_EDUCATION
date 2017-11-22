@@ -1,5 +1,6 @@
 package adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,7 +37,7 @@ public class Gallery_Dapter_College_Detail extends RecyclerView.Adapter<Gallery_
 
 
     public int i;
-    College_Detail_Activity college_detail_activity;
+    Activity college_detail_activity;
     JSONArray json_gallery;
     private String halg_img_path;
     private List<Common_Pojo> gallery_lis;
@@ -47,7 +48,7 @@ public class Gallery_Dapter_College_Detail extends RecyclerView.Adapter<Gallery_
         this.halg_img_path=halg_img_path;
     }
 
-    public Gallery_Dapter_College_Detail(College_Detail_Activity college_detail_activity, List<Common_Pojo> gallery_lis, String halg_img_path) {
+    public Gallery_Dapter_College_Detail(Activity college_detail_activity, List<Common_Pojo> gallery_lis, String halg_img_path) {
         this.college_detail_activity=college_detail_activity;
         this.gallery_lis=gallery_lis;
         this.halg_img_path=halg_img_path;

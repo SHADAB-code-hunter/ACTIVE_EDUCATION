@@ -124,10 +124,11 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     private View rootView;
     private LinearLayout id_linear_attach;
     private FrameLayout id_frm;
-    private Context context;
+    private Activity context;
+    private FrameLayout id_done;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity context) {
         super.onAttach(context);
         this.context=context;
 
@@ -142,12 +143,21 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.activity_vertical_stepper_form, container, false);
+        id_done=(FrameLayout)rootView.findViewById(R.id.id_done);
         id_frm=(FrameLayout)rootView.findViewById(R.id.id_frm);
         id_frm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Attach_Dialog attach_dialog=new Attach_Dialog(context);
                 attach_dialog.show();
+            }
+        });
+
+        id_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pager_Change_listener pager_change_listener=(Pager_Change_listener)context;
+                pager_change_listener.on_pager_change(1);
 
             }
         });

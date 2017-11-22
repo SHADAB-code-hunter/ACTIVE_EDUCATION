@@ -36,10 +36,12 @@
                style="@style/CustomEditText"
                android:textColorHint="#ffffff"
                android:soundEffectsEnabled="true"
+               android:hint="Google Account"
                android:outlineProvider="none"
                app:hintAnimationEnabled="true">
 
-               <android.support.design.widget.TextInputEditText
+               <EditText
+                   android:id="@+id/id_gplus"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:textSize="12sp"
@@ -82,15 +84,18 @@
                     android:background="@drawable/ic_facebook"/>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/id_fb_INPUT"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="Facebook Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
+                        android:id="@+id/id_fb"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="12sp"
@@ -137,12 +142,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="WhatsApp"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-
+                        android:id="@+id/id_whatsapp"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:textSize="12sp"
@@ -200,23 +206,24 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="Twitter Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-
+                        android:id="@+id/id_twitter"
+                        style="@style/CustomEditText"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
-                        android:textSize="12sp"
-                        style="@style/CustomEditText"
-                        android:gravity="center|left"
                         android:allowUndo="true"
-                        android:hint="Twitter Account"
-                        android:soundEffectsEnabled="true"
                         android:backgroundTint="#ffffff"
+                        android:gravity="center|left"
+                        android:hint="Twitter Account"
+                        android:singleLine="true"
+                        android:soundEffectsEnabled="true"
                         android:textColor="@color/edt_text_color"
-                        android:singleLine="true" />
+                        android:textSize="12sp" />
                 </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
@@ -259,12 +266,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="LinkedIn Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-                        android:id="@+id/id_fb_account"
+                        android:id="@+id/id_linked_account"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:textSize="12sp"
@@ -317,12 +325,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="Skype Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-
+                        android:id="@+id/id_skype"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:textSize="12sp"
@@ -377,12 +386,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="Instagram Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-
+                        android:id="@+id/id_instarag"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:textSize="12sp"
@@ -435,12 +445,13 @@
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/colorPrimaryDark"
                     android:textColorHint="#ffffff"
+                    android:hint="Tumblr Account"
                     android:soundEffectsEnabled="true"
                     android:outlineProvider="none"
                     app:hintAnimationEnabled="true">
 
                     <EditText
-
+                        android:id="@+id/id_tumblr"
                         android:layout_width="match_parent"
                         android:layout_height="35dp"
                         android:textSize="12sp"

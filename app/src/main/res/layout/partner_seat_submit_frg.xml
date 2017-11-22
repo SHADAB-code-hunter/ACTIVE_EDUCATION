@@ -56,109 +56,60 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/id_course_frm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp">
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/outline_spinner">
 
-            <android.support.design.widget.TextInputLayout
+            <ImageView
+                android:layout_toRightOf="@+id/id_tv"
+                android:layout_width="25dp"
+                android:layout_gravity="end"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_round_sign_down"/>
+
+            <TextView
+                android:id="@+id/id_tv_course"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColorHint="#ffffff"
-                android:soundEffectsEnabled="true"
-                android:outlineProvider="none"
-                app:hintAnimationEnabled="true">
+                android:layout_marginRight="25dp"
+                android:gravity="center|left"
+                android:text="Select Course"
+                android:textColor="@color/white" />
 
-                <EditText
-                    android:id="@+id/id_course_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:textSize="12sp"
-                    android:allowUndo="true"
-                    android:textColor="@color/edt_text_color"
-                    android:hint="Enter Course Name"
-                    android:soundEffectsEnabled="true"
-                    android:backgroundTint="@color/colorAccent"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="12dp"
-                android:layout_marginRight="0dp"
-                android:visibility="invisible"
-                android:src="@drawable/ic_agent_profile" />
         </FrameLayout>
-
-
         <FrameLayout
+            android:id="@+id/id_branch_frm"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp">
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColorHint="#ffffff"
-                app:hintAnimationEnabled="true">
-
-                <EditText
-                    android:id="@+id/id_brach_name"
-                    android:textSize="12sp"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/edt_text_color"
-                    android:layout_height="35dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="Enter Branch Name "
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:orientation="horizontal"
+            android:background="@drawable/outline_spinner">
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="12dp"
-                android:layout_marginRight="0dp"
-                android:visibility="invisible"
-                android:src="@drawable/ic_agent_profile" />
-        </FrameLayout>
+                android:layout_toRightOf="@+id/id_tv"
+                android:layout_width="25dp"
+                android:layout_gravity="end"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_round_sign_down"/>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="0dp">
-
-            <android.support.design.widget.TextInputLayout
+            <TextView
+                android:id="@+id/id_tv_branch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:textColorHint="#ffffff"
-                app:hintAnimationEnabled="true">
+                android:layout_height="match_parent"
+                android:layout_marginRight="25dp"
+                android:gravity="center|left"
+                android:text="Select Branch"
+                android:textColor="@color/white" />
 
-                <EditText
-                    android:id="@+id/id_course_duration"
-                    android:textSize="12sp"
-                    android:layout_width="match_parent"
-                    android:textColor="@color/edt_text_color"
-                    android:layout_height="35dp"
-                    android:backgroundTint="@color/colorAccent"
-                    android:hint="Enter Course Duration"
-                    android:inputType="number"
-                    android:singleLine="true" />
-            </android.support.design.widget.TextInputLayout>
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end|bottom"
-                android:layout_marginBottom="12dp"
-                android:layout_marginRight="0dp"
-                android:visibility="invisible"
-                android:src="@drawable/ic_agent_profile" />
         </FrameLayout>
+
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -298,10 +249,10 @@
             android:id="@+id/id_term_con"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:textColor="#6949FF"
+            android:textColor="@color/colorWhite"
             android:layout_marginTop="10dp"
             android:text="  I agree with all Terms &amp; Conditions"
-            android:buttonTint="#9933FF" />
+            android:buttonTint="@color/colorWhite" />
         <Button
             android:id="@+id/id_submit"
             android:layout_width="match_parent"
@@ -309,6 +260,11 @@
             android:text="Submit"
             android:textAllCaps="false"
             android:textColor="#423ce1"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"></LinearLayout>
 
     </LinearLayout>
 

@@ -1,10 +1,13 @@
 package com.gt.active_education;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -17,18 +20,22 @@ import com.bumptech.glide.Glide;
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
 import callbacks.Frg_Act_Listener;
+import callbacks.Log_Out_Listener;
+import fragment.Partner_Account_Frg;
 import fragment.Partner_Gallery;
 import fragment.Partner_Regisration_Frg;
 import fragment.Partner_Seat_Submission;
 import fragment.Target_fragment;
 import utilities.App_Static_Method;
+import utilities.MyApplication;
+import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
 /**
  * Created by GT on 10/5/2017.
  */
 
-public class Target_Circle_Activity extends AppCompatActivity implements View.OnClickListener, Frg_Act_Listener {
+public class Target_Circle_Activity extends AppCompatActivity implements View.OnClickListener, Frg_Act_Listener, Log_Out_Listener {
 
 
     private TextView id_profile;
@@ -58,7 +65,7 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
             public void onClick(View v) {
                 layout1.toggle();
               /*  InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);*/
+                  imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);*/
             }
         });
         id_fragment_partner=(FrameLayout)findViewById(R.id.id_fragment_partner);
@@ -74,9 +81,9 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
         id_fragment_title.setText("Target");
         ft.replace(R.id.id_fragment_partner, new Target_fragment());ft.commit();
 
-        id_clg_name.setText(App_Static_Method.get_agent_session_data("name"));
+        id_clg_name.setText(App_Static_Method.session_type().get("name"));
         Glide.with(Target_Circle_Activity.this)
-                .load(UrlEndpoints.SEAT_PROVIDER_PRFL_IMG+App_Static_Method.get_agent_session_data("image"))
+                .load(UrlEndpoints.SEAT_PROVIDER_PRFL_IMG+App_Static_Method.session_type().get("image"))
                 .into(id_img_college);
 
     }
@@ -89,9 +96,10 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
         switch (v.getId())
         {
             case R.id.id_linear_logout_menu:
-                layout1.toggle();
-                set_logout();
+
+                App_Static_Method.logout(Target_Circle_Activity.this);
                // id_fragment_title.setText("Log Us");
+                layout1.toggle();
                 ft.replace(R.id.id_fragment_partner, new Target_fragment());
                 ft.commit();
                 break;
@@ -114,7 +122,7 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
                 break;
             case R.id.id_linear_acc_menu:
                 id_fragment_title.setText("Account");layout1.toggle();
-                ft.replace(R.id.id_fragment_partner, new Target_fragment());
+                ft.replace(R.id.id_fragment_partner, new Partner_Account_Frg());
                 ft.commit();
                 break;
             case R.id.id_linear_seat_menu:
@@ -125,25 +133,67 @@ public class Target_Circle_Activity extends AppCompatActivity implements View.On
         }
     }
 
-    private void set_logout() {
-        Thread t=new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
 
-
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-    }
 
     @Override
     public void on_frg_act_linking() {
+
+    }
+
+    @Override
+    public void on_logout(boolean bl) {
+
+
+        Log.d("blelogin",""+bl);
+        if(bl)
+        {
+            SharedPreferences sharedPreferences;
+            SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+            switch (shprf_.getString("type", "na"))
+            {
+                case "agent":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                    SharedPreferences.Editor editor1 = sharedPreferences.edit();
+                    editor1.clear().commit();
+                    shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
+                    break;
+                case "user":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                    SharedPreferences.Editor editor2 = sharedPreferences.edit();
+                    editor2.clear().commit();
+                    shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
+
+                    break;
+                case "seater":
+                    sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
+                    SharedPreferences.Editor editor3 = sharedPreferences.edit();
+                    editor3.clear().commit();
+                    shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
+                    break;
+
+            }
+
+            Log.d("ssssssww","dffffff"+bl);
+       //     id_image_profile.setImageResource(R.drawable.ic_profile);
+          /*  if(progressDialog!=null)
+                progressDialog.cancel();
+
+            set_logindrawer();
+        }else if(!bl){
+
+            if(progressDialog!=null)
+                progressDialog.cancel();
+            Log.d("notlogout","dffffff"+bl);
+
+            set_logindrawer();*/
+
+        }
 
     }
 }

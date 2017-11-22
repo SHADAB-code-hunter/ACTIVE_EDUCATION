@@ -36,7 +36,7 @@
 
     <string name="facebook_app_id">356658544797544</string>
     <string name="fb_login_protocol_scheme">fb356658544797544</string>
-
+    <string name="login_text">Login User Will Get More Entertain, If you want To Continue With Login , Please Click Button Login Button</string>
     <string name="sample_blue_title">sample_blue_title</string>
     <string name="square_blue_name">square_blue</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>

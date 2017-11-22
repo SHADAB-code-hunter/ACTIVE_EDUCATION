@@ -68,6 +68,7 @@ public class Agent_Profile_Detail_Fragment extends Fragment implements View.OnCl
     private EditText edt_old_pass;
     private EditText edt_new_pass,edt_con_pass;
     private Context context;
+    private EditText edt_add;
 
 
     @Override
@@ -97,6 +98,7 @@ public class Agent_Profile_Detail_Fragment extends Fragment implements View.OnCl
         edt_old_pass=(EditText)rootView.findViewById(R.id.edt_pass);
         edt_fname=(EditText)rootView.findViewById(R.id.edt_fname);
         edt_email=(EditText)rootView.findViewById(R.id.edt_email);
+        edt_add=(EditText)rootView.findViewById(R.id.edt_add);
         //layout1 = (ExpandableRelativeLayout)rootView. findViewById(R.id.expandableLayout1);
 
         id_btn_save2=(Button)rootView.findViewById(R.id.id_btn_save2); id_btn_save2.setOnClickListener(this);
@@ -225,6 +227,7 @@ public class Agent_Profile_Detail_Fragment extends Fragment implements View.OnCl
         map.put("aname",edt_fname.getText().toString());
       //  if(edt_email.getText().toString().equals(null))
         map.put("email",edt_email.getText().toString());
+        map.put("address",edt_add.getText().toString());
         if(!map2.isEmpty())
         map.put("state",map2.get("state_id"));
         if(!map2.isEmpty())
@@ -243,7 +246,7 @@ public class Agent_Profile_Detail_Fragment extends Fragment implements View.OnCl
     public void onLJsonLoaded_new(JSONObject jsonObject) {
         if(jsonObject!=null) {
             Log.d("strjobject", jsonObject.toString());
-
+           // update();
             new DroidDialog.Builder(Agent_Profile_Detail_Fragment.this.getContext())
                     .icon(R.drawable.ic_checked)
                     .title("Successfull Updated !!!")
@@ -254,6 +257,9 @@ public class Agent_Profile_Detail_Fragment extends Fragment implements View.OnCl
                         public void onNeutral(Dialog droidDialog) {
                             //	activity.getParent().onBackPressed();
                             //    context.finish();
+
+                          //  new Agent_Profile_Detail_Fragment();
+
                             droidDialog.dismiss();
                         }
                     })

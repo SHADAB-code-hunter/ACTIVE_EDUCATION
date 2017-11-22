@@ -41,7 +41,7 @@ public class Target_fragment extends Fragment  implements JOBJ_Listener{
     private BatteryProgressView progress1;
     private BatteryProgressView2 progress2;
     private BatteryProgressView3 progress3;
-    private TextView id_total_no,id_fill_no,id_remain_no;
+    private TextView id_total_no,id_fill_no,id_remain_no,id_course_name1,id_course_name2,id_course_name3;
     private Target_Circle_Activity activity;
 
     @Override
@@ -65,11 +65,15 @@ public class Target_fragment extends Fragment  implements JOBJ_Listener{
         id_total_no=(TextView)rootView.findViewById(R.id.id_total_no);
         id_fill_no=(TextView)rootView.findViewById(R.id.id_fill_no);
         id_remain_no=(TextView)rootView.findViewById(R.id.id_remain_no);
+        id_course_name1=(TextView)rootView.findViewById(R.id.id_course_name1);
+        id_course_name2=(TextView)rootView.findViewById(R.id.id_course_name2);
+        id_course_name3=(TextView)rootView.findViewById(R.id.id_course_name3);
         progress1= (BatteryProgressView)rootView. findViewById(R.id.progress1);
         progress2= (BatteryProgressView2)rootView. findViewById(R.id.progress2);
         progress3= (BatteryProgressView3)rootView. findViewById(R.id.progress3);
 
-        new Asynch_JObject(Target_fragment.this, UrlEndpoints.SEAT_PROVIDER_TARGET, App_Static_Method.get_full_session_data()).execute();
+        Log.d("mgttgttgt",""+App_Static_Method.session_type());
+        new Asynch_JObject(Target_fragment.this, UrlEndpoints.SEAT_PROVIDER_TARGET, App_Static_Method.session_type()).execute();
 
        /* set_progress(progress1,R.color.circle_progress_color1);
         set_progress(progress2,R.color.circle_progress_color2);
@@ -100,6 +104,9 @@ public class Target_fragment extends Fragment  implements JOBJ_Listener{
             id_total_no.setText(jsonObject1.getString("total"));
             id_fill_no.setText(jsonObject1.getString("filled"));
             id_remain_no.setText(jsonObject1.getString("remaining"));
+            id_course_name1.setText(jsonObject1.getString("name"));
+            id_course_name2.setText(jsonObject1.getString("name"));
+            id_course_name3.setText(jsonObject1.getString("name"));
          //   activity.on_frg_act_linking();
 
         } catch (JSONException e) {

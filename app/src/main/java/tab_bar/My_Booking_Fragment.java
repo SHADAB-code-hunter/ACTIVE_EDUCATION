@@ -1,90 +1,158 @@
 package tab_bar;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.gt.active_education.Book_desc_Activity;
+import com.gt.active_education.DashBoard_Activity;
+import com.gt.active_education.Filter_Activity;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
+import adapter.Adapter_Book;
 import adapter.MoviesAdapter;
+import callbacks.Agent_deal_Listener;
 import callbacks.Avail_Course_Listener;
-import callbacks.Upcoming_List_LoadedListener;
+import callbacks.JOBJ_Listener;
+import pojo.Agent_Deal_Pojo;
+import task.Asynch_Book_Responce;
 import task.TaskLoad_List;
 import pojo.Cat_Model;
 import utilities.App_Static_Method;
 import utilities.Common_Pojo;
+import utilities.MyApplication;
+import utilities.RecyclerTouchListener;
+import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
-import static extras.Keys.KEY_USER_LOGIN.KEY_EMAIL;
-import static extras.Keys.KEY_USER_LOGIN.KEY_TOKEN;
+import static com.facebook.FacebookSdk.getApplicationContext;
+import static utilities.App_Static_Method.show_load_progress;
+
 
 /**
  * Created by GT on 8/5/2017.
  */
 
-public class My_Booking_Fragment extends Fragment implements Upcoming_List_LoadedListener , Avail_Course_Listener {
-
-  private RecyclerView recyclerView;
+public class My_Booking_Fragment extends  Fragment implements Agent_deal_Listener, JOBJ_Listener {
+    Adapter_Book adapter_book;
     Picasso picasso;
-    private  String str_url;
+    RecyclerView recyclerView;
+    private JSONArray jsonArray;
+    private String strulr;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_mybooking, container, false);
-        picasso = Picasso.with(getContext());
-        this.getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        String sentString=null;
-        if(getArguments()!=null){
-            sentString = getArguments().getString("url");
-            view.findViewById(R.id.id_tv_fragment);}
-        TextView textView=(TextView)view.findViewById(R.id.id_tv_fragment);
-        // textView.setText(sentString);
-
-        str_url=UrlEndpoints.GET_BOOKING_LIST+"email="+ App_Static_Method.get_session_data(KEY_EMAIL)
-                +"&token="+ App_Static_Method.get_session_data(KEY_TOKEN);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
-        new TaskLoad_List((Upcoming_List_LoadedListener)My_Booking_Fragment.this, str_url).execute();
-        picasso = Picasso.with(getContext());
-        return view;
     }
 
     @Override
-    public void onUpcomingLoaded(List<Cat_Model> listMovies) {}
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
-    public void onUpcomingLoaded(List<Cat_Model> listMovies, String poss) {
-        MoviesAdapter mAdapter = new MoviesAdapter(listMovies, picasso,getActivity(),str_url);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.frg_agent_book, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
+        //rootView.findViewById(R.id.id_heading).setVisibility(View.GONE);
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
+        String str_token=sharedPreferences.getString("token", "na");
+        String str_email=sharedPreferences.getString("mobile", "na");
+
+           if(getArguments()!=null) {
+                strulr = getArguments().getString("URL");
+           }
+        Log.d("uel", strulr+"mobile="+str_email+"&token="+str_token);
+
+        new Asynch_Book_Responce(My_Booking_Fragment.this, strulr+"mobile="+App_Static_Method.session_type().get("mobile")+"&token="+App_Static_Method.session_type().get("token")).execute();
+        picasso = Picasso.with(getContext());
+
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView,
+                new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+
+                        Intent i=new Intent(getApplicationContext(),Book_desc_Activity.class);
+                        try {
+                            i.putExtra("book_obj",jsonArray.getJSONObject(position).toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        startActivity(i);
+
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                }
+        ));
+        return rootView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    public void on_deal_call(List<Agent_Deal_Pojo> listMovies, String status_call) {
+        // Log.d("kist",""+listMovies.toString());
+        //  if (listMovies.isEmpty()) {
+      /*  adapter_book = new Adapter_Book(listMovies, picasso, (Activity) getContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+        recyclerView.setAdapter(mAdapter);*/
+       /* }else {
+            Toast.makeText(getContext(), "You Have No Deal", Toast.LENGTH_SHORT).show();
+        }*/
     }
 
     @Override
-    public void onUpcomingcourses(List<Common_Pojo> common_pojos) {
+    public void onLJsonLoaded(JSONObject jsonObject) {
 
     }
 
     @Override
-    public void onUpcomingexams(List<Common_Pojo> common_pojos) {
-
-    }
-
-    @Override
-    public void onAvailCourse(String str_id, String c_id, String course_id, String branch_id, String c_branch) {
-
+    public void onLJsonLoaded_new(JSONObject jsonObject) {
+//        Log.d("objwct_responce",jsonObject.toString());
+//
+        // mAdapter = new Agent_Deal_Adapter(jsonObject, picasso, (Activity) getContext());
+        try {
+            if(jsonObject.has("data")) {
+                jsonArray=jsonObject.getJSONArray("data");
+                adapter_book = new Adapter_Book(jsonArray, picasso, (Activity) getContext());
+                LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(adapter_book);
+            }
+        } catch (Exception e) {
+           Log.d("jkjkjk",""+e.getMessage());
+        }
     }
 }

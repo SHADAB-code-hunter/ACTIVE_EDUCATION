@@ -17,6 +17,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,7 +113,6 @@ import io.codetail.animation.ViewAnimationUtils;
 import pojo.Drawer_Pojo;
 import pojo.Send_date_Model;
 import pojo.Winner_Model;
-import task.Asynch_Agent_Form_JObject;
 import task.Asynch_Book_Responce;
 import task.Asynch_Responce_OBJ;
 import task.Load_Courses_Data;
@@ -124,6 +124,7 @@ import pojo.Cat_Model;
 import utilities.CirclePageIndicator;
 import utilities.Common_Pojo;
 import utilities.ConnectionCheck;
+import utilities.CustomDialogClass;
 import utilities.Custom_DialogClass;
 import utilities.DroidDialog;
 import utilities.Filter_Dialog;
@@ -257,6 +258,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         int width = size.x;
         int height = size.y;
 
+        Log.d("loginsession",""+session_type());
         Log.d("widthsize",""+width);
         Log.d("heightsize",""+height);
         id_edt_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -337,6 +339,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
             }
         });
 
+        // continue
         id_linear_chat.setOnClickListener(new AuthOnClickWrapper(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
@@ -504,9 +507,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
         int[] img_drwr=new int[]{R.drawable.ic_edit_prfl,R.drawable.ic_gallery,R.drawable.ic_gps,R.drawable.ic_share,
                 R.drawable.ic_stars,R.drawable.ic_contactus, R.drawable.ic_info,
-                R.drawable.ic_setting};
-       String[] str_menu_name=new String[]{"My Profile","Gallery","Find Your Need","Share App","Rate This App","Contact Us",
-       "About Us","Setting"};
+               /* R.drawable.ic_setting*/};
+       String[] str_menu_name=new String[]{"My Profile","Gallery","Find Your Need","Share App","Rate This App","Contact Us", "About Us"/*,"Setting"*/};
 
         verticleLayoutManager1=new CustomGridLayoutManager(getApplicationContext(),1);
         verticleLayoutManager1.setScrollEnabled(false);
@@ -586,8 +588,18 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     JSONArray jsonArray=jsonObject.getJSONArray("data");
                     Log.d("knknggknknk", "" + jsonObject);
                     if (jsonArray.getJSONObject(0).has("image")) {
+
+                        String str_type;
+                        if(session_type().get("type").equals("agent"))
+                        {
+                            str_type="partner/";
+                        }
+                            else{
+                            str_type="profile/";
+                        }
+
                         Picasso.with(DashBoard_Activity.this)
-                                .load(GET_PROFILE + "partner/" + (jsonArray.getJSONObject(0).getString("image")))
+                                .load(GET_PROFILE + str_type + (jsonArray.getJSONObject(0).getString("image")))
                                 //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
                                 // .error(DRAWABLE RESOURCE)      // optional
                                 // .resize(width, height)                        // optional
@@ -666,7 +678,6 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     @Override
     public void onSpinner_Date(String str_choose_daet,View v) {
         //Log.d("getdata",str_choose_daet);
-
 
         String str_url=UrlEndpoints.URL_Send_DAte+str_choose_daet;
         get_intent_data(str_url,"GIFT_VOUVHER");
@@ -794,9 +805,10 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 break;
 
             case 5:// contact us
-            //    drawer.closeDrawer(Gravity.LEFT);
-               /* CustomDialogClass dialogClass=new CustomDialogClass(DashBoard_Activity.this,);
-                dialogClass.show();*/
+            //  drawer.closeDrawer(Gravity.LEFT);
+                CustomDialogClass dialogClass=new CustomDialogClass(DashBoard_Activity.this);
+                dialogClass.show();
+             // contact us
 
                 break;
             case 6:// About us
@@ -1268,11 +1280,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
                 break;
 
-            case "V_CALL":
 
-                Toast.makeText(DashBoard_Activity.this, "Video Call Not Available Yet", Toast.LENGTH_SHORT).show();
-
-                break;
 
             case "CHAT":
 
@@ -1295,7 +1303,11 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     }
                 },getApplicationContext());
                 break;
+            case "V_CALL":
 
+                Toast.makeText(DashBoard_Activity.this, "Video Call Not Available Yet", Toast.LENGTH_SHORT).show();
+
+                break;
 
         }
     }
@@ -1357,11 +1369,19 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         circleIndicator.setOnPageChangeListener(viewPagerPageChangeListener);*/
 
      //Log.d("knknknknk",GET_PROFILE+"/user/"+(jsonArray.getJSONObject(0).getString("image")));
+            String str;
+            if(session_type().get("type").equals("agent"))
+            {
+                str ="partner/";
+            }else {
+                str ="profile/";
+            }
+
      Log.d("knknknknk",""+jsonArray.getJSONObject(0));
         if(jsonArray.getJSONObject(0).has("image"))
         {
             Picasso.with(DashBoard_Activity.this)
-                    .load(GET_PROFILE+"partner/"+(jsonArray.getJSONObject(0).getString("image")))
+                    .load(GET_PROFILE+str+(jsonArray.getJSONObject(0).getString("image")))
                     //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
                     // .error(DRAWABLE RESOURCE)      // optional
                     // .resize(width, height)                        // optional
@@ -1404,9 +1424,10 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
         if (!mPressed) {
             mPressed = true;
+            int endradius = Math.max(mRevealView.getWidth(), mRevealView.getHeight());
+
             int cx = (mRevealView.getLeft() + mRevealView.getRight());
             int cy = mRevealView.getTop();
-            int endradius = Math.max(mRevealView.getWidth(), mRevealView.getHeight());
             mAnimator = ViewAnimationUtils.createCircularReveal(mRevealView, cx, cy, 0, endradius);
             mAnimator.setInterpolator(new AccelerateDecelerateInterpolator());
             mAnimator.setDuration(200);
@@ -1458,7 +1479,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         view.startAnimation(animation);
     }
 
-    class AuthOnClickWrapper implements View.OnClickListener {
+    static class AuthOnClickWrapper implements View.OnClickListener {
 
         private View.OnClickListener mOnClickListener;
         private UserProfileStorage mUserProfileStorage;
@@ -1481,7 +1502,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
           //  }
         }
 
-        private void showDialog(){
+       /* private void showDialog(){
             AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
             builder.setMessage(R.string.dialog_auth_title)
                     .setPositiveButton(R.string.dialog_auth_positive_btn, new DialogInterface.OnClickListener() {
@@ -1496,7 +1517,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                         }
                     });
             builder.create().show();
-        }
+        }*/
     }
     @Override
     public void on_logout(boolean bl) {
@@ -1513,18 +1534,25 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     SharedPreferences.Editor editor1 = sharedPreferences.edit();
                     editor1.clear().commit();
                     shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
                     break;
                 case "user":
                     sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
                     SharedPreferences.Editor editor2 = sharedPreferences.edit();
                     editor2.clear().commit();
                     shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
+
                     break;
                 case "seater":
                     sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
                     SharedPreferences.Editor editor3 = sharedPreferences.edit();
                     editor3.clear().commit();
                     shprf_.edit().clear().commit();
+                    startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                    finish();
                     break;
 
             }
@@ -1557,15 +1585,15 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         builder.create().show();
     }
     private void get_intent_data(String str_url, final String str_dialog_status) {
-        //Log.d("vvbhv",str_url);
+        Log.d("vvbhv",str_url);
         final JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET,str_url,new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject responseObj) {
-                //Log.d("hjrtibbvcc", responseObj.toString()+" "+str_dialog_status);
+                Log.d("hjrtibbvcc", str_dialog_status+" "+responseObj.toString()+" ");
                 try {
                     if(responseObj.has("msg"))
                     {
-                      /*  mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
+                       /* mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
                         mPlay.start();
                         ConnectionCheck.list_not_get(New_Dashboard_Activity.this," Gift Voucher List Not Get");*/
                     }
@@ -1630,7 +1658,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                             }
                         }else if(responseObj.has("msg"))
                         {
-                          /*  mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
+                           /* mPlay= MediaPlayer.create(New_Dashboard_Activity.this, R.raw.dialog_aud);
                             mPlay.start();
                             ConnectionCheck.list_not_get(New_Dashboard_Activity.this,"Winner List Not Get");*/
                         }

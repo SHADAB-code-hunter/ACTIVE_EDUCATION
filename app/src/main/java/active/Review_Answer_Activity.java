@@ -1,4 +1,4 @@
-package com.gt.active_education;
+package active;
 
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -9,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gt.active_education.R;
 
 import java.util.ArrayList;
 

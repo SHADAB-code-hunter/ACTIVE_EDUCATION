@@ -12,6 +12,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.gt.active_education.R;
+import com.gt.active_education.User_Login_Activity;
 
 
 public class ConnectionCheck {
@@ -131,7 +132,7 @@ public class ConnectionCheck {
 				.divider(true, ContextCompat.getColor(activity, R.color.orange))
 				.show();
 	}
-/*
+
 	public static void exit_open_Dialog(Boolean bl_ok_true, final Activity activity) {
 		new DroidDialog.Builder(activity)
 				.icon(R.drawable.exit)
@@ -160,35 +161,38 @@ public class ConnectionCheck {
 				.show();
 	}
 
-	public static void openDialog(Boolean bl_ok_true, final Activity activity) {
+
+	public static void unAuth_prob(final Activity activity,final String str_gate) {
 		new DroidDialog.Builder(activity)
-				.icon(R.drawable.icon_conn_lose)
-				.title("Internet Not Found !!")
-				.content(activity.getResources().getString(R.string.short_text))
+				.icon(R.drawable.ic_login_sts)
+				.title("Unauthorised User !!")
+				.content(activity.getResources().getString(R.string.login_text))
 				.cancelable(true, false)
-				.negativeButton("Cancle", new DroidDialog.onNegativeListener() {
-					@Override
-					public void onNegative(Dialog droidDialog) {
-						droidDialog.dismiss();
-						// Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
-					}
-				})
-				.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
+
+				.neutralButton("OK", new DroidDialog.onNeutralListener() {
 					@Override
 					public void onNeutral(Dialog droidDialog) {
-						Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
-						activity.startActivity(intent);
-						droidDialog.dismiss();
-						// Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
+
+						if(activity.getLocalClassName().equals("Quiz_SubList_Activity"))
+						{
+							droidDialog.dismiss();
+							activity.finish();
+						}else{
+							droidDialog.dismiss();
+
+						}
 					}
 				})
 				.typeface("regular.ttf")
 				.animation(AnimUtils.AnimZoomInOut)
 				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
 						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
-				.divider(true, ContextCompat.getColor(activity, R.color.colorPrimaryDark))
+				.divider(true, ContextCompat.getColor(activity, R.color.orange))
 				.show();
 	}
+
+
+/*
 	public static void login_Dialog(final String str_gate, final Activity activity, final boolean skip_status) {
 		new DroidDialog.Builder(activity)
 				.icon(R.drawable.ic_login_sts)
@@ -227,36 +231,40 @@ public class ConnectionCheck {
 				.divider(true, ContextCompat.getColor(activity, R.color.orange))
 				.show();
 	}
+*/
 
 
-	public static void unAuth_prob(final Activity activity,final String str_gate) {
+/*
+	public static void openDialog(Boolean bl_ok_true, final Activity activity) {
 		new DroidDialog.Builder(activity)
-				.icon(R.drawable.ic_login_sts)
-				.title("Unauthorised User !!")
-				.content(activity.getResources().getString(R.string.login_text))
+				.icon(R.drawable.icon_conn_lose)
+				.title("Internet Not Found !!")
+				.content(activity.getResources().getString(R.string.short_text))
 				.cancelable(true, false)
-
-				.neutralButton("OK", new DroidDialog.onNeutralListener() {
+				.negativeButton("Cancle", new DroidDialog.onNegativeListener() {
+					@Override
+					public void onNegative(Dialog droidDialog) {
+						droidDialog.dismiss();
+						// Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
+					}
+				})
+				.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
 					@Override
 					public void onNeutral(Dialog droidDialog) {
-
-						if(activity.getLocalClassName().equals("Quiz_SubList_Activity"))
-						{
-							droidDialog.dismiss();
-							activity.finish();
-						}else{
-							droidDialog.dismiss();
-
-						}
+						Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
+						activity.startActivity(intent);
+						droidDialog.dismiss();
+						// Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
 					}
 				})
 				.typeface("regular.ttf")
 				.animation(AnimUtils.AnimZoomInOut)
 				.color(ContextCompat.getColor(activity, R.color.colorAccent), ContextCompat.getColor(activity, R.color.colorPrimaryDark),
 						ContextCompat.getColor(activity, R.color.colorPrimaryDark))
-				.divider(true, ContextCompat.getColor(activity, R.color.orange))
+				.divider(true, ContextCompat.getColor(activity, R.color.colorPrimaryDark))
 				.show();
 	}
+
 
 
 

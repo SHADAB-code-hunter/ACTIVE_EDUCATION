@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +32,15 @@ public class Agent_Account_Adapter extends RecyclerView.Adapter<Agent_Account_Ad
     List<Agent_Deal_Pojo> mList = new ArrayList<>();
     Picasso picasso;
     Context _activity;
+    JSONArray jsonArray;
 
-    public Agent_Account_Adapter(Context ctx) {
+    public Agent_Account_Adapter(Context ctx, JSONObject jsonObject) {
         this._activity = ctx;
+        try {
+            this.jsonArray=jsonObject.getJSONArray("data");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -58,11 +68,23 @@ public class Agent_Account_Adapter extends RecyclerView.Adapter<Agent_Account_Ad
         holder.tv_seat.setText(agent_deal_pojo.getTotal_admission());
         holder.tv_offer.setText("20 % ");*/
 
+        try {
+            JSONObject jsonObject=jsonArray.getJSONObject(position);
+
+            holder.id_tv_title.setText(jsonObject.getString("bank"));
+            holder.id_tv_reciept_no.setText("Payment Receipt No: "+jsonObject.getString("receipt"));
+            holder.id_tv_pay_date.setText(jsonObject.getString("added_date"));
+            holder.id_payment.setText(jsonObject.getString("price")+" /-");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 7;
+        return jsonArray.length();
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -70,17 +92,20 @@ public class Agent_Account_Adapter extends RecyclerView.Adapter<Agent_Account_Ad
         private CardView card_view;
         private Button id_btn_apply;
         private ImageView iv_cover;
-        private TextView tv_cat, tv_course, tv_l_date ,tv_seat ,tv_offer;
+        private TextView id_tv_title, id_tv_reciept_no, id_tv_pay_date ,id_payment;
         public MovieViewHolder(View x) {
             super(x);
-           /* iv_cover = (ImageView) x.findViewById(R.id.iv_cover);
-            tv_cat = (TextView) x.findViewById(R.id.tv_cat);
-            tv_course = (TextView) x.findViewById(R.id.tv_course);
-            tv_l_date = (TextView) x.findViewById(R.id.tv_l_date);
-            tv_seat = (TextView) x.findViewById(R.id.tv_seat);
-            tv_offer = (TextView) x.findViewById(R.id.tv_offer);
-            card_view = (CardView) x.findViewById(R.id.card_view);
-            id_btn_apply=(Button)x.findViewById(R.id.id_btn_apply);*/
+
+
+
+
+
+            id_tv_title = (TextView) x.findViewById(R.id.id_tv_title);
+            id_tv_reciept_no = (TextView) x.findViewById(R.id.id_tv_reciept_no);
+            id_tv_pay_date = (TextView) x.findViewById(R.id.id_tv_pay_date);
+            id_payment = (TextView) x.findViewById(R.id.id_payment);
+
+            id_btn_apply=(Button)x.findViewById(R.id.id_btn_apply);
         }
 
     }

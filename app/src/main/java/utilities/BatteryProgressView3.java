@@ -142,7 +142,7 @@ public class BatteryProgressView3 extends View {
         outerRadius=((width/2)- OUTER_STROKE_WIDTH);
         innerRadius=((width/2)- INNER_STROKE_WIDTH-innerCircleMargin);
         progressText="0";
-        subText="Complete Target";
+        subText="Remain Seats";
         progressBounds.set(((width/2)- (innerRadius)),((height/2)- (innerRadius)),((width/2)- INNER_STROKE_WIDTH-innerCircleMargin)+(width/2),((height/2)- INNER_STROKE_WIDTH-innerCircleMargin)+(height/2));
     }
     public void setOuterCircleColor(int outerCircleColor) {

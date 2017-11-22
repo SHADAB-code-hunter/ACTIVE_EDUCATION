@@ -109,10 +109,8 @@
                                                     android:id="@+id/toolbar_timer" />
 
                                                 <TextView
-                                                    android:layout_width="match_parent"
+                                                    android:layout_width="50dp"
                                                     android:layout_height="match_parent"
-
-                                                    android:layout_weight="2.1"
                                                     android:layout_margin="9dp"
                                                     android:visibility="invisible"
                                                     android:gravity="center"

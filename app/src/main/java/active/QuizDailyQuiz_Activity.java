@@ -1,4 +1,4 @@
-package com.gt.active_education;
+package active;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gt.active_education.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import active.Adv_Activity;
 import active_adapter.ViewPagerAdapter;
 import callbacks.Quiz_Opt_Choose_Event_Listener;
 import callbacks.VP_PageChange_Listener;
@@ -40,6 +40,7 @@ import pojo.Gallery_Model;
 import pojo.Quiz_Answer_Model;
 import pojo.Quiz_Model;
 import utilities.AnimUtils;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.DroidDialog;
 import utilities.MyApplication;
@@ -234,7 +235,7 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
                 PQ_handler.post(PQ_Update);
             }
         },SINGLE_QUES_TIME,SINGLE_QUES_TIME);
-      //  Theme_Change.Toolbar_Change_Prefrense(findViewById(R.id.toolbar2));
+     //   Theme_Change.Toolbar_Change_Prefrense(findViewById(R.id.toolbar2));
     }
 
     private void start_PQ_Timer() {
@@ -303,7 +304,7 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
         timeSwapBuff += timeInMilliseconds;
         customHandler.removeCallbacks(updateTimerThread);
         //Log.d("tttt",""+timeSwapBuff);
-        Intent i=new Intent(getApplicationContext(), Adv_Activity.class);
+        Intent i=new Intent(getApplicationContext(),Adv_Activity.class);
         i.putParcelableArrayListExtra("list", mDailyQuizList);
         //Log.d("count_poss",""+(COUNT));
         i.putExtra("SLOT_COUNT",str_SLOT_NUM);
@@ -434,7 +435,7 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
             case R.id.id_back_quicz_Quick_btn:
                 mPlay=MediaPlayer.create(QuizDailyQuiz_Activity.this, R.raw.dialog_aud);
                 mPlay.start();
-               // ConnectionCheck.exit_open_Dialog(true,QuizDailyQuiz_Activity.this);
+                ConnectionCheck.exit_open_Dialog(true,QuizDailyQuiz_Activity.this);
                 break;
             case R.id.quiz_next_action_button:
                /* //Log.d("countt", String.valueOf(main_viewPager.getAdapter().getCount()));
@@ -457,12 +458,11 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
                 bl_close_quiz=true;
                 mPlay=MediaPlayer.create(QuizDailyQuiz_Activity.this, R.raw.dialog_aud);
                 mPlay.start();
-              //  ConnectionCheck.exit_open_Dialog(true,QuizDailyQuiz_Activity.this);
+                ConnectionCheck.exit_open_Dialog(true,QuizDailyQuiz_Activity.this);
                 break;
 
         }
     }
-
 
     @Override
     public void onOption_Choosen(Quiz_Answer_Model quizAnswerModel) {
@@ -480,10 +480,9 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
     }
 
     private void save_ans_to_server(long q_timeInMilliseconds, String str_ans,String str_Qid,int poss) {
-      /*  MyApplication myApplication=new MyApplication();
-        SharedPreferences sharedPref=myApplication.get_shrd_prf_login(getBaseContext());
 
-        String url= UrlEndpoints.URL_SAVE_EACH_ANS+sharedPref.getString("mobile","NA")+"&token="+sharedPref.getString("Login_Token","NA")+"&question_id="
+
+        String url= UrlEndpoints.URL_SAVE_EACH_ANS+ App_Static_Method.session_type().get("mobile")+"&token="+App_Static_Method.session_type().get("type")+"&question_id="
                 +Integer.parseInt(str_Qid)+"&user_answer="+str_ans+"&time_taken="+q_timeInMilliseconds+"&slot="+COUNT;
         //Log.d("URL_save",""+url);
 
@@ -507,7 +506,7 @@ public class QuizDailyQuiz_Activity extends AppCompatActivity implements VP_Page
                     }
                 }) ;
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
-        requestQueue.add(stringRequest);*/
+        requestQueue.add(stringRequest);
     }
 
 

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
@@ -62,8 +63,7 @@ public class Agent_Best_Deal_Fragment extends Fragment implements Agent_deal_Lis
 }*/
         Log.d("uel",UrlEndpoints.GET_BEST_DEAL+"mobile="+str_email+"&token="+str_token);
 
-        new Agent_Async(Agent_Best_Deal_Fragment.this,
-                UrlEndpoints.GET_BEST_DEAL+"mobile="+str_email+"&token="+str_token).execute();
+        new Agent_Async(Agent_Best_Deal_Fragment.this, UrlEndpoints.GET_BEST_DEAL+"mobile="+str_email+"&token="+str_token).execute();
         picasso = Picasso.with(getContext());
 
 
@@ -79,14 +79,14 @@ public class Agent_Best_Deal_Fragment extends Fragment implements Agent_deal_Lis
     @Override
     public void on_deal_call(List<Agent_Deal_Pojo> listMovies, String status_call) {
        // Log.d("kist",""+listMovies.toString());
-      //  if (listMovies.isEmpty()) {
+        if (!listMovies.isEmpty()) {
             mAdapter = new Agent_Deal_Adapter(listMovies, picasso, (Activity) getContext());
             LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(mAdapter);
-       /* }else {
+        }else {
             Toast.makeText(getContext(), "You Have No Deal", Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 }

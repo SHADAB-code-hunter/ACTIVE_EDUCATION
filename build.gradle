@@ -32,6 +32,8 @@ allprojects {
         maven {
             url  "http://dl.bintray.com/lukaville/maven"
         }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://dl.bintray.com/hani-momanii/maven"}
     }
 }
 

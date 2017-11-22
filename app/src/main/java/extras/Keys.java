@@ -49,7 +49,7 @@ public interface Keys {
 
          String KEY_R_SEAT="remaining_seats";
 
-         String KEY_ID="id";
+         String KEY_ID="mapid";
 
          String KEY_B_NAME="branch_name";
 
@@ -77,6 +77,8 @@ public interface Keys {
          String KEY_DISCOUNT="discount";
 
          String KEY_TYPE="type";
+
+         String KEY_DEALID="dealid";
 
         /*  state keys  */
 

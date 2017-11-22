@@ -1,9 +1,13 @@
 package com.gt.active_education;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -25,6 +29,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.prechat.PreChatForm;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,6 +44,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import Zend_Chat.UserProfile;
+import Zend_Chat.UserProfileStorage;
 import adapter.Adapter_Facility;
 import adapter.Banner_Adapter;
 import adapter.Banner_Adapter_Clg;
@@ -103,6 +112,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
     private LinearLayout id_view_more_linear;
     private TextView id_duration;
     private TextView id_fees2;
+    private FrameLayout  id_call,id_frm_chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +141,9 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         id_view_more_linear=(LinearLayout)findViewById(R.id.id_view_more_linear);id_view_more_linear.setOnClickListener(this);
         id_duration=(TextView)findViewById(R.id.id_duration);
         id_fees2=(TextView)findViewById(R.id.id_fees2);
+
+        id_call=(FrameLayout)findViewById(R.id.id_call);id_call.setOnClickListener(this);
+        id_frm_chat=(FrameLayout)findViewById(R.id.id_frm_chat);id_frm_chat.setOnClickListener(this);
 
         progressDialog =show_load_progress(College_Detail_Activity.this,getString(R.string.Loading));
 
@@ -231,7 +244,46 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
         change_courses_dialog.show();
 
     }
+    static class AuthOnClickWrapper implements View.OnClickListener {
 
+        private View.OnClickListener mOnClickListener;
+        private UserProfileStorage mUserProfileStorage;
+        private Context mContext;
+
+        public AuthOnClickWrapper(View.OnClickListener onClickListener, Context context){
+            this.mOnClickListener = onClickListener;
+            this.mUserProfileStorage = new UserProfileStorage(context);
+            this.mContext = context;
+        }
+
+        @Override
+        public void onClick(View v) {
+            final UserProfile profile = mUserProfileStorage.getProfile();
+
+            //  if(StringUtils.hasLength("ahmed.shadab221@gmail.com")){
+            mOnClickListener.onClick(v);
+            //   }else{
+            // showDialog();
+            //  }
+        }
+
+       /* private void showDialog(){
+            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+            builder.setMessage(R.string.dialog_auth_title)
+                    .setPositiveButton(R.string.dialog_auth_positive_btn, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                          //  startActivity(new Intent(mContext, CreateProfileActivity.class));
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_auth_negative_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Intentionally empty
+                        }
+                    });
+            builder.create().show();
+        }*/
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId())
@@ -251,7 +303,48 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             case R.id.id_view_more_linear:
 
                     break;
+
+            case R.id.id_call:
+
+                String phoneNumber = "01294014664";
+
+                if (checkPermission(android.Manifest.permission.CALL_PHONE)) {
+                    String dial = "tel:" + phoneNumber;
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                } else {
+                    Toast.makeText(College_Detail_Activity.this, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+
+
+            case R.id.id_frm_chat:
+
+
+                AuthOnClickWrapper authOnClickWrapper=  new AuthOnClickWrapper(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+
+                        PreChatForm build = new PreChatForm.Builder()
+                                .name(PreChatForm.Field.REQUIRED)
+                                .email(PreChatForm.Field.REQUIRED)
+                                .phoneNumber(PreChatForm.Field.OPTIONAL)
+                                .message(PreChatForm.Field.OPTIONAL)
+                                .build();
+
+                        ZopimChat.SessionConfig department = new ZopimChat.SessionConfig()
+                                .preChatForm(build)
+                                .department("The date");
+
+                        ZopimChatActivity.startActivity(College_Detail_Activity.this, department);
+                    }
+                },getApplicationContext());
+                break;
         }
+    }
+    private boolean checkPermission(String permission) {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     private void call_Download() {
@@ -498,7 +591,7 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             t.start();
 
         } catch (JSONException e) {
-                Log.d("nmchbbh","hhfhfh");
+                Log.d("exception",""+e.getMessage());
         }
 
     }
