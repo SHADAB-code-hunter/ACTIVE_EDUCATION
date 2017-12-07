@@ -19,6 +19,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import utilities.UpdateValues;
+import utilities.UrlEndpoints;
+
 import static android.R.attr.width;
 import static java.lang.System.load;
 
@@ -69,9 +72,10 @@ public class Banner_Adapter extends PagerAdapter {
             String str_img=jsonObject.getString("images");
             ImageView id_iv_banner = (ImageView) layout.findViewById(R.id.id_iv_banner);
                 // id_iv_banner.setVisibility(View.VISIBLE);
-                Log.d("jfkj", "http://activeeduindia.com/admin/media/offer/"+ str_img);
+
+                Log.d("jfkj", "http://activeeduindia.com/new_admin/media/offer/"+ str_img);
                 Picasso.with(context)
-                        .load("http://activeeduindia.com/admin/media/offer/"+ str_img)
+                        .load("http://activeeduindia.com/new_admin/media/offer/"+ str_img)
                         .into(id_iv_banner);
 
             ((ViewPager) collection).addView(layout);

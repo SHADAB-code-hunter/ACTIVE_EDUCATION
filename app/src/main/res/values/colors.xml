@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="khatarnak">#1d3349</color>
 
     <color name="theme1">#F6874F</color>
     <color name="list_divider">#dedede</color>
@@ -14,8 +15,9 @@
     <color name="pure_red">#ED1B24</color>
     <color name="darkpure_red">#BF1E24</color>
     <color name="list_back_red">#C03437</color>
+    <color name="proceed_enable">#72D63A</color>
 
-
+    <color name="google_plus_brand_color">#dc4e41</color>
     <color name="circle_progress_color1">#FFFAAF3B</color>
     <color name="circle_progress_color2">#FF3BB1CF</color>
     <color name="circle_progress_color3">#FFEC6497</color>

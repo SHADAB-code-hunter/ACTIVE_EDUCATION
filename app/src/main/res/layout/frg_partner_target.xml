@@ -64,7 +64,7 @@
                             android:id="@+id/id_course_name1"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="B.Tech"
+                            
                             android:textSize="12sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -95,7 +95,7 @@
                             android:id="@+id/id_total_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="60"
+                            
                             android:textSize="18sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -177,7 +177,7 @@
                             android:id="@+id/id_course_name2"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="B.Tech"
+                            
                             android:textSize="12sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -208,7 +208,7 @@
                             android:id="@+id/id_fill_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="60"
+                            
                             android:textSize="18sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -290,7 +290,7 @@
                             android:id="@+id/id_course_name3"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="B.Tech"
+                            
                             android:textSize="12sp"
                             android:gravity="center"
                             android:layout_gravity="center"
@@ -321,7 +321,7 @@
                             android:id="@+id/id_remain_no"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="60"
+                            
                             android:textSize="18sp"
                             android:gravity="center"
                             android:layout_gravity="center"

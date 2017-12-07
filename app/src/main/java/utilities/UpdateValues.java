@@ -12,4 +12,5 @@ public class UpdateValues {
     public static String LG_Seater_Pref ="Seater_Login";
     public static String OTP_Prefrence ="OTP_VERIFY";
     public static String EDU_FORM="Form_Map_List";
+    public static String GUSET_SESSION="guset_user";
 }

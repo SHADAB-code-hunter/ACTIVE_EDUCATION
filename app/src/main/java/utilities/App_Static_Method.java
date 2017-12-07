@@ -41,6 +41,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -338,6 +339,11 @@ public class App_Static_Method {
         }
         return false;
     }
+    public static String  checktype() {
+        SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+
+        return  shprf_seater.getString("type","NA");
+    }
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
@@ -365,6 +371,11 @@ public class App_Static_Method {
             return true;
         }
         return false;
+    }
+    public static String get_Type() {
+        SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+
+        return shprf_.getString("type","NA");
     }
     public static boolean isValidPass(String pass,String pass2) {
         if (pass != null && pass2 != null && pass2.length() >4 && pass.length() >4 &&  pass.equals(pass2)) {
@@ -465,6 +476,12 @@ public class App_Static_Method {
         map.put("mobile",""+sharedPreferences.getAll().get("mobile"));
         map.put("token",""+sharedPreferences.getAll().get("token"));
         map.put("type",""+sharedPreferences.getAll().get("type"));
+
+        if(App_Static_Method.get_Type().equalsIgnoreCase("seater"))
+        {
+            map.put("utype",""+sharedPreferences.getAll().get("utype"));
+        }
+
         Log.d("gfhgfhgfhg",""+map);
         // SharedPreferences finalSharedPreferences = sharedPreferences;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT /*+"mobile="+ str_mobie
@@ -1001,6 +1018,35 @@ public static void set_profile_img(final Activity _activity) {
 
         holder.startAnimation(myAnim);
     }
+
+    public static Map<String, String> toMap(JSONObject object) throws Exception {
+        Map<String, String> map = new HashMap();
+        Iterator keys = object.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            map.put(key, ""+(object.get(key)));
+        }
+        return map;
+    }
+    public static JSONObject toMERGE_JSON(JSONObject object1,JSONObject object2) throws Exception {
+
+        Iterator keys = object2.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            object1.put(key, ""+(object2.get(key)));
+        }
+        return object1;
+    }
+    public static JSONObject toJSON(JSONObject object2) throws Exception {
+        JSONObject object1=new JSONObject();
+        Iterator keys = object2.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            object1.put(key, ""+(object2.get(key)));
+        }
+        return object1;
+    }
+
 
    /* public void permission_check(final int code,Context context)//for sms reading permission 101
     {

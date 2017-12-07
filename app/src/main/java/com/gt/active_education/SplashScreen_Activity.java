@@ -18,6 +18,7 @@ import android.view.ViewConfiguration;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import adapter.Splash_Banner_Adapter;
 import rubber_indicator.RubberIndicator;
@@ -51,7 +52,7 @@ public class SplashScreen_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //  Fabric.with(this, new Crashlytics());
-        //   setContentView(R.layout.activity_splash);
+           setContentView(R.layout.activity_splash_new);
 
        /* if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             ActivityManager.TaskDescription taskDescription = new ActivityManager.TaskDescription("AppName", Bitmap.createBitmap(R.drawable.ic_new_logo) ), ContextCompat.getColor(getApplicationContext()., R.color.colorPrimaryDark));
@@ -78,38 +79,63 @@ public class SplashScreen_Activity extends AppCompatActivity {
 
             @Override
             public void run() {
-                if(!App_Static_Method.is_any_login(SplashScreen_Activity.this).equals("NA"))
+                SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+              //  Toast.makeText(SplashScreen_Activity.this, "Splash "+shprf_seater.getString("type","NA"), Toast.LENGTH_SHORT).show();
+                String str_ype=shprf_seater.getString("type","NA");
+                if(!shprf_seater.getString("type","NA").equals("NA"))
                 {
-                    // if each are na
-                    if((checked_num(UpdateValues.LG_Seater_Pref,"mobile").equals("NA")) && (checked_num(UpdateValues.LG_PARTNER_Prefrence,"mobile").equals("NA")) && (checked_num(UpdateValues.LG_U_Prefrence,"mobile").equals("NA")))
+                    Log.d("Status :"," 0");
+
+                    if(str_ype.equalsIgnoreCase("guest"))
                     {
-                        startActivity(new Intent(SplashScreen_Activity.this,Agent_login_Activity.class));
+                        Log.d("Status :"," 1");
+                        startActivity(new Intent(SplashScreen_Activity.this, DashBoard_Activity.class));
                         finish();
+
                     }else {
-                        SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-                        switch (shprf_seater.getString("type", "na"))
+                        Log.d("Status :"," 2");
+                        if (!App_Static_Method.is_any_login(SplashScreen_Activity.this).equals("NA"))
                         {
-                            case "agent":
-                                startActivity(new Intent(SplashScreen_Activity.this,DashBoard_Activity.class));
+                            // if each are na
+                            Log.d("Status :"," 3");
+                            if ((checked_num(UpdateValues.LG_Seater_Pref, "mobile").equals("NA")) && (checked_num(UpdateValues.LG_PARTNER_Prefrence, "mobile").equals("NA")) && (checked_num(UpdateValues.LG_U_Prefrence, "mobile").equals("NA"))) {
+                                startActivity(new Intent(SplashScreen_Activity.this, Agent_login_Activity.class));
                                 finish();
-                                break;
-                            case "user":
-                                startActivity(new Intent(SplashScreen_Activity.this,DashBoard_Activity.class));
-                                finish();
-                                break;
-                            case "seater":
-                                startActivity(new Intent(SplashScreen_Activity.this,Target_Circle_Activity.class));
-                                finish();
-                                break;
+                            } else {
+                                Log.d("Status :"," 4");
+
+                                switch (shprf_seater.getString("type", "na")) {
+                                    case "agent":
+                                        startActivity(new Intent(SplashScreen_Activity.this, DashBoard_Activity.class));
+                                        finish();
+                                        break;
+                                    case "user":
+                                        startActivity(new Intent(SplashScreen_Activity.this, DashBoard_Activity.class));
+                                        finish();
+                                        break;
+                                    case "seater":
+                                        startActivity(new Intent(SplashScreen_Activity.this, Target_Circle_Activity.class));
+                                        finish();
+                                        break;
+
+                                }
+
+                            }
+                        } else {
+                            Log.d("Status :"," 4");
+
+                            Intent i = new Intent(SplashScreen_Activity.this, Agent_login_Activity.class);
+                            startActivity(i);
+                            finish();
                         }
-
                     }
-                }
-                else{
 
-                    Intent i = new Intent(SplashScreen_Activity.this, Agent_login_Activity.class);
-                    startActivity(i);
-                    finish();
+                }else {
+
+                    Log.d("Status :"," 5");
+                        startActivity(new Intent(SplashScreen_Activity.this, Gust_Activity.class));
+                        finish();
+
                 }
 
             }

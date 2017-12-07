@@ -32,6 +32,8 @@ import utilities.ConnectionCheck;
 import utilities.MyApplication;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_Type;
+
 /**
  * Created by GT on 6/10/2017.
  */
@@ -70,10 +72,10 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
         map.put("token",shrd_prf_login.getString("Login_Token", ""));*/
 
 
-        Map<String, String> map = App_Static_Method.session_type();
+      /*  Map<String, String> map = App_Static_Method.session_type();
         map.put("total",""+total_list_no_ques);
         map.put("jsonData",storedHashMapString);
-        Log.d("gdvcbhv",""+storedHashMapString);
+        Log.d("gdvcbhv",""+storedHashMapString);*/
         String Url= UrlEndpoints.URL_save_result_practice;//+shrd_prf_login.getString("mobile", "")+"&token="+shrd_prf_login.getString("Login_Token", "")+"&total="+total_list_no_ques+"&jsonData="+storedHashMapString;
        //Log.d("urlsezxc",Url);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.URL_save_result_practice,
@@ -104,9 +106,8 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
                                 }
 
 
-                        } catch (JSONException e) {
-                            //pd.dismiss();
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                           Log.d("ecetion",""+e.getMessage());
                         }
                     }
                 },
@@ -119,15 +120,31 @@ public class Quiz_Save_Result_Activity extends AppCompatActivity  implements Pie
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = App_Static_Method.session_type();
+                Map<String, String> map=new HashMap<>();
+                if(get_Type().equalsIgnoreCase("guest"))
+               {
+                   map.put("total",""+total_list_no_ques);
+                   map.put("jsonData",storedHashMapString);
+                   map.put("token","dummy");
+                   map.put("mobile","dummy");
+                   map.put("type",""+ get_Type());
+               }else {
+
+                    map.putAll(App_Static_Method.session_type());
+                    map.put("total",""+total_list_no_ques);
+                    map.put("jsonData",storedHashMapString);
+
+                }
+
+              /*  Map<String, String> map = App_Static_Method.session_type();
                // if(myApplication.is_User_Login(getBaseContext())) {
                    // SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
 
                    //Log.d("gdvcbhv",shrd_prf_login.getString("mobile", "")+"  "+shrd_prf_login.getString("Login_Token", "")+"  "+" total_quesnop"+total_list_no_ques+" "+storedHashMapString);
-                  /*  map.put("mobile",shrd_prf_login.getString("mobile", ""));
-                    map.put("token",shrd_prf_login.getString("Login_Token", ""));*/
-                    map.put("total",""+total_list_no_ques);
-                    map.put("jsonData",storedHashMapString);
+                  *//*  map.put("mobile",shrd_prf_login.getString("mobile", ""));
+                    map.put("token",shrd_prf_login.getString("Login_Token", ""));*//*
+                   */
+
                     Log.d("gdvcbhv",""+map);
                     return map;
                /* }else if(!myApplication.is_User_Login(getBaseContext())){

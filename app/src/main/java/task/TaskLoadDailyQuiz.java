@@ -1,6 +1,7 @@
 package task;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 
@@ -43,10 +44,14 @@ public class TaskLoadDailyQuiz extends AsyncTask<Void, Void, ArrayList<Quiz_Mode
     @Override
     protected ArrayList<Quiz_Model> doInBackground(Void... params) {
         ArrayList<Quiz_Model> listDailyQuiz=null;
+
         if(str_mobile==null||str_token==null) {
+            Log.d("hgdfhgf","fhjf___ghjfhvbjhb");
+
             listDailyQuiz = MovieUtils.loadQuizModel(requestQueue);
         }
         else if(!(str_mobile==null||str_token==null)) {
+            Log.d("hgdfhgf","fhjf___grgrg_ghjfhvbjhb");
             listDailyQuiz = MovieUtils.loadValid_Token_QuizModel(requestQueue,str_mobile,str_token);
         }
         return listDailyQuiz;
@@ -56,9 +61,11 @@ public class TaskLoadDailyQuiz extends AsyncTask<Void, Void, ArrayList<Quiz_Mode
     protected void onPostExecute(ArrayList<Quiz_Model> listDailyQuiz) {
         if (myComponent != null) {
             if(!(str_quiz_time==null)) {
+                Log.d("hgdfllhgf","fhjf___hghghghg_   ghjfhvbjhb");
                 myComponent.onDailyQuizLoaded(listDailyQuiz, str_quiz_time);
                 this.listDailyQuiz=listDailyQuiz;
             }else if(str_quiz_time==null) {
+                Log.d("hgdfh__gf","fhjf___hghghghg_   ghjfhvbjhb");
                 this.listDailyQuiz = listDailyQuiz;
                 myComponent.onDailyQuizLoaded(listDailyQuiz);
             }

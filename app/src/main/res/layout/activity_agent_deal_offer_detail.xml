@@ -115,7 +115,6 @@
                 <android.support.v4.view.ViewPager
                     android:id="@+id/id_collge_banner"
                     android:layout_width="match_parent"
-                    android:background="@drawable/img_back"
                     android:layout_height="200dp">
 
                 </android.support.v4.view.ViewPager>

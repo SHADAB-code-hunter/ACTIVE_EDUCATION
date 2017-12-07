@@ -51,6 +51,8 @@ public interface Keys {
 
          String KEY_ID="mapid";
 
+         String KEYD="id";
+
          String KEY_B_NAME="branch_name";
 
          String KEY_BNAME="bname";

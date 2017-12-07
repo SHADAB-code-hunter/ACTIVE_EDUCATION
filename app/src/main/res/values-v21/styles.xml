@@ -35,6 +35,9 @@
 
         <item name="android:windowBackground">@drawable/back_new</item>
     </style>
+    <style name="SplashTheme_Full_new" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_theme</item>
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>

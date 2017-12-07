@@ -186,7 +186,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
     private void Time_For_Quiz() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,  UrlEndpoints.URL_QUIZ_TIME,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  UrlEndpoints.URL_QUIZ_TIME+"&type="+App_Static_Method.get_Type(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String str_response) {
@@ -212,7 +212,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
                                 }
                             }
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -232,13 +232,14 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
     protected void onStart() {
         super.onStart();
         //Log.d("status","onStart");
-        if(App_Static_Method.session_type().get("type").equals("user"))
-        {
-            Login_Bool=true;
 
-        }else{
-            Login_Bool=false;
-        }
+
+            if (App_Static_Method.get_Type().equalsIgnoreCase("guest") || App_Static_Method.session_type().get("type").equals("user")) {
+                Login_Bool = true;
+
+                }else{
+                    Login_Bool=false;
+                }
 
     }
 
@@ -279,7 +280,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
         if (listDailyQuiz.size()>=0)
         {
-            //Log.d("ListSize_take",""+listDailyQuiz.size()+" quiz_time"+str_quiz_time);
+            Log.d("ListSize_take",""+listDailyQuiz.size()+" quiz_time"+str_quiz_time);
             //Log.d("ListSize_takedsec",""+listDailyQuiz);
             Double int_q_time= Double.valueOf(Per_Ques_Time);
             String str_Q_time=String.valueOf(Math.round(int_q_time*1000));
@@ -333,7 +334,14 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                                     Per_Ques_Time=response.getString("question_timing");// per ques time
                                     Slot_Num=response.getString("slot");// per ques time
                                     //Log.d("stusnot", "Quiz Has xcxcStarted");
-                                    new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this,App_Static_Method.session_type().get("mobile"),App_Static_Method.session_type().get("token"), response.getString("question_timing")).execute();
+                                    if(!App_Static_Method.get_Type().equals("guest")) {
+                                        new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this,App_Static_Method.session_type().get("mobile"),App_Static_Method.session_type().get("token"), response.getString("question_timing")).execute();
+
+                                    }else {
+
+                                        new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this,"dummy","dummy", response.getString("question_timing")).execute();
+
+                                    }
                                 }
                             }
                             else if(response.has("msg"))
@@ -361,10 +369,21 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
+
+
                 Map<String, String> map = new HashMap<>();
-                map.put("mobile",App_Static_Method.session_type().get("mobile"));
-                map.put("token",App_Static_Method.session_type().get("token"));
-                Log.d("mapstsrtubf",map.toString());
+                map.put("type",App_Static_Method.get_Type());
+                if(!App_Static_Method.get_Type().equals("guest")) {
+                    map.put("mobile", App_Static_Method.session_type().get("mobile"));
+                    map.put("token", App_Static_Method.session_type().get("token"));
+                    Log.d("mapstsrtubf", map.toString());
+                }else {
+                    map.put("mobile", "dummy");
+                    map.put("token", "dummy");
+
+                    Log.d("mapstsrtubf", map.toString());
+
+                }
                 return map;
             }
         };

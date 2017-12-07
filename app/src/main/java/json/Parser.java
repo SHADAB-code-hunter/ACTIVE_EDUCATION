@@ -24,6 +24,7 @@ import pojo.SEARCH_MODEL;
 import utilities.Common_Pojo;
 import utilities.Movie;
 
+import static extras.Keys.EndpointBoxOffice.KEYD;
 import static extras.Keys.EndpointBoxOffice.KEY_BNAME;
 import static extras.Keys.EndpointBoxOffice.KEY_BRANCH_FEES;
 import static extras.Keys.EndpointBoxOffice.KEY_BRN_ID;
@@ -892,9 +893,9 @@ public class Parser {
 
                             JSONObject currentQuiz = arrayQuiz.getJSONObject(i);
                             //get the id of the current movie
-                            if (Utils.contains(currentQuiz, KEY_ID)) {
-                                id = currentQuiz.getString(KEY_ID);
-                                Log.d("aname", currentQuiz.getString(KEY_ID));
+                            if (Utils.contains(currentQuiz, KEYD)) {
+                                id = currentQuiz.getString(KEYD);
+                                Log.d("aname", currentQuiz.getString(KEYD));
                             }
                             //get the title of the current movie
                             if (Utils.contains(currentQuiz, KEY_IS_ACTIVE)) {
@@ -950,7 +951,8 @@ public class Parser {
                         }
 
                     }
-                }catch (JSONException e) {
+                }catch (Exception e) {
+                    Log.d("gdgd___g",e.getMessage());
 
                 }
 

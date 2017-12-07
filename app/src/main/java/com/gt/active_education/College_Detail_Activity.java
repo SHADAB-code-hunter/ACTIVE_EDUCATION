@@ -69,6 +69,7 @@ import utilities.Common_Pojo;
 import utilities.RecyclerTouchListener;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_Type;
 import static utilities.App_Static_Method.show_load_progress;
 import static utilities.UrlEndpoints.GET_CLG_COURSE;
 import static utilities.UrlEndpoints.GET_COURSE_LIST;
@@ -152,9 +153,19 @@ public class College_Detail_Activity extends AppCompatActivity implements View.O
             public void onClick(View v) {
                 if(getIntent()!=null) {
                  //   Log.d("dlkldkl",""+)
-                    Intent intent=new Intent(getApplicationContext(),Admission_Form_Activity.class);
-                    intent.putExtras(getIntent().getExtras());
-                    startActivity(intent);
+
+                    if(get_Type().equalsIgnoreCase("guest")) {
+
+                        Intent intent = new Intent(getApplicationContext(), Signup_Guest_Activity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        intent.putExtra("ADDMISSIONFORM","ADDMISSIONFORM");
+                        startActivity(intent);
+
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), Admission_Form_Activity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        startActivity(intent);
+                    }
                 }
             }
         });

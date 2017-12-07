@@ -6,7 +6,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -17,11 +16,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Point;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -74,7 +71,6 @@ import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.security.MessageDigest;
@@ -96,6 +92,7 @@ import adapter.Banner_Adapter;
 import adapter.Common_pojo_adapter;
 import adapter.DashBoard_Menu_Adapter;
 import adapter.Recycler_Drawer_Adapter;
+import adapter.School_adapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -107,7 +104,6 @@ import callbacks.Profile_Image_Listener;
 import callbacks.Spinner_Date_Listener;
 import callbacks.Upcoming_List_LoadedListener;
 import fab_below.FabSpeedDial;
-import fragment.Agent_Profile_Detail_Fragment;
 import io.codetail.animation.SupportAnimator;
 import io.codetail.animation.ViewAnimationUtils;
 import pojo.Drawer_Pojo;
@@ -117,8 +113,8 @@ import task.Asynch_Book_Responce;
 import task.Asynch_Responce_OBJ;
 import task.Load_Courses_Data;
 import task.Load_Exams_Data;
+import task.New_Asynch;
 import task.TaskLoad_List;
-import utilities.AnimUtils;
 import utilities.App_Static_Method;
 import pojo.Cat_Model;
 import utilities.CirclePageIndicator;
@@ -126,19 +122,21 @@ import utilities.Common_Pojo;
 import utilities.ConnectionCheck;
 import utilities.CustomDialogClass;
 import utilities.Custom_DialogClass;
-import utilities.DroidDialog;
 import utilities.Filter_Dialog;
+import utilities.Filter_Dialogue_layout;
+import utilities.Find_Your_Need_Dialog;
 import utilities.MyApplication;
 import utilities.NotifyingScrollView;
 import utilities.RecyclerTouchListener;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_Type;
 import static utilities.App_Static_Method.session_type;
 import static utilities.App_Static_Method.show_load_progress;
 import static utilities.UrlEndpoints.GET_OFFER_BANNER;
 import static utilities.UrlEndpoints.GET_PROFILE;
-import static utilities.UrlEndpoints.UPDATE_PROFILE;
+import static utilities.UrlEndpoints.SCHOOL_TOP_AVAIL_CLASS_FULL;
 
 public class DashBoard_Activity extends AppCompatActivity implements View.OnClickListener , Upcoming_List_LoadedListener,
         Log_Out_Listener, Call_newDialog_Listener, Profile_Image_Listener, Avail_Course_Listener, Spinner_Date_Listener , JOBJ_Listener {
@@ -193,14 +191,15 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     private FrameLayout id_Learn_frm,id_earn_frm,id_fun_frm;
     private TextView id_name_mobile,id_location_add;
     private LinearLayout id_login_linear;
+    private Filter_Dialogue_layout filter_dialogue_layout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+      /*  getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
 
         if(!new ConnectionCheck(DashBoard_Activity.this).checkConnection()) {
             new ConnectionCheck(DashBoard_Activity.this).check_network(DashBoard_Activity.this);
@@ -316,24 +315,29 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                         startActivity(new Intent(getApplicationContext(), Agent_Profile_Activity.class));
                     }*//*
                 }*/
-                SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-                switch (shprf_seater.getString("type", "na"))
+                String str_type=get_Type();
+                if(str_type.equalsIgnoreCase("guest"))
                 {
-                    case "agent":
-                        startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
-                        //  finish();
-                        break;
-                    case "user":
-                        startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
-                        //  finish();
-                        break;
-                    case "seater":
-                        startActivity(new Intent(DashBoard_Activity.this,Target_Circle_Activity.class));
-                        //  finish();
-                        break;
-                    default:
-                        startActivity(new Intent(DashBoard_Activity.this,Agent_login_Activity.class));
-                        break;
+                    Log.d("Status :"," 1");
+                    startActivity(new Intent(DashBoard_Activity.this, Agent_login_Activity.class));
+
+                }else {
+
+                    SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+                    switch (shprf_seater.getString("type", "na")) {
+                        case "agent":
+                            startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
+                            //  finish();
+                            break;
+                        case "user":
+                            startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
+                            //  finish();
+                            break;
+                        case "seater":
+                            startActivity(new Intent(DashBoard_Activity.this, Target_Circle_Activity.class));
+                            //  finish();
+                            break;
+                    }
                 }
 
             }
@@ -378,8 +382,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        int[] Img_Array=new int[]{R.drawable.school,R.drawable.college,R.drawable.iuniversity,
-                R.drawable.tr,R.drawable.coach,R.drawable.tra};
+        int[] Img_Array=new int[]{R.drawable.ic_1school,R.drawable.ic_1college,R.drawable.ic_1iuniversity, R.drawable.ic_1tr,R.drawable.ic_1coach,R.drawable.traing};
 
         String[] Tv_Array=new String[]{"School","College","University","ITI College","Coaching Center","Training Center"};
 
@@ -400,15 +403,51 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                         progressDialog.setCancelable(true);
                         progressDialog.show();
                         progressDialog.setMessage(getString(R.string.Loading));*/
+                        Intent i=null;
+                        String url=null;
+
+                        switch (position)
+                        {
+
+                            case 0:
+                                i=new Intent(getApplicationContext(),School_Listing_Activity.class);
+                                url=UrlEndpoints.URL_DEAL_CAT_MAIN+"type="+(position+1);
+                                String img_path[]=getResources().getStringArray(R.array.category_string);
+                                i.putExtra("url",""+url);
+                                String[] cat_list = getResources().getStringArray(R.array.Category_List);
+                                i.putExtra("title","Top "+cat_list[position] +" Deal List");
+                                i.putExtra("img_path",UrlEndpoints.URL_CUSTOM_IMAGE_APTH+img_path[position]+"/");
+                                i.putExtra("AvailUrl",""+SCHOOL_TOP_AVAIL_CLASS_FULL);
+                                startActivity(i);
+                                break;
+
+                            case 1:
+                                /* i=new Intent(getApplicationContext(),School_Listing_Activity.class);
+                                 url=UrlEndpoints.URL_DEAL_CAT_MAIN+"type="+(position+1);
+                                String img_path[]=getResources().getStringArray(R.array.category_string);
+                                i.putExtra("url",""+url);
+                                String[] cat_list = getResources().getStringArray(R.array.Category_List);
+                                i.putExtra("title","Top "+cat_list[position] +" Deal List");
+                                i.putExtra("img_path",UrlEndpoints.URL_CUSTOM_IMAGE_APTH+img_path[position]+"/");
+                                startActivity(i);*/
+                                break;
+                            case 2:
+
+                                break;
+                            case 3:
+
+                                break;
+
+                            case 4:
+
+                                break;
+                            case 5:
+
+                                break;
+                        }
+
                         progressDialog =show_load_progress(DashBoard_Activity.this,getString(R.string.Loading));
-                        Intent i=new Intent(getApplicationContext(),Filter_Activity.class);
-                        String url=UrlEndpoints.URL_DEAL_CAT_MAIN+"type="+(position+1);
-                        String img_path[]=getResources().getStringArray(R.array.category_string);
-                        i.putExtra("url",""+url);
-                        String[] cat_list = getResources().getStringArray(R.array.Category_List);
-                        i.putExtra("title","Top "+cat_list[position] +" Deal List");
-                        i.putExtra("img_path",UrlEndpoints.URL_CUSTOM_IMAGE_APTH+img_path[position]+"/");
-                        startActivity(i);
+
 
                     }
 
@@ -423,8 +462,10 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                     @Override
                     public void onClick(View view, int position) {
                         TextView txt_id=(TextView)view.findViewById(R.id.txt_id);
-                        Intent i=new Intent(getApplicationContext(),Filter_Activity.class);
-                        String url=UrlEndpoints.GET_ALL_COURSES+"course="+txt_id.getText().toString();
+                        Intent i=null;
+                        String url=null;
+                        i=new Intent(getApplicationContext(),Filter_Activity.class);
+                        url=UrlEndpoints.GET_ALL_COURSES+"course="+txt_id.getText().toString();
                         Log.d("urffl",""+url);
                         i.putExtra("url",""+url);
                         i.putExtra("title","Top Courses List");
@@ -619,25 +660,74 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         }, UrlEndpoints.GET_PROFILE_DATA,session_type()).execute();
 
         new Asynch_Book_Responce(DashBoard_Activity.this,GET_OFFER_BANNER,session_type()).execute();
+
+       new New_Asynch(new New_Asynch.OBJ_Lister() {
+           @Override
+           public void on_lis_obj(JSONObject jsonObject) {
+               Log.d("jjkjk",""+jsonObject);
+
+               try {
+                   JSONArray jsonArray=jsonObject.getJSONArray("data");
+                   id_viewpager.setAdapter(new Banner_Adapter(getApplicationContext(),jsonArray));
+
+                   String str;
+                   if(session_type().get("type").equals("agent"))
+                   {
+                       str ="partner/";
+                   }else {
+                       str ="profile/";
+                   }
+
+                   Log.d("knknknknk",""+jsonArray.getJSONObject(0));
+                   if(jsonArray.getJSONObject(0).has("image"))
+                   {
+                       Picasso.with(DashBoard_Activity.this)
+                               .load(GET_PROFILE+str+(jsonArray.getJSONObject(0).getString("image")))
+                               //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
+                               // .error(DRAWABLE RESOURCE)      // optional
+                               // .resize(width, height)                        // optional
+                               // .rotate(degree)                             // optional
+                               .into(id_image_profile);
+                       // id_image_profile.setImageResource();
+                   }
+
+               } catch (Exception e) {
+                   e.printStackTrace();
+               }
+           }
+       },GET_OFFER_BANNER).execute();
+
+
         set_logindrawer();
         // oncreate end
     }
 
     private void set_logindrawer() {
 
-        if(session_type().get("token")==null)
-        {
-            TextView tv_menu_name=(TextView)findViewById(R.id.tv_menu_name);
-            tv_menu_name.setText("Login");
-            ImageView imageView=(ImageView)findViewById(R.id.flt_btn);
-            imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.ic_login));
+        Log.d("dsrsrsr",""+get_Type());
+        if(!get_Type().equals("guest")) {
+
+            if (session_type().get("token") == null) {
+                TextView tv_menu_name = (TextView) findViewById(R.id.tv_menu_name);
+                tv_menu_name.setText("Login");
+                ImageView imageView = (ImageView) findViewById(R.id.flt_btn);
+                imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.ic_login));
+            } else {
+                TextView tv_menu_name = (TextView) findViewById(R.id.tv_menu_name);
+                tv_menu_name.setText("Logout");
+                ImageView imageView = (ImageView) findViewById(R.id.flt_btn);
+                imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.logout));
+            }
         }else {
-            TextView tv_menu_name=(TextView)findViewById(R.id.tv_menu_name);
-            tv_menu_name.setText("Logout");
-            ImageView imageView=(ImageView)findViewById(R.id.flt_btn);
-            imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.logout));
+            TextView tv_menu_name = (TextView) findViewById(R.id.tv_menu_name);
+            tv_menu_name.setText("Login");
+            ImageView imageView = (ImageView) findViewById(R.id.flt_btn);
+            imageView.setImageDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.ic_login));
+
         }
     }
+
+
 
 
     private void getHashKey() {
@@ -742,30 +832,35 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
             case 0: // profile
 
                 SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-                switch (shprf_seater.getString("type", "na"))
-                {
-                    case "agent":
-                        startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
-                      //  finish();
-                        break;
-                    case "user":
-                        startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
-                      //  finish();
-                        break;
-                    case "seater":
-                        startActivity(new Intent(DashBoard_Activity.this,Target_Circle_Activity.class));
-                      //  finish();
-                        break;
-                    case "na":
-                        startActivity(new Intent(DashBoard_Activity.this,Agent_login_Activity.class));
-                        break;
+
+                if(!shprf_seater.getString("type","NA").equalsIgnoreCase("guest")) {
+
+                    switch (shprf_seater.getString("type", "na")) {
+                        case "agent":
+                            startActivity(new Intent(DashBoard_Activity.this, Agent_Profile_Activity.class));
+                            //  finish();
+                            break;
+                        case "user":
+                            startActivity(new Intent(DashBoard_Activity.this, User_Profile_Activity.class));
+                            //  finish();
+                            break;
+                        case "seater":
+                            startActivity(new Intent(DashBoard_Activity.this, Target_Circle_Activity.class));
+                            //  finish();
+                            break;
+                        case "na":
+                            startActivity(new Intent(DashBoard_Activity.this, Agent_login_Activity.class));
+                            break;
+                    }
+                }else {
+                    startActivity(new Intent(DashBoard_Activity.this, Agent_login_Activity.class));
                 }
               /*  if(App_Static_Method.is_any_login(DashBoard_Activity.this).equals("agent")) {
 
                 }else {
                     Toast.makeText(this, "Please Login !!!!!", Toast.LENGTH_SHORT).show();
                 }
-*/
+            */
                 break;
             case 1:// gallery
                // drawer.closeDrawer(Gravity.LEFT);
@@ -983,6 +1078,8 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
+
+        String str_type=get_Type();
         switch (v.getId())
         {
             /*case R.id.id_login_btn:
@@ -999,8 +1096,21 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                 break;*/
 
             case R.id.id_lnr_need:
-                filterDialog=new Filter_Dialog(DashBoard_Activity.this);
-                filterDialog.show();
+
+                Find_Your_Need_Dialog  find_your_need_dialog=new Find_Your_Need_Dialog(DashBoard_Activity.this);
+                find_your_need_dialog.show();
+
+               /* filterDialog=new Filter_Dialog(DashBoard_Activity.this);
+                filterDialog.show(
+
+                filter_dialogue_layout=new Filter_Dialogue_layout(new Filter_Dialogue_layout.FINAL_OBJ_LISTNER() {
+                    @Override
+                    public void onfinal_list(JSONArray data) {
+                        filter_dialogue_layout.cancel();
+                       // recyclerView.setAdapter(new School_adapter(School_Listing_Activity.this,data));
+                    }
+                },DashBoard_Activity.this);
+                filter_dialogue_layout.show();
                 break;
 
             case R.id.id_rght_serach_menu:
@@ -1051,109 +1161,57 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
             case R.id.id_Learn_frm:
 
-                if(session_type().get("type").equals("user")) {
-                startActivity(new Intent(getApplicationContext(), Quiz_SubList_Activity.class));
-                }else
-                    {
-                        Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
-                      /*  new DroidDialog.Builder(this)
-                                .icon(R.drawable.ic_null_list)
-                                .title("Please Login as User !!")
-                                .cancelable(true, false)
-                                .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
-                                    @Override
-                                    public void onNegative(Dialog droidDialog) {
-                                        droidDialog.dismiss();
-                                        // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
-                                    }
-                                })
-                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
-                                    @Override
-                                    public void onNeutral(Dialog droidDialog) {
-                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
-                                        startActivity(intent);
-                                        droidDialog.dismiss();
-                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
-                                    }
-                                })*//*
-                                .typeface("regular.ttf")
-                                .animation(AnimUtils.AnimZoomInOut)
-                                *//*.color(R.color.colorAccent, R.color.colorPrimaryDark),
-                                        ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                                .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))*//*
-                                .show();*/
-                    }
+
+                if(str_type.equalsIgnoreCase("guest") || session_type().get("type").equals("user"))
+                {
+                    startActivity(new Intent(getApplicationContext(), Quiz_SubList_Activity.class));
+
+
+                }else {
+                    Toast.makeText(this, "Please Login as User and Guest !!!", Toast.LENGTH_SHORT).show();
+                }
+
+
                 break;
             case R.id.id_earn_frm:
 
-                if(session_type().get("type").equals("user")) {
+               /* if(session_type().get("type").equals("user")) {
                     Custom_DialogClass cdd = new Custom_DialogClass(DashBoard_Activity.this, v);
                     cdd.show();
                 }else
                 {
                     Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
-                  /*  new DroidDialog.Builder(this)
-                            .icon(R.drawable.ic_null_list)
-                            .title("Please Login as User !!")
-                            .cancelable(true, false)
-                            .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
-                                @Override
-                                public void onNegative(Dialog droidDialog) {
-                                    droidDialog.dismiss();
-                                    // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
-                                    @Override
-                                    public void onNeutral(Dialog droidDialog) {
-                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
-                                        startActivity(intent);
-                                        droidDialog.dismiss();
-                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
-                                    }
-                                })*//*
-                            .typeface("regular.ttf")
-                            .animation(AnimUtils.AnimZoomInOut)
-                            .color(ContextCompat.getColor(this, R.color.colorAccent), ContextCompat.getColor(this, R.color.colorPrimaryDark),
-                                    ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                            .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                            .show();*/
+
+                }*/
+
+                if(str_type.equalsIgnoreCase("guest") || session_type().get("type").equals("user"))
+                {
+                    Custom_DialogClass cdd = new Custom_DialogClass(DashBoard_Activity.this, v);
+                    cdd.show();
+
+
+                }else {
+                    Toast.makeText(this, "Please Login as User and Guest !!!", Toast.LENGTH_SHORT).show();
                 }
+
                 break;
             case R.id.id_fun_frm:
-
+                /*
                 if(session_type().get("type").equals("user")) {
                     startActivity(new Intent(getApplicationContext(), Take_Daily_Quiz_Activity.class));
                 }else
                 {
-                    Toast.makeText(this, "Please Login as User !!", Toast.LENGTH_SHORT).show();
-                  /*  new DroidDialog.Builder(this)
-                            .icon(R.drawable.ic_null_list)
-                            .title("Please Login as User !!")
-                            .cancelable(true, false)
-                            .negativeButton("Cancle", new DroidDialog.onNegativeListener() {
-                                @Override
-                                public void onNegative(Dialog droidDialog) {
-                                    droidDialog.dismiss();
-                                    // Toast.makeText(getApplicationContext(), "No", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                                *//*.neutralButton("Network Setting", new DroidDialog.onNeutralListener() {
-                                    @Override
-                                    public void onNeutral(Dialog droidDialog) {
-                                        Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS );
-                                        startActivity(intent);
-                                        droidDialog.dismiss();
-                                        // Toast.makeText(getApplicationContext(), "Skip", Toast.LENGTH_SHORT).show();
-                                    }
-                                })*//*
-                            .typeface("regular.ttf")
-                            .animation(AnimUtils.AnimZoomInOut)
-                            .color(ContextCompat.getColor(this, R.color.colorAccent), ContextCompat.getColor(this, R.color.colorPrimaryDark),
-                                    ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                            .divider(true, ContextCompat.getColor(this, R.color.colorPrimaryDark))
-                            .show();*/
+
+                }*/
+                if(str_type.equalsIgnoreCase("guest") || session_type().get("type").equals("user"))
+                {
+                    startActivity(new Intent(getApplicationContext(), Take_Daily_Quiz_Activity.class));
+
+
+                }else {
+                    Toast.makeText(this, "Please Login as User and Guest !!!", Toast.LENGTH_SHORT).show();
                 }
+
                 break;
             case R.id.id_login_linear:
                 set_login_switch();
@@ -1163,15 +1221,23 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
 
     private void set_login_switch() {
 
-        if(session_type().get("token")!=null)
-        {
-            logout_method();
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
+        if(!get_Type().equals("guest")) {
+
+            if (session_type().get("token") != null) {
+                logout_method();
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+            } else {
+
+                startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                }
             }
         }else {
 
-           startActivity(new Intent(getBaseContext(),Agent_login_Activity.class));
+            startActivity(new Intent(getBaseContext(), Agent_login_Activity.class));
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
             }
@@ -1238,8 +1304,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
     public void onUpcomingcourses(List<Common_Pojo> common_pojos) {
         Log.d("sgfrt",common_pojos.toString());
         Common_pojo_adapter mAdapter = new Common_pojo_adapter(DashBoard_Activity.this,common_pojos);
-        GridLayoutManager horizontal_LayoutManager = new GridLayoutManager(getApplicationContext(),4,
-                LinearLayoutManager.VERTICAL, false);
+        GridLayoutManager horizontal_LayoutManager = new GridLayoutManager(getApplicationContext(),4, LinearLayoutManager.VERTICAL, false);
         id_top_courses_rv.setLayoutManager(horizontal_LayoutManager);
         id_top_courses_rv.setItemAnimator(new DefaultItemAnimator());
         id_top_courses_rv.setAdapter(mAdapter);
@@ -1391,7 +1456,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
         }
 
 
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -1666,7 +1731,7 @@ public class DashBoard_Activity extends AppCompatActivity implements View.OnClic
                         //  finish();
                     }
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

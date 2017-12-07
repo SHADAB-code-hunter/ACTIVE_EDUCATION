@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:background="#cc4a2294"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="10dp"
+    android:layout_width="350dp"
+    android:layout_height="500dp">
+
+    <TextView
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="  Find Your need "
+        android:textStyle="bold"
+        android:gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="0dp"
+        android:background="@drawable/outline_spinner">
+        <!--<TextView
+            android:textColor="@color/white"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:background="@color/light_grey"
+            android:visibility="gone"
+            android:gravity="center"
+            android:text="Category"/>
+
+        <Search_Spinner.SearchableSpinner
+            android:id="@+id/id_spn_cat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            app:theme="@style/Theme.Design.Light"
+            app:hintText="Select Category"/>-->
+        <FrameLayout
+            android:id="@+id/id_select_category"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/outline_spinner"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/id_tv_cat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="25dp"
+                android:gravity="center|left"
+                android:text="Select Category"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_toRightOf="@+id/id_tv"
+                android:src="@drawable/ic_round_sign_down" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center|top"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/id_state_frm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_spinner"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/id_tv_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center|left"
+                    android:text="Select State"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:src="@drawable/ic_round_sign_down" />
+
+            </FrameLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1_student"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/tumblr_white_ract"
+                android:layout_margin="3dp"
+                android:backgroundTint="#85060505"
+                app:ael_expanded="false"
+                app:ael_duration="400"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/id_fr_student"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_id_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+            <FrameLayout
+                android:id="@+id/id_city_frm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_spinner"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/id_tv_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center|left"
+                    android:text="Select City"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:src="@drawable/ic_round_sign_down" />
+
+            </FrameLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1_city"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/tumblr_white_ract"
+                android:layout_margin="3dp"
+                android:backgroundTint="#85060505"
+                app:ael_expanded="false"
+                app:ael_duration="400"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/id_fr_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_id_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+            <FrameLayout
+                android:id="@+id/id_third_frm"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:visibility="gone"
+                android:background="@drawable/outline_spinner"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/id_tv_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center|left"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:src="@drawable/ic_round_sign_down" />
+
+            </FrameLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1_third"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/tumblr_white_ract"
+                android:layout_margin="3dp"
+                android:backgroundTint="#85060505"
+                app:ael_expanded="false"
+                app:ael_duration="400"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/id_fr_class"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_id_third"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+            <FrameLayout
+                android:id="@+id/id_forth_frm"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_spinner"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/id_tv_fourth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center|left"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:src="@drawable/ic_round_sign_down" />
+
+            </FrameLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1_fourth"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/tumblr_white_ract"
+                android:layout_margin="3dp"
+                android:backgroundTint="#85060505"
+                app:ael_expanded="false"
+                app:ael_duration="400"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/id_fr_stream"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_id_fourth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+            <FrameLayout
+                android:id="@+id/id_fifth_frm"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="40dp"
+                android:background="@drawable/outline_spinner"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/id_tv_fifth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="25dp"
+                    android:gravity="center|left"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:layout_toRightOf="@+id/id_tv"
+                    android:src="@drawable/ic_round_sign_down" />
+
+            </FrameLayout>
+            <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+                android:id="@+id/expandableLayout1_fifth"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/tumblr_white_ract"
+                android:layout_margin="3dp"
+                android:backgroundTint="#85060505"
+                app:ael_expanded="false"
+                app:ael_duration="400"
+                app:ael_interpolator="accelerate"
+                app:ael_orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/id_fr_fifth"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/_id_fifth"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+
+            </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+            <Button
+                android:id="@+id/id_submit"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="5dp"
+                android:text="Submit"/>
+
+        </LinearLayout>
+
+
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

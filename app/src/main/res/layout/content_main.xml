@@ -396,13 +396,12 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:background="@drawable/ic_learn"
+                        android:background="@drawable/ic_2"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Learn"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>
@@ -430,13 +429,13 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_earn"
+                        android:background="@drawable/ic_1"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Earn"
+
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>
@@ -464,13 +463,12 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_fun"
+                        android:background="@drawable/ic_3"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fun"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>

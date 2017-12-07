@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/id_state_frm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/outline_spinner"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/id_tv_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="25dp"
+            android:gravity="center"
+            android:text="Available Classes"
+            android:textColor="@color/white" />
+
+
+    </FrameLayout>
+    <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+        android:id="@+id/expandableLayout1_student"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@drawable/tumblr_white_ract"
+        android:layout_margin="3dp"
+        android:backgroundTint="#85060505"
+        app:ael_expanded="false"
+        app:ael_duration="400"
+        app:ael_interpolator="accelerate"
+        app:ael_orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/id_fr_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/_id_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </FrameLayout>
+
+    </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+    <Button
+        android:id="@+id/id_btn"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Choose"/>
+
+</LinearLayout>

@@ -43,14 +43,14 @@
     </string-array>
 
     <string-array name="login_array">
-        <item>Student</item>
-        <item>Partner</item>
-        <item>School</item>
-        <item>College</item>
-        <item>University</item>
-        <item>ITI / Diploma</item>
-        <item>Coaching</item>
-        <item>Training Center</item>
+        <item>Student Login</item>
+        <item>Partner Login</item>
+        <item>School Login</item>
+        <item>College Login</item>
+        <item>University Login</item>
+        <item>ITI College Login </item>
+        <item>Coaching Login</item>
+        <item>Training Center Login</item>
 
     </string-array>
     <string-array name="week_days">

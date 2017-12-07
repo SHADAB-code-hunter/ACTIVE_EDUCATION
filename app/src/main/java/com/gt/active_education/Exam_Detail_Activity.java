@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +38,9 @@ import utilities.UrlEndpoints;
 public class Exam_Detail_Activity extends AppCompatActivity implements View.OnClickListener {
 
     TextView id_exname,post_vacan,exam_date_tv,exam_info_tv;
+    ImageView id_img;
     ProgressDialog progressDialog;
-    String str_exam_id;
+    String str_exam_id,exam_path;
     private FrameLayout id_frm_back;
 
     @Override
@@ -51,6 +54,7 @@ public class Exam_Detail_Activity extends AppCompatActivity implements View.OnCl
         post_vacan=(TextView)findViewById(R.id.post_vacan);
         exam_date_tv=(TextView)findViewById(R.id.exam_date_tv);
         exam_info_tv=(TextView)findViewById(R.id.exam_info_tv);
+        id_img=(ImageView)findViewById(R.id.id_img);
         if(!getIntent().equals(null))
         {
             str_exam_id=getIntent().getStringExtra("id");
@@ -80,6 +84,11 @@ public class Exam_Detail_Activity extends AppCompatActivity implements View.OnCl
                                 post_vacan.setText(jsonObject.getString("e_seats"));
                                 exam_date_tv.setText(jsonObject.getString("exam_date"));
                                 exam_info_tv.setText(jsonObject.getString("e_info"));
+                                exam_path=jsonObject.getString("path");
+
+                                Glide.with(Exam_Detail_Activity.this)
+                                        .load(""+jsonObject.getString("path"))
+                                        .into(id_img);
 
                                 progressDialog.cancel();
 

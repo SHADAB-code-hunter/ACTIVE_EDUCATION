@@ -159,6 +159,7 @@ public class Partner_Regisration_Frg extends Fragment implements View.OnClickLis
         switch1 = (SwitchCompat)rootView. findViewById(R.id.switch_button1);
         switch1.setOnCheckedChangeListener(listener);
 
+
         switch_button2_address = (SwitchCompat) rootView.findViewById(R.id.switch_button2_address);
         switch_button2_address.setOnCheckedChangeListener(listener);
         id_expand_addr = (ExpandableRelativeLayout) rootView.findViewById(R.id.id_expand_addr);

@@ -15,14 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.gt.active_education.Admission_Form_Activity;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 
 import adapter.Agent_Target_Adapter;
 import callbacks.Agent_deal_Listener;
@@ -37,7 +35,6 @@ import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
 import static utilities.App_Static_Method.session_type;
-import static utilities.UrlEndpoints.GET_AGENT_TARGET;
 import static utilities.UrlEndpoints.GET_BEST_DEAL;
 import static utilities.UrlEndpoints.PARTNER_DETAIL;
 

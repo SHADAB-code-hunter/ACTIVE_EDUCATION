@@ -499,7 +499,9 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
         @Override
         public CharSequence getPageTitle(int position) {
 
-            Log.d("cfdrdg",""+list_common.get(position));
+            Log.d("cfdrdg",""+list_common.get(position).getName());
+            Log.d("cfd_rdg",""+final_URL);
+           // if()
             return (CharSequence) list_common.get(position).getName();
         }
 

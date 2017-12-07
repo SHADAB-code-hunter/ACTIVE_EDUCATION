@@ -139,36 +139,36 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                             } else {
                                 switch (id_login_type.getText().toString().trim()) {
 
-                                    case "Student":
+                                    case "Student Login" :
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.LOGIN_API, "0");
 
                                         break;
-                                    case "School":
+                                    case "School Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "1");
 
                                         break;
-                                    case "College":
+                                    case "College Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "2");
 
                                         break;
-                                    case "University":
+                                    case "University Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "3");
 
                                         break;
-                                    case "ITI / Diploma":
+                                    case "ITI College Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "4");
 
                                         break;
-                                    case "Coaching":
+                                    case "Coaching Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "5");
 
                                         break;
 
-                                    case "Training Center":
+                                    case "Training Center Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "6");
 
                                         break;
-                                    case "Partner":
+                                    case "Partner Login":
                                         set_sign_in(str_uname, str_pass, UrlEndpoints.Agent_Login, "7");
                                         break;
                                 }
@@ -186,7 +186,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                startActivity(new Intent(getApplicationContext(),GoogleSignInActivity.class));
                 break;
             case R.id.id_Reg_here:
-                startActivity(new Intent(Agent_login_Activity.this,Sign_Up_Process_Activity.class));
+                startActivity(new Intent(Agent_login_Activity.this,Signup_Guest_Activity.class));
                // finish();
                 break;
 
@@ -207,7 +207,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                     {
                         try {
                             JSONObject jObj = new JSONObject(response);
-                            Toast.makeText(Agent_login_Activity.this, str_mobile+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(Agent_login_Activity.this, str_mobile+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("a_login",response.toString());
 
                           /*  SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
@@ -252,6 +252,8 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
 
                                     SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("alldata", ""+jsonObject);
+
                                     editor.putString("type", jsonObject.getString("type"));
                                     editor.putString("mobile", jsonObject.getString("mobile"));
                                     editor.putString("image", jsonObject.getString("image"));

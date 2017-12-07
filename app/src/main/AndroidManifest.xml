@@ -60,15 +60,16 @@
         android:icon="@mipmap/ic_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/img_logo"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme_Full">
 
         <!-- kotMain_LoginActivityvity -->
 
         <activity
-            android:name=".SplashScreen_Activity"
-            android:screenOrientation="portrait">
+            android:name=".Gust_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme_Full_new">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -83,6 +84,9 @@
             android:name=".DashBoard_Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".School_Listing_Activity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Booking_Detail_Activity"
             android:screenOrientation="portrait" />
         <activity
@@ -94,6 +98,12 @@
         <activity
             android:name=".PopupActivity"
             android:screenOrientation="portrait" />
+        <!-- <activity
+            android:name=".Gust_Activity"
+            android:screenOrientation="portrait" />-->
+         <activity
+            android:name=".Main_School_List_Activity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Agent_Deal_Offer_Detail_Activity"
             android:screenOrientation="portrait" />
@@ -103,6 +113,10 @@
             android:theme="@style/Theme_customBack" />
         <activity
             android:name=".Agent_Profile_Activity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".Signup_Guest_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Gallery_Activity"
@@ -208,6 +222,10 @@
        </activity>
         <activity
             android:name="active.Gift_Winner__Activity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="School_Full_Detail_Activity"
             android:label="@string/app_name" >
         </activity>
         <activity
