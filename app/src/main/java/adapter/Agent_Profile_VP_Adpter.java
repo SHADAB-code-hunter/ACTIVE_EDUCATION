@@ -1,6 +1,7 @@
 package adapter;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +13,8 @@ import fragment.Agent_Profile_Detail_Fragment;
 import fragment.Agent_Progress_Fragment;
 import fragment.Agent_Target_Frg;
 import fragment.Partner_Seat_Submission;
+import tab_bar.My_Booking_Fragment;
+import utilities.UrlEndpoints;
 
 /**
  * Created by GT on 10/23/2017.
@@ -37,7 +40,10 @@ public class Agent_Profile_VP_Adpter extends FragmentPagerAdapter {
                 break;
             case 1:
 
-                fragment =new Agent_Book_FRG();
+                fragment =new My_Booking_Fragment();
+                Bundle bundle=new Bundle();
+                bundle.putString("URL", ""+ UrlEndpoints.GET_BOOK_OFFER);
+                fragment.setArguments(bundle);
                 break;
             case 2:
 

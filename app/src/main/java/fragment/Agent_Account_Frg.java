@@ -13,23 +13,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.gt.active_education.Admission_Form_Activity;
 import com.gt.active_education.R;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
 import adapter.Agent_Account_Adapter;
-import adapter.Agent_Target_Adapter;
-import callbacks.Agent_deal_Listener;
-import pojo.Agent_Deal_Pojo;
-import task.Agent_Async;
-import utilities.MyApplication;
-import utilities.RecyclerTouchListener;
-import utilities.UpdateValues;
+import task.Asynch_Obj;
 import utilities.UrlEndpoints;
+
+import static utilities.App_Static_Method.progressDialog;
+import static utilities.App_Static_Method.session_type;
 
 /**
  * Created by GT on 10/23/2017.
@@ -55,11 +52,27 @@ public class Agent_Account_Frg extends Fragment {
 
         View rootView = inflater.inflate(R.layout.frg_agent_account, container, false);
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
-        mAdapter = new Agent_Account_Adapter(Agent_Account_Frg.this.getContext());
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
+
+        new Asynch_Obj(new Asynch_Obj.OBJ_Lister() {
+            @Override
+            public void on_lis_obj(JSONObject jsonObject, String str_key) {
+                Log.d("jsonObject",jsonObject.toString());
+                try {
+                if(jsonObject.has("data")) {
+                    mAdapter = new Agent_Account_Adapter(Agent_Account_Frg.this.getContext(), jsonObject);
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    recyclerView.setAdapter(mAdapter);
+                   }
+                } catch (Exception e) {
+                    Log.d("jsonObject",e.getMessage());
+                }
+
+            }
+        }, UrlEndpoints.URL_AGENT_TRANSCATION, session_type(), "social").execute();
+
+
         return rootView;
     }
 

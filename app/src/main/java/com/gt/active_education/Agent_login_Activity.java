@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import callbacks.Forgot_Close_Listener;
+import callbacks.Forgot_password;
 import fragment.Partner_Detail_Frag;
 import utilities.App_Forgot_Password;
 import utilities.Custom_List_Dialog;
@@ -44,7 +45,7 @@ import utilities.UrlEndpoints;
  * Created by GT on 8/26/2017.
  */
 
-public class Agent_login_Activity extends AppCompatActivity implements View.OnClickListener,Forgot_Close_Listener {
+public class Agent_login_Activity extends AppCompatActivity implements View.OnClickListener,Forgot_Close_Listener, Forgot_password {
     Button btn_sign_up;
     private boolean open=false;
     Button btn_login;
@@ -71,7 +72,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
         id_login_type=(EditText)findViewById(R.id.id_login_type);
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        str_log_array=getResources().getStringArray(R.array.login_array);
+        str_log_array=getResources().getStringArray(R.array.Guset_login_array);
         id_forgot_password=(TextView)findViewById(R.id.id_forgot_password);id_forgot_password.setOnClickListener(this);
         id_login_type.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -79,7 +80,6 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
 
                 if(!open) {
                     open = true;
-
                     custom_list_dialog = new Custom_List_Dialog(new Custom_List_Dialog.Dialog_Spinner_Listener() {
                         @Override
                         public void on_listdata(String s) {
@@ -121,54 +121,60 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                 String str_uname=((EditText)findViewById(R.id.edt_uname)).getText().toString().trim();
                 String str_pass=((EditText)findViewById(R.id.edt_pass)).getText().toString().trim();
 
-                if(str_uname==null) {
-                    ((EditText) findViewById(R.id.edt_uname)).setError(" Please Enter UserName !!!");
-                }else{
-                    if(str_pass==null) {
-                        ((EditText) findViewById(R.id.edt_pass)).setError(" Please Enter Password !!!");
-                    }else{
-                        if(id_login_type.getText().toString()==null) {
-                            ((EditText) findViewById(R.id.id_login_type)).setError(" Please Enter Password !!!");
-                        }else{
-                            switch (id_login_type.getText().toString().trim())
-                            {
+                if((id_login_type.getText().toString()).equals("Please Choose Login Type")) {
+                    Toast.makeText(this, "Please Choose Login Type", Toast.LENGTH_SHORT).show();
+                    return;
+                    }
 
-                                case "Student":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.LOGIN_API,"0");
+                    if(str_uname==null)
+                    {
+                        ((EditText) findViewById(R.id.edt_uname)).setError(" Please Enter UserName !!!");
+                    }else {
+                        if (str_pass == null) {
+                            ((EditText) findViewById(R.id.edt_pass)).setError(" Please Enter Password !!!");
+                        } else {
+                            if (id_login_type.getText().toString() == null) {
+                                ((EditText) findViewById(R.id.id_login_type)).setError(" Please Enter Password !!!");
+                            } else {
+                                switch (id_login_type.getText().toString().trim()) {
 
-                                    break;
-                                case "School":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"1");
+                                    case "Student Login" :
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.LOGIN_API, "0");
 
-                                    break;
-                                case "College":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"2");
+                                        break;
+                                    case "School Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "1");
 
-                                    break;
-                                case "University":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"3");
+                                        break;
+                                    case "College Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "2");
 
-                                    break;
-                                case "ITI / Diploma":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"4");
+                                        break;
+                                    case "University Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "3");
 
-                                    break;
-                                case "Coaching":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"5");
+                                        break;
+                                    case "ITI College Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "4");
 
-                                    break;
+                                        break;
+                                    case "Coaching Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "5");
 
-                                case "Training Center":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.SEAT_PROVIDER_SIGNIN,"6");
+                                        break;
 
-                                    break;
-                                case "Partner":
-                                    set_sign_in(str_uname,str_pass,UrlEndpoints.Agent_Login,"7");
-                                    break;
+                                    case "Training Center Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.SEAT_PROVIDER_SIGNIN, "6");
+
+                                        break;
+                                    case "Partner Login":
+                                        set_sign_in(str_uname, str_pass, UrlEndpoints.Agent_Login, "7");
+                                        break;
+                                }
                             }
                         }
                     }
-                }
+
                 break;
 
             case R.id.id_forgot_password:
@@ -179,7 +185,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                startActivity(new Intent(getApplicationContext(),GoogleSignInActivity.class));
                 break;
             case R.id.id_Reg_here:
-                startActivity(new Intent(Agent_login_Activity.this,Sign_Up_Process_Activity.class));
+                startActivity(new Intent(Agent_login_Activity.this,Signup_Guest_All_Activity.class));
                // finish();
                 break;
 
@@ -200,7 +206,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                     {
                         try {
                             JSONObject jObj = new JSONObject(response);
-                            Toast.makeText(Agent_login_Activity.this, str_mobile+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(Agent_login_Activity.this, str_mobile+"   "+str_pass+"   "+response.toString(), Toast.LENGTH_SHORT).show();
                             Log.d("a_login",response.toString());
 
                           /*  SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
@@ -230,40 +236,23 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
                                     editor.putString("type", jsonObject.getString("type"));
                                     editor.putString("token", jsonObject.getString("token"));
-                                 //   editor.putString("email", jsonObject.getString("email"));
-                                    editor.putString("mobile", jsonObject.getString("mobile"));
-                                    editor.commit();
-                                    startActivity(new Intent(getApplicationContext(),Agent_Profile_Activity.class));
-                                    finish();
-                                }
-                                else if(jsonObject.getString("type").equals("user"))
-                                {
-                                    //{"mobile":"9166833552","token":"rhRwoL9x5C","image":null,"uname":"sanjit","type":"user"}]}
-                                    SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
-                                    SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-                                    editor2.putString("type",jsonObject.getString("type"));
-                                    editor2.commit();
-
-
-                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("type", jsonObject.getString("type"));
-                                    editor.putString("token", jsonObject.getString("token"));
-                                 //   editor.putString("email", jsonObject.getString("email"));
+                                 // editor.putString("email", jsonObject.getString("email"));
                                     editor.putString("mobile", jsonObject.getString("mobile"));
                                     editor.commit();
                                     startActivity(new Intent(getApplicationContext(),DashBoard_Activity.class));
                                     finish();
-                                }else if(jsonObject.has("utype")) {
+                                }
+                               else if(jsonObject.has("utype")) {
 
                                     SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
                                     SharedPreferences.Editor editor2 = sharedPreferences2.edit();
                                     editor2.putString("type",jsonObject.getString("type"));
                                     editor2.commit();
 
-
-                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
+                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("alldata", ""+jsonObject);
+
                                     editor.putString("type", jsonObject.getString("type"));
                                     editor.putString("mobile", jsonObject.getString("mobile"));
                                     editor.putString("image", jsonObject.getString("image"));
@@ -274,9 +263,32 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                                     editor.putString("userid", jsonObject.getString("userid"));
                                     editor.putString("utype", jsonObject.getString("utype"));
                                     editor.putString("token", jsonObject.getString("token"));
+                                   // editor.putString("token", jsonObject.getString("token"));
                                     editor.commit();
                                     startActivity(new Intent(getApplicationContext(),Target_Circle_Activity.class));
                                     finish();
+                                }else {
+
+                                    if(jsonObject.getString("type").equals("user"))
+                                    {
+                                        //{"mobile":"9166833552","token":"rhRwoL9x5C","image":null,"uname":"sanjit","type":"user"}]}
+                                        SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+                                        SharedPreferences.Editor editor2 = sharedPreferences2.edit();
+                                        editor2.putString("type",jsonObject.getString("type"));
+                                        editor2.commit();
+
+
+                                        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("type", jsonObject.getString("type"));
+                                        editor.putString("token", jsonObject.getString("token"));
+                                        //   editor.putString("email", jsonObject.getString("email"));
+                                        editor.putString("mobile", jsonObject.getString("mobile"));
+                                        editor.commit();
+                                        startActivity(new Intent(getApplicationContext(),DashBoard_Activity.class));
+                                        finish();
+                                    }
+
                                 }
 
                                 progressDialog.cancel();
@@ -320,6 +332,13 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
     }
     @Override
     public void on_forgot_close() {
+       // appForgotPassword.cancel();
+    }
+
+    @Override
+    public void on_get_message() {
+
         appForgotPassword.cancel();
+
     }
 }

@@ -127,13 +127,13 @@ public class Agent_Deal_Adapter extends RecyclerView.Adapter<Agent_Deal_Adapter.
         holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                set_applynow(v, position);
+              //  set_applynow(v, position);
             }
         });
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                set_applynow(v, position);
+              //  set_applynow(v, position);
             }
         });
     }

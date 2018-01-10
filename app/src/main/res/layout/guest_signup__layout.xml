@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Expandable_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="3dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="10dp"
+            android:layout_alignParentTop="true"
+            android:background="#d25c4689"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/id_frm_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/back_about"
+                android:layout_gravity="center|left">
+
+                <TextView
+                    android:id="@+id/id_back_btn_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:background="@drawable/ic_back_arrow"/>
+            </FrameLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="00:00:00"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:layout_gravity="center"
+                android:layout_margin="0dp"
+                android:layout_weight="2.8"
+                android:textSize="9sp"
+                android:id="@+id/toolbar_timer" />
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_margin="0dp"
+                android:textSize="9sp"
+                android:visibility="gone"
+                android:background="@mipmap/ic_logo" />
+
+            <TextView
+                android:id="@+id/id_exname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:layout_marginBottom="0dp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="SignUp"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="0dp" />
+
+            <TextView
+                android:id="@+id/tv_logout"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:visibility="invisible"
+                android:background="@drawable/ic_power_button"
+                android:layout_marginRight="9dp"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:layout_gravity="center" />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/id_rltive_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_student"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:clickable="false"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/ic_study_new"/>
+            <TextView
+                android:id="@+id/title1_student"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_student"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:clickable="false"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Student SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_student"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_student"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_b_partner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_b_partner"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/ic_businessman"/>
+            <TextView
+                android:id="@+id/title1_b_partner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_b_partner"
+                android:gravity="center"
+                android:textSize="24sp"
+               
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Bussiness partner SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_b_partner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_b_partner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_school"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/ic_school"/>
+            <TextView
+                android:id="@+id/title1_school"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_school"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="School SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_school"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_school"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_college"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="7dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/college_old"/>
+            <TextView
+                android:id="@+id/title1_college"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_college"
+                android:gravity="center"
+                android:textSize="24sp"
+               
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="College SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_college"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_college"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_uni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_uni"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/univercity"/>
+            <TextView
+                android:id="@+id/title1_uni"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_uni"
+                android:gravity="center"
+                android:textSize="24sp"
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="University SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_uni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_uni"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_iti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_iti"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="10dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/iti_old"/>
+            <TextView
+                android:id="@+id/title1_iti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_iti"
+                android:gravity="center"
+                android:textSize="24sp"
+               
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="ITI College SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_iti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_iti"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_coach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_coach"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/coching_center_old"/>
+            <TextView
+                android:id="@+id/title1_coac"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_coach"
+                android:gravity="center"
+                android:textSize="24sp"
+               
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Coaching Center SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_coach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_coach"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/id_train"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:padding="5dp"
+            android:elevation="4dp"
+            android:background="@color/tumblr_red"
+            android:outlineProvider="bounds">
+
+
+            <ImageView
+                android:id="@+id/id_img_traing"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="5dp"
+                android:backgroundTint="#3d3d3d"
+                android:background="@drawable/tumblr_orange_oval"
+                android:src="@drawable/training_old"/>
+            <TextView
+                android:id="@+id/title1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/id_img_traing"
+                android:gravity="center"
+                android:textSize="24sp"
+               
+                android:fontFamily="sans-serif"
+                android:textColor="@color/colorWhite"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="8dp"
+                android:text="Training Center SignUp" />
+        </RelativeLayout>
+
+        <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+            android:id="@+id/expandableLayout1_train"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tumblr_white_ract"
+            android:layout_margin="3dp"
+            android:backgroundTint="#85060505"
+            app:ael_expanded="false"
+            app:ael_duration="400"
+            app:ael_interpolator="accelerate"
+            app:ael_orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/id_fr_train"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

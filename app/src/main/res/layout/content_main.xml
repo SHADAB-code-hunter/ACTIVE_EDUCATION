@@ -20,6 +20,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:text="http://activeeduindia.com/new_admin/webservices/getNewOffers.php"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopList.php"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopCourses.php"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="90dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopExams.php"/>
+
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -396,13 +425,12 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:background="@drawable/ic_learn"
+                        android:background="@drawable/ic_2"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Learn"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>
@@ -430,13 +458,13 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_earn"
+                        android:background="@drawable/ic_1"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Earn"
+
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>
@@ -464,13 +492,12 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
-                        android:background="@drawable/ic_fun"
+                        android:background="@drawable/ic_3"
                         android:gravity="center"
                         android:textColor="@color/white" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Fun"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="18sp"/>

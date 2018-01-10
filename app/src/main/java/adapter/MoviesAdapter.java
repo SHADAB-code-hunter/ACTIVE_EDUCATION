@@ -320,6 +320,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     private void set_applynow(View v, int position) {
+        Log.d("ndnccnnc",""+mList.get(position).toString());
         Log.d("kdddd9","clicked"+
                 ""+mList.get(position).getC_id()
         +" "+mList.get(position).getCourse_id()
@@ -334,6 +335,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         bundle.putString("course_name",""+mList.get(position).getC_course());
         bundle.putString("branch",""+mList.get(position).getBranch_id());
         bundle.putString("branch_name",""+mList.get(position).getC_branch());
+        bundle.putString("branch_fee",""+mList.get(position).getBranch_fees());
+
+        if(mList.get(position).getDealid()!=null) {
+            bundle.putString("dealid",""+mList.get(position).getDealid());
+        }
+        bundle.putString("id",""+mList.get(position).getId());
         i.putExtras(bundle);
 
         if(!(mList.get(position).getCategory()).equals("NA"))// for

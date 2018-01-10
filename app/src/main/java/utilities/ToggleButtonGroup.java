@@ -7,9 +7,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Checkable;
 import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 import com.gt.active_education.R;
 import callbacks.OnCheckedChangeListener;
+import callbacks.ToggleButton;
 
 public abstract class ToggleButtonGroup extends FlowLayout {
     private static final String LOG_TAG = ToggleButtonGroup.class.getSimpleName();
@@ -65,7 +65,7 @@ public abstract class ToggleButtonGroup extends FlowLayout {
         }
     }
 
-    public class CheckedStateTracker implements OnCheckedChangeListener {
+    private class CheckedStateTracker implements OnCheckedChangeListener {
         @Override
         public <T extends View & Checkable> void onCheckedChanged(T view, boolean isChecked) {
             onChildCheckedChange(view, isChecked);
@@ -121,7 +121,7 @@ public abstract class ToggleButtonGroup extends FlowLayout {
         if (mCheckedStateTracker == null) {
             mCheckedStateTracker = new CheckedStateTracker();
         }
-        view.setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) mCheckedStateTracker);
+        view.setOnCheckedChangeListener(mCheckedStateTracker);
     }
 
     private void clearStateTracker(ToggleButton view) {

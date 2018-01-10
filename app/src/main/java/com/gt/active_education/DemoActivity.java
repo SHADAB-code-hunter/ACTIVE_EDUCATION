@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import tumblr_menu.ArcLayout;
 import tumblr_menu.Demo;
 

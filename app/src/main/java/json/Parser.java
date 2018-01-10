@@ -24,6 +24,7 @@ import pojo.SEARCH_MODEL;
 import utilities.Common_Pojo;
 import utilities.Movie;
 
+import static extras.Keys.EndpointBoxOffice.KEYD;
 import static extras.Keys.EndpointBoxOffice.KEY_BNAME;
 import static extras.Keys.EndpointBoxOffice.KEY_BRANCH_FEES;
 import static extras.Keys.EndpointBoxOffice.KEY_BRN_ID;
@@ -48,6 +49,7 @@ import static extras.Keys.EndpointBoxOffice.KEY_C_PHONE1;
 import static extras.Keys.EndpointBoxOffice.KEY_C_SHORT_NAME;
 import static extras.Keys.EndpointBoxOffice.KEY_C_WEBSITE;
 import static extras.Keys.EndpointBoxOffice.KEY_DATA_ARRAY;
+import static extras.Keys.EndpointBoxOffice.KEY_DEALID;
 import static extras.Keys.EndpointBoxOffice.KEY_DISCOUNT;
 import static extras.Keys.EndpointBoxOffice.KEY_DURATION;
 import static extras.Keys.EndpointBoxOffice.KEY_ID;
@@ -155,6 +157,8 @@ public class Parser {
 
                     String edit_date = Constants.NA;
 
+                    String dealid = Constants.NA;
+
                     String type = Constants.NA;
 
                     String c_website=Constants.NA;
@@ -166,6 +170,7 @@ public class Parser {
                     String discounted_fee = Constants.NA;
 
                     String c_id = "-1";
+                    String id = "-1";
 
                     String c_branch_fees=Constants.NA;
                     String is_active = Constants.NA;
@@ -178,6 +183,10 @@ public class Parser {
                     if (Utils.contains(current_obj, KEY_CATEGORY)) {
                         Log.d("gdfr",""+current_obj.getString(KEY_CATEGORY));
                         category = current_obj.getString(KEY_CATEGORY);
+                    }
+                    if (Utils.contains(current_obj, KEY_ID)) {
+                        Log.d("gdfr",""+current_obj.getString(KEY_ID));
+                        id = current_obj.getString(KEY_ID);
                     }
 
                     if (Utils.contains(current_obj, KEY_CID)) {
@@ -251,12 +260,16 @@ public class Parser {
                     if (Utils.contains(current_obj, KEY_TYPE)) {
                          type = current_obj.getString(KEY_TYPE);
                         }
+                    if (Utils.contains(current_obj, KEY_DEALID)) {
+                         dealid = current_obj.getString(KEY_DEALID);
+                        }
 
                     //get the url of the related links
 
                     Cat_Model catModel = new Cat_Model();
                     Log.d("gdfrfr",""+current_obj.getString(KEY_CID));
                     catModel.setCategory(category);
+                    catModel.setId(id);
                     catModel.setC_id(c_id);
                     catModel.setC_name(c_name);
                     catModel.setC_image(c_image);
@@ -270,6 +283,7 @@ public class Parser {
                     catModel.setC_phone1(c_phone1);
                     catModel.setCourse_id(course_id);
                     catModel.setBranch_id(branch_id);
+                    catModel.setDealid(dealid);
                     catModel.setC_course(c_course);
                     catModel.setC_branch(c_branch);
                     catModel.setDiscount_fee(discounted_fee);
@@ -734,6 +748,7 @@ public class Parser {
                     catModel.setTotal_seats(total_seats);
                     catModel.setDis_offer(display_offer);
                     catModel.setCat_id(cat_id);
+                    catModel.setDeal_id(deal_id);
                     catModel.setImage(image);
                     catModel.setBranch_fee(branch_fee);
 
@@ -878,9 +893,9 @@ public class Parser {
 
                             JSONObject currentQuiz = arrayQuiz.getJSONObject(i);
                             //get the id of the current movie
-                            if (Utils.contains(currentQuiz, KEY_ID)) {
-                                id = currentQuiz.getString(KEY_ID);
-                                Log.d("aname", currentQuiz.getString(KEY_ID));
+                            if (Utils.contains(currentQuiz, KEYD)) {
+                                id = currentQuiz.getString(KEYD);
+                                Log.d("aname", currentQuiz.getString(KEYD));
                             }
                             //get the title of the current movie
                             if (Utils.contains(currentQuiz, KEY_IS_ACTIVE)) {
@@ -936,7 +951,8 @@ public class Parser {
                         }
 
                     }
-                }catch (JSONException e) {
+                }catch (Exception e) {
+                    Log.d("gdgd___g",e.getMessage());
 
                 }
 

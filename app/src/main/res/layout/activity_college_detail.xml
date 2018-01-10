@@ -679,7 +679,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="2"
                                 android:gravity="center|left"
-                                android:text="  9599805321 "
+                                android:text="  9999222294 "
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />
                         </LinearLayout>
@@ -768,6 +768,7 @@
 
 
             <FrameLayout
+                android:id="@+id/id_call"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -799,6 +800,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:visibility="gone"
             android:layout_weight="1">
             <FrameLayout
                 android:layout_width="50dp"
@@ -833,6 +835,7 @@
             android:orientation="vertical"
             android:layout_weight="1">
             <FrameLayout
+                android:id="@+id/id_frm_chat"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"

@@ -141,7 +141,7 @@ public class Adapter_Book extends RecyclerView.Adapter<Adapter_Book.MovieViewHol
 
             }
         }
-        holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
+      /*  holder.id_btn_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(_activity,Booking_Detail_Activity.class);
@@ -156,7 +156,7 @@ public class Adapter_Book extends RecyclerView.Adapter<Adapter_Book.MovieViewHol
                 i.putExtra("Booking_Object",jsonObject.toString());
                 _activity.startActivity(i);
             }
-        });
+        });*/
         } catch (Exception e) {
             Log.d("Exception_json",e.getMessage());
         }

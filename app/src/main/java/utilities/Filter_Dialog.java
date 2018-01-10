@@ -223,8 +223,6 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
 
     }
     private void set_city_list(String url, final String state_id, final int cat_position) {
-
-
         Log.d("cityiurl",url) ;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {
@@ -499,7 +497,9 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
         @Override
         public CharSequence getPageTitle(int position) {
 
-            Log.d("cfdrdg",""+list_common.get(position));
+            Log.d("cfdrdg",""+list_common.get(position).getName());
+            Log.d("cfd_rdg",""+final_URL);
+           // if()
             return (CharSequence) list_common.get(position).getName();
         }
 

@@ -1,6 +1,7 @@
 package com.gt.active_education;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import adapter.Agent_Profile_VP_Adpter;
@@ -77,6 +79,7 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
             id_image_profile_signup=(ImageView)findViewById(R.id.id_image_profile_signup);
             id_name_prfl=(TextView)findViewById(R.id.id_name_prfl);// name
             id_frm=(FrameLayout)findViewById(R.id.id_frm);id_frm.setOnClickListener(this);
+            imagePicker =new Imager_Picker_Activity(Agent_Profile_Activity.this);
             tv_home.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -288,7 +291,7 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
             case R.id.id_frm:
                  /* image pick*/
                 permission_check(101, Agent_Profile_Activity.this);
-                imagePicker =new Imager_Picker_Activity(Agent_Profile_Activity.this);
+
 
                 if (Build.VERSION.SDK_INT >= 23)
                     imagePicker.imagepicker(1);
@@ -311,7 +314,7 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("dataedpack",data.toString());
+        //  Log.d("dataedpack",data.toString());
 
         if (requestCode == App_Static_Method.lower_CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -365,6 +368,7 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
 
     }
 
+
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 75, baos);
@@ -374,19 +378,34 @@ public class Agent_Profile_Activity extends AppCompatActivity implements Log_Out
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+
+      //  List<ActivityManager.RunningAppProcessInfo> list=new ArrayList<>();
+
+     //   startActivity(new Intent(getApplicationContext(),DashBoard_Activity.class));
+        finish();
+    }
+
+    @Override
     public void onLJsonLoaded(JSONObject jsonObject) {
         Log.d("objecttt",jsonObject.toString());
     }
 
     @Override
     public void onLJsonLoaded_new(JSONObject jsonObject) {
+        if(jsonObject==null)
+        {
+            return;
+        }
         try {
             Log.d("objecttt",jsonObject.toString());
 
             JSONObject jsonObject1=(jsonObject.getJSONArray("data")).getJSONObject(0);
 
             Picasso.with(Agent_Profile_Activity.this)
-                    .load(GET_PROFILE+"/partner/"+(jsonObject1).getString("image"))
+                    .load(GET_PROFILE+"partner/"+(jsonObject1).getString("image"))
                     //  .placeholder(R.drawable.ic_manav_rcahna_banner)   // optional
                     // .error(DRAWABLE RESOURCE)      // optional
                     // .resize(width, height)                        // optional

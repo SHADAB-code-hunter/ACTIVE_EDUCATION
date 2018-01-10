@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,7 +27,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.gt.active_education.QuizDailyQuiz_Activity;
 import com.gt.active_education.R;
 
 import org.json.JSONArray;
@@ -42,6 +42,7 @@ import callbacks.Spinner_Date_Listener;
 import network.VolleySingleton;
 import pojo.Quiz_Model;
 import task.TaskLoadDailyQuiz;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.Custom_Term_Cond_Dialog;
 import utilities.MyApplication;
@@ -185,7 +186,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
     private void Time_For_Quiz() {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,  UrlEndpoints.URL_QUIZ_TIME,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,  UrlEndpoints.URL_QUIZ_TIME+"&type="+App_Static_Method.get_Type(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String str_response) {
@@ -211,7 +212,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
                                 }
                             }
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -231,13 +232,14 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
     protected void onStart() {
         super.onStart();
         //Log.d("status","onStart");
-        if(myApplication.is_User_Login(Take_Daily_Quiz_Activity.this))
-        {
-            Login_Bool=myApplication.is_User_Login(Take_Daily_Quiz_Activity.this);
 
-        }else if(!myApplication.is_User_Login(Take_Daily_Quiz_Activity.this)){
-            Login_Bool=myApplication.is_User_Login(Take_Daily_Quiz_Activity.this);
-        }
+
+            if (App_Static_Method.get_Type().equalsIgnoreCase("guest") || App_Static_Method.session_type().get("type").equals("user")) {
+                Login_Bool = true;
+
+                }else{
+                    Login_Bool=false;
+                }
 
     }
 
@@ -278,7 +280,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
 
         if (listDailyQuiz.size()>=0)
         {
-            //Log.d("ListSize_take",""+listDailyQuiz.size()+" quiz_time"+str_quiz_time);
+            Log.d("ListSize_take",""+listDailyQuiz.size()+" quiz_time"+str_quiz_time);
             //Log.d("ListSize_takedsec",""+listDailyQuiz);
             Double int_q_time= Double.valueOf(Per_Ques_Time);
             String str_Q_time=String.valueOf(Math.round(int_q_time*1000));
@@ -291,7 +293,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
             i.putExtra("Slot_TIME",str_slottime);// per slot time in milisecond
             i.putExtra("ADV_TIME",String.valueOf(ADV_TIME));// advertisement_time in minute
             i.putExtra("SLOT_NUM",Slot_Num);
-            //Log.d("adv_hgjh",ADV_TIME+" "+Slot_TIME+" "+str_Q_time+" "+Slot_Num);
+            Log.d("adv_hgjh",ADV_TIME+" "+Slot_TIME+" "+str_Q_time+" "+Slot_Num);
 
             startActivity(i);
             finish();
@@ -304,7 +306,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                     @Override
                     public void onResponse(String str_response) {
                         try {
-                                //Log.d("quiz_open_daily_res",""+str_response);
+                                Log.d("quiz_open_daily_res",""+str_response);
                                 JSONObject response = new JSONObject(str_response);
                             if(response.has("status"))
                             {
@@ -314,7 +316,7 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                                     JSONObject jsonObject = jsonArray.getJSONObject(0);
                                     JSONObject st_jobj = jsonObject.getJSONObject("startTime");
 
-                                  /*  btn_hr.setText(st_jobj.getString("hr"));
+                                  /*btn_hr.setText(st_jobj.getString("hr"));
                                     btn_min.setText(st_jobj.getString("min"));
                                     btn_sec.setText(st_jobj.getString("sec"));*/
 
@@ -332,7 +334,14 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                                     Per_Ques_Time=response.getString("question_timing");// per ques time
                                     Slot_Num=response.getString("slot");// per ques time
                                     //Log.d("stusnot", "Quiz Has xcxcStarted");
-                                   // new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this, shrd_prf_login.getString("mobile", ""), shrd_prf_login.getString("Login_Token", ""), response.getString("question_timing")).execute();
+                                    if(!App_Static_Method.get_Type().equals("guest")) {
+                                        new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this,App_Static_Method.session_type().get("mobile"),App_Static_Method.session_type().get("token"), response.getString("question_timing")).execute();
+
+                                    }else {
+
+                                        new TaskLoadDailyQuiz(Take_Daily_Quiz_Activity.this,"dummy","dummy", response.getString("question_timing")).execute();
+
+                                    }
                                 }
                             }
                             else if(response.has("msg"))
@@ -360,18 +369,20 @@ public class Take_Daily_Quiz_Activity extends AppCompatActivity implements Daily
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                if(myApplication.is_User_Login(getBaseContext())) {
-                  //  SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
 
-                    //Log.d("gdvcbhv",shrd_prf_login.getString("mobile", "")+"  "+shrd_prf_login.getString("Login_Token", ""));
-                 //   map.put("mobile",shrd_prf_login.getString("mobile", ""));
-                 //   map.put("token",shrd_prf_login.getString("Login_Token", ""));
-                    return map;
-                }else if(!myApplication.is_User_Login(getBaseContext())){
-                    mPlay= MediaPlayer.create(Take_Daily_Quiz_Activity.this, R.raw.dialog_aud);
-                    mPlay.start();
-                  //  ConnectionCheck.login_Dialog("Take_Quiz_Page",Take_Daily_Quiz_Activity.this,false);
+
+                Map<String, String> map = new HashMap<>();
+                map.put("type",App_Static_Method.get_Type());
+                if(!App_Static_Method.get_Type().equals("guest")) {
+                    map.put("mobile", App_Static_Method.session_type().get("mobile"));
+                    map.put("token", App_Static_Method.session_type().get("token"));
+                    Log.d("mapstsrtubf", map.toString());
+                }else {
+                    map.put("mobile", "dummy");
+                    map.put("token", "dummy");
+
+                    Log.d("mapstsrtubf", map.toString());
+
                 }
                 return map;
             }

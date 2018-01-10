@@ -37,6 +37,7 @@ import utilities.App_Static_Method;
 import utilities.MyApplication;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
+import utilities.User_App_Forgot_Password;
 
 import static extras.Keys.KEY_USER_LOGIN.KEY_EMAIL;
 
@@ -50,7 +51,7 @@ public class User_Login_Activity extends AppCompatActivity implements View.OnCli
     Button btn_login;
     private ProgressDialog progressDialog;
     private TextView id_forgot_password;
-    private  App_Forgot_Password appForgotPassword;
+    private User_App_Forgot_Password appForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,7 @@ public class User_Login_Activity extends AppCompatActivity implements View.OnCli
              break;
 
             case R.id.id_forgot_password:
-                appForgotPassword =new App_Forgot_Password(User_Login_Activity.this);
+                appForgotPassword =new User_App_Forgot_Password (User_Login_Activity.this);
                 appForgotPassword.show();
                 break;
         }

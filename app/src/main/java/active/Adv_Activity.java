@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -17,11 +19,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.gt.active_education.QuizDailyQuiz_Activity;
 import com.gt.active_education.R;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +36,14 @@ import callbacks.ADV_LSIT_LISTENER;
 import callbacks.DailyQuizLoadedListener;
 import pojo.ADV_RANK_MODEL;
 import pojo.Quiz_Model;
+import task.TaskLoadDailyQuiz;
+import utilities.App_Static_Method;
 import utilities.ConnectionCheck;
 import utilities.MyApplication;
 import utilities.NonSwipeableViewPager;
 import utilities.UrlEndpoints;
+
+import static utilities.App_Static_Method.session_type;
 
 /**
  * Created by GT on 6/2/2017.
@@ -128,17 +135,15 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
     }
 
     private void call_adv_to_srver() {
-       /* MyApplication myApplication=new MyApplication();
-        SharedPreferences sharedPref=myApplication.get_shrd_prf_login(getBaseContext());
 
-        String Url=// UrlEndpoints.ADV_SP_RANK_API+sharedPref.getString("mobile","NA")+"&token="+sharedPref.getString("Login_Token","NA")+"&slot="+SLOT_COUNT;
-        //Log.d("strrr",Url);
+        String Url= UrlEndpoints.ADV_SP_RANK_API+session_type().get("mobile")+"&token="+session_type().get("token")+"&slot="+SLOT_COUNT;
+        Log.d("strrr",Url);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Url,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            //Log.d("sruts", response.toString());
+                            Log.d("sruts", response.toString());
                             JSONArray data_jsonArray=response.getJSONArray("data");
                             JSONArray sp_jsonArray=response.getJSONArray("sponser");
                             ArrayList<ADV_RANK_MODEL> adv_rank_list=new ArrayList<>();
@@ -206,7 +211,7 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
                                     adv_rank_list.add(advRankModel);
                                 }
                             }
-                                //Log.d("lsit_model",adv_rank_list.toString());
+                                Log.d("lsit_model",adv_rank_list.toString());
                             ((ADV_LSIT_LISTENER)Adv_Activity.this).on_adv_list(adv_rank_list);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -222,7 +227,7 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplication());
         requestQueue.add(jsonObjectRequest);
-*/
+
     }
 
     @Override
@@ -287,7 +292,7 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
                             JSONObject response = new JSONObject(str_response);
                             if(response.has("status"))
                             {
-                               /* if (response.getString("status").equals("0")) {
+                                if (response.getString("status").equals("0")) {
 
                                   //  ConnectionCheck.quiz_end_not_get(Adv_Activity.this);
 
@@ -298,7 +303,7 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
                                     //Log.d("stusnot", "Quiz Has Started");
                                     // pd.dismiss();
                                     //   set_progres_dialog();
-                                    SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
+                                    //SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
                                     //Log.d("logindgf", shrd_prf_login.getString("mobile", "")+"   "+shrd_prf_login.getString("Login_Token", "")+" "+response.getString("question_timing")+" "+response.getString("slot_time"));
                                     //Log.d("stusnot", "Quiz Has cxcStarted");
                                     ADV_TIME= Integer.parseInt(response.getString("ad_timing"));// adv total time
@@ -306,14 +311,14 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
                                     Per_Ques_Time=response.getString("question_timing");// per ques time
                                     Slot_Num=response.getString("slot");// per ques time
                                     //Log.d("stusnot", "Quiz Has xcxcStarted");
-                                    new TaskLoadDailyQuiz(Adv_Activity.this, shrd_prf_login.getString("mobile", ""), shrd_prf_login.getString("Login_Token", ""), response.getString("question_timing")).execute();
-                                }*/
+                                    new TaskLoadDailyQuiz(Adv_Activity.this, session_type().get("mobile"),session_type().get("token"), response.getString("question_timing")).execute();
+                                }
                             }
                             else if(response.has("msg"))
                             {
                                 //pd.dismiss();
                                 //Log.d("unauth","un_Auth");
-                                //ConnectionCheck.unAuth_prob(Adv_Activity.this,response.getString("msg"));
+                                ConnectionCheck.unAuth_prob(Adv_Activity.this,response.getString("msg"));
                             }
                             else if(response.has("ad"))
                             {
@@ -335,18 +340,8 @@ public class Adv_Activity extends AppCompatActivity implements DailyQuizLoadedLi
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                if(myApplication.is_User_Login(getBaseContext())) {
-                  //  SharedPreferences shrd_prf_login = myApplication.get_shrd_prf_login(getBaseContext());
-
-                    //Log.d("gdvcbhv",shrd_prf_login.getString("mobile", "")+"  "+shrd_prf_login.getString("Login_Token", ""));
-                  //  map.put("mobile",shrd_prf_login.getString("mobile", ""));
-                  //  map.put("token",shrd_prf_login.getString("Login_Token", ""));
-                    return map;
-                }else if(!myApplication.is_User_Login(getBaseContext())){
-                    mPlay= MediaPlayer.create(Adv_Activity.this, R.raw.dialog_aud);
-                    mPlay.start();
-                   // ConnectionCheck.login_Dialog("Take_Quiz_Page",Adv_Activity.this,false);
-                }
+                map.put("mobile",session_type().get("mobile"));
+                map.put("token",session_type().get("token"));
                 return map;
             }
         };

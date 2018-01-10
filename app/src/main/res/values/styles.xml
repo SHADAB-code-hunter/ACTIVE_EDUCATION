@@ -55,6 +55,9 @@
     <style name="SplashTheme_Full" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/back_new</item>
     </style>
+     <style name="SplashTheme_Full_new" parent="AppTheme.NoActionBar">
+            <item name="android:windowBackground">@drawable/splash_theme</item>
+        </style>
 
     <style name="MaterialAnimations.TextAppearance.Title.Inverse" parent="android:TextAppearance.Material.Title">
         <item name="android:textColor">?android:textColorPrimaryInverse</item>

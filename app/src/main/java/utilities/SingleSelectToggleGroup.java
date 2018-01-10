@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Checkable;
 
 public class SingleSelectToggleGroup extends ToggleButtonGroup {
@@ -32,7 +31,7 @@ public class SingleSelectToggleGroup extends ToggleButtonGroup {
     }
 
     @Override
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    public void addView(View child, int index, LayoutParams params) {
         if (child instanceof Checkable) {
             final Checkable checkable = (Checkable) child;
             if (checkable.isChecked()) {

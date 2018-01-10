@@ -96,20 +96,22 @@ public class Agent_Book_FRG extends Fragment implements Agent_deal_Listener , JO
 
     @Override
     public void onLJsonLoaded_new(JSONObject jsonObject) {
-        Log.d("objwct_responce",jsonObject.toString());
+
+
+      //  Log.d("objwct_responce",""+jsonObject.toString());
 //
        // mAdapter = new Agent_Deal_Adapter(jsonObject, picasso, (Activity) getContext());
         try {
         if(jsonObject.has("data")) {
             JSONArray jsonArray=jsonObject.getJSONArray("data");
-            adapter_book = new Adapter_Book(jsonArray, picasso, (Activity) getContext());
+            //adapter_book = new Adapter_Book(jsonArray, picasso, (Activity) getContext());
             LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter_book);
         }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+           Log.d("exceprt",""+e.getMessage());
         }
     }
 }

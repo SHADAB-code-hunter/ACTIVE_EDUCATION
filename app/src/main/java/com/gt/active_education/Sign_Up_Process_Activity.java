@@ -45,7 +45,7 @@ public class Sign_Up_Process_Activity extends AppCompatActivity implements View.
         button_verify.setOnClickListener(this);*/
         if (!getIntent().equals(null))
         {
-            str_status=getIntent().getStringExtra("Status");
+         str_status=getIntent().getStringExtra("Status");
         }
         newAdapter=new SignUp_Pager_Adapter(getSupportFragmentManager(),Sign_Up_Process_Activity.this,str_status);
         main_viewPager.setAdapter(newAdapter);

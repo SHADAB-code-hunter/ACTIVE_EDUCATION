@@ -5,29 +5,20 @@
 
 package com.gt.active_education;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
 import android.widget.RatingBar;
-
-import com.gt.active_education.R;
-
 import RAting_BAr.MaterialRatingBar;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 
 public class RatingMainActivity extends AppCompatActivity {
 
-   /* @BindViews({
-            R.id.framework_decimal_ratingbar,
-            R.id.library_decimal_ratingbar,
-            R.id.library_tinted_decimal_ratingbar
-    })*/
     RatingBar[] mDecimalRatingBars;
     private MaterialRatingBar library_normal_ratingbar;
 
@@ -39,6 +30,13 @@ public class RatingMainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         library_normal_ratingbar=(MaterialRatingBar)findViewById(R.id.library_normal_ratingbar);
         library_normal_ratingbar.setRating((float) 3.5);
+
+        library_normal_ratingbar.setOnRatingChangeListener(new MaterialRatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChanged(MaterialRatingBar ratingBar, float rating) {
+                Log.d("jnjnjnjn",""+rating);
+            }
+        });
 //        mDecimalRatingBars[0].startAnimation(new RatingAnimation());
     }
 

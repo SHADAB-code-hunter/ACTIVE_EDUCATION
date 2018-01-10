@@ -105,8 +105,8 @@ public class Attach_Dialog extends Dialog implements View.OnClickListener {
 
     private void send_attach_dialog(String str) {
 
-        Custom_Dialog_FTP custom_dialog_ftp=new Custom_Dialog_FTP(Attach_Dialog.this.getContext(),str);
-        custom_dialog_ftp.show();
+        Custom_Dialog__FTP_SERVER Custom_Dialog__FTP_SERVER=new Custom_Dialog__FTP_SERVER(Attach_Dialog.this.getContext(),str);
+        Custom_Dialog__FTP_SERVER.show();
 
     }
 }

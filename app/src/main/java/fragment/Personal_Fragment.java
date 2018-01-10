@@ -64,6 +64,9 @@ import utilities.State_City_Search;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_session_type;
+import static utilities.App_Static_Method.toMap;
+import static utilities.UpdateValues.ADDMISSION;
 import static utilities.UrlEndpoints.GET_CITY;
 import static utilities.UrlEndpoints.GET_STATE;
 
@@ -94,12 +97,18 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
     private TextView id_text_tv_state;
     private TextView id_text_tv_city;
     private Map<String,String> map2=new HashMap<>();
+    private Map<String,String> map3=new HashMap<>();
     private RelativeLayout id_frm_city,id_frm_state;
+    private String admission;
+    private JSONObject jsonObject_admission;
+    private Context context;
+    private EditText id_edt_reffreralcode;
 
     //SIGN_UP_API
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context=context;
 //        throw new ClassCastException(context.toString() + " must implement ExampleFragmentCallbackInterface ");
 
     } /*try {
@@ -126,8 +135,9 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
         edt_cat=(EditText)rootView.findViewById(R.id.id_edt_cat);
         edt_dob=(EditText)rootView.findViewById(R.id.id_edt_dob);
         edt_add=(EditText)rootView.findViewById(R.id.id_edt_add);
+        id_edt_reffreralcode=(EditText)rootView.findViewById(R.id.id_edt_reffreralcode);
        // edt_state=(EditText)rootView.findViewById(R.id.id_edt_state);
-     //   edt_city=(EditText)rootView.findViewById(R.id.id_edt_city);
+        //   edt_city=(EditText)rootView.findViewById(R.id.id_edt_city);
 
         edt_pincode=(EditText)rootView.findViewById(R.id.id_edt_pincode);
         id_frm_state=(RelativeLayout)rootView.findViewById(R.id.id_frm_state);
@@ -139,8 +149,15 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
         if(getArguments()!=null)
         {
             bundle=getArguments();
-            cat_type=bundle.getString("type");
-           // Log.d("bundrrle",""+bundle.getString("type"));
+            cat_type=bundle.getString(ADDMISSION);
+            try {
+                 jsonObject_admission=new JSONObject(bundle.getString(ADDMISSION));
+                Log.d("ojfjn",""+jsonObject_admission);
+                Log.d("sessiontype",""+get_session_type());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // Log.d("bundrrle",""+bundle.getString("type"));
             //str_type=getIntent().getStringExtra("type");
         }
         /* image pick*/
@@ -233,7 +250,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                                                 map.put("l_name", st_lname);
                                                                 map.put("father_name", st_fth_name);
                                                                 map.put("email", st_email);
-                                                                map.put("mobile", st_mobile);
+                                                                map.put("f_mobile", st_mobile);
                                                                 map.put("caste_category", st_cat);
                                                                 map.put("dob", st_dob);
                                                                 map.put("address", st_add);
@@ -241,6 +258,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                                                 map.put("gender", "male");
                                                                 map.put("filename", st_fname + ".png");
                                                                 map.put("image", str_profile_bitmap);
+                                                                map.put("reffreral_code",id_edt_reffreralcode.getText().toString());
                                                                 Log.d("sruts","gdgdg"+str_profile_bitmap);
                                                                 call_submit_methos(map);
                                                             } else {
@@ -277,6 +295,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                             if(!s.equals("na")){
                                 id_text_tv_state.setText(s);
                                 id_text_tv_city.setText("City");
+                                map3.put("state",""+s_id);
                                 map2.put("state", ""+ App_Raw_Data.local_parseJson(s));
                                 Log.d("sgsdfe",""+App_Raw_Data.local_parseJson(s))  ;
                             }
@@ -304,9 +323,10 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                         state_city_search = new State_City_Search(new State_City_Search.Dialog_Spinner_Listener() {
                             @Override
                             public void on_listdata(String s,String s_id) {
-                                //  Log.d("jdjfhf",""+s);
+                                  Log.d("jdjfhf",""+s);
                                 if(!s.equals("na")){
                                     id_text_tv_city.setText(s);
+                                    map3.put("city",""+s_id);
                                     map2.put("city",s);
                                    // map.put("city", st_city);
                                 }else {
@@ -315,7 +335,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                 state_city_search.cancel();
                                 open = false;
                             }
-                        }, Personal_Fragment.this.getContext(), GET_CITY +map2.get("state"),"findCity");
+                        }, Personal_Fragment.this.getContext(), GET_CITY +map2.get("state"),"data");
                         state_city_search.show();
                     } else if(id_text_tv_state.getText().toString().equals("State")) {
                         Toast.makeText(Personal_Fragment.this.getContext(), "Please Select State First !!!", Toast.LENGTH_SHORT).show();
@@ -330,7 +350,15 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
 
     public void call_submit_methos(final Map<String, String> map)
     {
-        Log.d("frgg","cac");
+        try {
+            map.putAll(toMap(jsonObject_admission));
+            map.putAll(toMap(new JSONObject(get_session_type())));
+            map.putAll(map3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.d("frgg",""+map);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.GET_admission_personal,
                 new Response.Listener<String>() {
                     @Override
@@ -339,8 +367,13 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                         try {
                             JSONObject jObj = new JSONObject(response);
                             Log.d("srutsrerre",response);
+
+                            SharedPreferences sharedPreferences =context. getSharedPreferences(UpdateValues.FORM_ID, 0);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("Form_ID",jObj.getString("formid"));
+                            editor.commit();
                             Pager_Change_listener pager_change_listener=(Pager_Change_listener)Personal_Fragment.this.getActivity();
-                            pager_change_listener.on_pager_change(1);
+                            pager_change_listener.on_pager_change(1,response);
                            /* if(!jObj.has("exist")) {
                                 JSONArray jsonArray = jObj.getJSONArray("data");
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
@@ -360,7 +393,7 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                                 ConnectionCheck.user_Already_exist(SignUpActivity.this,"User Already Exist !!!");
                             }*/
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -373,39 +406,6 @@ public class Personal_Fragment extends Fragment implements Image_picker.ImageAtt
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
-                String str_types=(MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0)).getString("type","NA");
-                SharedPreferences sharedPreferences=null;
-                switch (str_types)
-                {
-                    case "agent":
-
-                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence,0);
-
-                        break;
-                    case "seater":
-                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref,0);
-
-                        break;
-                    case "user":
-                        sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-
-                        break;
-                }
-
-                String str_mobile=sharedPreferences.getString("mobile", "na");
-                String str_token=sharedPreferences.getString("token", "na");
-                String str_type=sharedPreferences.getString("type", "na");
-                map.put("crd_mobile",str_mobile);
-                map.put("token",str_token);
-                map.put("clgid",bundle.getString("clg_id"));
-                map.put("course",bundle.getString("course"));
-                map.put("branch",bundle.getString("branch"));
-                map.put("type",str_type);
-                map.put("category",cat_type);
-                map.putAll(map2);
-               // map.put("userid",);
-                Log.d("mappy",map.toString());
                 return map;
             }
         };

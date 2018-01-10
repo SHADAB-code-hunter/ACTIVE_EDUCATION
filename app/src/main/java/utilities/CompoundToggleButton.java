@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import callbacks.OnCheckedChangeListener;
 import callbacks.ToggleButton;
 
-
 public abstract class CompoundToggleButton extends FrameLayout implements ToggleButton {
     private static final String LOG_TAG = CompoundToggleButton.class.getSimpleName();
 

@@ -32,7 +32,7 @@
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_logo" />
+                    android:src="@drawable/newlogo" />
 
             </LinearLayout>
 
@@ -71,6 +71,58 @@
                     android:layout_height="50dp"
                     android:layout_margin="10dp">
 
+
+
+
+                    <!--
+                                    <FrameLayout
+                                        android:layout_width="35dp"
+                                        android:layout_height="35dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:padding="7dp"
+                                        android:background="@drawable/login_type_drawable">
+
+                                        <ImageView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:src="@drawable/ic_shield"/>
+
+
+                                    </FrameLayout>
+                    -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/colorPrimaryDark"
+                                android:textColorHint="#6949FF"
+                                app:hintAnimationEnabled="true">
+
+                                <EditText
+                                    android:id="@+id/id_login_type"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#451dff"
+                                    android:hint="Please Choose Login Type"
+                                    android:drawableRight="@drawable/ic_shield"/>
+                            </android.support.design.widget.TextInputLayout>
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp">
+
                     <android.support.design.widget.TextInputLayout
                         android:id="@+id/text_input_layout_username"
                         android:layout_width="match_parent"
@@ -84,17 +136,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#451dff"
-                            android:textSize="16sp"
-                            android:hint="Enter Recovery E-Mail" />
+                            android:singleLine="true"
+                            android:hint="Enter Mobile Number" />
                     </android.support.design.widget.TextInputLayout>
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="35dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="end|bottom"
                         android:layout_marginBottom="12dp"
-                        android:layout_marginRight="5dp"
-                        android:src="@drawable/ic_user" />
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/ic_agent_profile" />
                 </FrameLayout>
 
                 <FrameLayout
@@ -108,7 +160,6 @@
                         android:textSize="12sp"
                         android:text="We will send you a link on Registered E-Mail . After Click on link you can create a new Password. "
                         android:textColor="#6949FF" />
-
 
                 </FrameLayout>
 

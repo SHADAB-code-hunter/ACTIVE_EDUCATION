@@ -17,6 +17,7 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:cardBackgroundColor="#d26945b1"
             android:layout_margin="20dp">
 
             <LinearLayout
@@ -62,12 +63,14 @@
                         android:gravity="right"
                         android:layout_marginRight="25dp"
                         android:text="Website"
+                        android:textColor="@color/colorWhite"
                         android:layout_weight="1"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_height="match_parent"
                         android:text="  Call"
+                        android:textColor="@color/colorWhite"
                         android:layout_weight="1"/>
                 </LinearLayout>
                 <View
@@ -80,22 +83,28 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center|top">
-                    <com.mikhaellopez.circularimageview.CircularImageView
-                        android:id="@+id/id_sms"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_chat"
-                        app:civ_border_color="#EEEEEE"
-                        app:civ_border_width="1dp"
-                        app:civ_shadow="true"
-                        app:civ_shadow_radius="5"
-                        app:civ_shadow_color="#8BC34A"/>
 
+                    <FrameLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/tumblr_white_oval"
+                        android:backgroundTint="@color/tumblr_red">
+                    <ImageView
+                        android:id="@+id/id_sms"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_talk_bubbles"
+                        android:backgroundTint="#2535"
+                       />
+                    </FrameLayout>
                     <com.mikhaellopez.circularimageview.CircularImageView
                         android:id="@+id/id_v_call"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
+                        android:visibility="gone"
                         android:layout_margin="10dp"
                         android:src="@drawable/ic_v_call"
                         app:civ_border_color="#EEEEEE"
@@ -113,15 +122,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:layout_marginRight="20dp"
-                        android:text="Chat    "
+                        android:gravity="center"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginRight="0dp"
+                        android:text="Chat"
                         android:layout_weight="1"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_marginLeft="20dp"
                         android:layout_height="match_parent"
                         android:text="Video Call"
+                        android:visibility="gone"
                         android:layout_weight="1"/>
                 </LinearLayout>
 

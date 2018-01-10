@@ -80,6 +80,7 @@
               <TextView
                   android:id="@+id/id_skip_tv"
                   android:layout_width="wrap_content"
+                  android:visibility="gone"
                   android:layout_height="wrap_content"
                   android:text=" Skip"
                   android:drawableRight="@drawable/ic_arrow_point_to_right"
@@ -309,7 +310,7 @@
                     android:drawableLeft="@drawable/ic_term_cond"
                     android:layout_gravity="left|center"
                     android:text="     I agree with all Terms &amp; Conditions" />-->
-
+<!--
                 <CheckBox
                     android:id="@+id/id_term_con"
                     android:layout_width="wrap_content"
@@ -317,12 +318,13 @@
                     android:textColor="#6949FF"
                     android:layout_marginTop="10dp"
                     android:text="  I agree with all Terms &amp; Conditions"
-                    android:buttonTint="#9933FF" />
+                    android:buttonTint="#9933FF" />-->
 
                 <Button
                     android:id="@+id/btn_submit_btn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:clickable="true"
                     android:layout_gravity="bottom|end"
                     android:background="@drawable/login_btn_shape"
                     android:text="Submit"

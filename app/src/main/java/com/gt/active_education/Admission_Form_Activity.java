@@ -3,7 +3,6 @@ package com.gt.active_education;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,15 +10,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import adapter.Admission_Form_Adapter;
 import callbacks.Pager_Change_listener;
-import callbacks.SignUp_Pager_Swape_Listener;
 import horizontal_step_inditor.HorizontalStepView;
-import horizontal_step_inditor.StepBean;
 import nav_tabbar.NavigationTabBar;
-import utilities.NonSwipeableViewPager;
+
+import static utilities.UpdateValues.ADDMISSION;
 
 /**
  * Created by GT on 8/24/2017.
@@ -37,10 +34,7 @@ public class Admission_Form_Activity extends AppCompatActivity implements Pager_
         setContentView(R.layout.activity_admission_form);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if(!getIntent().equals(null))
-        {
-            bundle = getIntent().getExtras();
-        }
+
         main_viewPager=(ViewPager)findViewById(R.id.id_viewpager_quiz_question);
         //   set_progress_indicator();
 
@@ -48,7 +42,9 @@ public class Admission_Form_Activity extends AppCompatActivity implements Pager_
         {
              newAdapter = new Admission_Form_Adapter(getSupportFragmentManager(), Admission_Form_Activity.this);
         }else if(!getIntent().equals(null)) {
-            newAdapter = new Admission_Form_Adapter(getSupportFragmentManager(), Admission_Form_Activity.this, bundle);
+             Bundle bundle=new Bundle();
+             bundle.putString(ADDMISSION,""+getIntent().getStringExtra(ADDMISSION));
+             newAdapter = new Admission_Form_Adapter(getSupportFragmentManager(), Admission_Form_Activity.this,bundle );
         }
 
         main_viewPager.setAdapter(newAdapter);
@@ -143,7 +139,7 @@ public class Admission_Form_Activity extends AppCompatActivity implements Pager_
     }
 
     @Override
-    public void on_pager_change(int i) {
+    public void on_pager_change(int i, String response) {
         //main_viewPager.getCurrentItem()
         Log.d("hdjhf",""+main_viewPager.getCurrentItem());
 

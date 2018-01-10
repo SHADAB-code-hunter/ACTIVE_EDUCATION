@@ -31,7 +31,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.Filter_Activity;
+import com.gt.active_education.Login_Fior_Guest_Activity;
 import com.gt.active_education.R;
 
 import org.json.JSONException;
@@ -41,6 +43,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -55,6 +58,11 @@ import pojo.Cat_Model;
 import static extras.Keys.KEY_USER_LOGIN.KEY_EMAIL;
 import static extras.Keys.KEY_USER_LOGIN.KEY_IMAGE;
 import static extras.Keys.KEY_USER_LOGIN.KEY_TOKEN;
+import static utilities.UpdateValues.AGENT_SESSION;
+import static utilities.UpdateValues.GUSET_SESSION;
+import static utilities.UpdateValues.G_PARTNER_Prefrence;
+import static utilities.UpdateValues.REAL_USER_SESSION;
+import static utilities.UpdateValues.USER_SESSION;
 
 /**
  * Created by GT on 7/25/2017.
@@ -338,6 +346,11 @@ public class App_Static_Method {
         }
         return false;
     }
+    public static String  checktype() {
+        SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
+
+        return  shprf_seater.getString("type","NA");
+    }
     public static boolean isValidDate(String inDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         dateFormat.setLenient(false);
@@ -366,6 +379,11 @@ public class App_Static_Method {
         }
         return false;
     }
+    public static String get_Type() {
+        SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
+
+        return shprf_.getString("type","NA");
+    }
     public static boolean isValidPass(String pass,String pass2) {
         if (pass != null && pass2 != null && pass2.length() >4 && pass.length() >4 &&  pass.equals(pass2)) {
             return true;
@@ -386,7 +404,7 @@ public class App_Static_Method {
 
     public static Map<String, String>  session_type() {
         SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
-        final SharedPreferences sharedPreferences;
+        SharedPreferences sharedPreferences=null;
         String str_token = null;
         String str_mobie = null;
 
@@ -407,87 +425,47 @@ public class App_Static_Method {
                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
                 str_mobie = sharedPreferences.getString("mobile", "na");
                 str_token = sharedPreferences.getString("token", "na");
+                Log.d("kkkhkh",sharedPreferences.getString("userid", "na"));
                 break;
         }
 
         map.put("mobile",str_mobie);
         map.put("token",str_token);
         map.put("type",shprf_.getString("type", "na"));
+        if(shprf_.getString("type", "na").equals("seater"))
+        {
+         map.put("userid",""+sharedPreferences.getString("userid", "na"));
+         map.put("crd_mobile",""+sharedPreferences.getString("mobile", "na"));
+         map.put("utype",""+sharedPreferences.getString("utype", "na"));
+         map.put("clg_id",""+sharedPreferences.getString("clg_id", "na"));
+         map.put("image",""+sharedPreferences.getString("image", "na"));
+         map.put("name",""+sharedPreferences.getString("name", "na"));
+
+        }
+
+
+//        Log.d("gdgdsgbvvbnbbsklvgn",""+sharedPreferences.getAll());
         return map;
     }
 
     public static void logout(final Activity dashBoard_activity) {
-        SharedPreferences shprf_ = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-        final    SharedPreferences sharedPreferences;
-        String  str_token=null;
-        String  str_mobie=null;
 
-        switch (shprf_.getString("type", "na"))
-        {
-            case "agent":
-                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
-                str_mobie=   sharedPreferences.getString("mobile","na");
-                str_token=   sharedPreferences.getString("token","na");
-                break;
-            case "user":
-                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                str_mobie=   sharedPreferences.getString("mobile","na");
-                str_token=   sharedPreferences.getString("token","na");
-                break;
-            case "seater":
-                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
-                str_mobie=   sharedPreferences.getString("mobile","na");
-                str_token=   sharedPreferences.getString("token","na");
-                break;
-
-        }
-
-       /* Log.d("gfhgfhdddgfhg",str_email+"  "+str_token+" "+str_type);
-        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {*/
-            Log.d("gfhgfhgfhg",str_mobie+"  "+str_token+" "+shprf_.getString("type", "na"));
-        // SharedPreferences finalSharedPreferences = sharedPreferences;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"mobile="+ str_mobie
-                    + "&token=" + str_token+"&type="+shprf_.getString("type", "na"),
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT /*+"mobile="+ str_mobie
+                    + "&token=" + str_token+"&type="+shprf_.getString("type", "na")*/,
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try {
                                 JSONObject jObj = new JSONObject(response);
-                                Log.d("lougour", response.toString());
+                                Log.d("lougour", ""+response.toString());
                                 //{"msg":1}
                                     Log.d("ffff",""+jObj.getString("msg"));
-                                    if ((""+(jObj.getString("msg"))).equals("1"))
+                                    if (jObj.getInt("msg")==1)
                                     { // have to must convert in to string
                                         Log.d("udpgad", response.toString());
-                                      /*  SharedPreferences shprf_seater = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE,0);
-                                        SharedPreferences sharedPreferences =null;*/
-                                       /* switch (shprf_seater.getString("type", "na"))
-                                        {
-                                            case "agent":
-                                                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence, 0);
-                                                SharedPreferences.Editor editor1 = sharedPreferences.edit();
-                                                editor1.clear().commit();
-                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);
-                                                //  finish();
-                                                break;
-                                            case "user":
-                                                 sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                                                SharedPreferences.Editor editor2 = sharedPreferences.edit();
-                                                editor2.clear().commit();
-                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);
-                                                //  finish();
-                                                break;
-                                            case "seater":
-                                                sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_Seater_Pref, 0);
-                                                SharedPreferences.Editor editor3 = sharedPreferences.edit();
-                                                editor3.clear().commit();
-                                                ((Log_Out_Listener)dashBoard_activity).on_logout(true);//  finish();
-                                                break;
 
-                                        }
-*/
 
-                                        ((Log_Out_Listener)dashBoard_activity).on_logout(true);
+                                        ((Log_Out_Listener)dashBoard_activity).on_logout(remove_session());
                                         //  finish();
 
                                     }else {
@@ -509,7 +487,15 @@ public class App_Static_Method {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
 
-                    return null;
+                    Log.d("sesstiontype:",""+get_session_type());
+                    Map<String,String> map=null;
+                    try {
+                        map=toMap(new JSONObject(get_session_type()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    return map;
                 }
             };
 
@@ -521,61 +507,6 @@ public class App_Static_Method {
             Log.d("hfhfhfh","fhfhf");
             ((Log_Out_Listener)dashBoard_activity).on_logout(false);
         }*/
-
-    }
-    public static void user_session(final Activity _activity) {
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-        String str_email=sharedPreferences.getString("email", "na");
-        String str_token=sharedPreferences.getString("Login_Token", "na");
-        String str_type=sharedPreferences.getString("type", "na");
-
-        Log.d("gfhgfhdddgfhg",str_email+"  "+str_token+" "+str_type);
-        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {
-            Log.d("gfhgfhgfhg",str_email+"  "+str_token+" "+str_type);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"email="+ str_email
-                    + "&token=" + str_token+"&type="+str_type,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jObj = new JSONObject(response);
-                                Log.d("lougour", response.toString());
-                                //{"msg":1}
-                                Log.d("ffff",""+jObj.getString("msg"));
-                                if ((""+(jObj.getString("msg"))).equals("1")) { // have to must convert in to string
-                                    Log.d("udpgad", response.toString());
-                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.clear().commit();
-                                    ((Log_Out_Listener)_activity).on_logout(true);
-                                }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            //  Toast.makeText(dashBoard_activity, "Logout Unsuccessfull", Toast.LENGTH_LONG).show();
-                            ((Log_Out_Listener)_activity).on_logout(false);
-                        }
-                    }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-
-                    return null;
-                }
-            };
-
-            RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
-            requestQueue.add(stringRequest);
-
-        }else {
-
-            ((Log_Out_Listener)_activity).on_logout(false);
-        }
 
     }
 
@@ -752,70 +683,6 @@ public class App_Static_Method {
     }
 
 
-/*
-    public static void logout_Profile(final Agent_Profile_Activity dashBoard_activity) {
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-        String str_email=sharedPreferences.getString("email", "na");
-        String str_token=sharedPreferences.getString("Login_Token", "na");
-        String str_type=sharedPreferences.getString("type", "na");
-
-        if(!(str_email.equals("na")) && !(str_token.equals("na")) &&  !(str_type.equals("na"))) {
-            Log.d("gfhgfhgfhg",str_email+"  "+str_token);
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SET_LOG_OUT +"email="+
-                    str_email + "&token=" + str_token+"&str_type="+str_type,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jObj = new JSONObject(response);
-                                Log.d("srugfgts", response.toString());
-//{"msg":1}
-                             */
-/*   if (!jObj.has("exist")) {
-
-                                    Log.d("ststs", "msg not get");
-                                } else if (jObj.has("msg")) {*//*
-
-                                Log.d("ffff",""+jObj.getString("msg"));
-                                if ((""+(jObj.getString("msg"))).equals("1")) { // have to must convert in to string
-                                    Log.d("udpgad", response.toString());
-                                    SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.clear().commit();
-                                    ((Log_Out_Listener)dashBoard_activity).on_logout(true);
-                                }
-
-                                //  }
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(dashBoard_activity, "Logout Unsuccessfull", Toast.LENGTH_LONG).show();
-                            ((Log_Out_Listener)dashBoard_activity).on_logout(false);
-                        }
-                    }) {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-
-                    return null;
-                }
-            };
-
-            RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
-            requestQueue.add(stringRequest);
-
-        }else {
-
-            Toast.makeText(dashBoard_activity, "You have Logout ", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-*/
 public static void set_profile_img(final Activity _activity) {
 
     SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
@@ -873,30 +740,25 @@ public static void set_profile_img(final Activity _activity) {
 
 }
 
-    public static void send_Toserver(final Fragment cnt, Bundle bundle) {
+    public static void send_Toserver(final Fragment cnt, JSONObject bundle) {
 
         Log.d("formstring",""+getForm_string());
         String str_form=getForm_string();
+
       //  String str="\";
      //   String str_form_rep=str_form.replaceAll(" \ ","");
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-        String str_email=sharedPreferences.getString("email", "na");
-        String str_token=sharedPreferences.getString("Login_Token", "na");
+        Log.d("c_s_gfdr",""+getForm_string());
 
-        if(!(str_email.equals("na")) && !(str_token.equals("na"))) {
+      try {
 
+             Map<String,String>  form_map= new HashMap<String,String>();
+            Log.d("c_s_gfdr",""+getForm_string());
+            form_map.put("jsonData",getForm_string());
+            Log.d("c_s_g_fdr",""+form_map.toString());
+            form_map.putAll(toMap(bundle));
 
-            final Map<String,String>  form_map= new HashMap<String,String>();
-            form_map.put("crd_email",str_email);
-            form_map.put("type","agent");
-            form_map.put("token",str_token);
-
-            form_map.put("clgid",""+bundle.getString("clg_id"));
-            form_map.put("course",""+bundle.getString("course"));
-            form_map.put("branch",""+bundle.getString("branch"));
-            form_map.put("jsonData",str_form);
-
-            Log.d("gfhgfhgfhg",str_email+"  "+str_token);
+           final Map<String,String>  form_map_full=form_map;
+           Log.d("c__gfdr",""+form_map_full.toString());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SEND_FORM_DATA,
                     new Response.Listener<String>() {
                         @Override
@@ -910,8 +772,8 @@ public static void set_profile_img(final Activity _activity) {
 
                                     ((Form_Responce_Listener)cnt).on_form();
                                 }
-
-                            } catch (JSONException e) {
+                                ((Form_Responce_Listener)cnt).on_form();
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -926,22 +788,15 @@ public static void set_profile_img(final Activity _activity) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
 
-                   //  Log.d("cgfdr",form_map.get("jsonData"));
-                    Log.d("cgfdr",form_map.get("clgid"));
-                    Log.d("cgfdr",form_map.get("course"));
-                    Log.d("cgfdr",form_map.get("branch"));
-
-                    return form_map;
+                    return form_map_full;
                 }
             };
 
             RequestQueue requestQueue= VolleySingleton.getInstance().getRequestQueue();
             requestQueue.add(stringRequest);
-
-        }else {
-
-           // Toast.makeText(cnt, "You have Logout ", Toast.LENGTH_SHORT).show();
-        }
+          } catch (Exception e) {
+              e.printStackTrace();
+          }
 
     }
 
@@ -958,14 +813,14 @@ public static void set_profile_img(final Activity _activity) {
         types = new TypeToken<HashMap<String,String>>(){}.getType();
 
         HashMap<String,String> hmap=gson.fromJson(str_H_list,types); HashMap<String,String> hmap2=gson.fromJson(str_I_list,types);
-        HashMap<String,String> hmap3=gson.fromJson(str_Dip_list,types); HashMap<String,String> hmap4=gson.fromJson(str_Gra,types);
+      //  HashMap<String,String> hmap3=gson.fromJson(str_Dip_list,types); HashMap<String,String> hmap4=gson.fromJson(str_Gra,types);
 
 
         HashMap<String,HashMap<String,String>> f_map=new HashMap<String,HashMap<String,String>>();
         f_map.put("High_School",hmap);
-        f_map.put("Inter",hmap2);
-        f_map.put("ITI/Diploma",hmap3);
-        f_map.put("Graduate",hmap4);
+      //  f_map.put("Inter",hmap2);
+        /*f_map.put("ITI/Diploma",hmap3);
+        f_map.put("Graduate",hmap4);*/
 
         return gson.toJson(f_map, types);
     }
@@ -981,42 +836,135 @@ public static void set_profile_img(final Activity _activity) {
         holder.startAnimation(myAnim);
     }
 
-   /* public void permission_check(final int code,Context context)//for sms reading permission 101
-    {
-        int hasWriteContactsPermission = ContextCompat.checkSelfPermission(getContext(),
-                Manifest.permission.RECEIVE_SMS);
+    public static Map<String, String> toMap(JSONObject object) throws Exception {
+        Map<String, String> map = new HashMap();
+        Iterator keys = object.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            map.put(key, ""+(object.get(key)));
+        }
+        return map;
+    }
+    public static JSONObject toMERGE_JSON(JSONObject object1,JSONObject object2) throws Exception {
 
-        if (hasWriteContactsPermission != PackageManager.PERMISSION_GRANTED)
-        {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),Manifest.permission.RECEIVE_SMS))
+        Iterator keys = object2.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            object1.put(key, ""+(object2.get(key)));
+        }
+        return object1;
+    }
+    public static JSONObject toJSON(JSONObject object2) throws Exception {
+        JSONObject object1=new JSONObject();
+        Iterator keys = object2.keys();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            object1.put(key, ""+(object2.get(key)));
+        }
+        return object1;
+    }
+
+
+   public static String get_type_session() {
+
+       JSONObject jsonObject=null;
+       String str_type=null;
+       try {
+           jsonObject  =new JSONObject(get_session_type());
+           str_type=jsonObject.getString("type");
+
+       } catch (Exception e) {
+           e.printStackTrace();
+       }
+
+       return str_type;
+
+   }
+
+    public static JSONObject get_full_session_data_new() {
+        try {
+            SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+
+            if(!if_session_social())
             {
-                showMessageOKCancel("For adding images , You need to provide permission to access your SMS",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //   String[] PERMISSIONS = {ValueConstants.CAMERA_PERMISSION, ValueConstants.READ_EXTERNAL_STORAGE_PERMISSION, ValueConstants.WRITE_EXTERNAL_STORAGE_PERMISSION};
-
-                                //reuesting for permission
-                                ActivityCompat.requestPermissions(getActivity(),
-                                        new String[] {Manifest.permission.BIND_TELECOM_CONNECTION_SERVICE,Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS,Manifest.permission_group.SMS},
-                                        code);
-                            }
-                        });
-                return;
+                return  new JSONObject(sharedPreferences.getString("User_ssesion", "na")).put("accesskey","9670A!@");
+            }else {
+                return  new JSONObject(sharedPreferences.getString("Social_ssesion", "na")).put("accesskey","9670A!@");
             }
 
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[] {Manifest.permission.BIND_TELECOM_CONNECTION_SERVICE,Manifest.permission.RECEIVE_SMS, Manifest.permission.READ_SMS,Manifest.permission_group.SMS},
-                    code);
-            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
+
     }
-    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
-        new AlertDialog.Builder(getActivity())
-                .setMessage(message)
-                .setPositiveButton("OK", okListener)
-                .setNegativeButton("Cancel", null)
-                .create()
-                .show();
-    }*/
+    public static boolean is_session_exist() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+        String str_value=sharedPreferences.getString("User_ssesion", "NA");
+        String str_social=sharedPreferences.getString("Social_ssesion", "NA");
+
+        if(str_value.equalsIgnoreCase("NA") && str_social.equalsIgnoreCase("NA"))
+        {
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+    public static boolean if_session_social() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+        String str_value=sharedPreferences.getString("Social_ssesion", "NA");
+
+        if(str_value.equalsIgnoreCase("NA"))
+        {
+            return false;
+        }else {
+            return true;
+        }
+
+    }
+    public static String get_session_type() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+        String str_value=sharedPreferences.getString(GUSET_SESSION, "NA");
+        String str_value2=sharedPreferences.getString(REAL_USER_SESSION, "NA");
+        String str_value3=sharedPreferences.getString(AGENT_SESSION, "NA");
+
+
+        if(!str_value.equalsIgnoreCase("NA"))
+        {
+            return str_value;
+        }
+        if (!str_value2.equalsIgnoreCase("NA")){
+            return str_value2;
+        }
+        if (!str_value3.equalsIgnoreCase("NA")){
+            return str_value3;
+        }
+        return null;
+    }
+    public static String after_guestregisyter() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(G_PARTNER_Prefrence, 0);
+        String str_value=sharedPreferences.getString("U_SESSUIN", "NA");
+
+
+        if(!str_value.equalsIgnoreCase("NA"))
+        {
+            return str_value;
+        }
+
+        return null;
+    }
+    public static boolean remove_session() {
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+        editor.clear().commit();
+
+        String str_value=sharedPreferences.getString(GUSET_SESSION, "NA");
+        Log.d("renmove",""+str_value);
+        if(str_value.equalsIgnoreCase("NA"))
+        {
+            return true;
+        }
+        return false;
+    }
 }

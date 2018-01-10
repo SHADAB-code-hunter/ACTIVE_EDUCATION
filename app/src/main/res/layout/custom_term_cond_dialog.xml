@@ -3,7 +3,9 @@
     android:layout_width="350dp"
     android:layout_height="450dp"
     android:layout_gravity="center"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@drawable/back_new"
     android:id="@+id/id_linear">
 
     <TextView
@@ -133,7 +135,7 @@
             android:clickable="true"
             android:textAllCaps="false"
             android:text="Continue"
-            android:textColor="@color/white"
+            android:textColor="@color/tumblr_red"
              />
     </LinearLayout>
 

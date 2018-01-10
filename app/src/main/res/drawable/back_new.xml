@@ -20,13 +20,10 @@
     <item>
         <shape >
             <!--circle filling color-->
-            <gradient android:startColor="#f5582187"
-                android:endColor="#ed3c7e98"
+            <gradient android:startColor="#ea1d3349"
+                android:endColor="#49113f"
                 android:angle="315"/>
 
-            <stroke
-                android:width="0dp"
-                android:color="#F05D5F" />
 
         </shape>
     </item>

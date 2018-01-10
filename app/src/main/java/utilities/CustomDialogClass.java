@@ -45,7 +45,7 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
     public Activity c;
     private Spinner_Date_Listener spinnerDateListener;
 
-    public CustomDialogClass(Activity a,View find_v) {
+    public CustomDialogClass(Activity a) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
@@ -141,16 +141,16 @@ public class CustomDialogClass extends Dialog implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.id_website:
-             //   ((Call_newDialog_Listener)act).on_id_listener("WEBSITE", arrayList_id.get(position));
+                ((Call_newDialog_Listener)act).on_id_listener("WEBSITE");
                 break;
           /*  case R.id.id_sms:
             //    ((Call_Dilaog_Listener)act).on_id_listener("CHAT");
                 break;*/
             case R.id.id_v_call:
-             //   ((Call_Dilaog_Listener)act).on_id_listener("V_CALL", arrayList_id.get(position));
+                ((Call_newDialog_Listener)act).on_id_listener("V_CALL");
                 break;
             case R.id.id_call:
-               //((Call_Dilaog_Listener)act).on_id_listener("CALL");
+               ((Call_newDialog_Listener)act).on_id_listener("CALL");
 
                 break;
         }

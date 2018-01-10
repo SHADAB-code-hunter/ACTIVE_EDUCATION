@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:elevation="2dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical"
+            android:outlineProvider="bounds">
+
+            <FrameLayout
+                android:id="@+id/id_frm_prfl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+                <FrameLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="14dp"
+                    android:background="@drawable/tumblr_white_oval">
+
+                    <ImageView
+                        android:id="@+id/id_image_profile_signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_school_type"
+                        android:backgroundTint="#df1b1b1b"
+                        android:tint="#df1b1b1b" />
+
+                </FrameLayout>
+                <FrameLayout
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:background="@drawable/ksw_md_thumb"
+                    android:padding="7dp"
+                    android:layout_marginTop="0dp">
+                    <ImageView
+                        android:id="@+id/id_edit_camera_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end|center"
+                        android:layout_marginTop="0dp"
+                        android:src="@drawable/ic_cam" />
+
+                </FrameLayout>
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="Full Name"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_clg_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:hint="Full Name"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:allowUndo="true"
+                        android:soundEffectsEnabled="true"
+                        android:textColorHint="@color/transparent"
+                        android:backgroundTint="#ffffff"
+                        android:textColor="@color/edt_text_color"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="Short Name"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_short_clg_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:allowUndo="true"
+                        android:textColor="@color/edt_text_color"
+                        android:textColorHint="@color/transparent"
+                        android:hint="Short Name"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="@color/white"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="Password"
+                    android:soundEffectsEnabled="true"
+                    android:outlineProvider="none"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:allowUndo="true"
+                        android:textColor="@color/edt_text_color"
+                        android:textColorHint="@color/transparent"
+                        android:hint="Password"
+                        android:soundEffectsEnabled="true"
+                        android:backgroundTint="@color/white"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="Mobile Number"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_phone"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:textColorHint="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/edt_text_color"
+                        android:layout_height="match_parent"
+                        android:hint="Mobile Number"
+                        android:backgroundTint="@color/white"
+                        android:inputType="number"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="LandLine Number"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_landline"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:textColorHint="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/edt_text_color"
+                        android:layout_height="match_parent"
+                        android:hint="LandLine Number"
+                        android:backgroundTint="@color/white"
+                        android:inputType="number"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="E-Mail"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_email"
+                        android:textSize="12sp"
+                        style="@style/CustomEditText"
+                        android:layout_width="match_parent"
+                        android:textColor="@color/edt_text_color"
+                        android:textColorHint="@color/transparent"
+                        android:layout_height="35dp"
+                        android:inputType="textEmailAddress"
+                        android:backgroundTint="@color/white"
+                        android:hint="E-Mail"
+                        android:singleLine="true" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColorHint="#ffffff"
+                    android:hint="Address"
+                    app:hintAnimationEnabled="true">
+
+                    <EditText
+                        android:id="@+id/id_address"
+                        style="@style/CustomEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:backgroundTint="@color/white"
+                        android:hint="Address"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:textColor="@color/edt_text_color"
+                        android:textColorHint="@color/transparent"
+                        android:textSize="12sp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="end|bottom"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginRight="0dp"
+                    android:visibility="invisible"
+                    android:src="@drawable/ic_agent_profile" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/id_frm_state"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:id="@+id/id_text_tv_state"
+                    android:textSize="14sp"
+                    android:clickable="false"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/edt_text_color"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="5dp"
+                    android:textColorHint="@color/white"
+                    android:layout_height="35dp"
+                    android:inputType="textEmailAddress"
+                    android:backgroundTint="@color/white"
+                    android:hint="State"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_gravity="bottom"/>
+
+
+                <!-- </android.support.design.widget.TextInputLayout>-->
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/id_frm_city"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/id_text_tv_city"
+                    android:textSize="14sp"
+                    android:clickable="false"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/edt_text_color"
+                    android:gravity="bottom"
+                    android:layout_marginBottom="5dp"
+                    android:textColorHint="@color/white"
+                    android:layout_height="35dp"
+                    android:inputType="textEmailAddress"
+                    android:backgroundTint="@color/white"
+                    android:hint="City"
+                    android:singleLine="true" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white"
+                    android:layout_gravity="bottom"/>
+
+
+
+                <!-- </android.support.design.widget.TextInputLayout>-->
+
+            </FrameLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="Submit"
+                android:textColor="@color/white"
+                android:background="@color/tumblr_red"
+                android:id="@+id/id_btn"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -5,6 +5,8 @@ import android.util.Log;
 
 import com.android.volley.RequestQueue;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 import callbacks.Upcoming_List_LoadedListener;
@@ -41,5 +43,10 @@ public class Load_Exams_Data extends AsyncTask<Void, Void, List<Common_Pojo>> {
         if (myComponent != null) {
             myComponent.onUpcomingexams(listMovies);
         }
+    }
+
+    public interface OBJ_Lister {
+
+        public void on_lis_obj(JSONObject jsonObject, String str_key);
     }
 }

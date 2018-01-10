@@ -30,9 +30,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gt.active_education.Agent_login_Activity;
 import com.gt.active_education.DashBoard_Activity;
 import com.gt.active_education.R;
 import com.gt.active_education.Sign_Up_Process_Activity;
+import com.gt.active_education.Signup_Guest_Activity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,9 +77,11 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
     private CheckBox id_term_con;
     private TextView id_skip_tv;
     private Context context;
+    private String str_type;
+    private EditText edt_mobile;
 
     //SIGN_UP_API
-    @Override
+  /*  @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context=context;
@@ -87,6 +91,17 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + " must implement ExampleFragmentCallbackInterface ");
         }
+    } */
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        this.context=context;
+
+       /* try {
+            mListener = (SignUp_Pager_Swape_Listener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement ExampleFragmentCallbackInterface ");
+        }*/
     }
 
     @Override
@@ -102,7 +117,12 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
         id_term_con=(CheckBox)rootView.findViewById(R.id.id_term_con);
         id_image_profile_signup=(ImageView)rootView.findViewById(R.id.id_image_profile_signup);
         id_edit_camera_iv=(ImageView)rootView.findViewById(R.id.id_edit_camera_iv);id_edit_camera_iv.setOnClickListener(this);
-        btn_submit=(Button)rootView.findViewById(R.id.btn_submit_bt);
+        btn_submit=(Button)rootView.findViewById(R.id.btn_submit_btn);
+        edt_mobile=(EditText)rootView.findViewById(R.id.edt_mobile);
+
+
+        str_type=getArguments().getString("type");
+      //  Toast.makeText(context, ""+str_type, Toast.LENGTH_SHORT).show();
 
         SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
         Log.d("map_tostring",sharedPreferences2.getString("type","NA"));
@@ -110,8 +130,9 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (id_term_con.isChecked())
-                {
+               /* if (id_term_con.isChecked())
+                {*/
+                    Log.d("checkmobile","  cjadedcek");
                     edt_f_name = ((EditText) rootView.findViewById(R.id.edt_uname));
                     str_uname = edt_f_name.getText().toString().trim();
                     edt_email = ((EditText) rootView.findViewById(R.id.edt_email));
@@ -120,7 +141,9 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                     edt_con_pass = ((EditText) rootView.findViewById(R.id.edt_con_pass));
                     str_conPass = edt_con_pass.getText().toString().trim();
 
-                    if (!App_Static_Method.isValidName(str_uname)) {     // fname
+                    if (!App_Static_Method.isValidName(str_uname)) {
+                        // fname
+                        Log.d("checkmobile","  cjadedcek");
                         edt_f_name.setError("You must more characters");
                     } else {
                         st_email = edt_email.getText().toString().trim();
@@ -131,42 +154,52 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                                 edt_con_pass.setError("Password is not Correct ");
 
                             } else {
-                                if ((App_Static_Method.get_register_mobile().equals("na"))) {
+                               /* if ((App_Static_Method.get_register_mobile().equals("na"))) {
 
-                                } else {
-                                    if ((str_profile_bitmap.equals("")) || (str_profile_bitmap.length() >= 0)) {
-
+                                } else {*/
+                                  //  if ((str_profile_bitmap.equals("")) || (str_profile_bitmap.length() >= 0)) {
+                                   /* type:0
+                                    mobile:9166833551
+                                    pwd:123456
+                                    :naya naam
+                                    filename:abc.png
+                                    email:mm@mm.com
+                                    state:1
+                                    city:1
+                                    address:naya address
+                                    pincode:121005
+                                    image:gdjgdjgdjgj dgjkdjgdjgjdg kjgdjgdjd jgdjgdjgd*/
                                         map = new HashMap<String, String>();
-                                        map.put("uname", str_uname);
+                                        map.put("name", str_uname);
                                         map.put("email", st_email);
+                                        map.put("type", str_type);
                                         Log.d("checkmobile","  cjadedcek");
-                                        map.put("mobile", App_Static_Method.get_register_mobile());
-                                        Log.d("checkmobile","  cjacek"+App_Static_Method.get_register_mobile());
+                                        map.put("mobile", edt_mobile.getText().toString());
                                         map.put("pwd", str_conPass);
                                         map.put("filename", str_uname + ".png");
                                         //  map.put("image", str_profile_bitmap);
-                                        set_sign_up();
+                                        set_sign_up(map);
 
-                                      } else {
+                                     /* } else {
 
-                                    }
-                                }
+                                    }*/
+                              //  }
                             }
                         }
                     }
-                }else {
+               /* }else {
                     Toast.makeText(SignUp_Fragment.this.getContext(), "Please Select -Agree to Privacy Policy ", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
 
         });
 
-        id_skip_tv=(TextView)rootView.findViewById(R.id.id_skip_tv);id_skip_tv.setOnClickListener(this);
+      //  id_skip_tv=(TextView)rootView.findViewById(R.id.id_skip_tv);id_skip_tv.setOnClickListener(this);
 
         return rootView;
     }
 
-    private void set_sign_up()
+    private void set_sign_up(final Map<String, String> map)
     {
         Log.d("call_method","method call");
         StringRequest stringRequest = new StringRequest(Request.Method.POST, UrlEndpoints.SIGN_UP_API,
@@ -177,11 +210,32 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                         try {
                             JSONObject jObj = new JSONObject(response);
                             Log.d("rdfesruts",response.toString());
+
+                            if(jObj.getInt("msg")==1)
+                            {
+                                Intent i=new Intent(getContext(), Agent_login_Activity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                context.startActivity(i);
+                                ((Signup_Guest_Activity)context) .finish();
+                            }
+
+                          /*
+                            [6:55 PM, 11/26/2017] Sanjit Attentive: {
+                                "msg": 1,
+                                        "data": [
+                                {
+                                    "mobile": "9166833551",
+                                        "pwd": "123456",
+                                        "token": "GxVku5WuWV"
+                                }
+    ]
+                            }*/
+
                          // image left
                            // mListener.onPager_swap_method();
                          //   {"msg":1,"data":[{"mobile":"9599805321","token":"N4ijuWn7Cy","image":"","uname":"dvdbdb","email":"asdf@gndd.vbn"}]}
                           //{"msg":1,"data":[{"mobile":"9599805321","token":"N4ijuWn7Cy","image":"","uname":"dvdbdb","email":"asdf@gndd.vbn"}]}
-                            if(!jObj.has("exist")) {
+                          /*  if(!jObj.has("exist")) {
                                 JSONArray jsonArray = jObj.getJSONArray("data");
                                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                                 SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence, 0);
@@ -198,9 +252,9 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
                             {
                                 Log.d("existm",""+jObj.getString("exist"));
                                // ConnectionCheck.user_Already_exist(SignUpActivity.this,"User Already Exist !!!");
-                            }
+                            }*/
 
-                        } catch (JSONException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
 
                             Log.d("expdcc",""+e.getMessage());
@@ -217,10 +271,12 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
             protected Map<String, String> getParams() throws AuthFailureError {
                 Log.d("imge",""//+map.get("image")
                 +"  "+
-                  map.get("uname")+"  "+
-                map.get("email")+"  "+
-                map.get("mobile")+"  "+
-                map.get("pwd") );
+                SignUp_Fragment.this.map.get("uname")+"  "+
+                SignUp_Fragment.this.map.get("email")+"  "+
+                SignUp_Fragment.this.map.get("mobile")+"  "+
+                SignUp_Fragment.this.map.get("pwd") );
+
+                Log.d("image_signup",""+ map);
                 return map;
             }
         };
@@ -239,7 +295,7 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
 
                 if (Build.VERSION.SDK_INT >= 23)
                 {
-                    imagePicker.imagepicker(1,"img1");
+                    imagePicker.imagepicker(1,"1111");
                 }
                 else
                 {
@@ -362,5 +418,11 @@ public class SignUp_Fragment extends Fragment implements View.OnClickListener , 
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
     }
 }

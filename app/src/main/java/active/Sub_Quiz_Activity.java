@@ -21,13 +21,11 @@ import com.gt.active_education.R;
 import java.util.ArrayList;
 import java.util.Timer;
 
-import adapter.Sub_quiz_VP_Adapter;
 import callbacks.Quiz_Opt_Choose_Event_Listener;
 import callbacks.VP_PageChange_Listener;
 import pojo.Gallery_Model;
 import pojo.Quiz_Answer_Model;
 import pojo.Quiz_Model;
-import utilities.ConnectionCheck;
 import utilities.MyApplication;
 
 /**
@@ -95,7 +93,7 @@ public class Sub_Quiz_Activity extends AppCompatActivity implements VP_PageChang
         java.lang.reflect.Type type= new TypeToken<ArrayList<Quiz_Answer_Model>>() {}.getType();
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("Sub_Answer_Array_List",0);
         SharedPreferences.Editor editor = prefs.edit();
-        //////Log.d("checklength",""+  mDailyQuizList.toString());
+        Log.d("checklength",""+  mDailyQuizList.toString());
         editor.putString("SrdPrf_ArrayList", gson.toJson(new  ArrayList<Quiz_Answer_Model>()));
         editor.putString("LIST_NO",String.valueOf(mDailyQuizList.size()));
         editor.commit();

@@ -11,6 +11,7 @@ import android.view.animation.ScaleAnimation;
 
 import com.gt.active_education.R;
 
+
 public class CircularToggle extends MarkerButton {
     private static final String LOG_TAG = CircularToggle.class.getSimpleName();
 

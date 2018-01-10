@@ -56,9 +56,9 @@ public class MovieUtils {
         return listMovies;
     }
     public static ArrayList<Quiz_Model> loadValid_Token_QuizModel(RequestQueue requestQueue, String str_mob, String str_token) {
-        Log.d("hgdfhgf","fhjfghjfhvbjhb");
+        Log.d("hgdfhgf","fhjfghjfhvbjhb"+str_mob+"  "+str_token);
         JSONObject response = Requestor.requestMoviesJSON(requestQueue, Endpoints.getRequestUrlDailyQuiz(str_mob,str_token));
-          Log.d("responce_dpojo",""+response.length());
+          Log.d("responce_dpojo",""+response);
         ArrayList<Quiz_Model> listMovies = Parser.parseQuizJSON(response);//for parsing json data
         Log.d("insert_requestsdc",""+listMovies.size());
         // MyApplication.getWritableDatabase().insertMovies(DBMovies.BOX_OFFICE, listMovies, true);

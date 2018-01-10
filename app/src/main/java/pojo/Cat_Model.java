@@ -26,6 +26,7 @@ public class Cat_Model {
     public String rating;// common
     public String broucher;// common
     public String id;// common
+    public String dealid;// common
     public String is_active;// common
     public String user_id;// common
     public String course_id;// common
@@ -34,6 +35,13 @@ public class Cat_Model {
     public String c_branch;// common
     public String type;
 
+    public String getDealid() {
+        return dealid;
+    }
+
+    public void setDealid(String dealid) {
+        this.dealid = dealid;
+    }
     public String getType() {
         return type;
     }

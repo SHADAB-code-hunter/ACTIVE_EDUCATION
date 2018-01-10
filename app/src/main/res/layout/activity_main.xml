@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:paddingTop="20dp"
         android:fitsSystemWindows="true">
 
         <LinearLayout
@@ -83,7 +84,7 @@
                                 android:textColor="@color/white"
                                 android:textAllCaps="false"
                                 android:text="LogIn"
-                               />-->
+                              />-->
                             <LinearLayout
                                 android:id="@+id/id_login_linear"
                                 android:layout_width="match_parent"
@@ -128,7 +129,6 @@
                             android:id="@+id/id_name_mobile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Mohd. Shadab Ahmad"
                             android:gravity="center|bottom"
                             android:textSize="14sp"
                             android:typeface="normal"

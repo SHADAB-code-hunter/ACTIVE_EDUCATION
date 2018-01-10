@@ -3,7 +3,6 @@ package fragment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,6 +31,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -40,8 +40,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.gt.active_education.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,13 +60,15 @@ import droidninja.filepicker.FilePickerBuilder;
 import permissions.dispatcher.NeedsPermission;*/
 import utilities.App_Static_Method;
 import utilities.Attach_Dialog;
-import utilities.Custom_Dialog_FTP;
 import utilities.Image_picker;
 import utilities.MyApplication;
 import utilities.UpdateValues;
 
+import static utilities.App_Static_Method.get_session_type;
 import static utilities.App_Static_Method.lower_CAMERA_REQUEST;
 import static utilities.App_Static_Method.request_permission_result;
+import static utilities.App_Static_Method.toMERGE_JSON;
+import static utilities.UpdateValues.ADDMISSION;
 
 /**
  * Created by GT on 8/25/2017.
@@ -124,10 +130,12 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     private View rootView;
     private LinearLayout id_linear_attach;
     private FrameLayout id_frm;
-    private Context context;
+    private Activity context;
+    private FrameLayout id_done;
+    private JSONObject jsonObject_admission;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Activity context) {
         super.onAttach(context);
         this.context=context;
 
@@ -142,12 +150,41 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.activity_vertical_stepper_form, container, false);
+
+
+       /* context.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });*/
+
+        SharedPreferences sharedPreferences =context.getSharedPreferences(UpdateValues.FORM_ID, 0);
+        Log.d("hgdhgh",""+sharedPreferences.getString("Form_ID","NA"));
+        if(sharedPreferences.getString("Form_ID","NA").equalsIgnoreCase("NA"))
+        {
+
+        }
+
+        id_done=(FrameLayout)rootView.findViewById(R.id.id_done);
         id_frm=(FrameLayout)rootView.findViewById(R.id.id_frm);
         id_frm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Attach_Dialog attach_dialog=new Attach_Dialog(context);
                 attach_dialog.show();
+            }
+        });
+
+        id_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              /*  Pager_Change_listener pager_change_listener=(Pager_Change_listener)context;
+                pager_change_listener.on_pager_change(1, response);*/
 
             }
         });
@@ -155,13 +192,67 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         {
             Log.d("bundrrle","null");
             bundle=getArguments();
+            try {
+                sharedPreferences =context.getSharedPreferences(UpdateValues.FORM_ID, 0);
+                Log.d("hgdhgh",""+sharedPreferences.getString("Form_ID","NA"));
+                jsonObject_admission=new JSONObject(bundle.getString(ADDMISSION));
+                if(!sharedPreferences.getString("Form_ID","NA").equalsIgnoreCase("NA")) {
+                    jsonObject_admission.put("formid", "" + sharedPreferences.getString("Form_ID", "NA"));
+                }else {
+                    Toast.makeText(context, "Please Fill The Personal Detail first !!!", Toast.LENGTH_SHORT).show();
+                }
+                jsonObject_admission=toMERGE_JSON(jsonObject_admission,new JSONObject(get_session_type()));
+                Log.d("hg_dhgh",""+jsonObject_admission.toString());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         imagePicker=new Image_picker(Education_Form_Fragment.this);
         gens= new HashMap<String,HashMap<String,String>>();
-        initializeActivity(rootView);
+        initializeActivity(rootView,jsonObject_admission);
+        //set_form_oprn_status(rootView,jsonObject_admission);
         return rootView;
     }
-    private void initializeActivity(View rootView) {
+
+    private void set_form_oprn_status(View rootView, JSONObject jsonObject_admission) {
+        try {
+            String str_category= this.jsonObject_admission.getString("category");
+            String str_class= this.jsonObject_admission.getString("class_name");
+
+            switch (str_category)
+            {
+                case "1":
+
+                  //  get_form_staep(rootView,);
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    break;
+                case "5":
+                    break;
+                case "6":
+                    break;
+
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void get_form_staep() {
+
+
+    }
+
+
+    private void initializeActivity(View rootView, JSONObject jsonObject_admission) {
 
         this.rootView=rootView;
         // Time step vars
@@ -174,12 +265,16 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         // Vertical Stepper form vars
         int colorPrimary = ContextCompat.getColor(getContext(), R.color.colorPrimary);
         int colorPrimaryDark = ContextCompat.getColor(getContext(), R.color.colorPrimaryDark);
+
+
         String[] stepsTitles = getResources().getStringArray(R.array.steps_titles);
+        //switch ()
+        String[] stepsTitles2 = Arrays.copyOfRange(stepsTitles, 0, 3);
         //String[] stepsSubtitles = getResources().getStringArray(R.array.steps_subtitles);
 
         // Here we find and initialize the form
         verticalStepperForm = (VerticalStepperFormLayout) rootView.findViewById(R.id.vertical_stepper_form);
-        VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm, stepsTitles, (VerticalStepperForm)this, (Activity) getContext(),
+        VerticalStepperFormLayout.Builder.newInstance(verticalStepperForm, stepsTitles2, (VerticalStepperForm)this, (Activity) getContext(),
                 (Postion_Listener_Education_Form)this)
                 //.stepsSubtitles(stepsSubtitles)
                 .materialDesignInDisabledSteps(true) // false by default
@@ -266,7 +361,7 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
                 try {
                     Thread.sleep(1000);
 
-                    App_Static_Method.send_Toserver(Education_Form_Fragment.this,bundle);
+                    App_Static_Method.send_Toserver(Education_Form_Fragment.this,jsonObject_admission);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -329,7 +424,7 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //  checkTitleStep(s.toString());
-                Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
                 hashMap.put("str_mark",""+s);
             }
 
@@ -344,7 +439,7 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //  checkTitleStep(s.toString());
-                Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
                 hashMap.put("str_duration",""+s);
             }
 
@@ -359,7 +454,7 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //  checkTitleStep(s.toString());
-                Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(Education_Form_Fragment.this.getContext(), ""+s, Toast.LENGTH_SHORT).show();
                 hashMap.put("str_pass_year",""+s);
             }
 
@@ -631,12 +726,25 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
         return false;
     }
 
-    /*@Override
-    public void onBackPressed(){
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        confirmBack();
+        SharedPreferences sharedPreferences =context.getSharedPreferences(UpdateValues.FORM_ID, 0);
+        Log.d("hgdhgh",""+sharedPreferences.getString("Form_ID","NA"));
+        if(sharedPreferences.getString("Form_ID","NA").equalsIgnoreCase("NA"))
+        {
+            Toast.makeText(context, "Please Fill The Personal detail Form First !!!", Toast.LENGTH_SHORT).show();
+            return ;
+        }
     }
-*/
+
+    /*@Override
+        public void onBackPressed(){
+
+            confirmBack();
+        }
+    */
     @Override
     public void onPause() {
         super.onPause();
@@ -751,10 +859,10 @@ public class Education_Form_Fragment extends Fragment implements VerticalStepper
     @Override
     public void on_form() {
         dismissDialog();
-
+        JSONObject jsonObject=new JSONObject();
         Log.d("form_success","success");
         Pager_Change_listener pager_change_listener=(Pager_Change_listener)Education_Form_Fragment.this.getActivity();
-        pager_change_listener.on_pager_change(1);
+        pager_change_listener.on_pager_change(1, jsonObject.toString());
     }
 
 }

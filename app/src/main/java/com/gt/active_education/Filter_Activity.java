@@ -1,9 +1,14 @@
 package com.gt.active_education;
 
+import android.*;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.ArrayMap;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -32,6 +37,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.prechat.PreChatForm;
+import com.zopim.android.sdk.prechat.ZopimChatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +51,8 @@ import java.util.Map;
 
 import Fab_Filter.AAH_FabulousFragment;
 import Fab_Filter.MovieData;
+import Zend_Chat.UserProfile;
+import Zend_Chat.UserProfileStorage;
 import adapter.MoviesAdapter;
 import Fab_Filter.MyFabFragment;
 import callbacks.Avail_Course_Listener;
@@ -59,6 +69,7 @@ import utilities.Available_Courses_Dialog;
 import utilities.Common_Pojo;
 import utilities.ConnectionCheck;
 import utilities.Inner_Filter_Dialog;
+import utilities.MyApplication;
 import utilities.State_City_Search;
 import utilities.UrlEndpoints;
 
@@ -96,6 +107,7 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
     private RelativeLayout id_rv_filter;
     private Inner_Filter_Dialog inner_filter_dialog;
     private Available_Courses_Dialog availableCoursesDialog;
+    private FrameLayout id_call,id_frm_chat;
 
 
     @Override
@@ -105,6 +117,10 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        id_call=(FrameLayout)findViewById(R.id.id_call);id_call.setOnClickListener(this);
+        id_frm_chat=(FrameLayout)findViewById(R.id.id_frm_chat);id_frm_chat.setOnClickListener(this);
+
 
         if(!new ConnectionCheck(Filter_Activity.this).checkConnection()) {
             new ConnectionCheck(Filter_Activity.this).check_network(Filter_Activity.this);
@@ -630,9 +646,71 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
                 //  new Filter_Task(Filter_Activity.this,filter_url).execute();
                 break;
 
+            case R.id.id_call:
+
+                String phoneNumber = "01294014664";
+
+                if (checkPermission(android.Manifest.permission.CALL_PHONE)) {
+                    String dial = "tel:" + phoneNumber;
+                    startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                } else {
+                    Toast.makeText(Filter_Activity.this, "Permission Phone Call denied", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+
+
+
+            case R.id.id_frm_chat:
+
+            Log.d("dhdhdhdhdhdhdhdhdhdh","chartt");
+                AuthOnClickWrapper authOnClickWrapper= new AuthOnClickWrapper(new View.OnClickListener() {
+                    @Override
+                    public void onClick(final View v) {
+
+                        PreChatForm build = new PreChatForm.Builder()
+                                .name(PreChatForm.Field.REQUIRED)
+                                .email(PreChatForm.Field.REQUIRED)
+                                .phoneNumber(PreChatForm.Field.OPTIONAL)
+                                .message(PreChatForm.Field.OPTIONAL)
+                                .build();
+
+                        ZopimChat.SessionConfig department = new ZopimChat.SessionConfig()
+                                .preChatForm(build)
+                                .department("The date");
+
+                        ZopimChatActivity.startActivity(MyApplication.getAppContext(), department);
+                    }
+                },getApplicationContext());
+
+                break;
+
         }
     }
+    public static class AuthOnClickWrapper implements View.OnClickListener {
 
+        private View.OnClickListener mOnClickListener;
+        private UserProfileStorage mUserProfileStorage;
+        private Context mContext;
+
+        public AuthOnClickWrapper(View.OnClickListener onClickListener, Context context){
+            this.mOnClickListener = onClickListener;
+            this.mUserProfileStorage = new UserProfileStorage(context);
+            this.mContext = context;
+        }
+
+        @Override
+        public void onClick(View v) {
+            final UserProfile profile = mUserProfileStorage.getProfile();
+
+            //  if(StringUtils.hasLength("ahmed.shadab221@gmail.com")){
+            mOnClickListener.onClick(v);
+            //   }else{
+            // showDialog();
+            //  }
+        }
+
+    }
     private void onScrollPositionChanged() {
 
      //   Animation animation2;
@@ -663,6 +741,9 @@ public class Filter_Activity extends AppCompatActivity implements AAH_FabulousFr
         }
     }
 
+    private boolean checkPermission(String permission) {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
 
     @Override
     public void onInner_Dialog(Map<String, String> map) {

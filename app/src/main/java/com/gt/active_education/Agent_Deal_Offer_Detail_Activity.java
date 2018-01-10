@@ -31,6 +31,8 @@ import utilities.MyApplication;
 import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
+import static utilities.App_Static_Method.get_Type;
+
 /**
  * Created by GT on 8/29/2017.
  */
@@ -104,9 +106,22 @@ public class Agent_Deal_Offer_Detail_Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(!bundle.isEmpty()) {
-                    Intent intent = new Intent(getBaseContext(), Admission_Form_Activity.class);
+
+                    if(get_Type().equalsIgnoreCase("guest")) {
+
+                        Intent intent = new Intent(getApplicationContext(), Signup_Guest_Activity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        intent.putExtra("ADDMISSIONFORM","ADDMISSIONFORM");
+                        startActivity(intent);
+
+                    }else {
+                        Intent intent = new Intent(getApplicationContext(), Admission_Form_Activity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        startActivity(intent);
+                    }
+                   /* Intent intent = new Intent(getBaseContext(), Admission_Form_Activity.class);
                     intent.putExtras(bundle);
-                    startActivity(intent);
+                    startActivity(intent);*/
                 }
             }
         });

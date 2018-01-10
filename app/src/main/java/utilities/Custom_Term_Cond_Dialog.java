@@ -2,6 +2,8 @@ package utilities;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +29,6 @@ public class Custom_Term_Cond_Dialog extends Dialog implements View.OnClickListe
     public Button yes, no;
     private Spinner date_spinner;
     private String str_date = null;
-
     private ArrayList<String> arrayList;
     private Spinner_Date_Listener spinnerDateListener;
     private View find_v;
@@ -46,6 +47,7 @@ public class Custom_Term_Cond_Dialog extends Dialog implements View.OnClickListe
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.custom_term_cond_dialog);
+      //  getWindow().setBackgroundDrawable(MyApplication.getAppContext().getResources().getDrawable(R.drawable.back_new));
        // Theme_Change.Toolbar_Change_Prefrense(findViewById(R.id.id_linear));
         yes = (Button) findViewById(R.id.btn_yes);
         no = (Button) findViewById(R.id.btn_no);

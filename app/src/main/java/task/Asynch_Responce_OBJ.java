@@ -24,16 +24,10 @@ public class Asynch_Responce_OBJ extends AsyncTask<Void, Void, JSONObject> {
     private String url;
     private Map<String,String> map;
 
-    public Asynch_Responce_OBJ(OBJ_LISTENER myComponent, String url) {
-        Log.d("book_url",""+url);
-        this.url=url;
-        this.myComponent = myComponent;
-        volleySingleton = VolleySingleton.getInstance();
-        requestQueue = volleySingleton.getRequestQueue();
-    }
     public Asynch_Responce_OBJ(OBJ_LISTENER myComponent, String url ,Map<String, String> map)
     {
         Log.d("book_url",""+url);
+        Log.d("semap",""+map);
         this.url=url;
         this.myComponent = myComponent;
         this.map = map;

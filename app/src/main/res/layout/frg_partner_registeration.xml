@@ -408,6 +408,7 @@
                     android:text="College Address " />
                 <TextView
                     android:layout_below="@+id/menu"
+                    android:id="@+id/id_menu_tv"
                     android:layout_marginTop="4dp"
                     android:layout_marginLeft="8dp"
                     android:layout_width="wrap_content"
@@ -421,7 +422,17 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp" />
+                    android:padding="6dp" />
+
+                <Button
+                    android:id="@+id/id_add_save_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="95dp"
+                    android:text="save"
+                    android:layout_alignParentEnd="true"
+                    android:inputType="number"
+                    android:textSize="10sp"
+                    android:layout_below="@+id/switch_button2_address" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -458,6 +469,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            android:hint="Enter Building Number"
                             android:textColorHint="#ffffff"
                             android:soundEffectsEnabled="true"
                             android:outlineProvider="none"
@@ -495,6 +507,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            android:hint="Enter Area Name"
                             android:textColorHint="#ffffff"
                             app:hintAnimationEnabled="true">
 
@@ -528,6 +541,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            android:hint="Enter Nearest Location"
                             android:textColorHint="#ffffff"
                             app:hintAnimationEnabled="true">
 
@@ -539,7 +553,7 @@
                                 android:textColor="@color/edt_text_color"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/colorAccent"
-                                android:hint="Enter Nearest Location "
+                                android:hint="Enter Nearest Location"
                                 android:singleLine="true" />
                         </android.support.design.widget.TextInputLayout>
 
@@ -553,37 +567,50 @@
                             android:src="@drawable/ic_agent_profile" />
                     </FrameLayout>
                     <FrameLayout
+                        android:id="@+id/id_state_frm"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp">
-
-                        <android.support.design.widget.TextInputLayout
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/outline_spinner">
+                        <TextView
+                            android:id="@+id/id_tv_state"
+                            android:textColor="@color/white"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:textColorHint="#ffffff"
-                            app:hintAnimationEnabled="true">
-
-                            <EditText
-                                android:id="@+id/id_state"
-                                android:textSize="12sp"
-                                style="@style/CustomEditText"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/edt_text_color"
-                                android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
-                                android:hint="Choose State"
-                                android:singleLine="true" />
-                        </android.support.design.widget.TextInputLayout>
-
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="25dp"
+                            android:gravity="center|left"
+                            android:text="Select State"/>
                         <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="end|bottom"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="0dp"
-                            android:visibility="invisible"
-                            android:src="@drawable/ic_agent_profile" />
+                            android:layout_toRightOf="@+id/id_tv"
+                            android:layout_width="25dp"
+                            android:layout_gravity="end"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_round_sign_down"/>
+
+                    </FrameLayout>
+                    <FrameLayout
+                        android:id="@+id/id_city_frm"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:background="@drawable/outline_spinner">
+                        <TextView
+                            android:id="@+id/id_tv_city"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="25dp"
+                            android:gravity="center|left"
+                            android:text="Select City"/>
+                        <ImageView
+                            android:layout_toRightOf="@+id/id_tv"
+                            android:layout_width="25dp"
+                            android:layout_gravity="end"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_round_sign_down"/>
+
                     </FrameLayout>
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -595,39 +622,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
-                            app:hintAnimationEnabled="true">
-
-                            <EditText
-                                android:id="@+id/id_edt_city"
-                                android:textSize="12sp"
-                                style="@style/CustomEditText"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/edt_text_color"
-                                android:layout_height="35dp"
-                                android:backgroundTint="@color/colorAccent"
-                                android:hint="Choose City"
-                                android:singleLine="true" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <ImageView
-                            android:layout_width="35dp"
-                            android:layout_height="25dp"
-                            android:layout_gravity="end|bottom"
-                            android:layout_marginBottom="12dp"
-                            android:layout_marginRight="0dp"
-                            android:visibility="invisible"
-                            android:src="@drawable/ic_agent_profile" />
-                    </FrameLayout>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="0dp">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/colorPrimaryDark"
-                            android:textColorHint="#ffffff"
+                            android:hint="Enter District"
                             app:hintAnimationEnabled="true">
 
                             <EditText
@@ -660,6 +655,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
+                            android:hint="Enter Tahsheel"
                             android:textColorHint="#ffffff"
                             app:hintAnimationEnabled="true">
 
@@ -692,6 +688,7 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/colorPrimaryDark"
                             android:textColorHint="#ffffff"
+                            android:hint="Enter Pincode"
                             app:hintAnimationEnabled="true">
 
                             <EditText
@@ -700,6 +697,7 @@
                                 android:layout_width="match_parent"
                                 android:textColor="@color/edt_text_color"
                                 android:layout_height="35dp"
+                                android:inputType="number"
                                 android:backgroundTint="@color/colorAccent"
                                 android:hint="Enter Pincode" />
                         </android.support.design.widget.TextInputLayout>
@@ -757,6 +755,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp" />
+                <Button
+                    android:id="@+id/id_social_save_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="95dp"
+                    android:text="save"
+                    android:layout_alignParentEnd="true"
+                    android:inputType="number"
+                    android:textSize="10sp"
+                    android:layout_below="@+id/switch_button1_socail" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -831,7 +838,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
@@ -842,9 +848,18 @@
                     android:typeface="serif"
                     android:gravity="center"
                     android:padding="5dp"/>
-                <include android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/attach_images"></include>
+
+                <TextView
+                    android:id="@+id/id_img_attach"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="#ef494949"
+                    android:layout_margin="5dp"
+                    android:text="Attach"
+                    android:gravity="center"
+                    android:textColor="@color/half_black"
+                    android:backgroundTint="@color/cb_grey"
+                    android:drawableRight="@drawable/ic_attach_file_dark"/>
 
             </LinearLayout>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
@@ -858,31 +873,34 @@
             android:layout_margin="3dp"
             android:elevation="4dp"
             android:outlineProvider="bounds">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TextView
                     android:id="@+id/clg_certificates_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginLeft="8dp"
                     android:text="College Certificates " />
+
                 <TextView
-                    android:layout_below="@+id/clg_certificates_tv"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/clg_certificates_tv"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
                     android:text="Attach Your College Certificates"
-                    android:textColor="#cccccc"/>
+                    android:textColor="#cccccc" />
 
                 <android.support.v7.widget.SwitchCompat
                     android:id="@+id/switch_btn_clg_crtficate"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:padding="16dp" />
 
             </RelativeLayout>
@@ -902,18 +920,34 @@
                 android:orientation="vertical"
                 android:background="#49790406"
                 android:elevation="2dp">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:text=" Attach Certificates"
-                    android:textSize="20sp"
-                    android:typeface="serif"
-                    android:gravity="center"
-                    android:padding="5dp"/>
-                <include android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/attach_images"></include>
+                    android:orientation="vertical"
+                    android:elevation="2dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:text=" Attach College Certificates"
+                        android:textSize="20sp"
+                        android:typeface="serif"
+                        android:gravity="center"
+                        android:padding="5dp"/>
+
+                    <TextView
+                        android:id="@+id/id_cert_attach"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="#ef494949"
+                        android:layout_margin="5dp"
+                        android:text="Attach "
+                        android:gravity="center"
+                        android:textColor="@color/half_black"
+                        android:backgroundTint="@color/cb_grey"
+                        android:drawableRight="@drawable/ic_attach_file_dark"/>
+
+                </LinearLayout>
 
             </LinearLayout>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
@@ -969,20 +1003,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#49790406"
                 android:elevation="2dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:text=" Attach Brochure"
+                    android:text=" Attach College Brocures"
                     android:textSize="20sp"
                     android:typeface="serif"
                     android:gravity="center"
                     android:padding="5dp"/>
-                <include android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/attach_brochre"></include>
+
+                <TextView
+                    android:id="@+id/id_brochure_attach"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="#ef494949"
+                    android:layout_margin="5dp"
+                    android:text="Attach "
+                    android:gravity="center"
+                    android:textColor="@color/half_black"
+                    android:backgroundTint="@color/cb_grey"
+                    android:drawableRight="@drawable/ic_attach_file_dark"/>
 
             </LinearLayout>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
@@ -1006,7 +1048,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
-                    android:text="College Bank Detail " />
+                    android:text="College Facilities " />
                 <TextView
                     android:layout_below="@+id/clg_bank_detail_tv"
                     android:layout_marginTop="4dp"
@@ -1022,7 +1064,17 @@
                     android:layout_marginRight="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp" />
+                    android:padding="6dp" />
+
+                <Button
+                    android:id="@+id/id_social_facilitysave_btn"
+                    android:layout_width="60dp"
+                    android:layout_height="65dp"
+                    android:text="save"
+                    android:layout_alignParentEnd="true"
+                    android:inputType="number"
+                    android:textSize="10sp"
+                    android:layout_below="@+id/switch_btn_clg_bank_detail" />
 
             </RelativeLayout>
         </LinearLayout>
@@ -1045,25 +1097,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-                    android:text=" Provide Bank Detail"
+                    android:text=" Provide Facilities"
                     android:textSize="20sp"
                     android:typeface="serif"
                     android:gravity="center"
                     android:padding="5dp"/>
-                <include android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/bank_detail"></include>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/id_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp">
+
+                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
 
 
-        <Button
+     <!--   <Button
             android:id="@+id/id_btn_submit"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:text="Submit"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"/>-->
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

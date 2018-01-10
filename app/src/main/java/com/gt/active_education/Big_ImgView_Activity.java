@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.bogdwellers.pinchtozoom.ImageMatrixTouchHandler;
+import com.bumptech.glide.Glide;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -248,6 +249,16 @@ public class Big_ImgView_Activity extends AppCompatActivity {
                             }
                         });
                     }
+                }else if(st_page.equals("AE_Gallery"))
+                {
+                  //  Log.d("strimg", strimg+"  "+st_page+" "+strimg+str_img);
+                   /* if (!strimg.equals(Constants.NA)) {
+                        */Log.d("str___img", strimg+quiz_Ans_List.get(position).getImage_name());
+                    String stsr_img=strimg+quiz_Ans_List.get(position).getImage_name();
+                    Glide.with(context).
+                            load(stsr_img)
+                   . into(imageView);
+                  //  }
                 }
 
             }

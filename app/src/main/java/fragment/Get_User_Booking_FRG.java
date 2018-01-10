@@ -1,0 +1,92 @@
+package fragment;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.gt.active_education.R;
+import com.squareup.picasso.Picasso;
+
+import java.util.List;
+
+import adapter.Agent_Deal_Adapter;
+import callbacks.Agent_deal_Listener;
+import pojo.Agent_Deal_Pojo;
+import task.Agent_Async;
+import utilities.MyApplication;
+import utilities.UpdateValues;
+import utilities.UrlEndpoints;
+
+/**
+ * Created by GT on 11/14/2017.
+ */
+
+public class Get_User_Booking_FRG extends Fragment implements Agent_deal_Listener {
+    Agent_Deal_Adapter mAdapter;
+    Picasso picasso;
+    RecyclerView recyclerView;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.frg_best_deal, container, false);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
+        rootView.findViewById(R.id.id_heading).setVisibility(View.GONE);
+        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_PARTNER_Prefrence,0);
+        String str_token=sharedPreferences.getString("token", "na");
+        String str_email=sharedPreferences.getString("mobile", "na");
+        /*recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setScrollingTouchSlop();*/
+        //recyclerView.setHasFixedSize(true);
+        /*{
+  "msg": "Error !!"
+}*/
+        Log.d("uel", UrlEndpoints.GET_BOOKING_LIST+"mobile="+str_email+"&token="+str_token);
+
+        new Agent_Async(Get_User_Booking_FRG.this, UrlEndpoints.GET_BOOKING_LIST+"mobile="+str_email+"&token="+str_token).execute();
+        picasso = Picasso.with(getContext());
+
+
+        return rootView;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    public void on_deal_call(List<Agent_Deal_Pojo> listMovies, String status_call) {
+        // Log.d("kist",""+listMovies.toString());
+        if (!listMovies.isEmpty()) {
+            mAdapter = new Agent_Deal_Adapter(listMovies, picasso, (Activity) getContext());
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager((Activity) getContext());
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
+        }else {
+            Toast.makeText(getContext(), "You Have No Booking", Toast.LENGTH_SHORT).show();
+        }
+    }
+}

@@ -3,7 +3,7 @@
    <!-- <item android:drawable="@color/theme2"/>-->
     <item >
         <bitmap android:gravity="center"
-            android:src="@drawable/backround_bg"/>
+            android:src="@drawable/img_backround"/>
     </item>
     <item >
         <shape android:shape="rectangle">
