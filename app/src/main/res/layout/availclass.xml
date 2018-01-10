@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="25dp"
             android:gravity="center"
-            android:text="Available Classes"
+
             android:textColor="@color/white" />
 
 
@@ -27,7 +27,7 @@
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
         android:id="@+id/expandableLayout1_student"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="450dp"
         android:background="@drawable/tumblr_white_ract"
         android:layout_margin="3dp"
         android:backgroundTint="#85060505"
@@ -42,8 +42,36 @@
             android:layout_height="wrap_content"
             android:padding="5dp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Class"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Fee"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorWhite"
+                    android:text="Discount"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/_id_state"
+                android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 

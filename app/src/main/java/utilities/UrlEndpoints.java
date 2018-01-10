@@ -4,12 +4,14 @@ package utilities;
  * Created by Windows on 10-02-2015.
  */
 public class UrlEndpoints {
+    public static String REGOISTER = "http://goclubbing.hackplanet.online/Api_mobile_user_goclubbing/restOrderTest";
     public static String GUSET_REGISTER = "http://activeeduindia.com/new_admin/webservices/getGuestDetails.php?";//mobile=9166833551&name=sanjit"
     public static String OTP_API_KEY = "2961a00d-6dd2-11e7-94da-0200cd936042";
     public static String OTP_VERIFY_API = "http://2factor.in/API/V1/2961a00d-6dd2-11e7-94da-0200cd936042/SMS/VERIFY/";
     public static String OTP_GENERATE_API = "http://2factor.in/API/V1/2961a00d-6dd2-11e7-94da-0200cd936042/SMS/+91";
     public static String SIGN_UP_API = "http://activeeduindia.com/new_admin/webservices/signup.php?";
     public static String LOGIN_API = "http://activeeduindia.com/new_admin/webservices/signin.php?";//sa@gmail.com&pwd=12345";
+    public static String G_LOGIN_API = "http://activeeduindia.com/new_admin/webservices/guestsignin.php?";//sa@gmail.com&pwd=12345";
     public static String FORGOT_API = "http://activeeduindia.com/new_admin/webservices/forgetPasswordAgent.php?";//sa@gmail.com&pwd=12345";
     public static String Agent_Login = "http://activeeduindia.com/new_admin/webservices/agentSignIn.php?";//=sa@gmail.com&pwd=123456";
     public static String URL_DEAL_CAT_MAIN = "http://activeeduindia.com/new_admin/webservices/getTopList.php?";
@@ -23,7 +25,7 @@ public class UrlEndpoints {
     public static String URL_GET_FACILITY_IMG = "http://activeeduindia.com/new_admin/media/facility/";
     public static String URL_GET_GALLERY = "http://www.activeeduindia.com/new_admin/webservices/getGallery.php";
     public static String URL_GET_AE = "http://activeeduindia.com/new_admin/webservices/getEvent.php";
-                                        // http://activeeduindia.com/new_admin/webservices/getGallery.php?crd_mobile=9166833551&token=5Yy5cn3dc5&utype=1&userid=7
+    // http://activeeduindia.com/new_admin/webservices/getGallery.php?crd_mobile=9166833551&token=5Yy5cn3dc5&utype=1&userid=7
 
     public static String URL_PROFILE_PATH="http://activeeduindia.com/new_admin/media/profile/";
     public static String REG_NUM="http://activeeduindia.com/new_admin/webservices/numberRegistration.php?mobile=";//8368251761";
@@ -51,13 +53,13 @@ public class UrlEndpoints {
     public static final String GET_PROFILE ="http://activeeduindia.com/new_admin/media/";
     public static final String GET_STATE ="http://activeeduindia.com/new_admin/webservices/getState.php";
     public static final String GET_BOOKING_LIST="http://activeeduindia.com/new_admin/webservices/getUserBookingList.php?";
-    public static final String GET_CITY="http://activeeduindia.com/new_admin/webservices/getCity.php?state=";
+    public static final String GET_CITY="http://activeeduindia.com/new_admin/webservices/getCityName.php?state=";
     public static final String UPDATE_PROFILE="http://activeeduindia.com/new_admin/webservices/updateAgentProfile.php";
     public static final String SEND_PROFILE_UPDATE="http://activeeduindia.com/new_admin/webservices/updateUserProfile.php?";
     public static final String SEARCH_API="http://activeeduindia.com/new_admin/webservices/getSearchResult.php?keyword=";
     public static final String PARTNER_DETAIL="http://activeeduindia.com/new_admin/webservices/setCollegeDetails.php?";
     public static final String UPLOAD_FILE="http://activeeduindia.com/new_admin/webservices/uploadBrochure.php?";//brochurename=";//aa.pdf&brochure=";
-  //  public static final String SEAT_SUBMIT="http://activeeduindia.com/new_admin/webservices/getPartnerSeatSubmission.php?";
+    //  public static final String SEAT_SUBMIT="http://activeeduindia.com/new_admin/webservices/getPartnerSeatSubmission.php?";
     public static final String SEAT_SUBMIT_partner="http://activeeduindia.com/new_admin/webservices/submitSeats.php";
     public static final String IMAGE_PATH_ADAPTER="http://activeeduindia.com/new_admin/media/";
     public static final String SEAT_PROVIDER_SIGNIN="http://activeeduindia.com/new_admin/webservices/seatProviderSignin.php?";//email=sb@ss.com&pwd=123456&type=1";
@@ -73,7 +75,7 @@ public class UrlEndpoints {
     public static final String SEAT_PROVIDER_FACILITY="http://activeeduindia.com/new_admin/webservices/getFacilityList.php?";//crd_mobile=9166833551&token=5Yy5cn3dc5";//crd_mobile=9166833551&token=5Yy5cn3dc5&utype=1&userid=7
     public static final String SEAT_PROVIDER_FACILITY_UPDATED="http://activeeduindia.com/new_admin/webservices/setFacility.php?";// +
     public static final String SEAT_PROVIDER_ACCOUNT="http://activeeduindia.com/new_admin/webservices/accountDetail.php";// +
-  //  public static final String SEAT_USER_PAYEMNT="http://activeeduindia.com/new_admin/webservices/setFacility.php?";// +
+    //  public static final String SEAT_USER_PAYEMNT="http://activeeduindia.com/new_admin/webservices/setFacility.php?";// +
     public static final String SEAT_USER_PAYEMNT="http://activeeduindia.com/new_admin/webservices/setUserPayment.php?";//
     // mobile=8130110933&token=cZZl6gxItu&type=agent&category=1&subcategory=dps&dealid=1&price=1000";// +
     public static final String PAYMENT_API="http://activeeduindia.com/new_admin/webservices/getUserPayment.php?";
@@ -126,35 +128,74 @@ public class UrlEndpoints {
     public  static String URL_get_Result="http://activequizindia.com/new_admin/webservices/getUserResult.php?";//mobile=9166833551&token=uoA65P3R4J&type=practice";
     public  static String URL_UPDATE_PROFILE="http://activequizindia.com/new_admin/webservices/getUserResult.php?";//mobile=9166833551&token=uoA65P3R4J&type=practice";
 
-
     // new API STUCTURE
 
-    public  static String TOP_INNER_SCHOOL_FILTER_="http://activeeduindia.com/new_admin/webservices/getTopSchoolFilter.php";
-    public  static String TOP_INNER_SCHOOL_FILTER_DEFAULT="http://activeeduindia.com/new_admin/webservices/getTopSchoolFilter1.php";
+    public  static String TOP_INNER_SCHOOL_AVAIL_COURSES="http://activeeduindia.com/new_admin/webservices/school/top/getTopAvailableClass.php?s_id=";
+    public  static String TOP_INNER_SCHOOL_FILTER_="http://activeeduindia.com/new_admin/webservices/school/top/getTopSchoolFilter.php";
+    public  static String TOP_INNER_SCHOOL_FILTER_DEFAULT="http://activeeduindia.com/new_admin/webservices/school/top/getTopSchoolFilter1.php?page=";
+    public  static String TOP_INNER_SCHOOL_FILTER_STATE="http://activeeduindia.com/new_admin/webservices/school/top/getState.php";
+    public  static String TOP_INNER_SCHOOL_FILTER_CITY="http://activeeduindia.com/new_admin/webservices/school/top/getCity.php";
+    public  static String TOP_INNER_SCHOOL_FILTER_CLASS="http://activeeduindia.com/new_admin/webservices/school/top/getClass.php";
+    public  static String TOP_INNER_SCHOOL_FILTER_STREAM="http://activeeduindia.com/new_admin/webservices/school/top/getClassStream.php";
+    public  static String TOP_INNER_SCHOOL_FILTER_BOARD="http://activeeduindia.com/new_admin/webservices/school/top/getSchoolBoard.php";
     public  static String SCHOOL_AVAIL_CLASS="http://activeeduindia.com/new_admin/webservices/getTopSchoolClassDetail.php?id=";
     public  static String SCHOOL_AVAIL_CLASS_FULL="http://activeeduindia.com/new_admin/webservices/getTopSchoolFullDetail.php";//id=";
-    public  static String SCHOOL_TOP_AVAIL_CLASS_FULL="http://activeeduindia.com/new_admin/webservices/getTopAvailableClass.php?id=";//aps";//id=";
-//    public  static String TOP_INNER_SCHOOL_FILTER_DEFAULT="http://activeeduindia.com/new_admin/webservices/getTopSchoolFilter1.php";
+    public  static String SCHOOL_TOP_AVAIL_CLASS_FULL="http://activeeduindia.com/new_admin/webservices/school/top/getTopSchoolFullDetail.php?id=";//aps";//id=";
+    //public  static String TOP_INNER_SCHOOL_FILTER_DEFAULT="http://activeeduindia.com/new_admin/webservices/getTopSchoolFilter1.php";
+
+    /* college structure */
+    public  static String TOP_INNER_COLLEGE_FILTER="http://activeeduindia.com/new_admin/webservices/getTopCollegeFilter1.php?";
+    /* college structure */
+    public  static String TOP_DEFAULT_UNI_FILTER ="http://activeeduindia.com/new_admin/webservices/getTopUnivFilter1.php?";
+
+    /* ITI COLLEGE structure */
+    public  static String TOP_DEFAUL_ITI_FILTER ="http://activeeduindia.com/new_admin/webservices/getTopITIFilter1.php?";
+
+    /* ITI COLLEGE structure */
+    public  static String TOP_DEFAULT_COACH_FILTER="http://activeeduindia.com/new_admin/webservices/getTopCoachingFilter1.php?";
+    /* TRAIN COLLEGE structure */
+    public  static String TOP_DEFAULT_TRAINING_FILTER="http://activeeduindia.com/new_admin/webservices/getTopTrainingFilter1.php?";
+
+
 
     /*  main filter api */
 
     /* submit filter */
-    public  static String MAIN_submit="http://activeeduindia.com/new_admin/webservices/getMainSchoolList.php";
+    public  static String MAIN_School_submit="http://activeeduindia.com/new_admin/webservices/getMainSchoolList.php";
+    public  static String MAIN_College_submit="http://activeeduindia.com/new_admin/webservices/getMainCollegeList.php";
+    public  static String MAIN_uni_submit="http://activeeduindia.com/new_admin/webservices/getMainUnivList.php";
+    public  static String MAIN_COACH_LIST="http://activeeduindia.com/new_admin/webservices/getMainCoachingList.php";
+    public  static String MAIN_Train_LIST="http://activeeduindia.com/new_admin/webservices/getMainTrainingList.php";
 
     public  static String MAIN_URL_STATE="http://activeeduindia.com/new_admin/webservices/getState.php";
     public  static String MAIN_URL_CITY="http://activeeduindia.com/new_admin/webservices/getCity.php";
 
-
     /* college main URl*/
     public  static String MAIN_URL_collge_course="http://activeeduindia.com/new_admin/webservices/getCollegeCourses.php?";
     public  static String MAIN_URL_collge_code="http://activeeduindia.com/new_admin/webservices/getCollegeMode.php";
+    /* college main URl*/
+    public  static String MAIN_URL_COACH_CLASS="http://activeeduindia.com/new_admin/webservices/getCoachingClass.php?";
+    public  static String MAIN_URL_COACH_STREAM="http://activeeduindia.com/new_admin/webservices/getCoachingClassStream.php";
+    /* ITI main URl*/
+    public  static String MAIN_URL_ITI="http://activeeduindia.com/new_admin/webservices/getitiTrade.php";
+    public  static String MAIN_URL_ITI_TYPE="http://activeeduindia.com/new_admin/webservices/getitiType.php";
+    public  static String MAIN_URL_ITI_LIST="http://activeeduindia.com/new_admin/webservices/getMainITIList.php?";
+    public  static String MAIN_URL_ITI_FUL_DETAIL="http://activeeduindia.com/new_admin/webservices/getMainITIFullDetail.php?";//c_id=ITIDHANSIRI&trade_id=2?
+    public  static String MAIN_URL_COACH_FUL_DETAIL="http://activeeduindia.com/new_admin/webservices/getMainCoachingFullDetail.php?";//c_id=ITIDHANSIRI&trade_id=2?
+    public  static String MAIN_URL_ITI_SUBJECT="http://activeeduindia.com/new_admin/webservices/getCoachingClassSubject.php";
+    /* University main URl*/
+    public  static String MAIN_URL_uni_course="http://activeeduindia.com/new_admin/webservices/getUnivCourses.php";
+    public  static String MAIN_URL_uni_code="http://activeeduindia.com/new_admin/webservices/getUnivMode.php";
 
+    /* Exams main URl*/
+    public  static String MAIN_URL_TRAIN_Exams ="http://activeeduindia.com/new_admin/webservices/getTrainingExam.php";
+    public  static String MAIN_URL_TRAINING_LIST="http://activeeduindia.com/new_admin/webservices/getMainTrainingList.php";
 
     /* school main URl*/
     public  static String MAIN_URL_school_board="http://activeeduindia.com/new_admin/webservices/getSchoolBoard.php";
     public  static String MAIN_URL_school_class="http://activeeduindia.com/new_admin/webservices/getClass.php";
     public  static String MAIN_URL_school_stream="http://activeeduindia.com/new_admin/webservices/getClassStream.php";
-
+    public  static String MAIN_URL_school_TERM="http://activeeduindia.com/new_admin/webservices/getSchoolTerms.php?";//c_id=aps";
 
 
 }

@@ -20,6 +20,35 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:text="http://activeeduindia.com/new_admin/webservices/getNewOffers.php"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="30dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopList.php"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopCourses.php"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:gravity="center"
+                android:layout_marginTop="90dp"
+                android:text="http://activeeduindia.com/new_admin/webservices/getTopExams.php"/>
+
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

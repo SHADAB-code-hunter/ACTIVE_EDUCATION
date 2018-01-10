@@ -1,0 +1,17 @@
+function,project,method,Class Name,activity,fragment,menifest,gradle,storage,images
+touch event,acti edu,splash screen,,,,mega(9/9/2017)
+handler thraed,acti edu,splash screen,,,,mega(9/9/2017)
+imageattachment,acti edu,SignUp_Activity   (class -- Imager_Picker_Activity),SignUp_Fragment (class --  Image_picker)
+job schedular,D: drive -- download 8-18-17 android-JobScheduler-master
+xmpp chat smack,rooster app
+attach dynamic fragment lib,android file-picker,,,FragmentActivity  (Fragment Util),CallerFragment,
+permission dispatcher,android file-picker,onPickDocWithCheck,CallerFragmentPermissionsDispatcher,,CallerFragment,,,,
+frament fade in out animation,android file-picker,BaseFragment,,,BaseFragment,,,,
+Annotation NeedsPermission,,,,,,,,,
+SpinnerLoading,SpinnerLoading,,,,,,,,
+google map with peichart location,�Google Maps Android 3D Pie Chart,,,,,,,,
+android-PlacesAutocompleteTextView,address comltetion textview,,,,,,,,
+for checking  exception libarary,smartlogin(onpage signup login),ViewNotFoundException,,,,,,,
+session manager,smartlogin(onpage signup login),,,,,,,,
+material dialog opening animation,,,,MorphTransitionsActivity,,,,,
+FireCrasher-master,exception handling,,,,,,,,

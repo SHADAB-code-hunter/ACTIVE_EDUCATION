@@ -28,9 +28,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 import RAting_BAr.MaterialRatingBar;
 import callbacks.AvailCourseListener_School;
 import callbacks.CALL_ADAPTER;
+import callbacks.Listing_Listener;
+import pagination.Movie;
 
 /**
  * Created by krupenghetiya on 27/06/17.
@@ -82,16 +86,17 @@ public class School_adapter extends RecyclerView.Adapter<School_adapter.MovieVie
         }
 
         try {
+            ((Listing_Listener)_activity).on_List_method(position);
             JSONObject jsonObject=data.getJSONObject(position);
-            Log.d("hjhjhjhj",""+data);
+            Log.d("hjhjhjhj",""+jsonObject);
 
            // Toast.makeText(_activity, ""+jsonObject.getString("c_image"), Toast.LENGTH_SHORT).show();
-            if(jsonObject.has("c_name"))
-            holder.tv_title.setText(jsonObject.getString("c_name"));
+            if(jsonObject.has("s_name"))
+            holder.tv_title.setText(jsonObject.getString("s_name"));
 
-            if(jsonObject.has("c_image"))
+            if(jsonObject.has("s_image"))
             Glide.with(_activity)
-                    .load(jsonObject.getString("c_image"))
+                    .load(jsonObject.getString("s_image"))
                     .into(holder.iv_cover);
 
             if(jsonObject.has("discount")) {
@@ -99,17 +104,20 @@ public class School_adapter extends RecyclerView.Adapter<School_adapter.MovieVie
                 holder.id_discout_text.setText(jsonObject.getString("discount")+"%");
             }
 
-            if(jsonObject.has("c_course")) {
-                holder.tv_course.setText("Class : " +jsonObject.getString("c_course"));
+            if(jsonObject.has("class_name")) {
+                holder.tv_course.setText("Class : " +jsonObject.getString("class_name"));
             }
-            if(jsonObject.has("branch_fee")) {
-                holder.tv_rating.setText("Class Fee : " +jsonObject.getString("branch_fee"));
+            if(jsonObject.has("s_address")) {
+                holder.tv_rating.setText("Address : " +jsonObject.getString("s_address"));
             }
-            if(jsonObject.has("c_website")) {
-                 _website=jsonObject.getString("c_website");
+            if(jsonObject.has("s_website")) {
+                 _website=jsonObject.getString("s_website");
             }
             if(jsonObject.has("discount")) {
                 str_call=jsonObject.getString("discount");
+            }
+            if(jsonObject.has("board")) {
+               holder.tv_genre.setText(jsonObject.getString("board"));
             }
 
             holder.img_call.setOnClickListener(new View.OnClickListener() {
@@ -163,11 +171,11 @@ public class School_adapter extends RecyclerView.Adapter<School_adapter.MovieVie
             holder.id_applylayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Log.d("jjjddc","sxsxs");
                     try {
                         ( (CALL_ADAPTER)_activity).oncall_adapter(data.getJSONObject(position), "action");
                     } catch (Exception e) {
-                        e.printStackTrace();
+                       Log.d("jjjddc",""+e.getMessage());
                     }
                 }
             });
@@ -178,9 +186,9 @@ public class School_adapter extends RecyclerView.Adapter<School_adapter.MovieVie
                 public void onClick(View v) {
                     // continue
                     try {
-                        ((AvailCourseListener_School) _activity).onAvailCourse(data.getJSONObject(position),data.getJSONObject(position).getString("c_id"));
+                        ((AvailCourseListener_School) _activity).onAvailCourse(data.getJSONObject(position),data.getJSONObject(position).getString("s_id"));
                     } catch (Exception e) {
-                        e.printStackTrace();
+                       Log.d("exceopp",""+e.getMessage());
                     }
 
                 }
@@ -305,7 +313,68 @@ public class School_adapter extends RecyclerView.Adapter<School_adapter.MovieVie
 
     }
 
+  /*
+   Helpers
+   _________________________________________________________________________________________________
+    */
 
+    public void add(Movie mc) {
+        data.put(mc);
+        notifyItemInserted(data.length() - 1);
+    }
+
+    public void addAll(List<Movie> mcList) {
+        for (Movie mc : mcList) {
+            add(mc);
+        }
+    }
+
+  /*   public void remove(Movie city) {
+        int position = movies.indexOf(city);
+        if (position > -1) {
+            movies.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public void clear() {
+       // isLoadingAdded = false;
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    public boolean isEmpty() {
+        return getItemCount() == 0;
+    }
+
+
+    public void addLoadingFooter() {
+      //  isLoadingAdded = true;
+        add(new Movie());
+    }
+
+   public void removeLoadingFooter() {
+       // isLoadingAdded = false;
+
+        int position = movies.size() - 1;
+        Movie item = getItem(position);
+
+        if (item != null) {
+            movies.remove(position);
+            notifyItemRemoved(position);
+        }
+    }*/
+
+   /* public Movie getItem(int position) {
+        return movies.get(position);
+    }*/
+
+
+    /*
+    View Holders
+    _________________________________________________________________________________________________
+     */
     @Override
     public int getItemCount() {
         return data.length();

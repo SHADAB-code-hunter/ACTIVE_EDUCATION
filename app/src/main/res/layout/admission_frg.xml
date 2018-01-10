@@ -411,12 +411,39 @@
                         android:hint="Pincode "
                         android:inputType="number"
                         android:layout_weight="0.17"/>
+
+
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0dp"
+                    android:layout_weight="1">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_share_reffreral"
+                        android:layout_weight="1"/>
+                    <EditText
+                        android:id="@+id/id_edt_reffreralcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="14sp"
+                        android:singleLine="true"
+                        android:hint="Refferal Code "
+                        android:layout_weight="0.17"/>
+
+
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
     <Button
         android:id="@+id/id_btn_submit"
         android:layout_width="150dp"

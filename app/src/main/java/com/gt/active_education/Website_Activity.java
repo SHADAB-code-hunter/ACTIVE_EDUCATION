@@ -3,6 +3,7 @@ package com.gt.active_education;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -24,9 +25,10 @@ public class Website_Activity extends AppCompatActivity {
         if(getIntent()!=null)
         {
             str_intent=getIntent().getStringExtra("Url_Web");
+            Log.d("scdc",""+str_intent);
         }
 
-       // Toast.makeText(this, ""+str_intent, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, ""+str_intent, Toast.LENGTH_SHORT).show();
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(str_intent);

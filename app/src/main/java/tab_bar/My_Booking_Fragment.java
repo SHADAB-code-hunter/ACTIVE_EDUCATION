@@ -45,7 +45,10 @@ import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static utilities.App_Static_Method.after_guestregisyter;
+import static utilities.App_Static_Method.get_session_type;
 import static utilities.App_Static_Method.show_load_progress;
+import static utilities.App_Static_Method.toMap;
 
 
 /**
@@ -76,16 +79,13 @@ public class My_Booking_Fragment extends  Fragment implements Agent_deal_Listene
         View rootView = inflater.inflate(R.layout.frg_agent_book, container, false);
         recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerView);
         //rootView.findViewById(R.id.id_heading).setVisibility(View.GONE);
-        SharedPreferences sharedPreferences = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_U_Prefrence,0);
-        String str_token=sharedPreferences.getString("token", "na");
-        String str_email=sharedPreferences.getString("mobile", "na");
 
-           if(getArguments()!=null) {
-                strulr = getArguments().getString("URL");
-           }
-        Log.d("uel", strulr+"mobile="+str_email+"&token="+str_token);
-
-        new Asynch_Book_Responce(My_Booking_Fragment.this, strulr+"mobile="+App_Static_Method.session_type().get("mobile")+"&token="+App_Static_Method.session_type().get("token")).execute();
+        String strurl="http://activeeduindia.com/new_admin/webservices/getGuestBookingList.php";
+        try {
+            new Asynch_Book_Responce(My_Booking_Fragment.this, strurl,toMap(new JSONObject(after_guestregisyter()))).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         picasso = Picasso.with(getContext());
 
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView,
@@ -139,7 +139,7 @@ public class My_Booking_Fragment extends  Fragment implements Agent_deal_Listene
 
     @Override
     public void onLJsonLoaded_new(JSONObject jsonObject) {
-//        Log.d("objwct_responce",jsonObject.toString());
+        Log.d("objwct_responce",""+jsonObject.toString());
 //
         // mAdapter = new Agent_Deal_Adapter(jsonObject, picasso, (Activity) getContext());
         try {

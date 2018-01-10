@@ -10,5 +10,5 @@ import pojo.Get_Course_desc;
 
 public interface Pager_Change_listener {
 
-    public void on_pager_change(int i);
+    public void on_pager_change(int i, String response);
 }

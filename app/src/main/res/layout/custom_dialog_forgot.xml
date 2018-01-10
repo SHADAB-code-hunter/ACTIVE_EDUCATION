@@ -32,7 +32,7 @@
                     android:layout_width="150dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_logo" />
+                    android:src="@drawable/newlogo" />
 
             </LinearLayout>
 
@@ -160,7 +160,6 @@
                         android:textSize="12sp"
                         android:text="We will send you a link on Registered E-Mail . After Click on link you can create a new Password. "
                         android:textColor="#6949FF" />
-
 
                 </FrameLayout>
 

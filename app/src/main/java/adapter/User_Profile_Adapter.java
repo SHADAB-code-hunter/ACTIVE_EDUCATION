@@ -27,17 +27,19 @@ public class User_Profile_Adapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
-
+        Bundle bundle=new Bundle();
         switch (position)
         {
             case 0:
                 fragment= new My_Booking_Fragment();
                /* bundle.putString("url","my_test_url222");
                 fragment.setArguments(bundle);*/
+
+                bundle.putString("URL", ""+UrlEndpoints.GET_BOOKING_LIST);
+                fragment.setArguments(bundle);
                 return  fragment;
             case 1:
                 fragment= new Edit_Profile_Frg();
-                Bundle bundle=new Bundle();
                 bundle.putString("URL", ""+UrlEndpoints.GET_BOOKING_LIST);
                 fragment.setArguments(bundle);
                /* bundle.putString("url","my_test_url");

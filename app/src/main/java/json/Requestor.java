@@ -41,7 +41,7 @@ public class Requestor {
 
         requestQueue.add(request);
         try {
-            response = requestFuture.get(50000, TimeUnit.MILLISECONDS);
+            response = requestFuture.get(50000, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             L.m(e + "");
         } catch (ExecutionException e) {
@@ -61,7 +61,7 @@ public class Requestor {
                 requestFuture, requestFuture);
         requestQueue.add(request);
         try {
-            response = requestFuture.get(5000, TimeUnit.MILLISECONDS);
+            response = requestFuture.get(5000, TimeUnit.SECONDS);
             jObj = new JSONObject(response);
         } catch (InterruptedException e) {
             L.m(e + "");
@@ -85,7 +85,7 @@ public class Requestor {
                 requestFuture, requestFuture);
         requestQueue.add(request);
         try {
-            response = requestFuture.get(5000, TimeUnit.MILLISECONDS);
+            response = requestFuture.get(5000, TimeUnit.SECONDS);
             jObj = new JSONObject(response);
         } catch (InterruptedException e) {
             L.m(e + "");

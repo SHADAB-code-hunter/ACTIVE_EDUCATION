@@ -125,7 +125,7 @@
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
     <FrameLayout
-            android:id="@+id/id_class_frm"
+            android:id="@+id/id_broard_frm"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/outline_spinner"
@@ -134,12 +134,12 @@
             android:paddingRight="10dp">
 
             <TextView
-                android:id="@+id/id_tv_class"
+                android:id="@+id/id_board_class"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="25dp"
                 android:gravity="center|left"
-                android:text="Select Class"
+                android:text="Select Board"
                 android:textColor="@color/white" />
 
             <ImageView
@@ -151,7 +151,7 @@
 
         </FrameLayout>
     <com.github.aakira.expandablelayout.ExpandableRelativeLayout
-        android:id="@+id/expandableLayout1_class"
+        android:id="@+id/expandableLayout1_board"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:background="@drawable/tumblr_white_ract"
@@ -163,12 +163,12 @@
         app:ael_orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/id_fr_class"
+            android:id="@+id/id_fr_board"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/_id_class"
+                android:id="@+id/_id_rv_borad"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -176,6 +176,58 @@
         </FrameLayout>
 
     </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
+         <FrameLayout
+             android:id="@+id/id_class_frm"
+             android:layout_width="match_parent"
+             android:layout_height="40dp"
+             android:background="@drawable/outline_spinner"
+             android:orientation="horizontal"
+             android:paddingLeft="10dp"
+             android:paddingRight="10dp">
+
+             <TextView
+                 android:id="@+id/id_tv_class"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_marginRight="25dp"
+                 android:gravity="center|left"
+                 android:text="Select Class"
+                 android:textColor="@color/white" />
+
+             <ImageView
+                 android:layout_width="25dp"
+                 android:layout_height="match_parent"
+                 android:layout_gravity="end"
+                 android:layout_toRightOf="@+id/id_tv"
+                 android:src="@drawable/ic_round_sign_down" />
+
+         </FrameLayout>
+         <com.github.aakira.expandablelayout.ExpandableRelativeLayout
+             android:id="@+id/expandableLayout1_class"
+             android:layout_width="match_parent"
+             android:layout_height="300dp"
+             android:background="@drawable/tumblr_white_ract"
+             android:layout_margin="3dp"
+             android:backgroundTint="#85060505"
+             app:ael_expanded="false"
+             app:ael_duration="400"
+             app:ael_interpolator="accelerate"
+             app:ael_orientation="vertical">
+
+             <FrameLayout
+                 android:id="@+id/id_fr_class"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent">
+
+                 <android.support.v7.widget.RecyclerView
+                     android:id="@+id/_id_class"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent">
+
+                 </android.support.v7.widget.RecyclerView>
+             </FrameLayout>
+
+         </com.github.aakira.expandablelayout.ExpandableRelativeLayout>
     <FrameLayout
             android:id="@+id/id_class_stream"
             android:layout_width="match_parent"

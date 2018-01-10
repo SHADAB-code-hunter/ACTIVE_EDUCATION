@@ -1,5 +1,6 @@
 package com.gt.active_education;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,16 +41,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 import Fab_Filter.MovieData;
 import Fab_Filter.MyFabFragment;
 import Zend_Chat.UserProfile;
 import Zend_Chat.UserProfileStorage;
+import adapter.College_adapter;
 import adapter.MoviesAdapter;
 import adapter.School_adapter;
 import callbacks.AvailCourseListener_School;
 import callbacks.Avail_Course_Listener;
 import callbacks.CALL_ADAPTER;
+import callbacks.Listing_Listener;
 import network.VolleySingleton;
 import pojo.Cat_Model;
 import task.NORMAL_ASYNCHTASK;
@@ -63,10 +67,11 @@ import utilities.MyApplication;
 import utilities.State_City_Search;
 import utilities.UrlEndpoints;
 
+import static utilities.UrlEndpoints.TOP_INNER_COLLEGE_FILTER;
 import static utilities.UrlEndpoints.TOP_INNER_SCHOOL_FILTER_DEFAULT;
 
 
-public class School_Listing_Activity extends AppCompatActivity implements View.OnClickListener, Avail_Course_Listener , AvailCourseListener_School , CALL_ADAPTER {
+public class School_Listing_Activity extends AppCompatActivity implements View.OnClickListener, Avail_Course_Listener , AvailCourseListener_School , CALL_ADAPTER , Listing_Listener {
 
     private VolleySingleton volleySingleton;
     private RequestQueue requestQueue;
@@ -103,6 +108,11 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
     private School_adapter school_adapter;
     private String avail_str_Url;
     private Availschool_class availschool_class;
+    private FrameLayout id_broard_frm;
+    private TextView id_board_class;
+    Map<String,String> map=new HashMap<>();
+    private ProgressDialog progressDialog;
+    private  int poss=20;
 
 
     @Override
@@ -113,22 +123,25 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
         id_call=(FrameLayout)findViewById(R.id.id_call);id_call.setOnClickListener(this);
         id_frm_chat=(FrameLayout)findViewById(R.id.id_frm_chat);id_frm_chat.setOnClickListener(this);
 
-
         if(!new ConnectionCheck(School_Listing_Activity.this).checkConnection()) {
             new ConnectionCheck(School_Listing_Activity.this).check_network(School_Listing_Activity.this);
             return;
         }
         id_list_url=(TextView)findViewById(R.id.id_list_url);
+        id_board_class=(TextView)findViewById(R.id.id_board_class);
         id_state_filter=(LinearLayout)findViewById(R.id.id_state_filter);
         id_city_filter=(LinearLayout)findViewById(R.id.id_city_filter);
         id_course_filter=(LinearLayout)findViewById(R.id.id_course_filter);
         id_branch_filter=(LinearLayout)findViewById(R.id.id_branch_filter);
+
         id_frm_back=(FrameLayout)findViewById(R.id.id_frm_back);id_frm_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 School_Listing_Activity.this.finish();
             }
         });
+
+
         id_rv_filter=(RelativeLayout)findViewById(R.id.id_rv_filter);id_rv_filter.setOnClickListener(this);
         category_title=(TextView)findViewById(R.id.category_title);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -151,6 +164,11 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
                 onScrollPositionChanged();
             }
         });
+
+
+
+
+
 
         id_filter_layout=(HorizontalScrollView)findViewById(R.id.id_filter_layout);
 //        id_filter_upper=(FrameLayout)findViewById(R.id.id_filter_upper);id_filter_upper.setOnClickListener(this);
@@ -212,23 +230,68 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
             }
         });*/
         //set_state_list(UrlEndpoints.get_filter_list+1);
-        Map<String,String> map=new HashMap<>();
 
+
+                       // StepA();
+        get_data_from_server(poss);
+
+    }
+
+    private void get_data_from_server(int poss) {
+        progressDialog = new ProgressDialog(School_Listing_Activity.this);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        progressDialog.setMessage(getString(R.string.Loading));
         new NORMAL_ASYNCHTASK(new NORMAL_ASYNCHTASK.JOBJ_LISTENER() {
             @Override
             public void on_listener(JSONObject jsonobject, String loginApi) {
                 try {
-                LinearLayoutManager mLayoutManager = new LinearLayoutManager(School_Listing_Activity.this);
-                recyclerView.setLayoutManager(mLayoutManager);
-                recyclerView.setItemAnimator(new DefaultItemAnimator());
-                school_adapter= new School_adapter(School_Listing_Activity.this,jsonobject.getJSONArray(loginApi));
-                recyclerView.setAdapter(new School_adapter(School_Listing_Activity.this,jsonobject.getJSONArray(loginApi)));
+                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(School_Listing_Activity.this);
+                    recyclerView.setLayoutManager(mLayoutManager);
+                    recyclerView.setItemAnimator(new DefaultItemAnimator());
+                    school_adapter= new School_adapter(School_Listing_Activity.this,jsonobject.getJSONArray(loginApi));
+                    recyclerView.setAdapter(new School_adapter(School_Listing_Activity.this,jsonobject.getJSONArray(loginApi)));
+                    if(progressDialog!=null)
+                        progressDialog.cancel();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         },map.toString(),TOP_INNER_SCHOOL_FILTER_DEFAULT,"data").execute();
+    }
 
+    private void StepA() {
+        Log.d("R__T", "StepA initiated");
+        final CountDownLatch latchA = new CountDownLatch(1);
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("RT__", "Thread t Begins");
+               /* ThreadA threadA = new ThreadA();
+                try {
+                    JSONObject jsonObject = threadA.execute().get(10, TimeUnit.SECONDS);
+                    parseA(jsonObject);
+                    latchA.countDown();
+                    Log.d("RT", "Thread t Ends");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                }*/
+
+
+            }
+        });
+        t.start();
+        try {
+            latchA.await();
+        } catch (InterruptedException e) {
+            Log.d("jjjj",""+e.getMessage());
+        }
+        Log.d("R__T", "StepA END");
     }
 
 
@@ -239,9 +302,6 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
         super.onPostResume();
 
     }
-
-
-
 
     @Override
     public void onClick(View v) {
@@ -357,7 +417,7 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
                 try {
                     availschool_class.cancel();
                     Log.d("nmnm",""+data);
-                    Toast.makeText(School_Listing_Activity.this, "Choose Courses :  "+data.getString("name"), Toast.LENGTH_SHORT).show();
+                 //   Toast.makeText(School_Listing_Activity.this, "Choose Courses :  "+data.getString("name"), Toast.LENGTH_SHORT).show();
                     Intent  i = new Intent(getApplicationContext(), School_Full_Detail_Activity.class);
                     i.putExtra("JSON_OBJ", "" + data);
                     i.putExtra("JSON_OBJ", "" + App_Static_Method.toMERGE_JSON(data,jsonObject));
@@ -394,6 +454,18 @@ public class School_Listing_Activity extends AppCompatActivity implements View.O
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void on_List_method(int position) {
+
+        Log.d("ghsghs",""+position);
+        if(position==(poss*2))
+        {
+            Log.d("gh_sghs",""+position+"   :  "+(poss*2));
+          //  get_data_from_server(position);
         }
 
     }

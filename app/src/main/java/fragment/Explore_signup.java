@@ -37,15 +37,12 @@ import java.util.Map;
 
 import callbacks.JsonRes_Listener;
 import task.Asynch_Responce_OBJ;
-import task.Login_Asynch;
 import utilities.App_Raw_Data;
 import utilities.App_Static_Method;
-import utilities.Gust_Regis_Dialog;
 import utilities.Image_picker;
 import utilities.State_City_Search;
 import utilities.UrlEndpoints;
 
-import static com.gt.active_education.R.id.id_tv_city;
 import static utilities.App_Static_Method.permission_check;
 import static utilities.App_Static_Method.request_permission_result;
 import static utilities.UrlEndpoints.GET_CITY;
@@ -96,7 +93,7 @@ public class Explore_signup extends Fragment implements View.OnClickListener, Im
         id_image_profile_signup=(ImageView)rootView.findViewById(R.id.id_image_profile_signup);
         id_btn=(Button)rootView.findViewById(R.id.id_btn);id_btn.setOnClickListener(this);
         set_clg_social(rootView);
-//   new Login_Asynch(Gust_Regis_Dialog.this,map,UrlEndpoints.GUSET_REGISTER,"Guset_Register").execute();
+//   new Login_Asynch(Gust_Regis_Fragment.this,map,UrlEndpoints.GUSET_REGISTER,"Guset_Register").execute();
         id_state_frm=(FrameLayout)rootView.findViewById(R.id.id_frm_state);
         id_frm_city=(FrameLayout)rootView.findViewById(R.id.id_frm_city);
         id_tv_state=(TextView)rootView.findViewById(R.id.id_text_tv_state);

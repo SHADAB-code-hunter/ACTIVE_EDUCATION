@@ -18,6 +18,7 @@
         <item>Graduate Detail</item>
         <!--<item>Confirmation</item>-->
     </string-array>
+
     <string-array name="steps_subtitles">
         <item>Title of the alarm</item>
         <item>Description of the alarm</item>
@@ -51,6 +52,21 @@
         <item>ITI College Login </item>
         <item>Coaching Login</item>
         <item>Training Center Login</item>
+
+    </string-array>
+    <string-array name="Guset_login_array">
+        <item>Partner Login</item>
+        <item>School Login</item>
+        <item>College Login</item>
+        <item>University Login</item>
+        <item>ITI College Login </item>
+        <item>Coaching Login</item>
+        <item>Training Center Login</item>
+
+    </string-array>
+    <string-array name="guest_login_array">
+        <item>Student Login</item>
+        <item>Partner Login</item>
 
     </string-array>
     <string-array name="week_days">

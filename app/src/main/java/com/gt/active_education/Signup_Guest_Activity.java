@@ -71,13 +71,8 @@ public class Signup_Guest_Activity extends AppCompatActivity implements View.OnC
         exp_train = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_train);exp_train.collapse();
 
 
-        if( getIntent().getStringExtra("ADDMISSIONFORM").equalsIgnoreCase("ADDMISSIONFORM"))
-        {
 
-            String str= getIntent().getStringExtra("ADDMISSIONFORM");
-            Log.d("mmhfhfh",""+str);
-
-/*
+             /*
 
             exp_school = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_school);exp_school.collapse();
             exp_collge = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_college);exp_collge.collapse();
@@ -85,7 +80,7 @@ public class Signup_Guest_Activity extends AppCompatActivity implements View.OnC
             exp_iti = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_iti);exp_iti.collapse();
             exp_coach = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_coach);exp_coach.collapse();
             exp_train = (ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_train);exp_train.collapse();
-*/
+            */
 
             exp_school.setVisibility(View.GONE);
             exp_collge.setVisibility(View.GONE);
@@ -100,7 +95,7 @@ public class Signup_Guest_Activity extends AppCompatActivity implements View.OnC
             id_iti.setVisibility(View.GONE);
             id_coach.setVisibility(View.GONE);
             id_train.setVisibility(View.GONE);
-        }
+
 
 
         user.putString("type","user");

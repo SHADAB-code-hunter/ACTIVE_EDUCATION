@@ -223,8 +223,6 @@ public class Filter_Dialog extends Dialog implements View.OnClickListener, Dialo
 
     }
     private void set_city_list(String url, final String state_id, final int cat_position) {
-
-
         Log.d("cityiurl",url) ;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
                 new Response.Listener<String>() {

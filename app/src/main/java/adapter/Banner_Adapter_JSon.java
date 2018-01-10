@@ -53,7 +53,7 @@ public class Banner_Adapter_JSon extends PagerAdapter {
             JSONObject jsonObject=jsonArray.getJSONObject(position);
             ImageView id_iv_banner = (ImageView) layout.findViewById(R.id.id_iv_banner);
 
-            Toast.makeText(context, "banner :  "+jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
+         //   Toast.makeText(context, "banner :  "+jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
 
             if(jsonObject.has("name"))
                 Glide.with(context)

@@ -96,13 +96,46 @@
             android:name=".User_Profile_Activity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Login_Fior_Guest_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Signup_Guest_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Open_Image_Activity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".PopupActivity"
             android:screenOrientation="portrait" />
-        <!-- <activity
-            android:name=".Gust_Activity"
-            android:screenOrientation="portrait" />-->
+         <activity
+            android:name=".Main_Trainging_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".School_Listing_Test_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".College_Top_Listing_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Uni_Top_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ITI_Top_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Coach_top_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Training_top_List_Activity"
+            android:screenOrientation="portrait" />
          <activity
             android:name=".Main_School_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main_College_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main_Uni_List_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Agent_Deal_Offer_Detail_Activity"
@@ -115,9 +148,6 @@
             android:name=".Agent_Profile_Activity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".Signup_Guest_Activity"
-            android:screenOrientation="portrait" />
         <activity
             android:name=".Gallery_Activity"
             android:screenOrientation="portrait" />
@@ -173,6 +203,22 @@
         <activity
             android:name=".Exam_Detail_Activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Signup_Guest_All_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main_ITI_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ITI_Full_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main_Coach_List_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Coach_Full_Detail_Activity"
+            android:screenOrientation="portrait"
+            android:exported="true"/>
         <activity
             android:name=".Website_Activity"
             android:screenOrientation="portrait" />

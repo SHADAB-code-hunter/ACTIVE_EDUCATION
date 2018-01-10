@@ -83,7 +83,7 @@ public class App_Forgot_Password extends Dialog implements View.OnClickListener 
 
         btn_forgot=(Button)findViewById(R.id.btn_forgot);btn_forgot.setOnClickListener(this);
         id_login_type=(EditText)findViewById(R.id.id_login_type);
-        str_log_array=act.getResources().getStringArray(R.array.login_array);
+        str_log_array=act.getResources().getStringArray(R.array.Guset_login_array);
         id_login_type.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

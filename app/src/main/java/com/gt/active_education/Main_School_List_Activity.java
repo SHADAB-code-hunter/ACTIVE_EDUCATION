@@ -182,8 +182,8 @@ public class Main_School_List_Activity extends AppCompatActivity implements View
         //set_sign_in();
         // getList data & progress bar & saved in shared Preference;
 
-        if (str_Title!=null)
-        category_title.setText(str_Title);
+
+        category_title.setText("School Listing");
 
         picasso = Picasso.with(this);
         // add shared Preference list
@@ -274,14 +274,6 @@ public class Main_School_List_Activity extends AppCompatActivity implements View
             case R.id.id_rv_filter:
 
                 if(!vis_bl) {
-                   /* Animation animation2;
-                    animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.filter_down);
-                    id_filter_layout.setAnimation(animation2);
-                    id_filter_layout.setVisibility(View.VISIBLE);
-                    id_filter_upper.setVisibility(View.GONE);
-                    id_filter_search.setVisibility(View.VISIBLE);*/
-                    /*inner_filter_dialog=new Inner_Filter_Dialog(Filter_Activity.this,str_Url,Filter_Activity.this);
-                    inner_filter_dialog.show();*/
                     filter_dialogue_layout=new Filter_Dialogue_layout(new Filter_Dialogue_layout.FINAL_OBJ_LISTNER() {
                         @Override
                         public void onfinal_list(JSONArray data) {
@@ -292,19 +284,6 @@ public class Main_School_List_Activity extends AppCompatActivity implements View
                     filter_dialogue_layout.show();
                     vis_bl = false;
                 }
-                /*else if(vis_bl) {
-                   *//* Animation animation2;
-                    animation2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.filter_up);
-                    id_filter_layout.setAnimation(animation2);*//*
-                    id_filter_layout.setVisibility(View.INVISIBLE);
-                    id_filter_upper.setVisibility(View.VISIBLE);
-                    id_filter_search.setVisibility(View.INVISIBLE);
-                    vis_bl = false;
-                }*/
-
-
-                // call final URL
-                //  new Filter_Task(Filter_Activity.this,filter_url).execute();
                 break;
 
             case R.id.id_call:
@@ -387,7 +366,7 @@ public class Main_School_List_Activity extends AppCompatActivity implements View
                 Intent i = null;
                 String url = null;
                 i = new Intent(getApplicationContext(), School_Full_Detail_Activity.class);
-                   Log.d("nmnmnm",""+jsonObject);
+                Log.d("nmnmnm",""+jsonObject);
                 i.putExtra("JSON_OBJ", "" + jsonObject);
                 // i.putExtra("url",SCHOOL_AVAIL_CLASS_FULL+school_adapter.getJSONARRAy().getJSONObject(position).getString("id")+"&course_id="+school_adapter.getJSONARRAy().getJSONObject(position).getString("course_id"));
                 //      Toast.makeText(School_Listing_Activity.this, ""+school_adapter.getJSONARRAy().getJSONObject(position).getString("id"), Toast.LENGTH_SHORT).show();

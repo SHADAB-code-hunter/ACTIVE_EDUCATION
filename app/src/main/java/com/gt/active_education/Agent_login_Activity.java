@@ -72,7 +72,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
         id_login_type=(EditText)findViewById(R.id.id_login_type);
         btn_login=(Button)findViewById(R.id.btn_login);
         btn_login.setOnClickListener(this);
-        str_log_array=getResources().getStringArray(R.array.login_array);
+        str_log_array=getResources().getStringArray(R.array.Guset_login_array);
         id_forgot_password=(TextView)findViewById(R.id.id_forgot_password);id_forgot_password.setOnClickListener(this);
         id_login_type.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -80,7 +80,6 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
 
                 if(!open) {
                     open = true;
-
                     custom_list_dialog = new Custom_List_Dialog(new Custom_List_Dialog.Dialog_Spinner_Listener() {
                         @Override
                         public void on_listdata(String s) {
@@ -125,7 +124,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                 if((id_login_type.getText().toString()).equals("Please Choose Login Type")) {
                     Toast.makeText(this, "Please Choose Login Type", Toast.LENGTH_SHORT).show();
                     return;
-                }
+                    }
 
                     if(str_uname==null)
                     {
@@ -186,7 +185,7 @@ public class Agent_login_Activity extends AppCompatActivity implements View.OnCl
                startActivity(new Intent(getApplicationContext(),GoogleSignInActivity.class));
                 break;
             case R.id.id_Reg_here:
-                startActivity(new Intent(Agent_login_Activity.this,Signup_Guest_Activity.class));
+                startActivity(new Intent(Agent_login_Activity.this,Signup_Guest_All_Activity.class));
                // finish();
                 break;
 

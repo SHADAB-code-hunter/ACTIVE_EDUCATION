@@ -60,6 +60,10 @@ public class Gallery_Dapter_school_json extends RecyclerView.Adapter<Gallery_Dap
 
         return jsonArray.length();
     }
+    public  JSONArray getJSONARRAY() {
+
+        return jsonArray;
+    }
 
 
     @Override
@@ -75,7 +79,7 @@ public class Gallery_Dapter_school_json extends RecyclerView.Adapter<Gallery_Dap
 
         try {
              jsonObject=jsonArray.getJSONObject(position);
-            Toast.makeText(college_detail_activity, ""+jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(college_detail_activity, ""+jsonObject.getString("name"), Toast.LENGTH_SHORT).show();
 
             Glide.with(college_detail_activity).load(jsonObject.getString("name")).into(holder.id_img_glr);
             holder.id_img_glr.setOnClickListener(new View.OnClickListener() {

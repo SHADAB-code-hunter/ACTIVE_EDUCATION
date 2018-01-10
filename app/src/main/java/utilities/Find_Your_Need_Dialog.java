@@ -14,16 +14,20 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
-import com.gt.active_education.Agent_login_Activity;
+import com.gt.active_education.Main_Coach_List_Activity;
+import com.gt.active_education.Main_College_List_Activity;
+import com.gt.active_education.Main_ITI_List_Activity;
 import com.gt.active_education.Main_School_List_Activity;
+import com.gt.active_education.Main_Trainging_List_Activity;
+import com.gt.active_education.Main_Uni_List_Activity;
 import com.gt.active_education.R;
 
 import org.json.JSONArray;
@@ -40,14 +44,20 @@ import task.NEW_ASYNCH_HEADER;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 import static utilities.UrlEndpoints.MAIN_URL_CITY;
+import static utilities.UrlEndpoints.MAIN_URL_COACH_CLASS;
+import static utilities.UrlEndpoints.MAIN_URL_COACH_STREAM;
+import static utilities.UrlEndpoints.MAIN_URL_TRAIN_Exams;
+import static utilities.UrlEndpoints.MAIN_URL_ITI;
+import static utilities.UrlEndpoints.MAIN_URL_ITI_SUBJECT;
+import static utilities.UrlEndpoints.MAIN_URL_ITI_TYPE;
 import static utilities.UrlEndpoints.MAIN_URL_STATE;
 import static utilities.UrlEndpoints.MAIN_URL_collge_code;
 import static utilities.UrlEndpoints.MAIN_URL_collge_course;
 import static utilities.UrlEndpoints.MAIN_URL_school_board;
 import static utilities.UrlEndpoints.MAIN_URL_school_class;
 import static utilities.UrlEndpoints.MAIN_URL_school_stream;
-import static utilities.UrlEndpoints.MAIN_submit;
-import static utilities.UrlEndpoints.SCHOOL_TOP_AVAIL_CLASS_FULL;
+import static utilities.UrlEndpoints.MAIN_URL_uni_code;
+import static utilities.UrlEndpoints.MAIN_URL_uni_course;
 
 /**
  * Created by GT on 12/6/2017.
@@ -112,7 +122,7 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
         arrayList.add("School");
         arrayList.add("College");
         arrayList.add("University");
-        arrayList.add("ITI / Diploma");
+        arrayList.add("ITI College");
         arrayList.add("Coaching / Institute");
         arrayList.add("Training Institute");
 
@@ -125,7 +135,8 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
         id_tv_fourth = (TextView) findViewById(R.id.id_tv_fourth);
         id_tv_fifth = (TextView) findViewById(R.id.id_tv_fifth);
         id_tv_cat = (TextView) findViewById(R.id.id_tv_cat);
-        id_submit = (Button) findViewById(R.id.id_submit);id_submit.setOnClickListener(this);
+        id_submit = (Button) findViewById(R.id.id_submit);
+        id_submit.setOnClickListener(this);
 
         str_log_array = Find_Your_Need_Dialog.this.getContext().getResources().getStringArray(R.array.login_array);
 
@@ -230,15 +241,18 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                 main_map.put("cat_id", "3");
                 get_state();
                 break;
-            case "ITI / Diploma":
+            case "ITI College":
                 main_map.put("cat_id", "4");
-                //   get_state();
+                   get_state();
                 break;
             case "Coaching / Institute":
                 main_map.put("cat_id", "5");
+                get_state();
+
                 break;
             case "Training Institute":
                 main_map.put("cat_id", "6");
+                get_state();
                 break;
 
         }
@@ -317,11 +331,51 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                     Log.d("cl_assls", "" + jsonObject.getString("name"));
                     jobj_common.put(str_key, jarray_al_stream);
                     break;
+                case "trade":
+                    Log.d("trade", "" + main_map.get("cat_id"));
+                    jarray_al_mode.put(jsonObject);
+                    jobj_common.put(str_key, jarray_al_mode);
+                    on_forth_frm();
+
+                    break;
                 case "mode":
                     Log.d("mo_de", "" + main_map.get("cat_id"));
                     jarray_al_mode.put(jsonObject);
                     jobj_common.put(str_key, jarray_al_mode);
-                    on_forth_frm();
+
+
+                    break;
+                case "Coach_class":
+                    Log.d("Coach_class", "" + main_map.get("cat_id"));
+                    jarray_al_mode.put(jsonObject);
+                    jobj_common.put("class", jarray_al_mode);
+                    String str_types = jsonObject.getString("name").split(" ")[1];
+                    Log.d("classls", "" + str_types);
+                    on_fifth_frm();
+                   /* if (Integer.parseInt(str_types) > 10)
+                        on_forth_frm();
+                    else
+                        on_fifth_frm();
+*/
+
+                    break;
+                case "coach_stream":
+                    Log.d("coach_stream", "" + main_map.get("cat_id"));
+                    jarray_al_mode.put(jsonObject);
+                    jobj_common.put("stream", jarray_al_mode);
+                    on_fifth_frm();
+
+                    break;
+                case "subject":
+                    Log.d("subject", "" + main_map.get("cat_id"));
+                    jarray_al_mode.put(jsonObject);
+                    jobj_common.put("subject", jarray_al_mode);
+
+                    break;
+                case "Exams":
+                    Log.d("Exams", "" + main_map.get("cat_id"));
+                    jarray_al_mode.put(jsonObject);
+                    jobj_common.put("exam", jarray_al_mode);
 
                     break;
             }
@@ -341,6 +395,10 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                 id_tv_fifth.setText("Select Mode");
                 id_fifth_frm.setVisibility(View.VISIBLE);
                 break;
+            case "5":
+                id_tv_fifth.setText("Select Subject");
+                id_fifth_frm.setVisibility(View.VISIBLE);
+                break;
          /*   case "3":
                 id_tv_third.setText("Select Course");
                 id_third_frm.setVisibility(View.VISIBLE);
@@ -349,10 +407,7 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                 id_tv_third.setText("Select Trade");
                 id_third_frm.setVisibility(View.VISIBLE);
                 break;
-            case "5":
-                id_tv_third.setText("Select Class");
-                id_third_frm.setVisibility(View.VISIBLE);
-                break;
+
             case "6":
                 id_tv_third.setText("Select Exams");
                 id_third_frm.setVisibility(View.VISIBLE);
@@ -373,19 +428,19 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                 id_tv_fourth.setText("Select Mode");
                 id_forth_frm.setVisibility(View.VISIBLE);
                 break;
-       /*     case "3":
-                id_tv_third.setText("Select Course");
-                id_third_frm.setVisibility(View.VISIBLE);
+            case "3":
+                id_tv_fourth.setText("Select Mode");
+                id_forth_frm.setVisibility(View.VISIBLE);
                 break;
             case "4":
-                id_tv_third.setText("Select Trade");
-                id_third_frm.setVisibility(View.VISIBLE);
+                id_tv_fourth.setText("Select Mode");
+                id_forth_frm.setVisibility(View.VISIBLE);
                 break;
             case "5":
-                id_tv_third.setText("Select Class");
-                id_third_frm.setVisibility(View.VISIBLE);
+                id_tv_fourth.setText("Select Stream");
+                id_forth_frm.setVisibility(View.VISIBLE);
                 break;
-            case "6":
+         /*   case "6":
                 id_tv_third.setText("Select Exams");
                 id_third_frm.setVisibility(View.VISIBLE);
                 break;*/
@@ -473,20 +528,159 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
     }
 
     private void send_data_to_next_page() {
-        new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
-            @Override
-            public void on_listener(JSONObject jsonobject, String str_key) {
-                try {
 
-                    Log.d("submit_full", "" + jsonobject);
-                    Intent i=new Intent(getContext(),Main_School_List_Activity.class);
-                    i.putExtra("JSON_DATA",""+jsonobject);
-                    Find_Your_Need_Dialog.this.getContext().startActivity(i);
-                } catch (Exception e) {
-                    Log.d("jonb_djnd", "" + e.getMessage());
-                }
-            }
-        }, jobj_common.toString(), MAIN_submit + "?jsonData=", "data").execute();
+      String MAIN_submit=null;
+        Log.d("manag",""+main_map.get("cat_id"));
+        switch (main_map.get("cat_id")) {
+            case "1":
+                MAIN_submit=UrlEndpoints.MAIN_School_submit;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+
+                            Log.d("submit_full", "" + jsonobject);
+                            Intent i=new Intent(getContext(),Main_School_List_Activity.class);
+                            i.putExtra("JSON_DATA",""+jsonobject);
+                            Find_Your_Need_Dialog.this.getContext().startActivity(i);
+                            Find_Your_Need_Dialog.this.cancel();
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+
+                break;
+            case "2":
+                MAIN_submit=UrlEndpoints.MAIN_College_submit;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        Find_Your_Need_Dialog.this.cancel();
+                        try {
+                            if(!jsonobject.has("msg")) {
+                                Find_Your_Need_Dialog.this.cancel();
+                                Log.d("submit_full", "" + jsonobject);
+                                Intent i = new Intent(getContext(), Main_College_List_Activity.class);
+                                i.putExtra("JSON_DATA", "" + jsonobject);
+                                Find_Your_Need_Dialog.this.getContext().startActivity(i);
+
+                            }else {
+
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "DATA NOT FOUND !!!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+
+                break;
+            case "3":
+                MAIN_submit=UrlEndpoints.MAIN_uni_submit;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        Find_Your_Need_Dialog.this.cancel();
+                        try {
+                            if(!jsonobject.has("msg")) {
+                                Find_Your_Need_Dialog.this.cancel();
+                                Log.d("submit_full", "" + jsonobject);
+                                Intent i = new Intent(getContext(), Main_Uni_List_Activity.class);
+                                i.putExtra("JSON_DATA", "" + jsonobject);
+                                Find_Your_Need_Dialog.this.getContext().startActivity(i);
+
+                            }else {
+
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "DATA NOT FOUND !!!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+                break;
+            case "4":
+                MAIN_submit=UrlEndpoints.MAIN_URL_ITI_LIST;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        Find_Your_Need_Dialog.this.cancel();
+                        try {
+                            if(!jsonobject.has("msg")) {
+                                Find_Your_Need_Dialog.this.cancel();
+                                Log.d("submit_full", "" + jsonobject);
+                                Intent i = new Intent(getContext(), Main_ITI_List_Activity.class);
+                                i.putExtra("JSON_DATA", "" + jsonobject);
+                                Find_Your_Need_Dialog.this.getContext().startActivity(i);
+
+                            }else {
+
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "DATA NOT FOUND !!!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+                break;
+            case "5":
+                MAIN_submit=UrlEndpoints.MAIN_COACH_LIST;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        Find_Your_Need_Dialog.this.cancel();
+                        try {
+                            if(!jsonobject.has("msg")) {
+                                Find_Your_Need_Dialog.this.cancel();
+                                Log.d("submit_full", "" + jsonobject);
+                                Intent i = new Intent(getContext(), Main_Coach_List_Activity.class);
+                                i.putExtra("JSON_DATA", "" + jsonobject);
+                                Find_Your_Need_Dialog.this.getContext().startActivity(i);
+
+                            }else {
+
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "DATA NOT FOUND !!!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+                break;
+
+            case "6":
+                MAIN_submit=UrlEndpoints.MAIN_URL_TRAINING_LIST;
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        Find_Your_Need_Dialog.this.cancel();
+                        try {
+                            if(!jsonobject.has("msg")) {
+                                Find_Your_Need_Dialog.this.cancel();
+                                Log.d("submit_full", "" + jsonobject);
+                                Intent i = new Intent(getContext(), Main_Trainging_List_Activity.class);
+                                i.putExtra("JSON_DATA", "" + jsonobject);
+                                Find_Your_Need_Dialog.this.getContext().startActivity(i);
+
+                            }else {
+
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "DATA NOT FOUND !!!", Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_submit+ "?jsonData=", "data").execute();
+                break;
+
+        }
+
 
     }
 
@@ -507,12 +701,51 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                 //    get_iti_trade_data();
                 break;
             case "5":
-                //    get_coaching_class_data();
+                get_coach_subject_data();
                 break;
             case "6":
-                //  get_training_exam_data();
+               //   get_coach_subject_data();
                 break;
 
+        }
+    }
+    private void get_coach_subject_data() {
+        try {
+
+            if (!expandableLayout1_fifth.isExpanded()) // current
+            {
+                expandableLayout1_fourth.collapse();
+
+                try {
+                    jobj_common.put("city", jarray_al_city);
+
+                } catch (Exception e) {
+                    Log.d("Excs_prf", "" + e.getMessage());
+                }
+                new NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+                            Log.d("jonb_streamdjnd", "" + jsonobject);
+
+                            // _id_class.removeAllViews();
+                            Adter_RV_Filter adter_rv_filter = new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(), jsonobject.getJSONArray(str_key), (Callback_list_Listener) Find_Your_Need_Dialog.this, "subject");
+                            _id_fifth.setAdapter(adter_rv_filter);
+                            expandableLayout1_fifth.expand(100, new MyInterpolator());
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd", "" + e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(), MAIN_URL_ITI_SUBJECT + "?jsonData=", "data").execute();
+
+
+            } else if (expandableLayout1_fifth.isExpanded()) {
+                expandableLayout1_fifth.collapse(100, new MyInterpolator());
+
+            }
+
+        } catch (Exception e) {
+            Log.d("Excsprf", "" + e.getMessage());
         }
     }
 
@@ -562,7 +795,6 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
        Log.d("getthird_data",""+cat_id);
         switch (cat_id)
         {
-
             case "1":
                 get_borad_data();
             break;
@@ -570,21 +802,245 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                  get_college_course_data();
             break;
              case "3":
-             //    get_uni_course_data();
+                 get_uni_course_data();
             break;
              case "4":
-             //    get_iti_trade_data();
+                 get_iti_trade_data();
             break;
             case "5":
-            //    get_coaching_class_data();
+                get_coaching_class_data();
                 break;
             case "6":
-          //  get_training_exam_data();
+              get_training_exam_data();
             break;
 
 
         }
     }
+
+    private void get_training_exam_data() {
+
+            try {
+
+                if(!expandableLayout1_third.isExpanded())
+                {
+                    expandableLayout1_city.collapse();
+
+                    try {
+                        jobj_common.put("city",jarray_al_city);
+
+                    } catch (Exception e) {
+                        Log.d("Excs_prf",""+e.getMessage());
+                    }
+                    new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                        @Override
+                        public void on_listener(JSONObject jsonobject, String str_key) {
+                            try {
+                                Log.d("jonb_classdjnd",""+jsonobject);
+
+
+                                // _id_class.removeAllViews();
+                                Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray(str_key),(Callback_list_Listener)Find_Your_Need_Dialog.this,"Exams");
+                                _id_third.setAdapter(adter_rv_filter);
+                                expandableLayout1_third.expand(100,new MyInterpolator());
+                            } catch (Exception e) {
+                                Log.d("jonb_djnd",""+e.getMessage());
+                            }
+                        }
+                    }, jobj_common.toString(), MAIN_URL_TRAIN_Exams +"?jsonData=","data").execute();
+
+
+                }else if(expandableLayout1_third.isExpanded())
+                {
+                    expandableLayout1_third.collapse(100,new MyInterpolator());
+
+                }
+
+            } catch (Exception e) {
+                Log.d("Excsprf",""+e.getMessage());
+            }
+
+    }
+
+    private void get_coaching_stream_data() {
+        try {
+
+            if(!expandableLayout1_fourth.isExpanded())
+            {
+                expandableLayout1_third.collapse();
+
+                try {
+                    jobj_common.put("city",jarray_al_city);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+                            Log.d("jonb_classdjnd",""+jsonobject);
+                            if(jsonobject.has("msg"))
+                            {
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "No Data For Option !!!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // _id_class.removeAllViews();
+                            Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray(str_key),(Callback_list_Listener)Find_Your_Need_Dialog.this,"coach_stream");
+                            _id_fourth.setAdapter(adter_rv_filter);
+                            expandableLayout1_fourth.expand(100,new MyInterpolator());
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd",""+e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(),MAIN_URL_COACH_STREAM+"?jsonData=","data").execute();
+
+
+            }else if(expandableLayout1_fourth.isExpanded())
+            {
+                expandableLayout1_fourth.collapse(100,new MyInterpolator());
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void get_coaching_class_data() {
+
+        try {
+
+            if(!expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_city.collapse();
+
+                try {
+                    jobj_common.put("city",jarray_al_city);
+
+                } catch (Exception e) {
+                    Log.d("Excs_prf",""+e.getMessage());
+                }
+                new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+                            Log.d("jonb_classdjnd",""+jsonobject);
+
+
+                            // _id_class.removeAllViews();
+                            Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray(str_key),(Callback_list_Listener)Find_Your_Need_Dialog.this,"Coach_class");
+                            _id_third.setAdapter(adter_rv_filter);
+                            expandableLayout1_third.expand(100,new MyInterpolator());
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd",""+e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(),MAIN_URL_COACH_CLASS+"?jsonData=","data").execute();
+
+
+            }else if(expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_third.collapse(100,new MyInterpolator());
+
+            }
+
+        } catch (Exception e) {
+            Log.d("Excsprf",""+e.getMessage());
+        }
+    }
+
+
+    private void get_iti_trade_data() {
+        try {
+
+            if(!expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_city.collapse();
+
+                try {
+                    jobj_common.put("city",jarray_al_city);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+                            Log.d("jonb_classdjnd",""+jsonobject);
+                            if(jsonobject.has("msg"))
+                            {
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "No Data For Option !!!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // _id_class.removeAllViews();
+                             Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray(str_key),(Callback_list_Listener)Find_Your_Need_Dialog.this,"trade");
+                            _id_third.setAdapter(adter_rv_filter);
+                            expandableLayout1_third.expand(100,new MyInterpolator());
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd",""+e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(),MAIN_URL_ITI+"?jsonData=","data").execute();
+
+
+            }else if(expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_third.collapse(100,new MyInterpolator());
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void get_uni_course_data() {
+        try {
+
+            if(!expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_city.collapse();
+
+                try {
+                    jobj_common.put("city",jarray_al_city);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String str_key) {
+                        try {
+                            Log.d("jonb_classdjnd",""+jsonobject);
+                            if(jsonobject.has("msg"))
+                            {
+                                Toast.makeText(Find_Your_Need_Dialog.this.getContext(), "No Data For Option !!!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // _id_class.removeAllViews();
+                            Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray(str_key),(Callback_list_Listener)Find_Your_Need_Dialog.this,"mode");
+                            _id_third.setAdapter(adter_rv_filter);
+                            expandableLayout1_third.expand(100,new MyInterpolator());
+                        } catch (Exception e) {
+                            Log.d("jonb_djnd",""+e.getMessage());
+                        }
+                    }
+                }, jobj_common.toString(),MAIN_URL_uni_course+"?jsonData=","data").execute();
+
+
+            }else if(expandableLayout1_third.isExpanded())
+            {
+                expandableLayout1_third.collapse(100,new MyInterpolator());
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void get_forth_heirarachy_data(String cat_id) {
         Log.d("getforth_data",""+cat_id);
         switch (cat_id)
@@ -596,13 +1052,13 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
                  get_college_mode_data();
                 break;
             case "3":
-                //    get_uni_course_data();
+                  get_uni_mode_data();
                 break;
             case "4":
-                //    get_iti_trade_data();
+                 get_iti_mode_data();
                 break;
             case "5":
-                //    get_coaching_class_data();
+                get_coaching_stream_data();
                 break;
             case "6":
                 //  get_training_exam_data();
@@ -610,6 +1066,69 @@ public class Find_Your_Need_Dialog extends Dialog implements View.OnClickListene
 
 
         }
+    }
+    private void get_iti_mode_data() {
+        if(!expandableLayout1_fourth.isExpanded()) // current
+        {
+            expandableLayout1_third.collapse();
+
+            try {
+                jobj_common.put("city",jarray_al_city);
+
+            } catch (Exception e) {
+                Log.d("Excs_prf",""+e.getMessage());
+            }
+            new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                @Override
+                public void on_listener(JSONObject jsonobject, String str_key) {
+                    try {
+                        Log.d("jonb_classdjnd",""+jsonobject);
+
+                        // _id_class.removeAllViews();
+                        Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray("data"),(Callback_list_Listener)Find_Your_Need_Dialog.this,str_key);
+                        _id_fourth.setAdapter(adter_rv_filter);
+                        expandableLayout1_fourth.expand(100,new MyInterpolator());
+                    } catch (Exception e) {
+                        Log.d("jonb_djnd",""+e.getMessage());
+                    }
+                }
+            }, jobj_common.toString(),MAIN_URL_ITI_TYPE+"?jsonData=","trade").execute();
+
+
+        }
+
+    }
+
+    private void get_uni_mode_data() {
+        if(!expandableLayout1_fourth.isExpanded()) // current
+        {
+            expandableLayout1_third.collapse();
+
+            try {
+                jobj_common.put("city",jarray_al_city);
+
+            } catch (Exception e) {
+                Log.d("Excs_prf",""+e.getMessage());
+            }
+            new  NEW_ASYNCH_HEADER(new NEW_ASYNCH_HEADER.JOBJ_LISTENER() {
+                @Override
+                public void on_listener(JSONObject jsonobject, String str_key) {
+                    try {
+                        Log.d("jonb_classdjnd",""+jsonobject);
+
+                        // _id_class.removeAllViews();
+                        Adter_RV_Filter adter_rv_filter=new Adter_RV_Filter(Find_Your_Need_Dialog.this.getContext(),jsonobject.getJSONArray("data"),(Callback_list_Listener)Find_Your_Need_Dialog.this,str_key);
+                        _id_fourth.setAdapter(adter_rv_filter);
+                        expandableLayout1_fourth.expand(100,new MyInterpolator());
+                    } catch (Exception e) {
+                        Log.d("jonb_djnd",""+e.getMessage());
+                    }
+                }
+            }, jobj_common.toString(),MAIN_URL_uni_code+"?jsonData=","mode").execute();
+
+
+        }
+
     }
 
     private void get_college_mode_data() {

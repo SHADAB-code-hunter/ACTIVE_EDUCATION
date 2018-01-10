@@ -6,6 +6,8 @@
     android:orientation="vertical"
     android:fitsSystemWindows="true">
 
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -78,12 +80,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
                         android:fontFamily="sans-serif"
                         android:gravity="center_vertical"
                         android:singleLine="true"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -206,14 +208,15 @@
 
 
                 </LinearLayout>
+
                 <Button
                     android:id="@+id/id_btn_apply"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="bottom|end"
+                    android:layout_margin="5dp"
                     android:background="@drawable/btn_apply_back"
                     android:text="Apply Now"
-                    android:layout_margin="5dp"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="12dp" />
@@ -246,14 +249,35 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:gravity="center|left"
-                                android:text="Class Name"
-                                android:textColor="@color/white"
-                                android:textSize="20sp" />
+                                android:orientation="horizontal"
+                                android:padding="2dp">
+                                <TextView
+                                    android:id="@+id/_corse_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center|left"
+                                    android:padding="2dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+                                <TextView
+                                    android:id="@+id/id_check_avaibility"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:visibility="gone"
+                                    android:background="#6243"
+                                    android:textStyle="bold"
+                                    android:text="Check Availbility"
+                                    android:gravity="center|right"
+                                    android:padding="2dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+                                </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/id_change_courses_linear"
@@ -277,8 +301,9 @@
                                     android:id="@+id/id_linear_change_course"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:paddingLeft="5dp"
-                                    android:orientation="horizontal">
+                                    android:orientation="horizontal"
+                                    android:paddingLeft="5dp">
+
                                     <TextView
 
                                         android:layout_width="wrap_content"
@@ -287,19 +312,22 @@
                                         android:text="[ "
                                         android:textColor="@color/white"
                                         android:textSize="14sp" />
+
                                     <ImageView
                                         android:layout_width="10dp"
                                         android:layout_height="10dp"
                                         android:layout_gravity="center_vertical|bottom"
                                         android:background="@drawable/ic_edit_course" />
+
                                     <TextView
 
                                         android:layout_width="wrap_content"
                                         android:layout_height="match_parent"
                                         android:gravity="center|bottom"
-                                        android:text=" changes course "
+                                        android:text=" Change "
                                         android:textColor="@color/white"
                                         android:textSize="8sp" />
+
                                     <TextView
 
                                         android:layout_width="wrap_content"
@@ -313,37 +341,42 @@
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
-                                android:orientation="horizontal"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="5dp">
+                                android:layout_margin="5dp"
+                                android:orientation="horizontal">
+
                                 <TextView
                                     android:id="@+id/duration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:text="Duration :"
                                     android:textColor="@color/white"
-                                    android:text="Duration :"/>
+                                    android:visibility="gone" />
+
                                 <TextView
                                     android:id="@+id/id_duration"
-                                    android:visibility="gone"
-                                    android:layout_toRightOf="@+id/d1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/white" />
+                                    android:layout_toRightOf="@+id/d1"
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
+
                                 <TextView
                                     android:id="@+id/id_fees1"
-                                    android:layout_below="@+id/duration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_below="@+id/duration"
                                     android:text="Fees : "
                                     android:textColor="@color/white" />
+
                                 <TextView
                                     android:id="@+id/id_fees2"
-                                    android:layout_toRightOf="@+id/id_fees1"
-                                    android:visibility="gone"
-                                    android:layout_below="@+id/id_duration"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/white" />
+                                    android:layout_below="@+id/id_duration"
+                                    android:layout_toRightOf="@+id/id_fees1"
+                                    android:textColor="@color/white"
+                                    android:visibility="gone" />
                             </RelativeLayout>
 
 
@@ -388,9 +421,9 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/id_trdedescv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Class Description"
                                 android:textColor="@color/white" />
 
                             <TextView
@@ -405,7 +438,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Objective: To provide the students a strong foundation of pure and applied Physics by means of various theoretical and laboratory work."
                             android:textColor="@color/white"
                             android:textSize="10sp" />
 
@@ -414,14 +446,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:visibility="gone"
                             android:background="#5c775cb6"
                             android:gravity="end"
                             android:padding="3dp"
                             android:text="View More ..."
                             android:textColor="@color/white"
                             android:textSize="10sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -440,7 +472,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="top"
-
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
@@ -448,8 +479,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="10dp"
-                            android:text="Available Courses "
-                            android:textColor="@color/white" />
+                            android:text="Available Classes "
+                            android:textColor="@color/white"
+                            android:visibility="gone" />
 
                     </LinearLayout>
 
@@ -494,9 +526,9 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:id="@+id/id_clg_desc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="School Description"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -531,13 +563,15 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/colorWhite"
-                        android:text="Affiliation By"/>
+                        android:text="Affiliation By"
+                        android:textColor="@color/colorWhite" />
+
                     <TextView
                         android:id="@+id/id_afflictiobby"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textColor="@color/colorWhite"/>
+                        android:textColor="@color/colorWhite" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"

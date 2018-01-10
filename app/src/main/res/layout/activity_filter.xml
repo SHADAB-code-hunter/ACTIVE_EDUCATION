@@ -71,7 +71,6 @@
             android:layout_margin="5dp"
             android:layout_gravity="center">
 
-
             <FrameLayout
 
                 android:layout_width="40dp"

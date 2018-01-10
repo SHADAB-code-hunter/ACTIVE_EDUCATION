@@ -1,8 +1,10 @@
 package fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.gt.active_education.Agent_login_Activity;
+import com.gt.active_education.Login_Fior_Guest_Activity;
 import com.gt.active_education.PayU_Money_Activity;
 import com.gt.active_education.R;
 import com.payUMoney.sdk.PayUmoneySdkInitilizer;
@@ -34,12 +39,18 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import task.Asynch_Obj;
+import utilities.NEW_ASYNCH;
+import utilities.UpdateValues;
 import utilities.UrlEndpoints;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static utilities.App_Static_Method.get_session_type;
+import static utilities.App_Static_Method.is_session_exist;
 import static utilities.App_Static_Method.progressDialog;
 import static utilities.App_Static_Method.session_type;
+import static utilities.App_Static_Method.toMap;
+import static utilities.UpdateValues.ADDMISSION;
 
 /**
  * Created by GT on 8/25/2017.
@@ -49,26 +60,46 @@ public class Payment_Page extends Fragment implements View.OnClickListener {
 
     EditText amt = null;
     Button pay = null;
-
+    Activity context;
     public static final String TAG = "PayUMoneySDK Sample";
     private Bundle bundle;
+    private JSONObject set_obj;
+    private TextView id_term_c;
+
+    @Override
+    public void onAttach(Activity context) {
+        super.onAttach(context);
+        this.context=context;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(R.layout.activity_my, container, false);
-        amt = (EditText) rootView.findViewById(R.id.amount);
+        id_term_c=(TextView)rootView.findViewById(R.id.id_term_c);
+        amt = (EditText)rootView. findViewById(R.id.amount);
         pay = (Button) rootView.findViewById(R.id.pay_btn);pay.setOnClickListener(this);
 
-        if(getArguments()!=null)
-        {
-            bundle=getArguments();
-            //cat_type=bundle.getString("type");
-            // Log.d("bundrrle",""+bundle.getString("type"));
-            //str_type=getIntent().getStringExtra("type");
-            Log.d("json_Object",bundle.toString());
 
-            amt.setText(bundle.getString("branch_fee"));
+        try {
+            amt.setText((new JSONObject(getArguments().getString(ADDMISSION)).getString("branch_fee")));
+            if(getArguments()!=null) {
+
+                new NEW_ASYNCH(new NEW_ASYNCH.JOBJ_LISTENER() {
+                    @Override
+                    public void on_listener(JSONObject jsonobject, String loginApi) {
+                        //  userBokingListener.on_dialog__listener(jsonobject);
+                        try {
+                            id_term_c.setText(jsonobject.getJSONArray("data").getJSONObject(0).getString("name"));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, toMap(new JSONObject(getArguments().getString(ADDMISSION))), UrlEndpoints.MAIN_URL_school_TERM, "TERM").execute();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return rootView;
@@ -298,33 +329,76 @@ public class Payment_Page extends Fragment implements View.OnClickListener {
         switch (v.getId())
         {
             case R.id.pay_btn:
-               // makePayment();
-                 fake_apyment();
+            // if(get_session_type().equals())
+                JSONObject jsonObject=null;
+                try {
+                   jsonObject= new JSONObject(get_session_type());
+                 //   Toast.makeText(context, ""+jsonObject.getString("type"), Toast.LENGTH_SHORT).show();
+                    switch (jsonObject.getString("type"))
+                    {
 
-                break;
+                        case "guest":
+                            fake_apyment(jsonObject);
+                          //  startActivity(new Intent(Payment_Page.this.getContext(), Login_Fior_Guest_Activity.class));
+                            break;
+                         case "user":
+                             fake_apyment(jsonObject);
+                           //  startActivity(new Intent(Payment_Page.this.getContext(), Login_Fior_Guest_Activity.class));
+                            break;
+                         case "agent":
+                             fake_apyment(jsonObject);
+                           //  startActivity(new Intent(Payment_Page.this.getContext(), Login_Fior_Guest_Activity.class));
+                            break;
+
+                    }
+
+
+               Log.d("sessionrtpe",""+get_session_type());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+             break;
         }
     }
 
-    private void fake_apyment() {
+    private void fake_apyment(JSONObject jsonObject) {
 
-        Map<String,String> map=session_type();
-        map.put("category",bundle.getString("type"));
-        map.put("subcategory",bundle.getString("clg_id"));
-      //  if(bundle.getString("dealid")==null) {
-        map.put("dealid", ""+bundle.getString("dealid"));//}
-       // if(bundle.getString("id")==null) {
-        map.put("id",bundle.getString("id"));
-      //  }
-        map.put("price",bundle.getString("branch_fee"));
+        SharedPreferences sharedPreferences =context.getSharedPreferences(UpdateValues.FORM_ID, 0);
+        Log.d("ojf_jn",""+jsonObject);
+        try {
 
-        Log.d("jjhjhjhjhjh",bundle.toString());
-        new Asynch_Obj(new Asynch_Obj.OBJ_Lister() {
-            @Override
-            public void on_lis_obj(JSONObject jsonObject, String str_key) {
-                Log.d("jsonObject",jsonObject.toString());
+            jsonObject.put("formid",""+sharedPreferences.getString("Form_ID","NA"));
+            jsonObject.put("price",(new JSONObject(getArguments().getString(ADDMISSION)).getString("branch_fee")));
+            Log.d("ojf_jn",""+jsonObject);
+            if(!jsonObject.getString("formid").equalsIgnoreCase("NA"))
+            {
+                new Asynch_Obj(new Asynch_Obj.OBJ_Lister() {
+                    @Override
+                    public void on_lis_obj(JSONObject jsonObject, String str_key) {
+                        Log.d("jsonObject", "" + jsonObject.toString());
+                       /* price:100*/
+                        try {
+                            if(jsonObject.getInt("msg")==1) {
+                                SharedPreferences sharedPreferences = context.getSharedPreferences(UpdateValues.FORM_ID, 0);
+                                SharedPreferences.Editor editor= sharedPreferences.edit();
+                                editor.putString("Form_ID","NA");
+                                editor.commit();
 
+                                context.finish();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, UrlEndpoints.SEAT_USER_PAYEMNT, toMap(jsonObject), "payment").execute();
+            }else {
+                context.finish();
+               // Toast.makeText(context, "Please Fill The Admission Detail First ", Toast.LENGTH_SHORT).show();
             }
-        }, UrlEndpoints.SEAT_USER_PAYEMNT, map, "payment").execute();
+            context.finish();
+        } catch (Exception e) {
+            Log.d("Eceio",""+e.getMessage());
+        }
 
     }
 }

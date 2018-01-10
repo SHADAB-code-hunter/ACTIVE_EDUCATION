@@ -34,6 +34,7 @@ public class Asynch_Book_Responce extends AsyncTask<Void, Void, JSONObject> {
     }
     public Asynch_Book_Responce(JOBJ_Listener myComponent, String url, Map<String, String> map) {
         Log.d("book_url",""+url);
+        Log.d("book_uggrl",""+map);
         this.url=url;
         this.myComponent = myComponent;
         this.map = map;

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import adapter.Adter_Avail_courses;
 import adapter.Adter_RV_Filter;
 import callbacks.Callback_list_Listener;
 import task.NORMAL_ASYNCHTASK;
@@ -55,6 +56,7 @@ public class Availschool_class extends Dialog implements View.OnClickListener ,C
     private FINAL_OBJ_LISTNER final_obj_listner;
     private String strid;
     private Button id_btn;
+    private TextView id_tv_state;
 
 
     public Availschool_class(FINAL_OBJ_LISTNER final_obj_listner, Activity act, String strid) {
@@ -77,17 +79,18 @@ public class Availschool_class extends Dialog implements View.OnClickListener ,C
         id_state_frm=(FrameLayout)findViewById(R.id.id_state_frm);id_state_frm.setOnClickListener(this);
         id_btn=(Button)findViewById(R.id.id_btn);id_btn.setOnClickListener(this);
         expandableLayout1_student=(ExpandableRelativeLayout)findViewById(R.id.expandableLayout1_student);
-
+        id_tv_state=(TextView)findViewById(R.id.id_tv_state);id_tv_state.setText("Available Course");
         final MyInterpolator myInterpolator=new MyInterpolator();
         Map<String,String> map=new HashMap<>();
 
         JSONObject jobj_class=new JSONObject();
 
-        _id_state=(RecyclerView)findViewById(R.id._id_state);_id_state.setLayoutManager(new GridLayoutManager(getApplicationContext(),1, LinearLayoutManager.VERTICAL, false));
+        _id_state=(RecyclerView)findViewById(R.id._id_state);
+        _id_state.setLayoutManager(new GridLayoutManager(getApplicationContext(),1, LinearLayoutManager.VERTICAL, false));
 
         JSONObject jsonObject=new JSONObject();
         try {
-            jsonObject.put("id",""+strid);
+            jsonObject.put("s_id",""+strid);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +104,8 @@ public class Availschool_class extends Dialog implements View.OnClickListener ,C
                   try {
                       Log.d("jonbd__jnd", "" + jsonobject);
                       //    _id_state.removeAllViews();
-                      Adter_RV_Filter adter_rv_filter = new Adter_RV_Filter(Availschool_class.this.getContext(), jsonobject.getJSONArray(str_key), (Callback_list_Listener) Availschool_class.this, str_key);
+                      Adter_Avail_courses adter_rv_filter = new Adter_Avail_courses(Availschool_class.this.getContext(), jsonobject.getJSONArray(str_key),
+                              (Callback_list_Listener) Availschool_class.this, str_key);
                       _id_state.setAdapter(adter_rv_filter);
                       //  adter_rv_filter.notifyDataSetChanged();
                       expandableLayout1_student.expand(100, myInterpolator);
@@ -140,11 +144,11 @@ public class Availschool_class extends Dialog implements View.OnClickListener ,C
 
     @Override
     public void onAdap_OBJ(JSONObject jsonObject, String str_key) {
-
+        Toast.makeText(act,  "Choose Courses !!!", Toast.LENGTH_SHORT).show();
         if(str_key.equalsIgnoreCase("AVAIL"))
         {
             try {
-                Toast.makeText(act, jsonObject.getString("bname")+ "Choose Courses !!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(act, jsonObject.getString("name")+ "Choose Courses !!!", Toast.LENGTH_SHORT).show();
                 final_obj_listner.onfinal_list(jsonObject,"Choose_Class");
             } catch (Exception e) {
                 e.printStackTrace();

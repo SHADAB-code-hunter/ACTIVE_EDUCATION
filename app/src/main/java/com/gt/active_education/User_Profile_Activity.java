@@ -47,8 +47,11 @@ import utilities.Imager_Picker_Activity;
 import utilities.UrlEndpoints;
 
 import static com.gt.active_education.SignUp_Activity.permission_check;
+import static utilities.App_Static_Method.after_guestregisyter;
+import static utilities.App_Static_Method.get_session_type;
 import static utilities.App_Static_Method.request_permission_result;
 import static utilities.App_Static_Method.session_type;
+import static utilities.App_Static_Method.toMap;
 import static utilities.UrlEndpoints.GET_PROFILE;
 import static utilities.UrlEndpoints.GET_PROFILE_DATA;
 
@@ -112,7 +115,11 @@ public class User_Profile_Activity extends AppCompatActivity implements Log_Out_
         Log.d("sgsggsgs", session_type().toString());
         //id_image_profile_signup.setImageResource();
 
-        new Asynch_Agent_Form_JObject(User_Profile_Activity.this, GET_PROFILE_DATA,session_type()).execute();
+        try {
+            new Asynch_Agent_Form_JObject(User_Profile_Activity.this, GET_PROFILE_DATA,toMap(new JSONObject(after_guestregisyter()))).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         initUI();
     }
 
@@ -393,7 +400,7 @@ public class User_Profile_Activity extends AppCompatActivity implements Log_Out_
     @Override
     public void onLJsonLoaded_new(JSONObject jsonObject) {
         try {
-            Log.d("objecttt",jsonObject.toString());
+            Log.d("objecttt",""+jsonObject.toString());
 
             JSONObject jsonObject1=(jsonObject.getJSONArray("data")).getJSONObject(0);
 

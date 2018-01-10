@@ -1,32 +1,24 @@
 package utilities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,17 +34,20 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import callbacks.FInsi_Listener;
 import callbacks.JsonRes_Listener;
 import callbacks.SMS_RECEIVER_LISTENER;
 import task.Login_Asynch;
 
 import static utilities.UpdateValues.GUSET_SESSION;
+import static utilities.UpdateValues.USER_SESSION;
 
 /**
  * Created by GT on 11/15/2017.
  */
 
-public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener, JsonRes_Listener,SMS_RECEIVER_LISTENER {
+public class Gust_Regis_Fragment extends Fragment implements View.OnClickListener, JsonRes_Listener,SMS_RECEIVER_LISTENER {
 
     private EditText edt_uname, edt_email, edt_mobile,id_tv_otp;
     public IntentFilter intentFilter;
@@ -84,7 +79,7 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
         View rootView = inflater.inflate(R.layout.guset_register, container, false);
         receiver = new SmsReceiver();//1
         intentFilter = new IntentFilter("android.permission.RECEIVE_SMS");//2
-        SmsReceiver.bindListener((SMS_RECEIVER_LISTENER) Gust_Regis_Dialog.this);
+        SmsReceiver.bindListener((SMS_RECEIVER_LISTENER) Gust_Regis_Fragment.this);
         edt_uname = (EditText)rootView. findViewById(R.id.edt_uname);
         edt_mobile = (EditText) rootView.findViewById(R.id.edt_mobile);
         btn_login = (Button) rootView.findViewById(R.id.btn_login);
@@ -109,12 +104,15 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
                     // JSONObject responseObj = new JSONObject(responseObj);
                     if (responseObj.has("Status")) {
 
-                        Gust_Regis_Dialog.this.responseObj=responseObj;
-
+                        Gust_Regis_Fragment.this.responseObj=responseObj;
+                        if(progressDialog!=null)
+                            progressDialog.cancel();
 
                     } else if(responseObj.getString("Status").equals("Error"))
                     {
                         //Log.d("otp_send_status","error");
+                        if(progressDialog!=null)
+                            progressDialog.cancel();
                     }
 
                 } catch (Exception e) {
@@ -175,7 +173,7 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
                                         editor.putString("otp_api_key", ""+responseObj);
                                         editor.commit();
 
-                                        new Login_Asynch(Gust_Regis_Dialog.this,map,UrlEndpoints.GUSET_REGISTER,"Guset_Register").execute();
+                                        new Login_Asynch(Gust_Regis_Fragment.this,map,UrlEndpoints.GUSET_REGISTER,"Guset_Register").execute();
 
                                     }
                                 } else if(responseObj.getString("Status").equals("Error"))
@@ -207,18 +205,19 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
 
             case R.id.btn_login:
-                startActivity(new Intent(getContext(),DashBoard_Activity.class));
-                      /*  progressDialog = new ProgressDialog(Gust_Regis_Dialog.this.getContext());
+             //   startActivity(new Intent(getContext(),DashBoard_Activity.class));
+                InputMethodManager imm = (InputMethodManager)activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                        progressDialog = new ProgressDialog(Gust_Regis_Fragment.this.getContext());
                         progressDialog.setCancelable(true);
                         progressDialog.show();
                         progressDialog.setMessage(getString(R.string.Loading));
-*/
-               /* if (edt_uname.getText().toString().isEmpty()) {
+                if (edt_uname.getText().toString().isEmpty()) {
 
                     if(progressDialog!=null)
                         progressDialog.cancel();
 
-                    Toast.makeText(Gust_Regis_Dialog.this.getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Gust_Regis_Fragment.this.getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
                     return;
                 }
                        else {
@@ -226,7 +225,7 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
                                 {
                                     if(progressDialog!=null)
                                         progressDialog.cancel();
-                                    Toast.makeText(Gust_Regis_Dialog.this.getContext(), "Please Enter MOBILE", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Gust_Regis_Fragment.this.getContext(), "Please Enter MOBILE", Toast.LENGTH_SHORT).show();
 
                                     return;
                                 }else {
@@ -240,7 +239,7 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
                                     requestForSMS(edt_mobile.getText().toString());
 
                             }
-                      }*/
+                      }
                 break;
 
 
@@ -259,17 +258,29 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
 
     @Override
     public void on_res_litsner(JSONObject jsonObject, String restLocatDash) {
+      //  Toast.makeText(Gust_Regis_Fragment.this.getContext(), ""+responseObj.getInt("exist"), Toast.LENGTH_SHORT).show();
 
-        try { Log.d("hghghg", ""+jsonObject);
-            if(jsonObject.getInt("msg")==1) {
-                SharedPreferences sharedPreferences2 = MyApplication.getAppContext().getSharedPreferences(UpdateValues.LG_TYPE, 0);
-                SharedPreferences.Editor editor2 = sharedPreferences2.edit();
-                editor2.putString("type","guest");
-                editor2.commit();
+        try { Log.d("hg__hghg", ""+jsonObject);
+            Toast.makeText(Gust_Regis_Fragment.this.getContext(), ""+jsonObject, Toast.LENGTH_SHORT).show();
+            if(jsonObject.has("exist"))
+            {
+
+                if(jsonObject.getInt("exist")==1)
+                {
+                    Toast.makeText(activity, ""+jsonObject.getString("msg"), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            else
+            {
+                SharedPreferences sharedPreferences3 = MyApplication.getAppContext().getSharedPreferences(USER_SESSION, 0);
+                SharedPreferences.Editor editor3 = sharedPreferences3.edit();
+                editor3.putString(GUSET_SESSION,""+jsonObject);
+                editor3.commit();
+
+                ((FInsi_Listener)activity).onCall();
+
                 Log.d("Guest_ssesion", jsonObject.toString());
-
-                startActivity(new Intent(activity, DashBoard_Activity.class));
-                activity.finish();
 
             }
         } catch (Exception e) {
@@ -285,12 +296,15 @@ public class Gust_Regis_Dialog extends Fragment implements View.OnClickListener,
           //  edt_otp.setText(str_OTP);
             Str_otp=str_OTP;
             id_tv_otp.setText(""+str_OTP);
-           /* if(progressDialog!=null)
-            progressDialog.cancel();*/
+            if(progressDialog!=null)
+            progressDialog.cancel();
           //  otp_verification(responseObj,str_OTP);
 
         }
     }
 
+    public interface fini__listenr{
+        public void onCall();
+    }
 
 }
